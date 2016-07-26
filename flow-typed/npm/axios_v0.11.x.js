@@ -54,6 +54,7 @@ declare module 'axios' {
       request: AxiosRequestInterceptor<mixed>,
       response: AxiosResponseInterceptor<mixed>,
     },
+    create<T>(config: AxiosXHRConfigBase<T>): Axios<T>;
   }
   declare var exports: Axios;
 }
