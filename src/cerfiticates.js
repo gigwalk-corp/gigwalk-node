@@ -11,7 +11,7 @@ export default class Certificates {
         this.client = axios.create({
             baseURL,
             headers: {
-                'Authorization': auth
+                Authorization: auth
             }
         });
     }
