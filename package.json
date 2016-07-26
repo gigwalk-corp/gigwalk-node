@@ -4,7 +4,8 @@
   "description": "Gigwalk API Client - universal.",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "build": "babel src -d lib"
   },
   "repository": {
     "type": "git",
@@ -25,5 +26,14 @@
   "homepage": "https://github.com/gigwalk-corp/gigwalk#readme",
   "dependencies": {
     "axios": "^0.13.1"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.11.4",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-react": "^6.11.1",
+    "babel-preset-stage-0": "^6.5.0",
+    "babel-register": "^6.11.5",
+    "chai": "^3.5.0",
+    "mocha": "^2.5.3"
   }
 }
