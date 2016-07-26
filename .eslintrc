@@ -1,0 +1,72 @@
+{
+    "extends": "airbnb",
+    "parser": "babel-eslint",
+    "env": {
+        "node": true,
+        "mocha": true,
+        "browser": true,
+        "es6": true
+    },
+    "globals": {},
+    "plugins": [
+        "mocha",
+        "flowtype",
+        "gigwalk"
+    ],
+    "rules": {
+        "no-unused-expressions": 0,
+        "space-before-function-paren": [2, "never"],
+        "comma-dangle": 0,
+        "func-names": 2,
+        "no-var": 2,
+        "prefer-const": 2,
+        "spaced-comment": 2,
+        "new-cap": 2,
+        "guard-for-in": 1,
+        "object-shorthand": 2,
+        "consistent-return": 1,
+        "no-param-reassign": 2,
+        "no-console": 2,
+        "indent": [2, 4, {"SwitchCase": 1}],
+        "mocha/no-exclusive-tests": 2,
+        "max-len": [2, 160, 4],
+        "require-jsdoc": 1,
+        "flowtype/require-parameter-type": 2,
+        "flowtype/require-return-type": [
+            2,
+            "sometimes",
+            {
+                "annotateUndefined": "never"
+            }
+        ],
+        "flowtype/space-after-type-colon": [
+            2,
+            "always"
+        ],
+        "flowtype/space-before-type-colon": [
+            2,
+            "never"
+        ],
+        "flowtype/require-valid-file-annotation": [
+            2,
+            "always"
+        ],
+        "gigwalk/require-valid-flow-file-annotation": [
+            2,
+            "(spec|test)"
+        ],
+        "no-debugger": 2,
+        "no-underscore-dangle": 0,
+        "no-duplicate-imports": 0,
+        "react/jsx-indent": [2, 4],
+        "import/no-amd": 2,
+        "import/no-commonjs": 2,
+        "react/jsx-no-bind": 1
+    },
+    "settings": {
+        "flowtype": {
+            "onlyFilesWithFlowAnnotation": true
+        }
+    }
+}
+
