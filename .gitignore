@@ -1,2 +1,4 @@
 node_modules
 lib
+test-auth.json
+*.log
