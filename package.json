@@ -1,0 +1,29 @@
+{
+  "name": "gigwalk",
+  "version": "1.0.0",
+  "description": "Gigwalk API Client - universal.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gigwalk-corp/gigwalk.git"
+  },
+  "keywords": [
+    "gigwalk",
+    "api",
+    "api",
+    "client",
+    "axios"
+  ],
+  "author": "Steven Bassett <steven.j.bassett@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gigwalk-corp/gigwalk/issues"
+  },
+  "homepage": "https://github.com/gigwalk-corp/gigwalk#readme",
+  "dependencies": {
+    "axios": "^0.13.1"
+  }
+}
