@@ -1,10 +1,11 @@
+import schema from '../src/certificates-schema.json';
 import Certificates from '../src/cerfiticates';
 import { expect } from 'chai';
 import auth from '../test-auth.json'
 
 describe('Certificates', () => {
     const certificates = new Certificates({
-      baseUrl: 'https://stage-api.apps.gigwalk.com',
+      baseURL: 'https://stage-api.apps.gigwalk.com',
       auth: auth.token
     });
     it('should pass a smoke test', () => {
@@ -15,6 +16,7 @@ describe('Certificates', () => {
             .then((resp) => {
                 expect(resp.status).to.equal(200);
                 expect(resp.statusText).to.equal('OK');
+                expect(resp.data).to.have.jsonSchema(schema);
             })
     );
 });

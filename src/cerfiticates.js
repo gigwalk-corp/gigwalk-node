@@ -8,12 +8,19 @@ export type Options = {
 
 export default class Certificates {
     constructor({ auth, baseURL }: Options) {
+        const c = axios.create({
+            baseURL,
+            headers: {
+                'Authorization': `Token ${auth}`
+            }
+        });
+
         this.client = axios.create({
             baseURL,
             headers: {
                 'Authorization': `Token ${auth}`
             }
-        })
+        });
     }
 
     client: typeof axios;
