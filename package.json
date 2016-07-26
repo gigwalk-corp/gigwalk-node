@@ -7,7 +7,8 @@
     "build": "babel src -d lib",
     "eslint": "eslint .",
     "flow": "flow",
-    "test": "mocha"
+    "test": "mocha",
+    "test-debug": "bugger --brk ./node_modules/.bin/_mocha"
   },
   "repository": {
     "type": "git",
