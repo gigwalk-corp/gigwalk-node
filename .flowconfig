@@ -13,10 +13,8 @@ esproposal.class_static_fields=enable
 esproposal.export_star_as=enable
 suppress_comment= \\(.\\|\n\\)*\\$FlowFixMe
 suppress_comment= \\(.\\|\n\\)*\\$FlowIssue
-module.system.node.resolve_dirname=node_modules
 module.ignore_non_literal_requires=true
 module.use_strict=true
 
 [version]
 >=0.22.1
-
