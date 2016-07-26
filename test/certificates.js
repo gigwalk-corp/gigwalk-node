@@ -1,10 +1,14 @@
 import Certificates from '../src/cerfiticates';
 import { expect } from 'chai';
+import auth from '../test-auth.json'
 
 describe('Certificates', () => {
-    const certificates = new Certificates();
+    const certificates = new Certificates({
+      baseUrl: 'https://stage-api.apps.gigwalk.com',
+      auth: auth.token
+    });
     it('should pass a smoke test', () => {
-        expect(true).to.be.true;
+        expect(certificates).to.be.defined;
     });
     it('should be able to get all the certificates from the server', () =>
         certificates.fromActiveUser()

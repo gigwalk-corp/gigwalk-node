@@ -19,6 +19,7 @@ export default class Certificates {
     client: typeof axios;
 
     fromActiveUser(): Promise<Object> {
-        return Promise.reject();
+        const URL: string = '/v1/certifications'
+        return this.client.get(URL);
     }
 }
