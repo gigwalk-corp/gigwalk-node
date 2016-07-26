@@ -1,12 +1,11 @@
 import schema from '../src/certificates-schema.json';
 import Certificates from '../src/cerfiticates';
 import { expect } from 'chai';
-import auth from '../test-auth.json'
 
 describe('Certificates', () => {
     const certificates = new Certificates({
-      baseURL: 'https://stage-api.apps.gigwalk.com',
-      auth: auth.token
+        baseURL,
+        auth: token
     });
     it('should pass a smoke test', () => {
         expect(certificates).to.be.defined;
