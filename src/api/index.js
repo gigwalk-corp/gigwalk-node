@@ -1,0 +1,1 @@
+export type Dispatcher = typeof axios | (config: AxiosXHRConfig) => Promise;
