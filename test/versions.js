@@ -21,11 +21,16 @@ describe('versions', () => {
             .catch(done);
     });
 
-    it.skip('should fail if there is no auth token set', () => {
+    it('should fail if there is no auth token set', (done) => {
         // create a new Versions instance with a new client that doesn't have the headers set.
-        // const other = axios.create({
-        //     baseURL
-        // });
-        // const otherVersion = new Versions(other);
+        const other = axios.create({
+            baseURL
+        });
+        const otherVersion = new Versions(other);
+        otherVersion.get()
+            .then(done)
+            .catch((err) => {
+                console.log(err)
+            });
     });
 });
