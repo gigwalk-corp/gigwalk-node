@@ -1,4 +1,7 @@
 // @flow
+import { Axios } from 'axios';
+import type { $AxiosXHRConfig as AxiosXHRConfig } from 'axios';
+
 export type Dispatcher = Axios | (config: AxiosXHRConfig<*>) => Promise<*>;
 export type AuthToken = {
     token: string

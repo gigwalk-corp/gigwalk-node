@@ -16,3 +16,5 @@ chai.use(chaiAsPromised);
 global.expect = expect;
 global.baseURL = process.env.GIGWALK_TEST_BASEURL;
 global.token = `Token ${process.env.GIGWALK_TEST_TOKEN}`;
+global.email = process.env.GIGWALK_TEST_EMAIL;
+global.password = process.env.GIGWALK_TEST_PASSWORD;

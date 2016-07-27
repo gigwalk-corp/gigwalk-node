@@ -1,6 +1,6 @@
 // @flow
 import ResourceBase from '../resourceBase';
-
+import type { $AxiosXHRConfig as AxiosXHRConfig } from 'axios';
 type ForgotPasswordParams = {
     email: string
 }
