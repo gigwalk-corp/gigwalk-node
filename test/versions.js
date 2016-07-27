@@ -30,7 +30,9 @@ describe('versions', () => {
         otherVersion.get()
             .then(done)
             .catch((err) => {
-                console.log(err)
+                expect(err.response.data.message).to.be.equal('Not Authorized');
+                expect(err.response.status).to.equal(401);
+                done();
             });
     });
 });
