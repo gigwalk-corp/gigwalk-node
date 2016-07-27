@@ -2,6 +2,7 @@
     "extends": "../.eslintrc",
     "globals": {
         "baseURL": true,
-        "token": true
+        "token": true,
+        "expect": true
     }
 }

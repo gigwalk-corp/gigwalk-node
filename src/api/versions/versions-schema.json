@@ -1,0 +1,58 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "properties": {
+        "data": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "minimum_ios_version": {
+                        "type": "string"
+                    },
+                    "minimum_android_version": {
+                        "type": "string"
+                    },
+                    "version": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "minimum_ios_version",
+                    "minimum_android_version",
+                    "version"
+                ]
+            }
+        },
+        "errors": {
+            "type": "null"
+        },
+        "_meta": {
+            "type": "object",
+            "properties": {}
+        },
+        "code": {
+            "type": "integer"
+        },
+        "gw_api_response": {
+            "type": "array",
+            "items": {}
+        },
+        "warnings": {
+            "type": "null"
+        },
+        "_metadata": {
+            "type": "object",
+            "properties": {}
+        }
+    },
+    "required": [
+        "data",
+        "errors",
+        "_meta",
+        "code",
+        "gw_api_response",
+        "warnings",
+        "_metadata"
+    ]
+}
