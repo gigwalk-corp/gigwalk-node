@@ -1,5 +1,5 @@
+// @flow
 import ResourceBase from '../resourceBase';
-import type AxiosXHRConfig from 'axios';
 
 type ForgotPasswordParams = {
     email: string
@@ -22,14 +22,14 @@ export default class Authorization extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.authorization.forgotPassword({ ... })
      */
-    forgotPassword(params: ForgotPasswordParams) {
-        const request: AxiosXHRConfig = {
+    forgotPassword(params: ForgotPasswordParams): Promise<any> {
+        const request: AxiosXHRConfig<ForgotPasswordParams> = {
             url: '/v1/forgot_password',
-            type: 'post',
+            method: 'post',
             data: params
         };
 
-        this.dispatch(request)
+        return this.dispatch(request);
     }
 
     /**
@@ -43,13 +43,13 @@ export default class Authorization extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.authorization.resetPassword({ ... })
      */
-    resetPassword(params: ResetPasswordParams) {
-        const request: AxiosXHRConfig = {
+    resetPassword(params: ResetPasswordParams): Promise<any> {
+        const request: AxiosXHRConfig<ResetPasswordParams> = {
             url: '/v1/reset_password',
-            type: 'post',
+            method: 'post',
             data: params
         };
 
-        this.dispatch(request)
+        return this.dispatch(request);
     }
 }

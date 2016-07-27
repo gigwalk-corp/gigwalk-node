@@ -1,47 +1,56 @@
 // @flow
 import axios from 'axios';
 import stringify from 'json-stable-stringify';
-import type AxiosXHRConfig from 'axios';
 
-export type Request = AxiosXHRConfig & {
-    onSuccess?: Function,
-    onError?: Function
-};
+interface Request<T> extends AxiosXHRConfig<T> {
+    onSuccess: Function,
+    onError: Function
+}
 
-export type ActiveRequestRecord = {
-    request: Request,
-    promise: Promise
-};
+interface ActiveRequestRecord<T> {
+    request: Request<T>,
+    promise: Promise<T>
+}
 
 export default class RequestQueue {
-    dispatchQueue: Array = [];
+    dispatchQueue: Array<Request<*>> = [];
 
-    activeRequests: Map<String, ActiveRequestRecord> = new Map();
+    activeRequests: Map<string, ActiveRequestRecord<*>> = new Map();
 
     /**
      * Adds a request to the RequestQueue. Returns a promise that is resolved or rejected when
      * the request completes.
-     * @param request
+     * @param config
      * @returns {Promise}
      */
-    add(request: Request) {
-        const { dispatchQueue, activeRequests } = this;
+    add(config: AxiosXHRConfig<*>) {
+        const request = {
+            ...config,
+            onSuccess: () => {},
+            onError: () => {}
+        };
+
         const key = stringify(request);
 
-        if (activeRequests.has(key)) {
-            return activeRequests.get(key).promise;
+        if (this.activeRequests.get(key)) {
+            const record = this.activeRequests.get(key);
+            if (record) {
+                return record.promise;
+            }
         }
 
-        const promise = new Promise((resolve, reject) => {
+        // todo: provide better flow annotations
+        const promise = new Promise((resolve: Function, reject: Function) => {
             request.onSuccess = resolve;
             request.onError = reject;
 
-            dispatchQueue.push(request);
+            this.dispatchQueue.push(request);
         });
 
-        activeRequests.set(key, { request, promise });
+        // $FlowFixMe
+        this.activeRequests.set(key, { request, promise });
 
-        if (dispatchQueue.length === 1) {
+        if (this.dispatchQueue.length === 1) {
             setTimeout(() => this.checkQueue(), 0);
         }
 
@@ -53,11 +62,12 @@ export default class RequestQueue {
 
         if (dispatchQueue.length > 0) {
             const request = dispatchQueue.shift();
-            const promise = axios.request(request);
+            const promise = axios(request);
 
+            // todo: provide better flow annotations
             promise
-                .then((...args) => request.onSuccess(...args))
-                .catch((...args) => request.onError(...args))
+                .then((...args: Array<any>) => request.onSuccess(...args))
+                .catch((...args: Array<any>) => request.onError(...args))
                 .then(() => {
                     const key = stringify(request);
                     activeRequests.delete(key);

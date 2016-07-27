@@ -1,5 +1,5 @@
-
-export type Dispatcher = typeof axios | (config: AxiosXHRConfig) => Promise;
+// @flow
+export type Dispatcher = Axios | (config: AxiosXHRConfig<*>) => Promise<*>;
 export type AuthToken = {
     token: string
 }
@@ -11,6 +11,7 @@ export type Auth = AuthToken | BasicAuth;
 
 export default class ResourceBase {
 
+    auth: Auth;
     dispatch: Dispatcher;
 
     constructor(dispatcher: Dispatcher) {

@@ -1,6 +1,6 @@
 // @flow
 import RequestQueue from './requestQueue';
-import Authorization from './api/authorization'
+import Authorization from './api/authorization';
 import Certifications from './api/certifications';
 import Customers from './api/customers';
 import LocationLists from './api/locationLists';
@@ -14,7 +14,6 @@ import TicketEvents from './api/ticketEvents';
 import Tickets from './api/tickets';
 import ResourceBase from './api/resourceBase';
 
-import type AxiosXHRConfig from 'axios';
 import type { Dispatcher, Auth } from './api/resourceBase';
 
 export type GigwalkAPIConfig = {
@@ -23,31 +22,34 @@ export type GigwalkAPIConfig = {
 
 export default class GigwalkAPI {
 
+    hostname: string;
+
     // Stored auth credentials
     auth: Auth;
 
     // Outgoing request queue
-    requestQueue: typeof RequestQueue;
+    requestQueue: RequestQueue;
 
     // API resources
-    authorization: typeof Authorization;
-    certifications: typeof Certifications;
-    customers: typeof Customers;
-    locationLists: typeof LocationLists;
-    locations: typeof Locations;
-    organizations: typeof Organizations;
-    search: typeof Search;
-    subscriptions: typeof Subscriptions;
-    targetLists: typeof TargetLists;
-    targets: typeof Targets;
-    ticketEvents: typeof TicketEvents;
-    tickets: typeof Tickets;
+    authorization: Authorization;
+    certifications: Certifications;
+    customers: Customers;
+    locationLists: LocationLists;
+    locations: Locations;
+    organizations: Organizations;
+    search: Search;
+    subscriptions: Subscriptions;
+    targetLists: TargetLists;
+    targets: Targets;
+    ticketEvents: TicketEvents;
+    tickets: Tickets;
 
     constructor(config: GigwalkAPIConfig) {
-        const dispatcher = (request: AxiosXHRConfig): Promise => this.dispatchRequest(request);
+        this.hostname = config.hostname || 'api.apps.gigwalk.com';
 
         this.requestQueue = new RequestQueue();
 
+        const dispatcher: Dispatcher = (request: AxiosXHRConfig<*>): Promise<*> => this.dispatchRequest(request);
         this.authorization = new Authorization(dispatcher);
         this.certifications = new Certifications(dispatcher);
         this.customers = new Customers(dispatcher);
@@ -69,10 +71,10 @@ export default class GigwalkAPI {
             if (property instanceof ResourceBase) {
                 property.authenticate(this.auth);
             }
-        })
+        });
     }
 
-    dispatchRequest(request: AxiosXHRConfig): Promise {
+    dispatchRequest(request: AxiosXHRConfig<*>): Promise<*> {
         return this.requestQueue.add(request);
     }
 }
