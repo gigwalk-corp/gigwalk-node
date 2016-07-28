@@ -17,6 +17,12 @@ export default class RequestQueue {
 
     activeRequests: Map<string, ActiveRequestRecord<*>> = new Map();
 
+    httpClient: Axios;
+
+    constructor(httpClient?: Axios = axios) {
+        this.httpClient = httpClient;
+    }
+
     /**
      * Adds a request to the RequestQueue. Returns a promise that is resolved or rejected when
      * the request completes.
@@ -30,7 +36,7 @@ export default class RequestQueue {
             onError: () => {}
         };
 
-        const key = stringify(request);
+        const key = stringify(config);
 
         if (this.activeRequests.get(key)) {
             const record = this.activeRequests.get(key);
@@ -43,26 +49,23 @@ export default class RequestQueue {
         const promise = new Promise((resolve: Function, reject: Function) => {
             request.onSuccess = resolve;
             request.onError = reject;
-
-            this.dispatchQueue.push(request);
         });
 
         // $FlowFixMe
         this.activeRequests.set(key, { request, promise });
 
+        this.dispatchQueue.push(request);
         if (this.dispatchQueue.length === 1) {
-            setTimeout(() => this.checkQueue(), 0);
+            setTimeout(() => this.checkQueue(), 1);
         }
 
         return promise;
     }
 
     checkQueue() {
-        const { dispatchQueue, activeRequests } = this;
-
-        if (dispatchQueue.length > 0) {
-            const request = dispatchQueue.shift();
-            const promise = axios(request);
+        if (this.dispatchQueue.length > 0) {
+            const request = this.dispatchQueue.shift();
+            const promise = this.httpClient(request);
 
             // todo: provide better flow annotations
             promise
@@ -70,10 +73,10 @@ export default class RequestQueue {
                 .catch((...args: Array<any>) => request.onError(...args))
                 .then(() => {
                     const key = stringify(request);
-                    activeRequests.delete(key);
+                    this.activeRequests.delete(key);
                 });
 
-            setTimeout(() => this.checkQueue(), 0);
+            setTimeout(() => this.checkQueue(), 1);
         }
     }
 

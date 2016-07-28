@@ -1,4 +1,5 @@
 // @flow
+import axios from 'axios';
 import RequestQueue from './requestQueue';
 import Authorization from './api/authorization';
 import Certifications from './api/certifications';
@@ -47,7 +48,8 @@ export default class GigwalkAPI {
     constructor(config: GigwalkAPIConfig) {
         this.hostname = config.hostname || 'api.apps.gigwalk.com';
 
-        this.requestQueue = new RequestQueue();
+        const client = axios.create({ baseURL: this.hostname });
+        this.requestQueue = new RequestQueue(client);
 
         const dispatcher: Dispatcher = (request: AxiosXHRConfig<*>): Promise<*> => this.dispatchRequest(request);
         this.authorization = new Authorization(dispatcher);
