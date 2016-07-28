@@ -1,19 +1,25 @@
 // @flow
 import { Axios } from 'axios';
 import Versions from './api/versions';
+import Certifications from './api/certifications/Certifications';
 import type { $AxiosXHRConfigBase, $AxiosXHR, $AxiosXHRConfig } from 'axios';
 
 class AxiosError extends Error {
     response: $AxiosXHR<*>;
     config: $AxiosXHRConfig<*>;
 }
-
+const DEFAULT_OPTS = {
+    baseURL: 'https://api.app.gigwalk.com'
+};
 export default class Gigwalk extends Axios {
-    constructor(config?: $AxiosXHRConfigBase<*> = { baseURL: 'https://api.app.gigwalk.com' }) {
+    constructor(config?: $AxiosXHRConfigBase<*> = DEFAULT_OPTS) {
         super(config);
         this.versions = new Versions(this);
+        this.certifications = new Certifications(this);
     }
+
     versions: Versions;
+    certifications: Certifications;
     defaults: {
         headers: {
             common: {

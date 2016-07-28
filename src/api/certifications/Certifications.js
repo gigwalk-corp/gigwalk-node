@@ -1,5 +1,5 @@
 // @flow
-import Resource from './api/Resource';
+import Resource from '../Resource';
 
 export type Options = {
     baseURL: string,

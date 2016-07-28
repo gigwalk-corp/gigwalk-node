@@ -1,6 +1,6 @@
 import axios from 'axios';
-import schema from '../src/certificates-schema.json';
-import Certificates from '../src/cerfiticates';
+import schema from '../src/api/certifications/certificates-schema.json';
+import Certificates from '../src/api/certifications/Certifications';
 import { expect } from 'chai';
 
 describe('Certificates', () => {
