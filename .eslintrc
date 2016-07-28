@@ -11,6 +11,7 @@
     "plugins": [
         "mocha",
         "flowtype",
+        "flow-vars",
         "gigwalk"
     ],
     "rules": {
@@ -31,6 +32,8 @@
         "mocha/no-exclusive-tests": 2,
         "max-len": [2, 160, 4],
         "require-jsdoc": 1,
+        "flow-vars/define-flow-type": 1,
+        "flow-vars/use-flow-type": 1,
         "flowtype/require-parameter-type": 2,
         "flowtype/require-return-type": [
             2,
