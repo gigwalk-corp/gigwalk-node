@@ -1,5 +1,5 @@
-import schema from '../src/certifications-schema.json';
-import Certifications from '../src/cerfitications';
+import schema from '../src/api/certifications/certifications-schema.json';
+import Certifications from '../src/api/certifications/cerfitications';
 import { expect } from 'chai';
 
 describe('Certifications', () => {
@@ -31,28 +31,28 @@ describe('Certifications', () => {
                 }
             ]
         })
-            .then((resp) => {
-                expect(resp.status).to.equal(200);
-                expect(resp.statusText).to.equal('OK');
-                expect(resp.data).to.have.jsonSchema(schema);
-                certificationID = resp.data.data[0].id;
-                certificationID2 = resp.data.data[1].id;
+            .then((res) => {
+                expect(res.status).to.equal(200);
+                expect(res.statusText).to.equal('OK');
+                expect(res.data).to.have.jsonSchema(schema);
+                certificationID = res.data.data[0].id;
+                certificationID2 = res.data.data[1].id;
             })
     );
     it('should be able to get all the certifications from the server', () =>
         certifications.getCertifications()
-            .then((resp) => {
-                expect(resp.status).to.equal(200);
-                expect(resp.statusText).to.equal('OK');
-                expect(resp.data).to.have.jsonSchema(schema);
+            .then((res) => {
+                expect(res.status).to.equal(200);
+                expect(res.statusText).to.equal('OK');
+                expect(res.data).to.have.jsonSchema(schema);
             })
     );
     it('should be able to get a specific certifiation from the server ', () =>
         certifications.getCertificationID(certificationID)
-            .then((resp) => {
-                expect(resp.status).to.equal(200);
-                expect(resp.statusText).to.equal('OK');
-                expect(resp.data).to.have.jsonSchema(schema);
+            .then((res) => {
+                expect(res.status).to.equal(200);
+                expect(res.statusText).to.equal('OK');
+                expect(res.data).to.have.jsonSchema(schema);
             })
     );
     it('should be able to edit a specific certification from the server', () =>
@@ -62,10 +62,10 @@ describe('Certifications', () => {
             type: 'ASSIGNED_CERT',
             state: 'ACTIVE'
         })
-            .then((resp) => {
-                expect(resp.status).to.equal(200);
-                expect(resp.statusText).to.equal('OK');
-                expect(resp.data).to.have.jsonSchema(schema);
+            .then((res) => {
+                expect(res.status).to.equal(200);
+                expect(res.statusText).to.equal('OK');
+                expect(res.data).to.have.jsonSchema(schema);
             })
     );
     it('should be able to remove a certification to a customer to the server', () =>
@@ -75,10 +75,10 @@ describe('Certifications', () => {
                 certificationID
             ]
         })
-            .then((resp) => {
-                expect(resp.status).to.equal(200);
-                expect(resp.statusText).to.equal('OK');
-                // expect(resp.data).to.have.jsonSchema(schema);
+            .then((res) => {
+                expect(res.status).to.equal(200);
+                expect(res.statusText).to.equal('OK');
+                // expect(res.data).to.have.jsonSchema(schema);
             })
     );
     it('should be able to add a certification to a customer to the server', () =>
@@ -88,18 +88,18 @@ describe('Certifications', () => {
                 certificationID
             ]
         })
-            .then((resp) => {
-                expect(resp.status).to.equal(200);
-                expect(resp.statusText).to.equal('OK');
-                // expect(resp.data).to.have.jsonSchema(schema);
+            .then((res) => {
+                expect(res.status).to.equal(200);
+                expect(res.statusText).to.equal('OK');
+                // expect(res.data).to.have.jsonSchema(schema);
             })
     );
     it('should be able to get a customers certifications from the server', () =>
         certifications.getCustomerCertifications(organizationID, customerID)
-            .then((resp) => {
-                expect(resp.status).to.equal(200);
-                expect(resp.statusText).to.equal('OK');
-                expect(resp.data).to.have.jsonSchema(schema);
+            .then((res) => {
+                expect(res.status).to.equal(200);
+                expect(res.statusText).to.equal('OK');
+                expect(res.data).to.have.jsonSchema(schema);
             })
     );
     it('should be post new certifications for an organization to the server', () =>
@@ -113,18 +113,18 @@ describe('Certifications', () => {
                 }
             ]
         })
-            .then((resp) => {
-                expect(resp.status).to.equal(200);
-                expect(resp.statusText).to.equal('OK');
-                expect(resp.data).to.have.jsonSchema(schema);
+            .then((res) => {
+                expect(res.status).to.equal(200);
+                expect(res.statusText).to.equal('OK');
+                expect(res.data).to.have.jsonSchema(schema);
             })
     );
     it('should be able to get an organizations certifications from the server', () =>
         certifications.getOrganizationCertifications(organizationID)
-            .then((resp) => {
-                expect(resp.status).to.equal(200);
-                expect(resp.statusText).to.equal('OK');
-                expect(resp.data).to.have.jsonSchema(schema);
+            .then((res) => {
+                expect(res.status).to.equal(200);
+                expect(res.statusText).to.equal('OK');
+                expect(res.data).to.have.jsonSchema(schema);
             })
     );
     it('should be able to edit a certification for an organiztion from the server', () =>
@@ -139,10 +139,10 @@ describe('Certifications', () => {
                 }
             ]
         })
-            .then((resp) => {
-                expect(resp.status).to.equal(200);
-                expect(resp.statusText).to.equal('OK');
-                // expect(resp.data).to.have.jsonSchema(schema);
+            .then((res) => {
+                expect(res.status).to.equal(200);
+                expect(res.statusText).to.equal('OK');
+                // expect(res.data).to.have.jsonSchema(schema);
             })
     );
     it('should be able to upload a certification for an organiztion to the server from a S3 file', () =>
@@ -151,10 +151,10 @@ describe('Certifications', () => {
                 'null'
             ]
         })
-            .then((resp) => {
-                expect(resp.status).to.equal(200);
-                expect(resp.statusText).to.equal('OK');
-                // expect(resp.data).to.have.jsonSchema(schema);
+            .then((res) => {
+                expect(res.status).to.equal(200);
+                expect(res.statusText).to.equal('OK');
+                // expect(res.data).to.have.jsonSchema(schema);
             })
     );
     it('should be able to delete a certification for an organiztion from the server', () =>
@@ -163,18 +163,18 @@ describe('Certifications', () => {
                 certificationID
             ]
         })
-            .then((resp) => {
-                expect(resp.status).to.equal(200);
-                expect(resp.statusText).to.equal('OK');
-                // expect(resp.data).to.have.jsonSchema(schema);
+            .then((res) => {
+                expect(res.status).to.equal(200);
+                expect(res.statusText).to.equal('OK');
+                // expect(res.data).to.have.jsonSchema(schema);
             })
     );
     it('should be able to delete a specific certification from the server', () =>
         certifications.deleteCertificationID(certificationID2)
-            .then((resp) => {
-                expect(resp.status).to.equal(200);
-                expect(resp.statusText).to.equal('OK');
-                // expect(resp.data).to.have.jsonSchema(schema);
+            .then((res) => {
+                expect(res.status).to.equal(200);
+                expect(res.statusText).to.equal('OK');
+                // expect(res.data).to.have.jsonSchema(schema);
             })
     );
 });

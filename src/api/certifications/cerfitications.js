@@ -16,7 +16,7 @@ export default class Certificates {
         });
     }
 
-    client: typeof axios;
+    client: axios;
 
     deleteCertificationID(certificationID : number): Promise<Object> {
         const URL: string = `/v1/certifications/${certificationID}`;
