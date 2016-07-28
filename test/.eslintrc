@@ -3,6 +3,8 @@
     "globals": {
         "baseURL": true,
         "token": true,
-        "expect": true
+        "expect": true,
+        "email": true,
+        "password": true
     }
 }

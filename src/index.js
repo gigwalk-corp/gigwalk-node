@@ -15,6 +15,7 @@ import Tickets from './api/tickets';
 import ResourceBase from './api/resourceBase';
 
 import type { Dispatcher, Auth } from './api/resourceBase';
+import type { $AxiosXHRConfig as AxiosXHRConfig } from 'axios';
 
 export type GigwalkAPIConfig = {
     hostname?: string,

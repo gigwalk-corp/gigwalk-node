@@ -2,7 +2,9 @@
 import axios from 'axios';
 import stringify from 'json-stable-stringify';
 
-interface Request<T> extends AxiosXHRConfig<T> {
+import type { $AxiosXHRConfig } from 'axios';
+
+interface Request<T> extends $AxiosXHRConfig<T> {
     onSuccess: Function,
     onError: Function
 }
@@ -23,7 +25,7 @@ export default class RequestQueue {
      * @param config
      * @returns {Promise}
      */
-    add(config: AxiosXHRConfig<*>) {
+    add(config: $AxiosXHRConfig<*>) {
         const request = {
             ...config,
             onSuccess: () => {},
@@ -47,7 +49,6 @@ export default class RequestQueue {
             this.dispatchQueue.push(request);
         });
 
-        // $FlowFixMe
         this.activeRequests.set(key, { request, promise });
 
         if (this.dispatchQueue.length === 1) {
