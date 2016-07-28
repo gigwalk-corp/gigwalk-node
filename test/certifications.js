@@ -1,4 +1,4 @@
-import Certifications from '../src/api/certifications/cerfitications';
+import Certifications from '../src/api/certifications/certifications';
 import axios from 'axios';
 import schema from '../src/api/certifications/certifications-schema.json';
 
@@ -11,11 +11,11 @@ describe('Certifications', () => {
     });
     const certifications = new Certifications(client);
 
-    const randString : string = Math.random().toString(36).substring(10);
-    let certificationID : number;
-    let certificationID2 : number;
-    const organizationID : number = 4;
-    const customerID : number = 1;
+    const randString: string = Math.random().toString(36).substring(10);
+    let certificationID: number;
+    let certificationID2: number;
+    const organizationID: number = 4;
+    const customerID: number = 1;
 
     it('should be able to create cerfitications', () =>
         certifications.createCertifications({
