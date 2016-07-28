@@ -1,3 +1,4 @@
+/* eslint prefer-template:0 */
 module.exports = {
     entry: {
         main: './index.js'

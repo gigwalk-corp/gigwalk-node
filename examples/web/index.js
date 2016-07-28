@@ -1,4 +1,4 @@
-/* eslint gigwalk/require-valid-flow-file-annotation: 0 */
+/* eslint gigwalk/require-valid-flow-file-annotation: 0,  import/no-unresolved: 0 */
 import React, { Component } from 'react';
 import { render } from 'react-dom';
 import injectTapEventPlugin from 'react-tap-event-plugin';
