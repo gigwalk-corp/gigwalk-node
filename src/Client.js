@@ -2,7 +2,7 @@
 import { Axios } from 'axios';
 import Versions from './api/versions';
 import Certifications from './api/certifications/Certifications';
-import type { $AxiosXHRConfigBase, $AxiosXHR, $AxiosXHRConfig } from 'axios';
+import type { $AxiosXHRConfigBase, $AxiosXHR, $AxiosXHRConfig, $AxiosError } from 'axios';
 
 class AxiosError extends Error {
     response: $AxiosXHR<*>;
@@ -43,22 +43,30 @@ export default class Gigwalk extends Axios {
 
     request(config: $AxiosXHRConfig<any>, ...args: Array<any>): Promise<$AxiosXHR<*>> {
         let result: Promise<$AxiosXHR<*>>;
-        const key: string = JSON.stringify(config);
-        const unset = (res: $AxiosXHR<*>): $AxiosXHR<*> => {
-            this.queue.delete(key);
-            return res;
-        };
+        let key: string;
+        try {
+            key = JSON.stringify(config);
+        } catch (e) {
+            console.error(e); // eslint-disable-line no-console
+            return super.request(config, ...args);
+        }
 
         if (this.queue.has(key)) {
-            // $FlowFixMe should allow that it is known
+            // $FlowFixMe should allow that it is known to be a Promise that resoves
             result = this.queue.get(key);
         } else {
             result = super.request(config, ...args)
-                .then(unset)
-                .then(unset);
+                .then((res: $AxiosXHR<*>): $AxiosXHR<*> => {
+                    this.queue.delete(key);
+                    return res;
+                })
+                .catch((err: $AxiosError<*>): Promise<$AxiosError<*>> => {
+                    this.queue.delete(key);
+                    return Promise.reject(err);
+                });
             this.queue.set(key, result);
         }
-        // $FlowFixMe should allow that it is known
+        // $FlowFixMe should allow that it is known to be a Promise that resoves
         return result;
     }
     authorize(email: string, password: string): Promise<$AxiosXHR<*>> {
