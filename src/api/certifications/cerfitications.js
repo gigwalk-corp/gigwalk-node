@@ -1,79 +1,110 @@
 // @flow
-import axios from 'axios';
+type UpdateCertificationParams = {
+    description: string,
+    title: string,
+    type: string,
+    state: string
+}
 
-export type Options = {
-    baseURL: string,
-    auth: string
-};
+type UpdateCertificationsParams = {
+    certifications: [
+        {
+            description: string,
+            title: string,
+            type: string,
+            state: string
+        }
+    ]
+}
+
+type UpdateCustomerCertificationsParams = {
+    action: string,
+    certification_ids: []
+}
+
+type UpdateOrganizationCertificationsParams = {
+  certifications: [
+    {
+      id: number,
+      description: string,
+      title: string,
+      type: string,
+      state: string
+    }
+  ]
+}
+
+type DeleteOrganizationCertificationsParams = {
+    certification_ids: []
+}
+
+type CreateOrganizationCertificationsFromFileParams = {
+    s3_keys: [ ]
+}
 
 export default class Certificates {
-    constructor({ auth, baseURL }: Options) {
-        this.client = axios.create({
-            baseURL,
-            headers: {
-                Authorization: auth
-            }
-        });
+    constructor(client: Axios) {
+        this.client = client;
     }
 
-    client: axios;
+    client: Axios;
 
-    deleteCertificationID(certificationID : number): Promise<Object> {
+    deleteCertification(certificationID : number): Promise<AxiosXHR<Object>> {
         const URL: string = `/v1/certifications/${certificationID}`;
         return this.client.delete(URL);
     }
 
-    getCertificationID(certificationID : number): Promise<Object> {
+    getCertification(certificationID : number): Promise<AxiosXHR<Object>> {
         const URL: string = `/v1/certifications/${certificationID}`;
         return this.client.get(URL);
     }
 
-    putCertificationID(certificationID : number, payload: any): Promise<Object> {
+    updateCertification(certificationID : number, payload: UpdateCertificationParams): Promise<AxiosXHR<Object>> {
         const URL: string = `/v1/certifications/${certificationID}`;
         return this.client.put(URL, payload);
     }
 
-    getCertifications(): Promise<Object> {
+    getCertifications(): Promise<AxiosXHR<Object>> {
         const URL: string = '/v1/certifications';
         return this.client.get(URL);
     }
 
-    postCertifications(payload : any): Promise<Object> {
+    createCertifications(payload : UpdateCertificationsParams): Promise<AxiosXHR<Object>> {
         const URL: string = '/v1/certifications';
         return this.client.post(URL, payload);
     }
 
-    getCustomerCertifications(organizationID : number, customerID : number): Promise<Object> {
+    getCustomerCertifications(organizationID : number, customerID : number): Promise<AxiosXHR<Object>> {
         const URL: string = `/v1/organizations/${organizationID}/customer/${customerID}/certifications`;
         return this.client.get(URL);
     }
 
-    putCustomerCertifications(organizationID : number, customerID : number, payload : any): Promise<Object> {
+    updateCustomerCertifications(organizationID : number, customerID : number, payload : UpdateCustomerCertificationsParams): Promise<AxiosXHR<Object>> {
         const URL: string = `/v1/organizations/${organizationID}/customer/${customerID}/certifications`;
         return this.client.put(URL, payload);
     }
 
-    getOrganizationCertifications(organizationID : number): Promise<Object> {
+    getOrganizationCertifications(organizationID : number): Promise<AxiosXHR<Object>> {
         const URL: string = `/v1/organizations/${organizationID}/certifications`;
         return this.client.get(URL);
     }
 
-    postOrganizationCertifications(organizationID : number, payload : any): Promise<Object> {
+    createOrganizationCertifications(organizationID : number, payload : UpdateCertificationsParams): Promise<AxiosXHR<Object>> {
         const URL: string = `/v1/organizations/${organizationID}/certifications`;
         return this.client.post(URL, payload);
     }
 
-    putOrganizationCertifications(organizationID : number, payload : any): Promise<Object> {
+    updateOrganizationCertifications(organizationID : number, payload : UpdateOrganizationCertificationsParams): Promise<AxiosXHR<Object>> {
         const URL: string = `/v1/organizations/${organizationID}/certifications`;
         return this.client.put(URL, payload);
     }
 
-    deleteOrganizationCertifications(organizationID : number, payload : any): Promise<Object> {
+    deleteOrganizationCertifications(organizationID : number, payload : DeleteOrganizationCertificationsParams): Promise<AxiosXHR<Object>> {
         const URL: string = `/v1/organizations/${organizationID}/certifications/delete`;
         return this.client.post(URL, payload);
     }
 
-    uploadOrganizationCertificationsFromS3(organizationID : number, payload : any): Promise<Object> {
+    createOrganizationCertificationsFromFile(organizationID : number, payload : CreateOrganizationCertificationsFromFileParams): Promise<AxiosXHR<Object>> {
         const URL: string = `/v1/organizations/${organizationID}/certifications/upload`;
         return this.client.post(URL, payload);
     }

@@ -1,12 +1,15 @@
-import schema from '../src/api/certifications/certifications-schema.json';
 import Certifications from '../src/api/certifications/cerfitications';
-import { expect } from 'chai';
+import axios from 'axios';
+import schema from '../src/api/certifications/certifications-schema.json';
 
 describe('Certifications', () => {
-    const certifications = new Certifications({
+    const client = axios.create({
         baseURL,
-        auth: token
+        headers: {
+            Authorization: token
+        }
     });
+    const certifications = new Certifications(client);
 
     const randString : string = Math.random().toString(36).substring(10);
     let certificationID : number;
@@ -14,8 +17,8 @@ describe('Certifications', () => {
     const organizationID : number = 4;
     const customerID : number = 1;
 
-    it('should be able to post new cerfitications to the server', () =>
-        certifications.postCertifications({
+    it('should be able to create cerfitications', () =>
+        certifications.createCertifications({
             certifications: [
                 {
                     description: randString,
@@ -39,7 +42,7 @@ describe('Certifications', () => {
                 certificationID2 = res.data.data[1].id;
             })
     );
-    it('should be able to get all the certifications from the server', () =>
+    it('should be able to get all certifications', () =>
         certifications.getCertifications()
             .then((res) => {
                 expect(res.status).to.equal(200);
@@ -47,16 +50,16 @@ describe('Certifications', () => {
                 expect(res.data).to.have.jsonSchema(schema);
             })
     );
-    it('should be able to get a specific certifiation from the server ', () =>
-        certifications.getCertificationID(certificationID)
+    it('should be able to get a specific certifiation', () =>
+        certifications.getCertification(certificationID)
             .then((res) => {
                 expect(res.status).to.equal(200);
                 expect(res.statusText).to.equal('OK');
                 expect(res.data).to.have.jsonSchema(schema);
             })
     );
-    it('should be able to edit a specific certification from the server', () =>
-        certifications.putCertificationID(certificationID, {
+    it('should be able to edit a specific certification', () =>
+        certifications.updateCertification(certificationID, {
             description: randString.substr(0, 8),
             title: randString.substr(0, 8),
             type: 'ASSIGNED_CERT',
@@ -68,8 +71,8 @@ describe('Certifications', () => {
                 expect(res.data).to.have.jsonSchema(schema);
             })
     );
-    it('should be able to remove a certification to a customer to the server', () =>
-        certifications.putCustomerCertifications(organizationID, customerID, {
+    it('should be able to remove a certification from a customer', () =>
+        certifications.updateCustomerCertifications(organizationID, customerID, {
             action: 'remove',
             certification_ids: [
                 certificationID
@@ -81,8 +84,8 @@ describe('Certifications', () => {
                 // expect(res.data).to.have.jsonSchema(schema);
             })
     );
-    it('should be able to add a certification to a customer to the server', () =>
-        certifications.putCustomerCertifications(organizationID, customerID, {
+    it('should be able to add a certification to a customer', () =>
+        certifications.updateCustomerCertifications(organizationID, customerID, {
             action: 'add',
             certification_ids: [
                 certificationID
@@ -94,7 +97,7 @@ describe('Certifications', () => {
                 // expect(res.data).to.have.jsonSchema(schema);
             })
     );
-    it('should be able to get a customers certifications from the server', () =>
+    it('should be able to get a customers certifications', () =>
         certifications.getCustomerCertifications(organizationID, customerID)
             .then((res) => {
                 expect(res.status).to.equal(200);
@@ -102,8 +105,8 @@ describe('Certifications', () => {
                 expect(res.data).to.have.jsonSchema(schema);
             })
     );
-    it('should be post new certifications for an organization to the server', () =>
-        certifications.postOrganizationCertifications(organizationID, {
+    it('should be create certifications for an organization', () =>
+        certifications.createOrganizationCertifications(organizationID, {
             certifications: [
                 {
                     description: 'test post',
@@ -119,7 +122,7 @@ describe('Certifications', () => {
                 expect(res.data).to.have.jsonSchema(schema);
             })
     );
-    it('should be able to get an organizations certifications from the server', () =>
+    it('should be able to get all certifications for an organization', () =>
         certifications.getOrganizationCertifications(organizationID)
             .then((res) => {
                 expect(res.status).to.equal(200);
@@ -127,8 +130,8 @@ describe('Certifications', () => {
                 expect(res.data).to.have.jsonSchema(schema);
             })
     );
-    it('should be able to edit a certification for an organiztion from the server', () =>
-        certifications.putOrganizationCertifications(organizationID, {
+    it('should be able to edit a certification for an organiztion', () =>
+        certifications.updateOrganizationCertifications(organizationID, {
             certifications: [
                 {
                     id: 0,
@@ -145,8 +148,8 @@ describe('Certifications', () => {
                 // expect(res.data).to.have.jsonSchema(schema);
             })
     );
-    it('should be able to upload a certification for an organiztion to the server from a S3 file', () =>
-        certifications.uploadOrganizationCertificationsFromS3(organizationID, {
+    it('should be able to create certifications for an organiztion from a file', () =>
+        certifications.createOrganizationCertificationsFromFile(organizationID, {
             s3_keys: [
                 'null'
             ]
@@ -157,7 +160,7 @@ describe('Certifications', () => {
                 // expect(res.data).to.have.jsonSchema(schema);
             })
     );
-    it('should be able to delete a certification for an organiztion from the server', () =>
+    it('should be able to delete a certification for an organiztion', () =>
         certifications.deleteOrganizationCertifications(organizationID, {
             certification_ids: [
                 certificationID
@@ -169,8 +172,8 @@ describe('Certifications', () => {
                 // expect(res.data).to.have.jsonSchema(schema);
             })
     );
-    it('should be able to delete a specific certification from the server', () =>
-        certifications.deleteCertificationID(certificationID2)
+    it('should be able to delete a specific certification', () =>
+        certifications.deleteCertification(certificationID2)
             .then((res) => {
                 expect(res.status).to.equal(200);
                 expect(res.statusText).to.equal('OK');
