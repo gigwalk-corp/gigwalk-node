@@ -49,6 +49,7 @@ class App extends Component {
         });
     }
     onSubmit() {
+        this.props.client.authorize(this.state.username, this.state.password);
         this.props.client.authorize(this.state.username, this.state.password)
             .then((res) => {
                 this.setState({ res: JSON.stringify(res, null, 4) });

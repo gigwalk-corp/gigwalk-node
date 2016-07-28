@@ -16,6 +16,7 @@ export default class Gigwalk extends Axios {
         super(config);
         this.versions = new Versions(this);
         this.certifications = new Certifications(this);
+        this.queue = new Map();
     }
 
     versions: Versions;
@@ -27,6 +28,7 @@ export default class Gigwalk extends Axios {
             }
         }
     };
+    queue: Map<string, Promise<$AxiosXHR<*>>>;
 
     setAuthToken(token: string): Promise<$AxiosXHR<*>> {
         const prefix: string = 'Token ';
@@ -39,6 +41,26 @@ export default class Gigwalk extends Axios {
         });
     }
 
+    request(config: $AxiosXHRConfig<any>, ...args: Array<any>): Promise<$AxiosXHR<*>> {
+        let result: Promise<$AxiosXHR<*>>;
+        const key: string = JSON.stringify(config);
+        const unset = (res: $AxiosXHR<*>): $AxiosXHR<*> => {
+            this.queue.delete(key);
+            return res;
+        };
+
+        if (this.queue.has(key)) {
+            // $FlowFixMe should allow that it is known
+            result = this.queue.get(key);
+        } else {
+            result = super.request(config, ...args)
+                .then(unset)
+                .then(unset);
+            this.queue.set(key, result);
+        }
+        // $FlowFixMe should allow that it is known
+        return result;
+    }
     authorize(email: string, password: string): Promise<$AxiosXHR<*>> {
         return this.post('/v1/auth', null, {
             auth: {
