@@ -258,16 +258,16 @@ export default class Certifications extends ResourceBase {
      *             gigwalk.certification.updateCustomerCertifications({...})
      */
     updateCustomerCertifications(params: UpdateCustomerCertificationsParams): APIPromise<UpdateCustomerCertificationsData> {
-         const request: AxiosXHRConfig<any> = {
-             url: `/v1/organizations/${params.organization_id}/customer/${params.customer_id}/certifications`,
-             method: 'put',
-             data: {
-                 action: params.action,
-                 certification_ids: params.certification_ids
-             }
-         };
-         return this.dispatch(request);
-     }
+        const request: AxiosXHRConfig<any> = {
+            url: `/v1/organizations/${params.organization_id}/customer/${params.customer_id}/certifications`,
+            method: 'put',
+            data: {
+                action: params.action,
+                certification_ids: params.certification_ids
+            }
+        };
+        return this.dispatch(request);
+    }
 
     /**
      * @api {get} /v1/organizations/{organization_id}/certifications
