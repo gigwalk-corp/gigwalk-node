@@ -140,7 +140,7 @@ export default class Certifications extends ResourceBase {
      * @api {delete} /v1/certifications/{certification_id}
      * @apiName DeleteCertification
      * @apiDescription Delete given cert This is a hard delete
-     * @apiParam {number} certificationID
+     * @apiParam {Number} certification_id
      * @apiExample {js} Example:
      *             gigwalk.certification.deleteCertification({...})
      */
@@ -156,7 +156,7 @@ export default class Certifications extends ResourceBase {
      * @api {get} /v1/certifications/{certification_id}
      * @apiName GetCertification
      * @apiDescription Get Certification info. Return data fields (id, org_id, description, title, type, state).
-     * @apiParam {number} certificationID
+     * @apiParam {Number} certification_id
      * @apiExample {js} Example:
      *             gigwalk.certification.getCertification({...})
      */
@@ -173,8 +173,8 @@ export default class Certifications extends ResourceBase {
      * @api {put} /v1/certifications/{certification_id}
      * @apiName UpdateCertification
      * @apiDescription Update Certification(s) JSON payload can have (description, title, type, state).
-     * @apiParam {number} certificationID
-     * @apiParam {UpdateCertificationParams} payload
+     * @apiParam {Number} certification_id
+     * @apiParam {CertificationTemplate} certification
      * @apiExample {js} Example:
      *             gigwalk.certification.updateCertification({...})
      */
@@ -211,7 +211,7 @@ export default class Certifications extends ResourceBase {
      * @apiName CreateCertifications
      * @apiDescription Create Certification(s) JSON payload can have (description, title, type, state).
                        If the cert already exists (check by title), then we return existing cert(s)
-     * @apiParam {BulkCertificationParams} payload
+     * @apiParam {Array<CertificationTemplate>} certifications
      * @apiExample {js} Example:
      *             gigwalk.certification.createCertifications({...})
      */
@@ -232,8 +232,8 @@ export default class Certifications extends ResourceBase {
      * @apiName GetCustomerCertifications
      * @apiDescription Get Certification info for a given customer Return data fields (id, org_id, description, title, type, state).
                        It could return paginated results and also sorted by given parameters
-     * @apiParam {number} organizationID
-     * @apiParam {number} customerID
+     * @apiParam {Number} organization_id
+     * @apiParam {Number} customer_id
      * @apiExample {js} Example:
      *             gigwalk.certification.getCustomerCertifications({...})
      */
@@ -251,9 +251,10 @@ export default class Certifications extends ResourceBase {
      * @apiName UpdateCustomerCertifications
      * @apiDescription Add or remove certifications for a customer A customer WORKER can use this
                        endpoint only to add/remove SELF_CERTS certifications to himself
-     * @apiParam {number} organizationID
-     * @apiParam {number} customerID
-     * @apiParam {UpdateCustomerCertParams} payload
+     * @apiParam {Number} organization_id
+     * @apiParam {Number} customer_id
+     * @apiParam {String} action
+     * @apiParam {Array<number>} certification_ids
      * @apiExample {js} Example:
      *             gigwalk.certification.updateCustomerCertifications({...})
      */
@@ -274,7 +275,7 @@ export default class Certifications extends ResourceBase {
      * @apiName GetOrganizationCertifications
      * @apiDescription Get Certifications information for a given organization Return data fields (id, org_id, description, title, type, state).
                        It could return paginated results and also sorted by given parameters
-     * @apiParam {number} organizationID
+     * @apiParam {Number} organization_id
      * @apiExample {js} Example:
      *             gigwalk.certification.getOrganizationCertifications({...})
      */
@@ -292,8 +293,8 @@ export default class Certifications extends ResourceBase {
      * @apiName CreateOrganizationCertifications
      * @apiDescription Create Certification(s) for a given organization JSON payload can have (description, title).
                        If the cert already exists (check by title), then we return existing cert(s)
-     * @apiParam {number} organizationID
-     * @apiParam {BulkCertificationParams} payload
+     * @apiParam {Number} organization_id
+     * @apiParam {Array<CertificationTemplate>} certifications
      * @apiExample {js} Example:
      *             gigwalk.certification.createOrganizationCertifications({...})
      */
@@ -313,8 +314,8 @@ export default class Certifications extends ResourceBase {
      * @api {put} /v1/organizations/{organization_id}/certifications
      * @apiName UpdateOrganizationCertifications
      * @apiDescription Update Certification(s) for a given organization
-     * @apiParam {number} organization_id
-     * @apiParam {UpdateOrganizationCertificationParams} payload
+     * @apiParam {Number} organization_id
+     * @apiParam {Array<CertificationTemplate>} certifications
      * @apiExample {js} Example:
      *             gigwalk.certification.updateOrganizationCertifications({...})
      */
@@ -334,8 +335,8 @@ export default class Certifications extends ResourceBase {
      * @api {post} /v1/organizations/{organization_id}/certifications/delete
      * @apiName DeleteOrganizationCertifications
      * @apiDescription Mark the certifications with the passed ids as deleted.
-     * @apiParam {number} organizationID
-     * @apiParam {DeleteOrganizationCertificationParams} payload
+     * @apiParam {Number} organization_id
+     * @apiParam {Array<number>} certification_ids
      * @apiExample {js} Example:
      *             gigwalk.certification.deleteOrganizationCertifications({...})
      */
@@ -356,8 +357,8 @@ export default class Certifications extends ResourceBase {
      * @apiName CreateOrganizationCertificationsFromFile
      * @apiDescription Create Certifications from a file that has been uploaded to S3.
                        See https://docs.google.com/document/d/1Q14OKBva_2VhWdSQCbrwjq2Q8dVH6TwXgZ83jTGxHRc/ for more info about our file upload api.
-     * @apiParam {number} organizationID
-     * @apiParam {CreateOrganizationCertFromFileParams} payload
+     * @apiParam {Number} organization_id
+     * @apiParam {Array<string>} s3_keys
      * @apiExample {js} Example:
      *             gigwalk.certification.createOrganizationCertificationsFromFile({...})
      */

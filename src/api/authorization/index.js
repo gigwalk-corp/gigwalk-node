@@ -12,6 +12,10 @@ type ResetPasswordParams = {
     check_expired: boolean
 }
 
+type ForgotPasswordData = null
+
+type ResetPasswordData = null
+
 export default class Authorization extends ResourceBase {
 
     /**
@@ -22,8 +26,8 @@ export default class Authorization extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.authorization.forgotPassword({ ... })
      */
-    forgotPassword(params: ForgotPasswordParams): Promise<any> {
-        const request: AxiosXHRConfig<ForgotPasswordParams> = {
+    forgotPassword(params: ForgotPasswordParams): Promise<ForgotPasswordData> {
+        const request: AxiosXHRConfig<any> = {
             url: '/v1/forgot_password',
             method: 'post',
             data: params
@@ -43,8 +47,8 @@ export default class Authorization extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.authorization.resetPassword({ ... })
      */
-    resetPassword(params: ResetPasswordParams): Promise<any> {
-        const request: AxiosXHRConfig<ResetPasswordParams> = {
+    resetPassword(params: ResetPasswordParams): Promise<ResetPasswordData> {
+        const request: AxiosXHRConfig<any> = {
             url: '/v1/reset_password',
             method: 'post',
             data: params
