@@ -18,7 +18,7 @@ describe('Certifications', () => {
     const organizationID: number = 4;
     const customerID: number = 1;
 
-    it('should be able to create cerfitications', () =>
+    it('should be able to create cerfitications', (done) => {
         certifications.createCertifications([
             {
                 description: randString,
@@ -35,29 +35,32 @@ describe('Certifications', () => {
         ])
             .then((res) => {
                 expect(res.status).to.equal(200);
-                expect(res.statusText).to.equal('OK');
                 expect(res.data).to.have.jsonSchema(schema);
                 certificationID = res.data.data[0].id;
                 certificationID2 = res.data.data[1].id;
+                done();
             })
-    );
-    it('should be able to get all certifications', () =>
+            .catch(done);
+    });
+    it('should be able to get all certifications', (done) => {
         certifications.getCertifications()
             .then((res) => {
                 expect(res.status).to.equal(200);
-                expect(res.statusText).to.equal('OK');
                 expect(res.data).to.have.jsonSchema(schema);
+                done();
             })
-    );
-    it('should be able to get a specific certifiation', () =>
+            .catch(done);
+    });
+    it('should be able to get a specific certifiation', (done) => {
         certifications.getCertification(certificationID)
             .then((res) => {
                 expect(res.status).to.equal(200);
-                expect(res.statusText).to.equal('OK');
                 expect(res.data).to.have.jsonSchema(schema);
+                done();
             })
-    );
-    it('should be able to edit a specific certification', () =>
+            .catch(done);
+    });
+    it('should be able to edit a specific certification', (done) => {
         certifications.updateCertification(certificationID, {
             description: randString.substr(0, 8),
             title: randString.substr(0, 8),
@@ -66,11 +69,12 @@ describe('Certifications', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                expect(res.statusText).to.equal('OK');
                 expect(res.data).to.have.jsonSchema(schema);
+                done();
             })
-    );
-    it('should be able to remove a certification from a customer', () =>
+            .catch(done);
+    });
+    it('should be able to remove a certification from a customer', (done) => {
         certifications.updateCustomerCertifications(organizationID, customerID, {
             action: 'remove',
             certification_ids: [
@@ -79,11 +83,12 @@ describe('Certifications', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                expect(res.statusText).to.equal('OK');
                 // expect(res.data).to.have.jsonSchema(schema);
+                done();
             })
-    );
-    it('should be able to add a certification to a customer', () =>
+            .catch(done);
+    });
+    it('should be able to add a certification to a customer', (done) => {
         certifications.updateCustomerCertifications(organizationID, customerID, {
             action: 'add',
             certification_ids: [
@@ -92,19 +97,21 @@ describe('Certifications', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                expect(res.statusText).to.equal('OK');
                 // expect(res.data).to.have.jsonSchema(schema);
+                done();
             })
-    );
-    it('should be able to get a customers certifications', () =>
+            .catch(done);
+    });
+    it('should be able to get a customers certifications', (done) => {
         certifications.getCustomerCertifications(organizationID, customerID)
             .then((res) => {
                 expect(res.status).to.equal(200);
-                expect(res.statusText).to.equal('OK');
                 expect(res.data).to.have.jsonSchema(schema);
+                done();
             })
-    );
-    it('should be create certifications for an organization', () =>
+            .catch(done);
+    });
+    it('should be create certifications for an organization', (done) => {
         certifications.createOrganizationCertifications(organizationID, [
             {
                 description: 'test post',
@@ -115,19 +122,21 @@ describe('Certifications', () => {
         ])
             .then((res) => {
                 expect(res.status).to.equal(200);
-                expect(res.statusText).to.equal('OK');
                 expect(res.data).to.have.jsonSchema(schema);
+                done();
             })
-    );
-    it('should be able to get all certifications for an organization', () =>
+            .catch(done);
+    });
+    it('should be able to get all certifications for an organization', (done) => {
         certifications.getOrganizationCertifications(organizationID)
             .then((res) => {
                 expect(res.status).to.equal(200);
-                expect(res.statusText).to.equal('OK');
                 expect(res.data).to.have.jsonSchema(schema);
+                done();
             })
-    );
-    it('should be able to edit a certification for an organiztion', () =>
+            .catch(done);
+    });
+    it('should be able to edit a certification for an organiztion', (done) => {
         certifications.updateOrganizationCertifications(organizationID, [
             {
                 id: 0,
@@ -139,36 +148,40 @@ describe('Certifications', () => {
         ])
             .then((res) => {
                 expect(res.status).to.equal(200);
-                expect(res.statusText).to.equal('OK');
                 // expect(res.data).to.have.jsonSchema(schema);
+                done();
             })
-    );
-    it('should be able to create certifications for an organiztion from a file', () =>
+            .catch(done);
+    });
+    it('should be able to create certifications for an organiztion from a file', (done) => {
         certifications.createOrganizationCertificationsFromFile(organizationID, [
             'null'
         ])
             .then((res) => {
                 expect(res.status).to.equal(200);
-                expect(res.statusText).to.equal('OK');
                 // expect(res.data).to.have.jsonSchema(schema);
+                done();
             })
-    );
-    it('should be able to delete a certification for an organiztion', () =>
+            .catch(done);
+    });
+    it('should be able to delete a certification for an organiztion', (done) => {
         certifications.deleteOrganizationCertifications(organizationID, [
             certificationID
         ])
             .then((res) => {
                 expect(res.status).to.equal(200);
-                expect(res.statusText).to.equal('OK');
                 // expect(res.data).to.have.jsonSchema(schema);
+                done();
             })
-    );
-    it('should be able to delete a specific certification', () =>
+            .catch(done);
+    });
+    it('should be able to delete a specific certification', (done) => {
         certifications.deleteCertification(certificationID2)
             .then((res) => {
                 expect(res.status).to.equal(200);
-                expect(res.statusText).to.equal('OK');
                 // expect(res.data).to.have.jsonSchema(schema);
+                done();
             })
-    );
+            .catch(done);
+    });
 });
