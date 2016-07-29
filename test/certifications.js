@@ -1,4 +1,4 @@
-import Certifications from '../src/api/certifications/certifications';
+import Certifications from '../src/api/certifications/index';
 import axios from 'axios';
 import schema from '../src/api/certifications/certifications-schema.json';
 
@@ -9,6 +9,7 @@ describe('Certifications', () => {
             Authorization: token
         }
     });
+
     const certifications = new Certifications(client);
 
     const randString: string = Math.random().toString(36).substring(10);
