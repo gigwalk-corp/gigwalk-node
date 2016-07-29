@@ -147,8 +147,7 @@ export default class Certifications extends ResourceBase {
     deleteCertification(params: DeleteCertificationParams): APIPromise<DeleteCertificationData> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1/certifications/${params.certification_id}`,
-            method: 'delete',
-            data: null
+            method: 'delete'
         };
         return this.dispatch(request);
     }
@@ -164,8 +163,7 @@ export default class Certifications extends ResourceBase {
     getCertification(params: GetCertificationParams): APIPromise<GetCertificationData> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1/certifications/${params.certification_id}`,
-            method: 'get',
-            data: null
+            method: 'get'
         };
 
         return this.dispatch(request);
@@ -202,8 +200,7 @@ export default class Certifications extends ResourceBase {
     getCertifications(): APIPromise<GetCertificationsData> {
         const request: AxiosXHRConfig<any> = {
             url: '/v1/certifications',
-            method: 'get',
-            data: null
+            method: 'get'
         };
 
         return this.dispatch(request);
@@ -243,8 +240,7 @@ export default class Certifications extends ResourceBase {
     getCustomerCertifications(params: GetCustomerCertificationsParams): APIPromise<GetCustomerCertificationsData> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1/organizations/${params.organization_id}/customer/${params.customer_id}/certifications`,
-            method: 'get',
-            data: null
+            method: 'get'
         };
 
         return this.dispatch(request);
@@ -262,17 +258,16 @@ export default class Certifications extends ResourceBase {
      *             gigwalk.certification.updateCustomerCertifications({...})
      */
     updateCustomerCertifications(params: UpdateCustomerCertificationsParams): APIPromise<UpdateCustomerCertificationsData> {
-        const request: AxiosXHRConfig<any> = {
-            url: `/v1/organizations/${params.organization_id}/customer/${params.customer_id}/certifications`,
-            method: 'put',
-            data: {
-                action: params.action,
-                certification_ids: params.certification_ids
-            }
-        };
-        console.log(request.data);
-        return this.dispatch(request);
-    }
+         const request: AxiosXHRConfig<any> = {
+             url: `/v1/organizations/${params.organization_id}/customer/${params.customer_id}/certifications`,
+             method: 'put',
+             data: {
+                 action: params.action,
+                 certification_ids: params.certification_ids
+             }
+         };
+         return this.dispatch(request);
+     }
 
     /**
      * @api {get} /v1/organizations/{organization_id}/certifications
@@ -286,8 +281,7 @@ export default class Certifications extends ResourceBase {
     getOrganizationCertifications(params: GetOrganizationCertificationsParams): APIPromise<GetOrganizationCertificationsData> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1/organizations/${params.organization_id}/certifications`,
-            method: 'get',
-            data: null
+            method: 'get'
         };
 
         return this.dispatch(request);
