@@ -108,17 +108,17 @@ export default class Certificates {
 
     client: Axios;
 
-    deleteCertification(certificationID : number): APIPromise<NumberCertificationData> {
+    deleteCertification(certificationID: number): APIPromise<NumberCertificationData> {
         const URL: string = `/v1/certifications/${certificationID}`;
         return this.client.delete(URL);
     }
 
-    getCertification(certificationID : number): APIPromise<CertificationData> {
+    getCertification(certificationID: number): APIPromise<CertificationData> {
         const URL: string = `/v1/certifications/${certificationID}`;
         return this.client.get(URL);
     }
 
-    updateCertification(certificationID : number, payload: UpdateCertificationParams): APIPromise<CertificationData> {
+    updateCertification(certificationID: number, payload: UpdateCertificationParams): APIPromise<CertificationData> {
         const URL: string = `/v1/certifications/${certificationID}`;
         return this.client.put(URL, payload);
     }
@@ -128,43 +128,43 @@ export default class Certificates {
         return this.client.get(URL);
     }
 
-    createCertifications(payload : UpdateCertificationsParams): APIPromise<BulkCertificationData> {
+    createCertifications(payload: UpdateCertificationsParams): APIPromise<BulkCertificationData> {
         const URL: string = '/v1/certifications';
         return this.client.post(URL, payload);
     }
 
-    getCustomerCertifications(organizationID : number, customerID : number): APIPromise<BulkCustomerCertificationData> {
+    getCustomerCertifications(organizationID: number, customerID: number): APIPromise<BulkCustomerCertificationData> {
         const URL: string = `/v1/organizations/${organizationID}/customer/${customerID}/certifications`;
         return this.client.get(URL);
     }
 
-    updateCustomerCertifications(organizationID : number, customerID : number, payload : UpdateCustomerCertificationsParams)
+    updateCustomerCertifications(organizationID: number, customerID: number, payload: UpdateCustomerCertificationsParams)
                                                                                             : APIPromise<UpdateCustomerCertificationsData> {
         const URL: string = `/v1/organizations/${organizationID}/customer/${customerID}/certifications`;
         return this.client.put(URL, payload);
     }
 
-    getOrganizationCertifications(organizationID : number): APIPromise<BulkCertificationData> {
+    getOrganizationCertifications(organizationID: number): APIPromise<BulkCertificationData> {
         const URL: string = `/v1/organizations/${organizationID}/certifications`;
         return this.client.get(URL);
     }
 
-    createOrganizationCertifications(organizationID : number, payload : UpdateCertificationsParams): APIPromise<BulkCertificationData> {
+    createOrganizationCertifications(organizationID: number, payload: UpdateCertificationsParams): APIPromise<BulkCertificationData> {
         const URL: string = `/v1/organizations/${organizationID}/certifications`;
         return this.client.post(URL, payload);
     }
 
-    updateOrganizationCertifications(organizationID : number, payload : UpdateOrganizationCertificationsParams): APIPromise<EmptyCertificationData> {
+    updateOrganizationCertifications(organizationID: number, payload: UpdateOrganizationCertificationsParams): APIPromise<EmptyCertificationData> {
         const URL: string = `/v1/organizations/${organizationID}/certifications`;
         return this.client.put(URL, payload);
     }
 
-    deleteOrganizationCertifications(organizationID : number, payload : DeleteOrganizationCertificationsParams): APIPromise<EmptyCertificationData> {
+    deleteOrganizationCertifications(organizationID: number, payload: DeleteOrganizationCertificationsParams): APIPromise<EmptyCertificationData> {
         const URL: string = `/v1/organizations/${organizationID}/certifications/delete`;
         return this.client.post(URL, payload);
     }
 
-    createOrganizationCertificationsFromFile(organizationID : number, payload : CreateOrganizationCertificationsFromFileParams)
+    createOrganizationCertificationsFromFile(organizationID: number, payload: CreateOrganizationCertificationsFromFileParams)
                                                                                             : APIPromise<NumberCertificationData> {
         const URL: string = `/v1/organizations/${organizationID}/certifications/upload`;
         return this.client.post(URL, payload);
