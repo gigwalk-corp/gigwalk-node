@@ -18,9 +18,20 @@ type UpdateCertificationsParams = {
     ]
 }
 
-type UpdateCustomerCertificationsParams = {
+type UpdateCustomerCertsParams = {
     action: string,
     certification_ids: []
+}
+
+type CreateOrganizationCertificationsParams = {
+    certifications: [
+        {
+            description: string,
+            title: string,
+            type: string,
+            state: string
+        }
+    ]
 }
 
 type UpdateOrganizationCertificationsParams = {
@@ -39,7 +50,7 @@ type DeleteOrganizationCertificationsParams = {
     certification_ids: []
 }
 
-type CreateOrganizationCertificationsFromFileParams = {
+type CreateOrganizationCertsFromFileParams = {
     s3_keys: []
 }
 
@@ -94,7 +105,7 @@ export type BulkCustomerCertificationData = [[{
     }
 }]];
 
-export type UpdateCustomerCertificationsData = [[[
+export type UpdateCustomerCertsData = [[[
         number,
         number
 ]]];
@@ -123,7 +134,7 @@ export default class Certificates {
         return this.client.put(URL, payload);
     }
 
-    getCertifications(): Promise<BulkCertificationData> {
+    getCertifications(): APIPromise<BulkCertificationData> {
         const URL: string = '/v1/certifications';
         return this.client.get(URL);
     }
@@ -138,8 +149,7 @@ export default class Certificates {
         return this.client.get(URL);
     }
 
-    updateCustomerCertifications(organizationID: number, customerID: number, payload: UpdateCustomerCertificationsParams)
-                                                                                            : APIPromise<UpdateCustomerCertificationsData> {
+    updateCustomerCertifications(organizationID: number, customerID: number, payload: UpdateCustomerCertsParams): APIPromise<UpdateCustomerCertsData> {
         const URL: string = `/v1/organizations/${organizationID}/customer/${customerID}/certifications`;
         return this.client.put(URL, payload);
     }
@@ -149,7 +159,7 @@ export default class Certificates {
         return this.client.get(URL);
     }
 
-    createOrganizationCertifications(organizationID: number, payload: UpdateCertificationsParams): APIPromise<BulkCertificationData> {
+    createOrganizationCertifications(organizationID: number, payload: CreateOrganizationCertificationsParams): APIPromise<BulkCertificationData> {
         const URL: string = `/v1/organizations/${organizationID}/certifications`;
         return this.client.post(URL, payload);
     }
@@ -164,8 +174,7 @@ export default class Certificates {
         return this.client.post(URL, payload);
     }
 
-    createOrganizationCertificationsFromFile(organizationID: number, payload: CreateOrganizationCertificationsFromFileParams)
-                                                                                            : APIPromise<NumberCertificationData> {
+    createOrganizationCertificationsFromFile(organizationID: number, payload: CreateOrganizationCertsFromFileParams): APIPromise<NumberCertificationData> {
         const URL: string = `/v1/organizations/${organizationID}/certifications/upload`;
         return this.client.post(URL, payload);
     }
