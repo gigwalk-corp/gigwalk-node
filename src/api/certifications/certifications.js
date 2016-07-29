@@ -7,35 +7,21 @@ type UpdateCertificationParams = {
     state: string
 }
 
-type UpdateCertificationsParams = {
-    certifications: [
-        {
-            description: string,
-            title: string,
-            type: string,
-            state: string
-        }
-    ]
-}
+type BulkCertificationParams = [
+    {
+        description: string,
+        title: string,
+        type: string,
+        state: string
+    }
+]
 
-type UpdateCustomerCertsParams = {
+type UpdateCustomerCertParams = {
     action: string,
     certification_ids: []
 }
 
-type CreateOrganizationCertificationsParams = {
-    certifications: [
-        {
-            description: string,
-            title: string,
-            type: string,
-            state: string
-        }
-    ]
-}
-
-type UpdateOrganizationCertificationsParams = {
-  certifications: [
+type UpdateOrganizationCertificationParams = [
     {
       id: number,
       description: string,
@@ -43,16 +29,11 @@ type UpdateOrganizationCertificationsParams = {
       type: string,
       state: string
     }
-  ]
-}
+]
 
-type DeleteOrganizationCertificationsParams = {
-    certification_ids: []
-}
+type DeleteOrganizationCertificationParams = []
 
-type CreateOrganizationCertsFromFileParams = {
-    s3_keys: []
-}
+type CreateOrganizationCertFromFileParams = []
 
 export type APIRes<T> = {
     _meta: Object,
@@ -105,7 +86,7 @@ export type BulkCustomerCertificationData = [[{
     }
 }]];
 
-export type UpdateCustomerCertsData = [[[
+export type UpdateCustomerCertData = [[[
         number,
         number
 ]]];
@@ -181,9 +162,11 @@ export default class Certificates {
      * @apiExample {js} Example:
      *             gigwalk.certification.createCertifications({...})
      */
-    createCertifications(payload: UpdateCertificationsParams): APIPromise<BulkCertificationData> {
+    createCertifications(payload: BulkCertificationParams): APIPromise<BulkCertificationData> {
         const URL: string = '/v1/certifications';
-        return this.client.post(URL, payload);
+        return this.client.post(URL, {
+            certifications: payload
+        });
     }
 
     /**
@@ -212,7 +195,7 @@ export default class Certificates {
      * @apiExample {js} Example:
      *             gigwalk.certification.updateCustomerCertifications({...})
      */
-    updateCustomerCertifications(organizationID: number, customerID: number, payload: UpdateCustomerCertsParams): APIPromise<UpdateCustomerCertsData> {
+    updateCustomerCertifications(organizationID: number, customerID: number, payload: UpdateCustomerCertParams): APIPromise<UpdateCustomerCertData> {
         const URL: string = `/v1/organizations/${organizationID}/customer/${customerID}/certifications`;
         return this.client.put(URL, payload);
     }
@@ -241,9 +224,11 @@ export default class Certificates {
      * @apiExample {js} Example:
      *             gigwalk.certification.createOrganizationCertifications({...})
      */
-    createOrganizationCertifications(organizationID: number, payload: CreateOrganizationCertificationsParams): APIPromise<BulkCertificationData> {
+    createOrganizationCertifications(organizationID: number, payload: BulkCertificationParams): APIPromise<BulkCertificationData> {
         const URL: string = `/v1/organizations/${organizationID}/certifications`;
-        return this.client.post(URL, payload);
+        return this.client.post(URL, {
+            certifications: payload
+        });
     }
 
     /**
@@ -255,9 +240,11 @@ export default class Certificates {
      * @apiExample {js} Example:
      *             gigwalk.certification.updateOrganizationCertifications({...})
      */
-    updateOrganizationCertifications(organizationID: number, payload: UpdateOrganizationCertificationsParams): APIPromise<EmptyCertificationData> {
+    updateOrganizationCertifications(organizationID: number, payload: UpdateOrganizationCertificationParams): APIPromise<EmptyCertificationData> {
         const URL: string = `/v1/organizations/${organizationID}/certifications`;
-        return this.client.put(URL, payload);
+        return this.client.put(URL, {
+            certifications: payload
+        });
     }
 
     /**
@@ -269,9 +256,11 @@ export default class Certificates {
      * @apiExample {js} Example:
      *             gigwalk.certification.deleteOrganizationCertifications({...})
      */
-    deleteOrganizationCertifications(organizationID: number, payload: DeleteOrganizationCertificationsParams): APIPromise<EmptyCertificationData> {
+    deleteOrganizationCertifications(organizationID: number, payload: DeleteOrganizationCertificationParams): APIPromise<EmptyCertificationData> {
         const URL: string = `/v1/organizations/${organizationID}/certifications/delete`;
-        return this.client.post(URL, payload);
+        return this.client.post(URL, {
+            certification_ids: payload
+        });
     }
 
     /**
@@ -284,8 +273,10 @@ export default class Certificates {
      * @apiExample {js} Example:
      *             gigwalk.certification.createOrganizationCertificationsFromFile({...})
      */
-    createOrganizationCertificationsFromFile(organizationID: number, payload: CreateOrganizationCertsFromFileParams): APIPromise<NumberCertificationData> {
+    createOrganizationCertificationsFromFile(organizationID: number, payload: CreateOrganizationCertFromFileParams): APIPromise<NumberCertificationData> {
         const URL: string = `/v1/organizations/${organizationID}/certifications/upload`;
-        return this.client.post(URL, payload);
+        return this.client.post(URL, {
+            s3_keys: payload
+        });
     }
 }

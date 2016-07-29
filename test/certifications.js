@@ -18,22 +18,20 @@ describe('Certifications', () => {
     const customerID: number = 1;
 
     it('should be able to create cerfitications', () =>
-        certifications.createCertifications({
-            certifications: [
-                {
-                    description: randString,
-                    title: randString,
-                    type: 'ASSIGNED_CERT',
-                    state: 'ACTIVE'
-                },
-                {
-                    description: randString.substr(0, 9),
-                    title: randString.substr(0, 9),
-                    type: 'ASSIGNED_CERT',
-                    state: 'ACTIVE'
-                }
-            ]
-        })
+        certifications.createCertifications([
+            {
+                description: randString,
+                title: randString,
+                type: 'ASSIGNED_CERT',
+                state: 'ACTIVE'
+            },
+            {
+                description: randString.substr(0, 9),
+                title: randString.substr(0, 9),
+                type: 'ASSIGNED_CERT',
+                state: 'ACTIVE'
+            }
+        ])
             .then((res) => {
                 expect(res.status).to.equal(200);
                 expect(res.statusText).to.equal('OK');
@@ -106,16 +104,14 @@ describe('Certifications', () => {
             })
     );
     it('should be create certifications for an organization', () =>
-        certifications.createOrganizationCertifications(organizationID, {
-            certifications: [
-                {
-                    description: 'test post',
-                    title: 'test post',
-                    type: 'ASSIGNED_CERT',
-                    state: 'ACTIVE'
-                }
-            ]
-        })
+        certifications.createOrganizationCertifications(organizationID, [
+            {
+                description: 'test post',
+                title: 'test post',
+                type: 'ASSIGNED_CERT',
+                state: 'ACTIVE'
+            }
+        ])
             .then((res) => {
                 expect(res.status).to.equal(200);
                 expect(res.statusText).to.equal('OK');
@@ -131,17 +127,15 @@ describe('Certifications', () => {
             })
     );
     it('should be able to edit a certification for an organiztion', () =>
-        certifications.updateOrganizationCertifications(organizationID, {
-            certifications: [
-                {
-                    id: 0,
-                    description: 'test put',
-                    title: 'test put',
-                    type: 'ASSIGNED_CERT',
-                    state: 'ACTIVE'
-                }
-            ]
-        })
+        certifications.updateOrganizationCertifications(organizationID, [
+            {
+                id: 0,
+                description: 'test put',
+                title: 'test put',
+                type: 'ASSIGNED_CERT',
+                state: 'ACTIVE'
+            }
+        ])
             .then((res) => {
                 expect(res.status).to.equal(200);
                 expect(res.statusText).to.equal('OK');
@@ -149,11 +143,9 @@ describe('Certifications', () => {
             })
     );
     it('should be able to create certifications for an organiztion from a file', () =>
-        certifications.createOrganizationCertificationsFromFile(organizationID, {
-            s3_keys: [
-                'null'
-            ]
-        })
+        certifications.createOrganizationCertificationsFromFile(organizationID, [
+            'null'
+        ])
             .then((res) => {
                 expect(res.status).to.equal(200);
                 expect(res.statusText).to.equal('OK');
@@ -161,11 +153,9 @@ describe('Certifications', () => {
             })
     );
     it('should be able to delete a certification for an organiztion', () =>
-        certifications.deleteOrganizationCertifications(organizationID, {
-            certification_ids: [
-                certificationID
-            ]
-        })
+        certifications.deleteOrganizationCertifications(organizationID, [
+            certificationID
+        ])
             .then((res) => {
                 expect(res.status).to.equal(200);
                 expect(res.statusText).to.equal('OK');
