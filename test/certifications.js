@@ -18,20 +18,22 @@ describe('Certifications', () => {
     const customerID: number = 1;
 
     it('should be able to create cerfitications', (done) => {
-        certifications.createCertifications([
-            {
-                description: randString,
-                title: randString,
-                type: 'ASSIGNED_CERT',
-                state: 'ACTIVE'
-            },
-            {
-                description: randString.substr(0, 9),
-                title: randString.substr(0, 9),
-                type: 'ASSIGNED_CERT',
-                state: 'ACTIVE'
-            }
-        ])
+        certifications.createCertifications({
+            certifications: [
+                {
+                    description: randString,
+                    title: randString,
+                    type: 'ASSIGNED_CERT',
+                    state: 'ACTIVE'
+                },
+                {
+                    description: randString.substr(0, 9),
+                    title: randString.substr(0, 9),
+                    type: 'ASSIGNED_CERT',
+                    state: 'ACTIVE'
+                }
+            ]
+        })
             .then((res) => {
                 expect(res.status).to.equal(200);
                 expect(res.data).to.have.jsonSchema(schema);
@@ -51,7 +53,9 @@ describe('Certifications', () => {
             .catch(done);
     });
     it('should be able to get a specific certifiation', (done) => {
-        certifications.getCertification(certificationID)
+        certifications.getCertification({
+            certification_id: certificationID
+        })
             .then((res) => {
                 expect(res.status).to.equal(200);
                 expect(res.data).to.have.jsonSchema(schema);
@@ -60,11 +64,14 @@ describe('Certifications', () => {
             .catch(done);
     });
     it('should be able to edit a specific certification', (done) => {
-        certifications.updateCertification(certificationID, {
-            description: randString.substr(0, 8),
-            title: randString.substr(0, 8),
-            type: 'ASSIGNED_CERT',
-            state: 'ACTIVE'
+        certifications.updateCertification({
+            certification_id: certificationID,
+            certification: {
+                description: randString.substr(0, 8),
+                title: randString.substr(0, 8),
+                type: 'ASSIGNED_CERT',
+                state: 'ACTIVE'
+            }
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
@@ -74,7 +81,9 @@ describe('Certifications', () => {
             .catch(done);
     });
     it('should be able to remove a certification from a customer', (done) => {
-        certifications.updateCustomerCertifications(organizationID, customerID, {
+        certifications.updateCustomerCertifications({
+            organization_id: organizationID,
+            customer_id: customerID,
             action: 'remove',
             certification_ids: [
                 certificationID
@@ -88,7 +97,9 @@ describe('Certifications', () => {
             .catch(done);
     });
     it('should be able to add a certification to a customer', (done) => {
-        certifications.updateCustomerCertifications(organizationID, customerID, {
+        certifications.updateCustomerCertifications({
+            organization_id: organizationID,
+            customer_id: customerID,
             action: 'add',
             certification_ids: [
                 certificationID
@@ -102,7 +113,10 @@ describe('Certifications', () => {
             .catch(done);
     });
     it('should be able to get a customers certifications', (done) => {
-        certifications.getCustomerCertifications(organizationID, customerID)
+        certifications.getCustomerCertifications({
+            organization_id: organizationID,
+            customer_id: customerID
+        })
             .then((res) => {
                 expect(res.status).to.equal(200);
                 expect(res.data).to.have.jsonSchema(schema);
@@ -111,14 +125,17 @@ describe('Certifications', () => {
             .catch(done);
     });
     it('should be create certifications for an organization', (done) => {
-        certifications.createOrganizationCertifications(organizationID, [
-            {
-                description: 'test post',
-                title: 'test post',
-                type: 'ASSIGNED_CERT',
-                state: 'ACTIVE'
-            }
-        ])
+        certifications.createOrganizationCertifications({
+            organization_id: organizationID,
+            certifications: [
+                {
+                    description: 'test post',
+                    title: 'test post',
+                    type: 'ASSIGNED_CERT',
+                    state: 'ACTIVE'
+                }
+            ]
+        })
             .then((res) => {
                 expect(res.status).to.equal(200);
                 expect(res.data).to.have.jsonSchema(schema);
@@ -127,7 +144,9 @@ describe('Certifications', () => {
             .catch(done);
     });
     it('should be able to get all certifications for an organization', (done) => {
-        certifications.getOrganizationCertifications(organizationID)
+        certifications.getOrganizationCertifications({
+            organization_id: organizationID
+        })
             .then((res) => {
                 expect(res.status).to.equal(200);
                 expect(res.data).to.have.jsonSchema(schema);
@@ -136,15 +155,18 @@ describe('Certifications', () => {
             .catch(done);
     });
     it('should be able to edit a certification for an organiztion', (done) => {
-        certifications.updateOrganizationCertifications(organizationID, [
-            {
-                id: 0,
-                description: 'test put',
-                title: 'test put',
-                type: 'ASSIGNED_CERT',
-                state: 'ACTIVE'
-            }
-        ])
+        certifications.updateOrganizationCertifications({
+            organization_id: organizationID,
+            certifications: [
+                {
+                    id: 0,
+                    description: 'test put',
+                    title: 'test put',
+                    type: 'ASSIGNED_CERT',
+                    state: 'ACTIVE'
+                }
+            ]
+        })
             .then((res) => {
                 expect(res.status).to.equal(200);
                 // expect(res.data).to.have.jsonSchema(schema);
@@ -153,9 +175,12 @@ describe('Certifications', () => {
             .catch(done);
     });
     it('should be able to create certifications for an organiztion from a file', (done) => {
-        certifications.createOrganizationCertificationsFromFile(organizationID, [
-            'null'
-        ])
+        certifications.createOrganizationCertificationsFromFile({
+            organization_id: organizationID,
+            s3_keys: [
+                'null'
+            ]
+        })
             .then((res) => {
                 expect(res.status).to.equal(200);
                 // expect(res.data).to.have.jsonSchema(schema);
@@ -163,10 +188,13 @@ describe('Certifications', () => {
             })
             .catch(done);
     });
-    it('should be able to delete a certification for an organiztion', (done) => {
-        certifications.deleteOrganizationCertifications(organizationID, [
-            certificationID
-        ])
+    it('should be able to delete a certification for an organization', (done) => {
+        certifications.deleteOrganizationCertifications({
+            organization_id: organizationID,
+            certification_ids: [
+                certificationID
+            ]
+        })
             .then((res) => {
                 expect(res.status).to.equal(200);
                 // expect(res.data).to.have.jsonSchema(schema);
@@ -175,7 +203,9 @@ describe('Certifications', () => {
             .catch(done);
     });
     it('should be able to delete a specific certification', (done) => {
-        certifications.deleteCertification(certificationID2)
+        certifications.deleteCertification({
+            certification_id: certificationID2
+        })
             .then((res) => {
                 expect(res.status).to.equal(200);
                 // expect(res.data).to.have.jsonSchema(schema);

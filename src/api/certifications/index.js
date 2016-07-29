@@ -1,38 +1,7 @@
 // @flow
 import ResourceBase from '../resourceBase';
 
-type UpdateCertificationParams = {
-    description: string,
-    title: string,
-    type: string,
-    state: string
-}
-
-type BulkCertificationParams = Array<{
-    description: string,
-    title: string,
-    type: string,
-    state: string
-}>
-
-type UpdateCustomerCertParams = {
-    action: string,
-    certification_ids: Array<number>
-}
-
-type UpdateOrganizationCertificationParams = Array<{
-    id: number,
-    description: string,
-    title: string,
-    type: string,
-    state: string
-}>
-
-type DeleteOrganizationCertificationParams = Array<number>
-
-type CreateOrganizationCertFromFileParams = Array<string>
-
-export type APIRes<T> = {
+type APIRes<T> = {
     _meta: Object,
     warnings: mixed,
     gw_api_response: Array<Object>,
@@ -40,35 +9,103 @@ export type APIRes<T> = {
     code: number,
     data: T,
     errors: mixed
-};
+}
 
-export type APIPromise<T> = Promise<AxiosXHR<APIRes<T>>>;
+type APIPromise<T> = Promise<AxiosXHR<APIRes<T>>>
 
-export type NumberCertificationData = [
+type CertificationTemplate = {
+    description: string,
+    title: string,
+    type: string,
+    state: string
+}
+
+type DeleteCertificationParams = {
+    certification_id: number
+}
+
+type GetCertificationParams = {
+    certification_id: number
+}
+
+type UpdateCertificationParams = {
+    certification_id: number,
+    certification: CertificationTemplate
+}
+
+type CreateCertificationsParams = {
+    certifications: Array<CertificationTemplate>
+}
+
+type GetCustomerCertificationsParams = {
+    organization_id: number,
+    customer_id: number
+}
+
+type UpdateCustomerCertificationsParams = {
+    organization_id: number,
+    customer_id: number,
+    action: string,
+    certification_ids: Array<number>
+}
+
+type GetOrganizationCertificationsParams = {
+    organization_id: number
+}
+
+type CreateOrganizationCertificationsParams = {
+    organization_id: number,
+    certifications: Array<CertificationTemplate>
+}
+
+type UpdateOrganizationCertificationsParams = {
+    organization_id: number,
+    certifications: Array<{
+        id: number,
+        description: string,
+        title: string,
+        type: string,
+        state: string
+    }>
+}
+
+type DeleteOrganizationCertificationsParams = {
+    organization_id: number,
+    certification_ids: Array<number>
+}
+
+type CreateOrganizationCertificationsFromFileParams = {
+    organization_id: number,
+    s3_keys: Array<string>
+}
+
+type CertificationSchema = {
+    title: string,
+    user_count: number,
+    description: string,
+    id: number,
+    type: string,
+    state: string,
+    organization_id: number
+}
+
+type DeleteCertificationData = [
     number
-];
+]
 
-export type CertificationData = [{
-    title: string,
-    user_count: number,
-    description: string,
-    id: number,
-    type: string,
-    state: string,
-    organization_id: number
-}];
+type GetCertificationData = [
+    CertificationSchema
+]
 
-export type BulkCertificationData = Array<{
-    title: string,
-    user_count: number,
-    description: string,
-    id: number,
-    type: string,
-    state: string,
-    organization_id: number
-}>;
+type UpdateCertificationData = [
+    CertificationSchema
+]
 
-export type BulkCustomerCertificationData = Array<{
+type GetCertificationsData = Array<CertificationSchema>
+
+type CreateCertificationsData = Array<CertificationSchema>
+
+type GetCustomerCertificationsData = Array<{
     title: string,
     user_count: number,
     description: string,
@@ -81,14 +118,22 @@ export type BulkCustomerCertificationData = Array<{
         id: number,
         customer_status: string
     }
-}>;
+}>
 
-export type UpdateCustomerCertData = Array<[
-        number,
-        number
-]>;
+type UpdateCustomerCertificationsData = Array<[
+    number,
+    number
+]>
 
-export type EmptyCertificationData = [];
+type GetOrganizationCertificationsData = Array<CertificationSchema>
+
+type CreateOrganizationCertificationsData = Array<CertificationSchema>
+
+type UpdateOrganizationCertificationsData = null
+
+type DeleteOrganizationCertificationsData = null
+
+type CreateOrganizationCertificationsFromFileData = Array<number>
 
 export default class Certifications extends ResourceBase {
     /**
@@ -99,13 +144,12 @@ export default class Certifications extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.certification.deleteCertification({...})
      */
-    deleteCertification(certificationID: number): APIPromise<NumberCertificationData> {
+    deleteCertification(params: DeleteCertificationParams): APIPromise<DeleteCertificationData> {
         const request: AxiosXHRConfig<any> = {
-            url: `/v1/certifications/${certificationID}`,
+            url: `/v1/certifications/${params.certification_id}`,
             method: 'delete',
             data: null
         };
-
         return this.dispatch(request);
     }
 
@@ -117,9 +161,9 @@ export default class Certifications extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.certification.getCertification({...})
      */
-    getCertification(certificationID: number): APIPromise<CertificationData> {
+    getCertification(params: GetCertificationParams): APIPromise<GetCertificationData> {
         const request: AxiosXHRConfig<any> = {
-            url: `/v1/certifications/${certificationID}`,
+            url: `/v1/certifications/${params.certification_id}`,
             method: 'get',
             data: null
         };
@@ -136,11 +180,11 @@ export default class Certifications extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.certification.updateCertification({...})
      */
-    updateCertification(certificationID: number, payload: UpdateCertificationParams): APIPromise<CertificationData> {
+    updateCertification(params: UpdateCertificationParams): APIPromise<UpdateCertificationData> {
         const request: AxiosXHRConfig<any> = {
-            url: `/v1/certifications/${certificationID}`,
+            url: `/v1/certifications/${params.certification_id}`,
             method: 'put',
-            data: payload
+            data: params.certification
         };
 
         return this.dispatch(request);
@@ -149,12 +193,13 @@ export default class Certifications extends ResourceBase {
     /**
      * @api {get} /v1/certifications
      * @apiName GetCertifications
-     * @apiDescription Get all certifications available to the current user Return data fields (id, org_id, description, title, type, state). Including the
-                       current user organization certificates and public certificates It could return paginated results and also sorted by given parameters
+     * @apiDescription Get all certifications available to the current user Return data fields (id, org_id, description, title, type, state).
+                       Including the current user organization certificates and public certificates It could return paginated results and also
+                       sorted by given parameters
      * @apiExample {js} Example:
      *             gigwalk.certification.getCertifications({...})
      */
-    getCertifications(): APIPromise<BulkCertificationData> {
+    getCertifications(): APIPromise<GetCertificationsData> {
         const request: AxiosXHRConfig<any> = {
             url: '/v1/certifications',
             method: 'get',
@@ -173,12 +218,12 @@ export default class Certifications extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.certification.createCertifications({...})
      */
-    createCertifications(payload: BulkCertificationParams): APIPromise<BulkCertificationData> {
+    createCertifications(params: CreateCertificationsParams): APIPromise<CreateCertificationsData> {
         const request: AxiosXHRConfig<any> = {
             url: '/v1/certifications',
             method: 'post',
             data: {
-                certifications: payload
+                certifications: params.certifications
             }
         };
 
@@ -195,9 +240,9 @@ export default class Certifications extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.certification.getCustomerCertifications({...})
      */
-    getCustomerCertifications(organizationID: number, customerID: number): APIPromise<BulkCustomerCertificationData> {
+    getCustomerCertifications(params: GetCustomerCertificationsParams): APIPromise<GetCustomerCertificationsData> {
         const request: AxiosXHRConfig<any> = {
-            url: `/v1/organizations/${organizationID}/customer/${customerID}/certifications`,
+            url: `/v1/organizations/${params.organization_id}/customer/${params.customer_id}/certifications`,
             method: 'get',
             data: null
         };
@@ -216,13 +261,16 @@ export default class Certifications extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.certification.updateCustomerCertifications({...})
      */
-    updateCustomerCertifications(organizationID: number, customerID: number, payload: UpdateCustomerCertParams): APIPromise<UpdateCustomerCertData> {
+    updateCustomerCertifications(params: UpdateCustomerCertificationsParams): APIPromise<UpdateCustomerCertificationsData> {
         const request: AxiosXHRConfig<any> = {
-            url: `/v1/organizations/${organizationID}/customer/${customerID}/certifications`,
+            url: `/v1/organizations/${params.organization_id}/customer/${params.customer_id}/certifications`,
             method: 'put',
-            data: payload
+            data: {
+                action: params.action,
+                certification_ids: params.certification_ids
+            }
         };
-
+        console.log(request.data);
         return this.dispatch(request);
     }
 
@@ -235,9 +283,9 @@ export default class Certifications extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.certification.getOrganizationCertifications({...})
      */
-    getOrganizationCertifications(organizationID: number): APIPromise<BulkCertificationData> {
+    getOrganizationCertifications(params: GetOrganizationCertificationsParams): APIPromise<GetOrganizationCertificationsData> {
         const request: AxiosXHRConfig<any> = {
-            url: `/v1/organizations/${organizationID}/certifications`,
+            url: `/v1/organizations/${params.organization_id}/certifications`,
             method: 'get',
             data: null
         };
@@ -255,12 +303,12 @@ export default class Certifications extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.certification.createOrganizationCertifications({...})
      */
-    createOrganizationCertifications(organizationID: number, payload: BulkCertificationParams): APIPromise<BulkCertificationData> {
+    createOrganizationCertifications(params: CreateOrganizationCertificationsParams): APIPromise<CreateOrganizationCertificationsData> {
         const request: AxiosXHRConfig<any> = {
-            url: `/v1/organizations/${organizationID}/certifications`,
+            url: `/v1/organizations/${params.organization_id}/certifications`,
             method: 'post',
             data: {
-                certifications: payload
+                certifications: params.certifications
             }
         };
 
@@ -276,12 +324,12 @@ export default class Certifications extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.certification.updateOrganizationCertifications({...})
      */
-    updateOrganizationCertifications(organizationID: number, payload: UpdateOrganizationCertificationParams): APIPromise<EmptyCertificationData> {
+    updateOrganizationCertifications(params: UpdateOrganizationCertificationsParams): APIPromise<UpdateOrganizationCertificationsData> {
         const request: AxiosXHRConfig<any> = {
-            url: `/v1/organizations/${organizationID}/certifications`,
+            url: `/v1/organizations/${params.organization_id}/certifications`,
             method: 'put',
             data: {
-                certifications: payload
+                certifications: params.certifications
             }
         };
 
@@ -297,12 +345,12 @@ export default class Certifications extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.certification.deleteOrganizationCertifications({...})
      */
-    deleteOrganizationCertifications(organizationID: number, payload: DeleteOrganizationCertificationParams): APIPromise<EmptyCertificationData> {
+    deleteOrganizationCertifications(params: DeleteOrganizationCertificationsParams): APIPromise<DeleteOrganizationCertificationsData> {
         const request: AxiosXHRConfig<any> = {
-            url: `/v1/organizations/${organizationID}/certifications/delete`,
+            url: `/v1/organizations/${params.organization_id}/certifications/delete`,
             method: 'post',
             data: {
-                certification_ids: payload
+                certification_ids: params.certification_ids
             }
         };
 
@@ -319,12 +367,12 @@ export default class Certifications extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.certification.createOrganizationCertificationsFromFile({...})
      */
-    createOrganizationCertificationsFromFile(organizationID: number, payload: CreateOrganizationCertFromFileParams): APIPromise<NumberCertificationData> {
+    createOrganizationCertificationsFromFile(params: CreateOrganizationCertificationsFromFileParams): APIPromise<CreateOrganizationCertificationsFromFileData> {
         const request: AxiosXHRConfig<any> = {
-            url: `/v1/organizations/${organizationID}/certifications/upload`,
+            url: `/v1/organizations/${params.organization_id}/certifications/upload`,
             method: 'post',
             data: {
-                s3_keys: payload
+                s3_keys: params.s3_keys
             }
         };
 
