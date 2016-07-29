@@ -15,7 +15,7 @@ import TicketEvents from './api/ticketEvents';
 import Tickets from './api/tickets';
 import ResourceBase from './api/resourceBase';
 
-import type { Dispatcher, Auth } from './api/resourceBase';
+import type { Auth } from './api/resourceBase';
 
 export type GigwalkAPIConfig = {
     hostname?: string,
@@ -51,7 +51,7 @@ export default class GigwalkAPI {
         const client = axios.create({ baseURL: this.hostname });
         this.requestQueue = new RequestQueue(client);
 
-        const dispatcher: Dispatcher = (request: AxiosXHRConfig<*>): Promise<*> => this.dispatchRequest(request);
+        const dispatcher = this.requestQueue.add;
         this.authorization = new Authorization(dispatcher);
         this.certifications = new Certifications(dispatcher);
         this.customers = new Customers(dispatcher);
@@ -74,9 +74,5 @@ export default class GigwalkAPI {
                 property.authenticate(this.auth);
             }
         });
-    }
-
-    dispatchRequest(request: AxiosXHRConfig<*>): Promise<*> {
-        return this.requestQueue.add(request);
     }
 }

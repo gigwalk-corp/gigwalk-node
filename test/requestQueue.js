@@ -1,13 +1,8 @@
 import RequestQueue from '../src/requestQueue';
-import chai, { expect } from 'chai';
+import { expect } from 'chai';
 import sinon from 'sinon';
-import sinonChai from 'sinon-chai';
-import chaiAsPromised from 'chai-as-promised';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
-
-chai.use(sinonChai);
-chai.use(chaiAsPromised);
 
 describe('RequestQueue', () => {
     const sandbox = sinon.sandbox.create();

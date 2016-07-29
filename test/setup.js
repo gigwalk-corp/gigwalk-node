@@ -4,6 +4,7 @@ import chaiJsonSchema from 'chai-json-schema';
 import chaiAsPromised from 'chai-as-promised';
 import dotenv from 'dotenv';
 import path from 'path';
+import sinonChai from 'sinon-chai';
 
 /**
  * Use to setup environmental config for local development.
@@ -12,6 +13,7 @@ import path from 'path';
 dotenv.config({ silent: true, path: path.resolve(__dirname, '../.env') });
 chai.use(chaiJsonSchema);
 chai.use(chaiAsPromised);
+chai.use(sinonChai);
 
 global.expect = expect;
 global.baseURL = process.env.GIGWALK_TEST_BASEURL;

@@ -3,8 +3,8 @@ import axios from 'axios';
 import stringify from 'json-stable-stringify';
 
 interface Request<T> extends AxiosXHRConfig<T> {
-    onSuccess: Function,
-    onError: Function
+    success: Function,
+    error: Function
 }
 
 interface ActiveRequestRecord<T> {
@@ -13,14 +13,17 @@ interface ActiveRequestRecord<T> {
 }
 
 export default class RequestQueue {
+
+    // Queue of requests awaiting dispatch
     dispatchQueue: Array<Request<*>> = [];
 
+    // Map of all pending requests
     activeRequests: Map<string, ActiveRequestRecord<*>> = new Map();
 
-    httpClient: Axios;
+    client: Axios;
 
-    constructor(httpClient?: Axios = axios) {
-        this.httpClient = httpClient;
+    constructor(client?: Axios = axios) {
+        this.client = client;
     }
 
     /**
@@ -32,23 +35,26 @@ export default class RequestQueue {
     add(config: AxiosXHRConfig<*>) {
         const request = {
             ...config,
-            onSuccess: () => {},
-            onError: () => {}
+            success: () => {},
+            error: () => {}
         };
 
         const key = stringify(config);
 
-        if (this.activeRequests.get(key)) {
+        if (this.activeRequests.has(key)) {
             const record = this.activeRequests.get(key);
             if (record) {
                 return record.promise;
             }
         }
 
-        // todo: provide better flow annotations
+        // Create a promise that we can return immediately. Since the dispatch happens
+        // asynchronously, we won't have the axios promise to return.
         const promise = new Promise((resolve: Function, reject: Function) => {
-            request.onSuccess = resolve;
-            request.onError = reject;
+            // Attach the resolve and reject functions to the request so that
+            // we can fulfill/reject the promise when the request completes.
+            request.success = resolve;
+            request.error = reject;
         });
 
         // $FlowFixMe
@@ -65,12 +71,13 @@ export default class RequestQueue {
     checkQueue() {
         if (this.dispatchQueue.length > 0) {
             const request = this.dispatchQueue.shift();
-            const promise = this.httpClient(request);
+            const promise = this.client(request);
 
-            // todo: provide better flow annotations
+            // Add then/catch to the promise chain so that we can fulfill/reject
+            // the promise returned by RequestQueue.add().
             promise
-                .then((...args: Array<any>) => request.onSuccess(...args))
-                .catch((...args: Array<any>) => request.onError(...args))
+                .then((...args: Array<any>) => request.success(...args))
+                .catch((...args: Array<any>) => request.error(...args))
                 .then(() => {
                     const key = stringify(request);
                     this.activeRequests.delete(key);
