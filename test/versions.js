@@ -11,7 +11,7 @@ describe('versions', () => {
     });
     const version = new Versions(client);
 
-    it('should return current versions for the api', (done) => {
+    it('should be able to return current versions for the api', (done) => {
         version.get()
             .then((res) => {
                 expect(res.status).to.equal(200);
