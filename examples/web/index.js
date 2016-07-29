@@ -52,8 +52,8 @@ class App extends Component {
 
     onSubmit() {
         // TODO: Move to authorization resource?
-        //this.props.client.authorize(this.state.username, this.state.password);
-        //this.props.client.authorize(this.state.username, this.state.password)
+        // this.props.client.authorize(this.state.username, this.state.password);
+        // this.props.client.authorize(this.state.username, this.state.password)
         //    .then((res) => {
         //        this.setState({ res: JSON.stringify(res, null, 4) });
         //    }, (err) => {
