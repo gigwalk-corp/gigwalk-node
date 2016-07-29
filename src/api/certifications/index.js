@@ -8,33 +8,29 @@ type UpdateCertificationParams = {
     state: string
 }
 
-type BulkCertificationParams = [
-    {
-        description: string,
-        title: string,
-        type: string,
-        state: string
-    }
-]
+type BulkCertificationParams = Array<{
+    description: string,
+    title: string,
+    type: string,
+    state: string
+}>
 
 type UpdateCustomerCertParams = {
     action: string,
-    certification_ids: []
+    certification_ids: Array<number>
 }
 
-type UpdateOrganizationCertificationParams = [
-    {
-      id: number,
-      description: string,
-      title: string,
-      type: string,
-      state: string
-    }
-]
+type UpdateOrganizationCertificationParams = Array<{
+    id: number,
+    description: string,
+    title: string,
+    type: string,
+    state: string
+}>
 
-type DeleteOrganizationCertificationParams = []
+type DeleteOrganizationCertificationParams = Array<number>
 
-type CreateOrganizationCertFromFileParams = []
+type CreateOrganizationCertFromFileParams = Array<string>
 
 export type APIRes<T> = {
     _meta: Object,
@@ -62,7 +58,7 @@ export type CertificationData = [{
     organization_id: number
 }];
 
-export type BulkCertificationData = [[{
+export type BulkCertificationData = Array<{
     title: string,
     user_count: number,
     description: string,
@@ -70,9 +66,9 @@ export type BulkCertificationData = [[{
     type: string,
     state: string,
     organization_id: number
-}]];
+}>;
 
-export type BulkCustomerCertificationData = [[{
+export type BulkCustomerCertificationData = Array<{
     title: string,
     user_count: number,
     description: string,
@@ -85,12 +81,12 @@ export type BulkCustomerCertificationData = [[{
         id: number,
         customer_status: string
     }
-}]];
+}>;
 
-export type UpdateCustomerCertData = [[[
+export type UpdateCustomerCertData = Array<[
         number,
         number
-]]];
+]>;
 
 export type EmptyCertificationData = [];
 

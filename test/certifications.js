@@ -9,7 +9,6 @@ describe('Certifications', () => {
             Authorization: token
         }
     });
-
     const certifications = new Certifications(client);
 
     const randString: string = Math.random().toString(36).substring(10);
