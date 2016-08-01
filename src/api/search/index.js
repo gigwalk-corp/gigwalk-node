@@ -15,12 +15,11 @@ type APIPromise<T> = Promise<AxiosXHR<APIRes<T>>>
 
 export default class Search extends ResourceBase {
     /**
-     * @api {}
-     * @apiName
-     * @apiDescription
-     * @apiParam {}
+     * @api {} GET /v1/search
+     * @apiName search
+     * @apiDescription ES Search for the given query_string This searches all the ES docs for the given query_string and returns results in ES idiom. Unused?
      * @apiExample {js} Example:
-     *             gigwalk.customers.({...})
+     *             gigwalk.customers.search({...})
      */
     search(params: any): APIPromise<any> {
         const request: AxiosXHRConfig<any> = {
@@ -31,12 +30,11 @@ export default class Search extends ResourceBase {
     }
 
     /**
-     * @api {}
-     * @apiName
-     * @apiDescription
-     * @apiParam {}
+     * @api {} POST /v1/search
+     * @apiName createSearch
+     * @apiDescription Not implemented
      * @apiExample {js} Example:
-     *             gigwalk.customers.({...})
+     *             gigwalk.customers.createSearch({...})
      */
     createSearch(params: any): APIPromise<any> {
         const request: AxiosXHRConfig<any> = {
@@ -47,12 +45,13 @@ export default class Search extends ResourceBase {
     }
 
     /**
-     * @api {}
-     * @apiName
-     * @apiDescription
-     * @apiParam {}
+     * @api {} GET /v1/organizations/{organization_id}/search/{index_type}
+     * @apiName searchOrganization
+     * @apiDescription We can search in groups, members, location_lists, target_lists, tickets or subscriptions filtered by the org
+     * @apiParam {Number} organization_id
+     * @apiParam {String} index_type
      * @apiExample {js} Example:
-     *             gigwalk.customers.({...})
+     *             gigwalk.customers.searchOrganization({...})
      */
     searchOrganization(params: any): APIPromise<any> {
         const request: AxiosXHRConfig<any> = {
