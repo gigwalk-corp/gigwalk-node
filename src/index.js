@@ -56,7 +56,7 @@ export default class GigwalkAPI {
     }
 
     authenticate(auth: Auth) {
-        let header;
+        let header = '';
         if (auth.email && auth.password) {
             header = `Basic ${auth.email}:${auth.password}`;
         } else if (auth.token) {

@@ -1,9 +1,19 @@
 // @flow
 import { Axios } from 'axios';
 import RequestQueue from './requestQueue';
+import type { $AxiosXHRConfig, $AxiosXHRConfigBase, $AxiosXHR } from 'axios';
 
 export default class GigwalkAxios extends Axios {
-    constructor(defaultConfig?: AxiosXHRConfigBase<*> = {}) {
+
+    defaults: {
+        headers: {
+            common: {
+                Authorization: string
+            }
+        }
+    };
+
+    constructor(defaultConfig?: $AxiosXHRConfigBase<*> = {}) {
         let adapter;
 
         // Copied from axios/core/dispatchRequest.js
@@ -16,12 +26,13 @@ export default class GigwalkAxios extends Axios {
         }
 
         const requestQueue = new RequestQueue(adapter);
-        const config = {
+
+        const config: $AxiosXHRConfigBase<*> = {
             baseURL: 'https://api.app.gigwalk.com',
             ...defaultConfig,
 
             // Use a custom adapter which adds the request to a RequestQueue
-            adapter(requestConfig: AxiosXHRConfig<*>) {
+            adapter(requestConfig: $AxiosXHRConfig<*>): Promise<$AxiosXHR<*>> {
                 return requestQueue.add(requestConfig);
             }
         };

@@ -1,4 +1,6 @@
 // @flow
+import type { Axios } from 'axios';
+
 export type AuthToken = {
     token: string
 }

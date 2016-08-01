@@ -1,8 +1,9 @@
 // @flow
 import axios from 'axios';
 import stringify from 'json-stable-stringify';
+import type { Axios, $AxiosXHR, $AxiosXHRConfig } from 'axios';
 
-interface Request<T> extends AxiosXHRConfig<T> {
+interface Request<T> extends $AxiosXHRConfig<T> {
     success: Function,
     error: Function
 }
@@ -32,7 +33,7 @@ export default class RequestQueue {
      * @param config
      * @returns {Promise}
      */
-    add(config: AxiosXHRConfig<*>) {
+    add(config: $AxiosXHRConfig<*>): Promise<$AxiosXHR<*>> {
         const request = {
             ...config,
             success: () => {},
@@ -57,7 +58,6 @@ export default class RequestQueue {
             request.error = reject;
         });
 
-        // $FlowFixMe
         this.activeRequests.set(key, { request, promise });
 
         this.dispatchQueue.push(request);
