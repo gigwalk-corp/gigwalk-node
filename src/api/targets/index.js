@@ -13,6 +13,42 @@ type APIRes<T> = {
 
 type APIPromise<T> = Promise<AxiosXHR<APIRes<T>>>
 
+type ObservationTargetBasicTemplate = {
+    observation_target_type_id: number,
+    title: string
+}
+
+type ObservationTargetTemplate = {
+    obs_target_id: number,
+    title: string,
+    status: string,
+    key_value_pairs: Array<{
+        key: string,
+        value: string
+    }>
+}
+
+type CreateOrganizationTargetsParams = {
+    organization_id: number,
+    observation_target: ObservationTargetBasicTemplate
+}
+
+type GetOrganizationTargetParams = {
+    organization_id: number,
+    observation_target_id: number
+}
+
+type UpdateOrganizationTargetParams = {
+    organization_id: number,
+    observation_target_id: number,
+    observation_target: ObservationTargetTemplate
+}
+
+type SearchOrganizationTargetsParams = {
+    organization_id: number,
+    query_string: string
+}
+
 export default class Targets extends ResourceBase {
     /**
      * @api {post} /v1/organizations/{organization_id}/observation_targets
@@ -22,7 +58,7 @@ export default class Targets extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.createOrganizationTargets({...})
      */
-    createOrganizationTargets(params: any): APIPromise<any> {
+    createOrganizationTargets(params: CreateOrganizationTargetsParams): APIPromise<any> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'post'
@@ -40,7 +76,7 @@ export default class Targets extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.getOrganizationTarget({...})
      */
-    getOrganizationTarget(params: any): APIPromise<any> {
+    getOrganizationTarget(params: GetOrganizationTargetParams): APIPromise<any> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'get'
@@ -58,7 +94,7 @@ export default class Targets extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.updateOrganizationTarget({...})
      */
-    updateOrganizationTarget(params: any): APIPromise<any> {
+    updateOrganizationTarget(params: UpdateOrganizationTargetParams): APIPromise<any> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'put'
@@ -75,7 +111,7 @@ export default class Targets extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.searchOrganizationTargets({...})
      */
-    searchOrganizationTargets(params: any): APIPromise<any> {
+    searchOrganizationTargets(params: SearchOrganizationTargetsParams): APIPromise<any> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'get'

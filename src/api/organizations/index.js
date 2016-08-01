@@ -13,16 +13,50 @@ type APIRes<T> = {
 
 type APIPromise<T> = Promise<AxiosXHR<APIRes<T>>>
 
+type OrganizationTemplate = {
+    organization_name: string,
+    type: string,
+    needs_core: boolean,
+    core_customer_account: string,
+    core_private_workforce: string,
+    config: {
+        logo_uri: string,
+        hours_after_due: number
+    },
+    cloud9urls: Array<{
+        url: string,
+        customer_id: number,
+        name: string
+    }>
+}
+
+type DeleteOrganizationParams = {
+    organization_id: number
+}
+
+type GetOrganizationParams = {
+    organization_id: number
+}
+
+type UpdateOrganizationParams = {
+    organization_id: number,
+    organization: OrganizationTemplate
+}
+
+type CreateOrganizationParams = {
+    organization: OrganizationTemplate
+}
+
 export default class Organzations extends ResourceBase {
     /**
      * @api {delete} /v1/organizations/{organization_id}
-     * @apiName deleteOrganiztion
+     * @apiName deleteOrganization
      * @apiDescription Delete specified organization
      * @apiParam {Number} organization_id
      * @apiExample {js} Example:
-     *             gigwalk.customers.deleteOrganiztion({...})
+     *             gigwalk.customers.deleteOrganization({...})
      */
-    deleteOrganiztion(params: any): APIPromise<any> {
+    deleteOrganization(params: DeleteOrganizationParams): APIPromise<any> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'delete'
@@ -39,7 +73,7 @@ export default class Organzations extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.getOrganization({...})
      */
-    getOrganization(params: any): APIPromise<any> {
+    getOrganization(params: GetOrganizationParams): APIPromise<any> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'get'
@@ -53,12 +87,12 @@ export default class Organzations extends ResourceBase {
      * @apiDescription JSON payload (email, org_name, needs_core, core_customer_account, core_private_workforce, type, status, config). Only super-admins
                        and above can update organization info. The endpoint can also be used to update the company logo. A file with name 'logo' has to be
                        added in a multipart form in order to do that. For example the following curl - curl -X PUT
-                       "http://stage-api.apps.gigwalk.com/v1/organizations/7" -F "logo=@path/to/file.png" --user "user:password"
+                       http://stage-api.apps.gigwalk.com/v1/organizations/7 -F logo=@path/to/file.png --user user:password
      * @apiParam {Number} organization_id
      * @apiExample {js} Example:
      *             gigwalk.customers.updateOrganization({...})
      */
-    updateOrganization(params: any): APIPromise<any> {
+    updateOrganization(params: UpdateOrganizationParams): APIPromise<any> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'put'
@@ -74,7 +108,7 @@ export default class Organzations extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.getOrganizations({...})
      */
-    getOrganizations(params: any): APIPromise<any> {
+    getOrganizations(): APIPromise<any> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'get'
@@ -85,12 +119,12 @@ export default class Organzations extends ResourceBase {
     /**
      * @api {post} /v1/organizations
      * @apiName createOrganization
-     * @apiDescription JSON payload may have (email, org_name, needs_core, core_customer_account, core_private_workforce, type, status, config). 
+     * @apiDescription JSON payload may have (email, org_name, needs_core, core_customer_account, core_private_workforce, type, status, config).
                        Only super-admins and above can update organization info
      * @apiExample {js} Example:
      *             gigwalk.customers.createOrganization({...})
      */
-    createOrganization(params: any): APIPromise<any> {
+    createOrganization(params: CreateOrganizationParams): APIPromise<any> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'post'

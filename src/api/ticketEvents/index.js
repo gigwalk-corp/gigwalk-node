@@ -13,6 +13,21 @@ type APIRes<T> = {
 
 type APIPromise<T> = Promise<AxiosXHR<APIRes<T>>>
 
+type TicketEventTemplate = {
+    ticket_event_type: string,
+    ticket_event_date: string,
+    ticket_event_data: {}
+}
+
+type CreateTicketEventParams = {
+    ticket_id: number,
+    ticket_event: TicketEventTemplate
+}
+
+type DeleteTicketEventParams = {
+    ticket_event_id: number
+}
+
 export default class TicketEvents extends ResourceBase {
     /**
      * @api {post} /v1/tickets/{ticket_id}/events
@@ -22,7 +37,7 @@ export default class TicketEvents extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.createTicketEvent({...})
      */
-    createTicketEvent(params: any): APIPromise<any> {
+    createTicketEvent(params: CreateTicketEventParams): APIPromise<any> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'post'
@@ -38,7 +53,7 @@ export default class TicketEvents extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.deleteTicketEvent({...})
      */
-    deleteTicketEvent(params: any): APIPromise<any> {
+    deleteTicketEvent(params: DeleteTicketEventParams): APIPromise<any> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'delete'

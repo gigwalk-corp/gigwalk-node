@@ -13,15 +13,25 @@ type APIRes<T> = {
 
 type APIPromise<T> = Promise<AxiosXHR<APIRes<T>>>
 
+type SearchDocumentsParams = {
+    query_string: string
+}
+
+type SearchOrganizationParams = {
+    organization_id: number,
+    index_type: string,
+    query_string: string
+}
+
 export default class Search extends ResourceBase {
     /**
      * @api {} GET /v1/search
-     * @apiName search
+     * @apiName searchDocuments
      * @apiDescription ES Search for the given query_string This searches all the ES docs for the given query_string and returns results in ES idiom. Unused?
      * @apiExample {js} Example:
-     *             gigwalk.customers.search({...})
+     *             gigwalk.customers.searchDocuments({...})
      */
-    search(params: any): APIPromise<any> {
+    searchDocuments(params: SearchDocumentsParams): APIPromise<any> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'get'
@@ -36,7 +46,7 @@ export default class Search extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.createSearch({...})
      */
-    createSearch(params: any): APIPromise<any> {
+    createSearch(): APIPromise<any> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'post'
@@ -53,7 +63,7 @@ export default class Search extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.searchOrganization({...})
      */
-    searchOrganization(params: any): APIPromise<any> {
+    searchOrganization(params: SearchOrganizationParams): APIPromise<any> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'get'

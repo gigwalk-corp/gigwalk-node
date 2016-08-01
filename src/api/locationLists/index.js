@@ -13,6 +13,99 @@ type APIRes<T> = {
 
 type APIPromise<T> = Promise<AxiosXHR<APIRes<T>>>
 
+type SimpleLocationTemplate = {
+    address: string,
+    title: string
+}
+
+type LocationListTemplate = {
+    name: string,
+    status: string,
+    locations: Array<SimpleLocationTemplate>
+}
+
+type DeleteLocationListParams = {
+    organization_location_list_id: number
+}
+
+type GetLocationListParams = {
+    organization_location_list_id: number
+}
+
+type UpdateLocationListParams = {
+    organization_location_list_id: number,
+    location_list: LocationListTemplate
+}
+
+type DeleteOrganizationLocationListParams = {
+    organization_id: number,
+    location_list_ids: Array<number>
+}
+
+type GetOrganizationLocationListsParams = {
+    organization_id: number
+}
+
+type CreateOrganizationLocationListParams = {
+    organization_id: number,
+    location_list: LocationListTemplate
+}
+
+type DeleteOrganiztionLocationFromListParams = {
+    organization_location_list_id: number,
+    location_id: number
+}
+
+type DeleteLocationFromListParams = {
+    organization_location_list_id: number,
+    location_id: number
+}
+
+type GetLocationDetailsForListParams = {
+    organization_location_list_id: number
+}
+
+type AddLocationsToListParams = {
+    organization_location_list_id: number,
+    locations: Array<number>
+}
+
+type RemoveLocationsFromListParams = {
+    organization_location_list_id: number,
+    locations: Array<number>
+}
+
+type SearchLocationListParams = {
+    organization_location_list_id: number,
+    query_string: string
+}
+
+type GetFileInfoForLocationListParams = {
+    location_list_id: number
+}
+
+type GetFileInfoForOrganizationLocationListParams = {
+    organization_id: number,
+    location_list_id: number
+}
+
+type CreateOrganizationLocationListUsingFileParams = {
+    organization_id: number,
+    location_list_name: string,
+    s3_keys: Array<string>
+}
+
+type UpdateLocationAdressParams = {
+    file_upload_id: number,
+    location_list_id: number
+}
+
+type UpdateLocationAdressByIDParams = {
+    file_upload_id: number,
+    location_list_id: number,
+    location_id: number
+}
+
 export default class LocationLists extends ResourceBase {
     /**
      * @api {delete} /v1/organization_location_lists/{organization_location_list_id}
@@ -23,7 +116,7 @@ export default class LocationLists extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.deleteLocationList({...})
      */
-    deleteLocationList(params: any): APIPromise<any> {
+    deleteLocationList(params: DeleteLocationListParams): APIPromise<any> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'delete'
@@ -40,7 +133,7 @@ export default class LocationLists extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.getLocationList({...})
      */
-    getLocationList(params: any): APIPromise<any> {
+    getLocationList(params: GetLocationListParams): APIPromise<any> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'get'
@@ -58,7 +151,7 @@ export default class LocationLists extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.updateLocationList({...})
      */
-    updateLocationList(params: any): APIPromise<any> {
+    updateLocationList(params: UpdateLocationListParams): APIPromise<any> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'put'
@@ -75,7 +168,7 @@ export default class LocationLists extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.deleteOrganizationLocationList({...})
      */
-    deleteOrganizationLocationList(params: any): APIPromise<any> {
+    deleteOrganizationLocationList(params: DeleteOrganizationLocationListParams): APIPromise<any> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'delete'
@@ -92,7 +185,7 @@ export default class LocationLists extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.getOrganizationLocationLists({...})
      */
-    getOrganizationLocationLists(params: any): APIPromise<any> {
+    getOrganizationLocationLists(params: GetOrganizationLocationListsParams): APIPromise<any> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'get'
@@ -110,7 +203,7 @@ export default class LocationLists extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.createOrganizationLocationList({...})
      */
-    createOrganizationLocationList(params: any): APIPromise<any> {
+    createOrganizationLocationList(params: CreateOrganizationLocationListParams): APIPromise<any> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'post'
@@ -120,14 +213,14 @@ export default class LocationLists extends ResourceBase {
 
     /**
      * @api {delete} /v1/organization_location_lists/{organization_location_list_id}/locations/{location_id}
-     * @apiName deleteLocationFromList
+     * @apiName deleteOrganiztionLocationFromList
      * @apiDescription Delete specified location from the specified location list The location itself is not deleted, it is just removed from location list.
      * @apiParam {Number} organization_location_list_id
      * @apiParam {Number} location_id
      * @apiExample {js} Example:
-     *             gigwalk.customers.deleteLocationFromList({...})
+     *             gigwalk.customers.deleteOrganiztionLocationFromList({...})
      */
-    deleteLocationFromList(params: any): APIPromise<any> {
+    deleteOrganiztionLocationFromList(params: DeleteOrganiztionLocationFromListParams): APIPromise<any> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'delete'
@@ -144,7 +237,7 @@ export default class LocationLists extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.deleteLocationFromList({...})
      */
-    deleteLocationFromList(params: any): APIPromise<any> {
+    deleteLocationFromList(params: DeleteLocationListParams): APIPromise<any> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'delete'
@@ -161,7 +254,7 @@ export default class LocationLists extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.getLocationDetailsForList({...})
      */
-    getLocationDetailsForList(params: any): APIPromise<any> {
+    getLocationDetailsForList(params: GetLocationDetailsForListParams): APIPromise<any> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'get'
@@ -171,15 +264,15 @@ export default class LocationLists extends ResourceBase {
 
     /**
      * @api {post} /v1/location_lists/{organization_location_list_id}/locations
-     * @apiName addLocationToList
+     * @apiName addLocationsToList
      * @apiDescription Add location ids specified in JSON payload to the given location list. JSON payload is an array of ("id": id) dicts. How is this
                        supposed to work? 404 if location_list does not exist, but we are trying to add the location_list anyway. Is the intention to create
                        a new location_list or not?
      * @apiParam {Number} organization_location_list_id
      * @apiExample {js} Example:
-     *             gigwalk.customers.addLocationToList({...})
+     *             gigwalk.customers.addLocationsToList({...})
      */
-    addLocationToList(params: any): APIPromise<any> {
+    addLocationsToList(params: AddLocationsToListParams): APIPromise<any> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'post'
@@ -195,7 +288,7 @@ export default class LocationLists extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.removeLocationsFromList({...})
      */
-    removeLocationsFromList(params: any): APIPromise<any> {
+    removeLocationsFromList(params: RemoveLocationsFromListParams): APIPromise<any> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'put'
@@ -205,13 +298,13 @@ export default class LocationLists extends ResourceBase {
 
     /**
      * @api {post} /v1/location_lists/{organization_location_list_id}/search/locations
-     * @apiName getLocationsInListMatchingCriteria
+     * @apiName searchLocationList
      * @apiDescription Search locations in the given location list Can search for a match in title, address, administrative area level 1/2 or country
      * @apiParam {Number} organization_location_list_id
      * @apiExample {js} Example:
-     *             gigwalk.customers.getLocationsInListMatchingCriteria({...})
+     *             gigwalk.customers.searchLocationList({...})
      */
-    getLocationsInListMatchingCriteria(params: any): APIPromise<any> {
+    searchLocationList(params: SearchLocationListParams): APIPromise<any> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'post'
@@ -229,7 +322,7 @@ export default class LocationLists extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.getFileInfoForLocationList({...})
      */
-    getFileInfoForLocationList(params: any): APIPromise<any> {
+    getFileInfoForLocationList(params: GetFileInfoForLocationListParams): APIPromise<any> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'get'
@@ -248,7 +341,7 @@ export default class LocationLists extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.getFileInfoForOrganizationLocationList({...})
      */
-    getFileInfoForOrganizationLocationList(params: any): APIPromise<any> {
+    getFileInfoForOrganizationLocationList(params: GetFileInfoForOrganizationLocationListParams): APIPromise<any> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'get'
@@ -264,7 +357,7 @@ export default class LocationLists extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.createOrganizationLocationListUsingFile({...})
      */
-    createOrganizationLocationListUsingFile(params: any): APIPromise<any> {
+    createOrganizationLocationListUsingFile(params: CreateOrganizationLocationListUsingFileParams): APIPromise<any> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'post'
@@ -281,7 +374,7 @@ export default class LocationLists extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.updateLocationAdress({...})
      */
-    updateLocationAdress(params: any): APIPromise<any> {
+    updateLocationAdress(params: UpdateLocationAdressParams): APIPromise<any> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'put'
@@ -291,15 +384,15 @@ export default class LocationLists extends ResourceBase {
 
     /**
      * @api {put} /v1/location_lists/{location_list_id}/upload/{file_upload_id}/unresolved_locations/{location_id}
-     * @apiName updateLocationAdress
+     * @apiName updateLocationAdressByID
      * @apiDescription Update location address Either a file upload or JSON data can be input
      * @apiParam {Number} file_upload_id
      * @apiParam {Number} location_list_id
      * @apiParam {Number} location_id
      * @apiExample {js} Example:
-     *             gigwalk.customers.updateLocationAdress({...})
+     *             gigwalk.customers.updateLocationAdressByID({...})
      */
-    updateLocationAdress(params: any): APIPromise<any> {
+    updateLocationAdressByID(params: UpdateLocationAdressByIDParams): APIPromise<any> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'put'
