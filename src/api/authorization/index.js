@@ -1,5 +1,7 @@
 // @flow
 import Resource from '../resource';
+import type { $AxiosXHR } from 'axios';
+import type { APIResponse } from '../resource';
 
 type ForgotPasswordParams = {
     email: string
@@ -12,9 +14,8 @@ type ResetPasswordParams = {
     check_expired: boolean
 }
 
-type ForgotPasswordData = null
-
-type ResetPasswordData = null
+type ForgotPasswordResponse = APIResponse<null>;
+type ResetPasswordResponse = APIResponse<null>;
 
 export default class Authorization extends Resource {
 
@@ -26,7 +27,7 @@ export default class Authorization extends Resource {
      * @apiExample {js} Example:
      *             gigwalk.authorization.forgotPassword({ ... })
      */
-    forgotPassword(params: ForgotPasswordParams): Promise<ForgotPasswordData> {
+    forgotPassword(params: ForgotPasswordParams): Promise<$AxiosXHR<ForgotPasswordResponse>> {
         return this.client.post('/v1/forgot_password', { ...params });
     }
 
@@ -41,7 +42,7 @@ export default class Authorization extends Resource {
      * @apiExample {js} Example:
      *             gigwalk.authorization.resetPassword({ ... })
      */
-    resetPassword(params: ResetPasswordParams): Promise<ResetPasswordData> {
+    resetPassword(params: ResetPasswordParams): Promise<$AxiosXHR<ResetPasswordResponse>> {
         return this.client.post('/v1/reset_password', { ...params });
     }
 }

@@ -34,11 +34,15 @@ export default class RequestQueue {
      * @returns {Promise}
      */
     add(config: $AxiosXHRConfig<*>): Promise<$AxiosXHR<*>> {
-        const request = {
-            ...config,
+        const request: Request<*> = {
+            url: config.url,
             success: () => {},
             error: () => {}
         };
+
+        // Note: To pass type checking, manual assignment of maybe types is required. See https://github.com/facebook/flow/issues/2167
+        if (config.data) request.data = config.data;
+        if (config.method) request.method = config.method;
 
         const key = stringify(config);
 

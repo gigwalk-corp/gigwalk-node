@@ -12,11 +12,19 @@ import TargetLists from './api/targetLists';
 import Targets from './api/targets';
 import TicketEvents from './api/ticketEvents';
 import Tickets from './api/tickets';
-import type { Auth } from './api/resource';
 
 export type GigwalkAPIConfig = {
     hostname?: string,
 };
+
+export type AuthToken = {
+    token: string
+}
+
+export type BasicAuth = {
+    username: string,
+    password: string
+}
 
 export default class GigwalkAPI {
 
@@ -55,7 +63,7 @@ export default class GigwalkAPI {
         this.tickets = new Tickets(client);
     }
 
-    authenticate(auth: Auth) {
+    authenticate(auth: AuthToken | BasicAuth) {
         let header = '';
         if (auth.email && auth.password) {
             header = `Basic ${auth.email}:${auth.password}`;

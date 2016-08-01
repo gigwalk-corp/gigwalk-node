@@ -1,14 +1,15 @@
 // @flow
 import type { Axios } from 'axios';
 
-export type AuthToken = {
-    token: string
+export type APIResponse<T> = {
+    _meta: Object,
+    _metadata: Object,
+    warnings: mixed,
+    errors: mixed,
+    gw_api_response: Array<Object>,
+    code: number,
+    data: T,
 }
-export type BasicAuth = {
-    username: string,
-    password: string
-}
-export type Auth = AuthToken | BasicAuth;
 
 export default class Resource {
     client: Axios;
