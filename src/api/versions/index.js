@@ -1,7 +1,7 @@
 // @flow
 import ResourceBase from '../resourceBase';
 
-export type APIRes<T> = {
+type APIRes<T> = {
     _meta: Object,
     warnings: mixed,
     gw_api_response: Array<Object>,
@@ -11,9 +11,9 @@ export type APIRes<T> = {
     errors: mixed
 };
 
-export type APIPromise<T> = Promise<AxiosXHR<APIRes<T>>>;
+type APIPromise<T> = Promise<AxiosXHR<APIRes<T>>>;
 
-export type GetData = [{
+type GetData = [{
     minimum_ios_version: string,
     minimum_android_version: string,
     version: string
