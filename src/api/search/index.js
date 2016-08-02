@@ -23,17 +23,39 @@ type SearchOrganizationParams = {
     query_string: string
 }
 
-type SearchDocumentsData = {
-
+type searchResultsSchema = {
+    _shards: {
+        successful: number,
+        total: number,
+        failed: number
+    },
+    hits: {
+        total: number,
+        max_score: number,
+        hits: Array<{
+            _source: Object,
+            _score: number,
+            _type: string,
+            _id: number,
+            _index: string,
+            highlight?: Object
+        }>
+    },
+    took: number,
+    timed_out: boolean
 }
 
-type CreateSearchData = {
+type SearchDocumentsData = [
+    searchResultsSchema
+]
 
-}
+type CreateSearchData = [
+    string
+]
 
-type SearchOrganizationData = {
-
-}
+type SearchOrganizationData = [
+    searchResultsSchema
+]
 
 export default class Search extends ResourceBase {
     /**

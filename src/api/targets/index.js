@@ -49,21 +49,27 @@ type SearchOrganizationTargetsParams = {
     query_string: string
 }
 
-type CreateOrganizationTargetsData = {
-
+type ObservationTargetSchema = {
+    title: string,
+    id: number,
+    observation_target_type_id: number,
+    status: string,
+    organization_data: Object
 }
 
-type GetOrganizationTargetData = {
+type CreateOrganizationTargetsData = [
+    ObservationTargetSchema
+]
 
-}
+type GetOrganizationTargetData = [ // NEED TO CHECK
+    ObservationTargetSchema
+]
 
-type UpdateOrganizationTargetData = {
+type UpdateOrganizationTargetData = [
+    ObservationTargetSchema
+]
 
-}
-
-type SearchOrganizationTargetsData = {
-
-}
+type SearchOrganizationTargetsData = Array<ObservationTargetSchema>
 
 export default class Targets extends ResourceBase {
     /**

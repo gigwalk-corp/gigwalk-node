@@ -47,25 +47,96 @@ type CreateOrganizationParams = {
     organization: OrganizationTemplate
 }
 
-type DeleteOrganizationData = {
-
+type OrganizationSchema = {
+    organization_name: string,
+    id: number,
+    type: string,
+    date_updated: string,
+    user_count: number,
+    status: string,
+    vertical_type: string,
+    core_customer_account: boolean,
+    core_private_workforce: boolean,
+    needs_core: boolean,
+    cloud9urls: Object,
+    created_user: {
+        email: string,
+        first_name: string,
+        last_name: string
+    },
+    stats: {
+        projects: {
+            draft_count: number,
+            active_count: number,
+            completed_count: number,
+            archived_count: number,
+            canceled_count: number
+        },
+        resources: {
+            certification_count: number,
+            location_count: number,
+            target_count: number
+        },
+        team: {
+            group_count: number,
+            user_count: number
+        },
+        tickets: {
+            scheduled_count: number,
+            assigned_count: number,
+            unassigned_count: number,
+            started_count: number,
+            submitted_count: number
+        }
+    },
+    config: {
+        logo_uri: string,
+        is_crossmark_org: boolean,
+        invitation_ttl: number,
+        locale: string,
+        targets_enabled: boolean,
+        force_timing_template: boolean,
+        week_start_day: number,
+        hours_after_due: number,
+        max_weekly_hours: number,
+        cannot_opt_out: boolean,
+        autoassign: {
+            enabled: boolean,
+            use_work_history: boolean,
+            ft_priority: boolean,
+            groups_required: boolean,
+            radius_km: number,
+            bundling_days: Object,
+        },
+        push_notifications: {
+            enabled: boolean
+        },
+        two_way_rating: {
+            enabled: boolean,
+            rating_email_template: string,
+            max_creator_response_days: number,
+            max_worker_response_days: number,
+            max_comment_length: number,
+            max_rating_emails: number
+        }
+    }
 }
 
-type GetOrganizationData = {
+type DeleteOrganizationData = null
 
-}
+type GetOrganizationData = [
+    OrganizationSchema
+]
 
-type UpdateOrganizationData = {
+type UpdateOrganizationData = [
+    OrganizationSchema
+]
 
-}
+type GetOrganizationsData = Array<OrganizationSchema>
 
-type GetOrganizationsData = {
-
-}
-
-type CreateOrganizationData = {
-
-}
+type CreateOrganizationData = [ // NEED TO CHECK
+    OrganizationSchema
+]
 
 export default class Organzations extends ResourceBase {
     /**

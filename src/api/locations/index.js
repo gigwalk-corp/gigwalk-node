@@ -79,49 +79,59 @@ type CreateOrganizationLocationListParams = {
     subscription_id: number
 }
 
-type GetLocationsData = {
-
+type LocationSchema = {
+    title: string,
+    locality: string,
+    id: number,
+    country: string,
+    formatted_address: string,
+    postal_code: number,
+    administrative_area_level_1: string,
+    administrative_area_level_2: string,
+    specificity: string,
+    latitude: number,
+    longitude: number,
+    tzid: string,
+    organization_id: number,
+    source_location_id: number,
+    status: string,
+    state: string,
+    organization_data: Object
 }
 
-type CreateLocationsData = {
+type GetLocationsData = Array<LocationSchema>
 
-}
+type CreateLocationsData = Array<LocationSchema>
 
-type GetLocationData = {
+type GetLocationData = [
+    LocationSchema
+]
 
-}
+type GetOrganizationLocationsData = Array<LocationSchema>
 
-type GetOrganizationLocationsData = {
+type CreateOrganizationLocationsData = Array<LocationSchema>
 
-}
+type UpdateOrganizaionLocationsData = Array<LocationSchema>
 
-type CreateOrganizationLocationsData = {
+type DeleteOrganizationLocationData = [
+    number
+]
 
-}
+type GetOrganizationLocationData = [
+    LocationSchema
+]
 
-type UpdateOrganizaionLocationsData = {
+type CreateOrganizationLocationData = [
+    LocationSchema
+]
 
-}
+type UpdateOrganizationLocationData = [
+    LocationSchema
+]
 
-type DeleteOrganizationLocationData = {
-
-}
-
-type GetOrganizationLocationData = {
-
-}
-
-type CreateOrganizationLocationData = {
-
-}
-
-type UpdateOrganizationLocationData = {
-
-}
-
-type CreateOrganizationLocationListData = {
-
-}
+type CreateOrganizationLocationListData = [ // NEED TO CHECK
+    number
+]
 
 export default class Locations extends ResourceBase {
     /**

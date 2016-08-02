@@ -87,45 +87,45 @@ type SearchSubscriptionsParams = {
     query_string: string
 }
 
-type DeleteSubscriptionData = {
+type DeleteSubscriptionData = [
 
-}
+]
 
-type GetSubscriptionData = {
+type GetSubscriptionData = [
 
-}
+]
 
-type CreateClonedSubscriptionData = {
+type CreateClonedSubscriptionData = [
 
-}
+]
 
-type UpdateSubscriptionData = {
+type UpdateSubscriptionData = [
 
-}
+]
 
-type CreateSubscriptionsData = {
+type CreateSubscriptionsData = [
 
-}
+]
 
-type SearchSubscriptionsWithParamsData = {
+type SearchSubscriptionsWithParamsData = [
 
-}
+]
 
-type DeleteOrganizationSubscriptionData = {
+type DeleteOrganizationSubscriptionData = [
 
-}
+]
 
-type UpdateOrganizationSubscriptionData = {
+type UpdateOrganizationSubscriptionData = [
 
-}
+]
 
-type SearchSubscriptionsWithFieldData = {
+type SearchSubscriptionsWithFieldData = [
 
-}
+]
 
-type SearchSubscriptionsData = {
+type SearchSubscriptionsData = [
 
-}
+]
 
 export default class Subscriptions extends ResourceBase {
     /**

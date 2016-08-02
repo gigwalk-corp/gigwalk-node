@@ -148,89 +148,89 @@ type GetTicketsInAreaParams = {
     radius: number
 }
 
-type SearchGroupTicketsData = {
+type SearchGroupTicketsData = [
 
-}
+]
 
-type GetCurrentCustomerTicketsData = {
+type GetCurrentCustomerTicketsData = [
 
-}
+]
 
-type GetCustomerTicketsData = {
+type GetCustomerTicketsData = [
 
-}
+]
 
-type SearchOrganizationTicketsData = {
+type SearchOrganizationTicketsData = [
 
-}
+]
 
-type SearchOrganizationTicketsWithFieldData = {
+type SearchOrganizationTicketsWithFieldData = [
 
-}
+]
 
-type CreateTicketDataItemData = {
+type CreateTicketDataItemData = [
 
-}
+]
 
-type DeleteTicketDataItemData = {
+type DeleteTicketDataItemData = [
 
-}
+]
 
-type CreateClonedTicketData = {
+type CreateClonedTicketData = [
 
-}
+]
 
-type SubmitTicketData = {
+type SubmitTicketData = [
 
-}
+]
 
-type GetTicketData = {
+type GetTicketData = [
 
-}
+]
 
-type SearchTicketsWithIDData = {
+type SearchTicketsWithIDData = [
 
-}
+]
 
-type UpdateTicketData = {
+type UpdateTicketData = [
 
-}
+]
 
-type GetTicketsData = {
+type GetTicketsData = [
 
-}
+]
 
-type SearchTicketsData = {
+type SearchTicketsData = [
 
-}
+]
 
-type UpdateTicketWithStateData = {
+type UpdateTicketWithStateData = [
 
-}
+]
 
-type GetOrganizationTicketsData = {
+type GetOrganizationTicketsData = [
 
-}
+]
 
-type SearchOrganizationTicketsWithCriteriaData = {
+type SearchOrganizationTicketsWithCriteriaData = [
 
-}
+]
 
-type GetSubscriptionTicketsData = {
+type GetSubscriptionTicketsData = [
 
-}
+]
 
-type SearchSubscriptionTicketsData = {
+type SearchSubscriptionTicketsData = [
 
-}
+]
 
-type GetTicketEventsData = {
+type GetTicketEventsData = [
 
-}
+]
 
-type GetTicketsInAreaData = {
+type GetTicketsInAreaData = [
 
-}
+]
 
 export default class Tickets extends ResourceBase {
     /**
