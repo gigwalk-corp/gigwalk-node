@@ -1,5 +1,6 @@
 // @flow
-import ResourceBase from '../resourceBase';
+import Resource from '../resource';
+import type { $AxiosXHR } from 'axios';
 
 export type APIRes<T> = {
     _meta: Object,
@@ -11,7 +12,7 @@ export type APIRes<T> = {
     errors: mixed
 };
 
-export type APIPromise<T> = Promise<AxiosXHR<APIRes<T>>>;
+export type APIPromise<T> = Promise<$AxiosXHR<APIRes<T>>>;
 
 export type GetData = [{
     minimum_ios_version: string,
@@ -19,7 +20,7 @@ export type GetData = [{
     version: string
 }];
 
-export default class Versions extends ResourceBase {
+export default class Versions extends Resource {
     /**
      * @api {get} /v1/versions/current
      * @apiName Get
@@ -28,12 +29,6 @@ export default class Versions extends ResourceBase {
      *             gigwalk.versions.get({...})
      */
     get(): APIPromise<GetData> {
-        const request: AxiosXHRConfig<any> = {
-            url: '/v1/versions/current',
-            method: 'get',
-            data: null
-        };
-
-        return this.dispatch(request);
+        return this.client.get('/v1/versions/current');
     }
 }

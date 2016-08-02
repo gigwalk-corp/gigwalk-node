@@ -1,8 +1,9 @@
 // @flow
 import axios from 'axios';
 import stringify from 'json-stable-stringify';
+import type { Axios, $AxiosXHR, $AxiosXHRConfig } from 'axios';
 
-interface Request<T> extends AxiosXHRConfig<T> {
+interface Request<T> extends $AxiosXHRConfig<T> {
     success: Function,
     error: Function
 }
@@ -32,12 +33,16 @@ export default class RequestQueue {
      * @param config
      * @returns {Promise}
      */
-    add(config: AxiosXHRConfig<*>) {
-        const request = {
-            ...config,
+    add(config: $AxiosXHRConfig<*>): Promise<$AxiosXHR<*>> {
+        const request: Request<*> = {
+            url: config.url,
             success: () => {},
             error: () => {}
         };
+
+        // Note: To pass type checking, manual assignment of maybe types is required. See https://github.com/facebook/flow/issues/2167
+        if (config.data) request.data = config.data;
+        if (config.method) request.method = config.method;
 
         const key = stringify(config);
 
@@ -57,7 +62,6 @@ export default class RequestQueue {
             request.error = reject;
         });
 
-        // $FlowFixMe
         this.activeRequests.set(key, { request, promise });
 
         this.dispatchQueue.push(request);
