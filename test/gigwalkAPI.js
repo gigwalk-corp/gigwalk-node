@@ -1,5 +1,3 @@
-import sinon from 'sinon';
-
 import GigwalkAPI from '../src/index';
 import GigwalkAxios from '../src/client';
 import Authorization from '../src/api/authorization';
@@ -14,6 +12,7 @@ import TargetLists from '../src/api/targetLists';
 import Targets from '../src/api/targets';
 import TicketEvents from '../src/api/ticketEvents';
 import Tickets from '../src/api/tickets';
+import sinon from 'sinon';
 
 describe('GigwalkAPI', () => {
     const sandbox = sinon.sandbox.create();
@@ -31,10 +30,10 @@ describe('GigwalkAPI', () => {
         const clientStub = sandbox.stub();
         GigwalkAPI.__Rewire__('GigwalkAxios', clientStub);
 
-        new GigwalkAPI({ hostname: 'beta-api.app.gigwalk.com' });
+        new GigwalkAPI({ hostname: 'beta-api.app.gigwalk.com' }); // eslint-disable-line no-new
         expect(clientStub).to.have.been.calledWith({ baseURL: 'https://beta-api.app.gigwalk.com' });
 
-        new GigwalkAPI();
+        new GigwalkAPI(); // eslint-disable-line no-new
         expect(clientStub).to.have.been.calledWith({ baseURL: 'https://api.app.gigwalk.com' });
 
         GigwalkAPI.__ResetDependency__('GigwalkAxios');
@@ -89,4 +88,4 @@ describe('GigwalkAPI', () => {
         expect(gigwalk.tickets).to.be.instanceof(Tickets);
         expect(gigwalk.tickets.client).to.equal(gigwalk.client);
     });
- });
+});
