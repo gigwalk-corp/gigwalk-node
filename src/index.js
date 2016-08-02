@@ -1,6 +1,5 @@
 // @flow
-import axios from 'axios';
-import RequestQueue from './requestQueue';
+import GigwalkAxios from './client';
 import Authorization from './api/authorization';
 import Certifications from './api/certifications';
 import Customers from './api/customers';
@@ -13,23 +12,25 @@ import TargetLists from './api/targetLists';
 import Targets from './api/targets';
 import TicketEvents from './api/ticketEvents';
 import Tickets from './api/tickets';
-import ResourceBase from './api/resourceBase';
-
-import type { Auth } from './api/resourceBase';
+import cloneDeep from 'lodash.clonedeep';
 
 export type GigwalkAPIConfig = {
     hostname?: string,
 };
 
+export type AuthToken = {
+    token: string
+}
+
+export type BasicAuth = {
+    username: string,
+    password: string
+}
+
 export default class GigwalkAPI {
 
-    hostname: string;
-
-    // Stored auth credentials
-    auth: Auth;
-
-    // Outgoing request queue
-    requestQueue: RequestQueue;
+    // The http client
+    client: GigwalkAxios;
 
     // API resources
     authorization: Authorization;
@@ -45,34 +46,37 @@ export default class GigwalkAPI {
     ticketEvents: TicketEvents;
     tickets: Tickets;
 
-    constructor(config: GigwalkAPIConfig) {
-        this.hostname = config.hostname || 'api.apps.gigwalk.com';
+    constructor(config?: GigwalkAPIConfig = {}) {
+        const client = new GigwalkAxios({ baseURL: `https://${config.hostname || 'api.app.gigwalk.com'}` });
+        this.client = client;
 
-        const client = axios.create({ baseURL: this.hostname });
-        this.requestQueue = new RequestQueue(client);
+        // AxiosIssue - global.defaults and client.defaults reference the same object. Changing the instance
+        // defaults will affect the global namespace (and therefore any other axios instances)
+        // See https://github.com/mzabriskie/axios/issues/391
+        client.defaults = cloneDeep(client.defaults);
 
-        const dispatcher = this.requestQueue.add;
-        this.authorization = new Authorization(dispatcher);
-        this.certifications = new Certifications(dispatcher);
-        this.customers = new Customers(dispatcher);
-        this.locationLists = new LocationLists(dispatcher);
-        this.locations = new Locations(dispatcher);
-        this.organizations = new Organizations(dispatcher);
-        this.search = new Search(dispatcher);
-        this.subscriptions = new Subscriptions(dispatcher);
-        this.targetLists = new TargetLists(dispatcher);
-        this.targets = new Targets(dispatcher);
-        this.ticketEvents = new TicketEvents(dispatcher);
-        this.tickets = new Tickets(dispatcher);
+        this.authorization = new Authorization(client);
+        this.certifications = new Certifications(client);
+        this.customers = new Customers(client);
+        this.locationLists = new LocationLists(client);
+        this.locations = new Locations(client);
+        this.organizations = new Organizations(client);
+        this.search = new Search(client);
+        this.subscriptions = new Subscriptions(client);
+        this.targetLists = new TargetLists(client);
+        this.targets = new Targets(client);
+        this.ticketEvents = new TicketEvents(client);
+        this.tickets = new Tickets(client);
     }
 
-    authenticate(auth: Auth) {
-        this.auth = auth;
+    authenticate(auth: AuthToken | BasicAuth) {
+        let header = '';
+        if (auth.email && auth.password) {
+            header = `Basic ${auth.email}:${auth.password}`;
+        } else if (auth.token) {
+            header = `Token ${auth.token}`;
+        }
 
-        Object.values(this).forEach((property: any) => {
-            if (property instanceof ResourceBase) {
-                property.authenticate(this.auth);
-            }
-        });
+        this.client.defaults.headers.common.Authorization = header;
     }
 }

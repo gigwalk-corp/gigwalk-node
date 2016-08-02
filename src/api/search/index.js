@@ -1,5 +1,6 @@
 // @flow
-import ResourceBase from '../resourceBase';
+import Resource from '../resource';
+import type { $AxiosXHR, $AxiosXHRConfig } from 'axios';
 
 type APIRes<T> = {
     _meta: Object,
@@ -11,7 +12,7 @@ type APIRes<T> = {
     errors: mixed
 }
 
-type APIPromise<T> = Promise<AxiosXHR<APIRes<T>>>
+type APIPromise<T> = Promise<$AxiosXHR<APIRes<T>>>
 
 type SearchDocumentsParams = {
     query_string: string
@@ -57,7 +58,7 @@ type SearchOrganizationData = [
     searchResultsSchema
 ]
 
-export default class Search extends ResourceBase {
+export default class Search extends Resource {
     /**
      * @api {} GET /v1/search
      * @apiName searchDocuments
@@ -66,11 +67,11 @@ export default class Search extends ResourceBase {
      *             gigwalk.customers.searchDocuments({...})
      */
     searchDocuments(params: SearchDocumentsParams): APIPromise<SearchDocumentsData> {
-        const request: AxiosXHRConfig<any> = {
+        const request: $AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'get'
         };
-        return this.dispatch(request);
+        return this.client.request(request);
     }
 
     /**
@@ -81,11 +82,11 @@ export default class Search extends ResourceBase {
      *             gigwalk.customers.createSearch({...})
      */
     createSearch(): APIPromise<CreateSearchData> {
-        const request: AxiosXHRConfig<any> = {
+        const request: $AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'post'
         };
-        return this.dispatch(request);
+        return this.client.request(request);
     }
 
     /**
@@ -98,10 +99,10 @@ export default class Search extends ResourceBase {
      *             gigwalk.customers.searchOrganization({...})
      */
     searchOrganization(params: SearchOrganizationParams): APIPromise<SearchOrganizationData> {
-        const request: AxiosXHRConfig<any> = {
+        const request: $AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'get'
         };
-        return this.dispatch(request);
+        return this.client.request(request);
     }
 }

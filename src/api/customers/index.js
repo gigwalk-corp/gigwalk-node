@@ -1,5 +1,6 @@
 // @flow
-import ResourceBase from '../resourceBase';
+import Resource from '../resource';
+import type { $AxiosXHR, $AxiosXHRConfig } from 'axios';
 
 type APIRes<T> = {
     _meta: Object,
@@ -11,7 +12,7 @@ type APIRes<T> = {
     errors: mixed
 }
 
-type APIPromise<T> = Promise<AxiosXHR<APIRes<T>>>
+type APIPromise<T> = Promise<$AxiosXHR<APIRes<T>>>
 
 type CustomerTemplate = {
   email: string,
@@ -154,7 +155,7 @@ type UpdateCustomerData = [ // NEED TO CHECK
 
 type SearchCustomersData = Array<CustomerSchema>
 
-export default class Customers extends ResourceBase {
+export default class Customers extends Resource {
     /**
      * @api {delete} /v1/organizations/{organization_id}/customers/{customer_email}
      * @apiName deleteCustomerWithEmail
@@ -165,11 +166,11 @@ export default class Customers extends ResourceBase {
      *             gigwalk.customers.deleteCustomerWithEmail({...})
      */
     deleteCustomerWithEmail(params: DeleteCustomerWithEmailParams): APIPromise<DeleteCustomerWithEmailData> {
-        const request: AxiosXHRConfig<any> = {
+        const request: $AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'delete'
         };
-        return this.dispatch(request);
+        return this.client.request(request);
     }
 
     /**
@@ -182,11 +183,11 @@ export default class Customers extends ResourceBase {
      *             gigwalk.customers.getCustomerWithEmail({...})
      */
     getCustomerWithEmail(params: GetCustomerWithEmailParams): APIPromise<GetCustomerWithEmailData> {
-        const request: AxiosXHRConfig<any> = {
+        const request: $AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'get'
         };
-        return this.dispatch(request);
+        return this.client.request(request);
     }
 
     /**
@@ -199,11 +200,11 @@ export default class Customers extends ResourceBase {
      *             gigwalk.customers.updateCustomer({...})
      */
     updateCustomerWithEmail(params: UpdateCustomerWithEmailParams): APIPromise<UpdateCustomerWithEmailData> {
-        const request: AxiosXHRConfig<any> = {
+        const request: $AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'put'
         };
-        return this.dispatch(request);
+        return this.client.request(request);
     }
 
     /**
@@ -216,11 +217,11 @@ export default class Customers extends ResourceBase {
      *             gigwalk.customers.deleteCustomerWithID({...})
      */
     deleteCustomerWithID(params: DeleteCustomerWithIDParams): APIPromise<DeleteCustomerWithIDData> {
-        const request: AxiosXHRConfig<any> = {
+        const request: $AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'delete'
         };
-        return this.dispatch(request);
+        return this.client.request(request);
     }
 
     /**
@@ -233,11 +234,11 @@ export default class Customers extends ResourceBase {
      *             gigwalk.customers.getCustomerWithID({...})
      */
     getCustomerWithID(params: GetCustomerWithIDParams): APIPromise<GetCustomerWithIDData> {
-        const request: AxiosXHRConfig<any> = {
+        const request: $AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'get'
         };
-        return this.dispatch(request);
+        return this.client.request(request);
     }
 
     /**
@@ -250,11 +251,11 @@ export default class Customers extends ResourceBase {
      *             gigwalk.customers.updateCustomerWithID({...})
      */
     updateCustomerWithID(params: UpdateCustomerWithIDParams): APIPromise<UpdateCustomerWithIDData> {
-        const request: AxiosXHRConfig<any> = {
+        const request: $AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'put'
         };
-        return this.dispatch(request);
+        return this.client.request(request);
     }
 
     /**
@@ -266,11 +267,11 @@ export default class Customers extends ResourceBase {
      *             gigwalk.customers.getOrganizationCustomers({...})
      */
     getOrganizationCustomers(params: GetOrganizationCustomersParams): APIPromise<GetOrganizationCustomersData> {
-        const request: AxiosXHRConfig<any> = {
+        const request: $AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'get'
         };
-        return this.dispatch(request);
+        return this.client.request(request);
     }
 
     /**
@@ -282,11 +283,11 @@ export default class Customers extends ResourceBase {
      *             gigwalk.customers.updateOrganizationCustomers({...})
      */
     updateOrganizationCustomers(params: UpdateOrganizationCustomersParams): APIPromise<UpdateOrganizationCustomersData> {
-        const request: AxiosXHRConfig<any> = {
+        const request: $AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'put'
         };
-        return this.dispatch(request);
+        return this.client.request(request);
     }
 
     /**
@@ -299,11 +300,11 @@ export default class Customers extends ResourceBase {
      *             gigwalk.customers.getCustomer({...})
      */
     getCustomer(): APIPromise<GetCustomerData> {
-        const request: AxiosXHRConfig<any> = {
+        const request: $AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'get'
         };
-        return this.dispatch(request);
+        return this.client.request(request);
     }
 
     /**
@@ -315,11 +316,11 @@ export default class Customers extends ResourceBase {
      *             gigwalk.customers.updateCustomer({...})
      */
     updateCustomer(params: UpdateCustomerParams): APIPromise<UpdateCustomerData> {
-        const request: AxiosXHRConfig<any> = {
+        const request: $AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'put'
         };
-        return this.dispatch(request);
+        return this.client.request(request);
     }
 
     /**
@@ -331,10 +332,10 @@ export default class Customers extends ResourceBase {
      *             gigwalk.customers.searchCustomers({...})
      */
     searchCustomers(params: SearchCustomersParams): APIPromise<SearchCustomersData> {
-        const request: AxiosXHRConfig<any> = {
+        const request: $AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'post'
         };
-        return this.dispatch(request);
+        return this.client.request(request);
     }
 }
