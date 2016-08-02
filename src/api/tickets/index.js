@@ -13,17 +13,152 @@ type APIRes<T> = {
 
 type APIPromise<T> = Promise<AxiosXHR<APIRes<T>>>
 
+type DataItemTemplate = {
+  data_type_id: number,
+  observation_target_id: number,
+  data_item_value: Array<number>,
+  timestamp: number,
+  latitude: number,
+  longitude: number,
+  template_id: number,
+  device_id: number,
+  app_version: number,
+  user_agent: string
+}
+
+type TicketSearchTemplate = {
+  search_type: string,
+  latitude: number,
+  uom: km,
+  longitude: number,
+  radius: number,
+  status: string,
+  date_type: string,
+  start_date: string,
+  end_date: string,
+  timezone: string
+}
+
+type SearchGroupTicketsParams = {
+    group_id: number,
+    query_params: Array<{
+        field: string,
+        operator: string,
+        value: string
+    }>,
+    bounding_box: {
+        top_left: {
+            lat: number,
+            lon: number
+        },
+        bottom_right: {
+            lat: number,
+            lon: number
+        }
+    },
+    timezone: string
+}
+
+type GetCustomerTicketsParams = {
+    customer_id: number
+}
+
+type SearchOrganizationTicketsParams = {
+    organization_id: number,
+    query_string: string
+}
+
+type SearchOrganizationTicketsWithFieldParams = {
+    organization_id: number,
+    search_field: string,
+    query_string: string
+}
+
+type CreateTicketDataItemParams = {
+    ticket_id: number,
+    data_item: DataItemTemplate
+}
+
+type DeleteTicketDataItemParams = {
+    ticket_id: number,
+    data_type_id: number
+}
+
+type CreateClonedTicketParams = {
+    ticket_id: number
+}
+
+type SubmitTicketParams = {
+    ticket_id: number
+}
+
+type GetTicketParams = {
+    ticket_id: number
+}
+
+type SearchTicketsWithIDParams = {
+    ticket_id: number,
+    query: TicketSearchTemplate
+}
+
+type UpdateTicketParams = {
+    ticket_id: number,
+    action: string,
+    ticket_ids: Array<number>,
+    customer_id: string
+}
+
+type SearchTicketsParams = {
+    query: TicketSearchTemplate
+}
+
+type UpdateTicketWithStateParams = {
+    ticket_id: number,
+    execution_state: string,
+    action: string,
+    ticket_ids: Array<number>,
+    customer_id: string
+}
+
+type GetOrganizationTicketsParams = {
+    organization_id: number
+}
+
+type SearchOrganizationTicketsWithCriteriaParams = {
+    organization_id: number,
+    query: TicketSearchTemplate
+}
+
+type GetSubscriptionTicketsParams = {
+    subscription_id: number
+}
+
+type SearchSubscriptionTicketsParams = {
+    subscription_id: number,
+    query: TicketSearchTemplate
+}
+
+type GetTicketEventsParams = {
+    ticket_id: number
+}
+
+type GetTicketsInAreaParams = {
+    map_lat: number,
+    map_lon: number,
+    radius: number
+}
+
 export default class Tickets extends ResourceBase {
     /**
      * @api {post} /v1/groups/{group_id}/tickets/search
      * @apiName searchGroupTickets
      * @apiDescription Get all tickets from the specified group that satisfy the search criteria, now we support field bundle_autoassign with
-                       operator "=" and values "true" or "false"
+                       operator = and values true or false
      * @apiParam {Number} group_id
      * @apiExample {js} Example:
      *             gigwalk.customers.searchGroupTickets({...})
      */
-    searchGroupTickets(params: any): APIPromise<any> {
+    searchGroupTickets(params: SearchGroupTicketsParams): APIPromise<any> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'post'
@@ -33,12 +168,12 @@ export default class Tickets extends ResourceBase {
 
     /**
      * @api {get} /v1/tickets/my_list
-     * @apiName getTickets
+     * @apiName getCurrentCustomerTickets
      * @apiDescription Get all tickets that belong to current_user's id
      * @apiExample {js} Example:
-     *             gigwalk.customers.getTickets({...})
+     *             gigwalk.customers.getCurrentCustomerTickets({...})
      */
-    getTickets(params: any): APIPromise<any> {
+    getCurrentCustomerTickets(): APIPromise<any> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'get'
@@ -54,7 +189,7 @@ export default class Tickets extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.getCustomerTickets({...})
      */
-    getCustomerTickets(params: any): APIPromise<any> {
+    getCustomerTickets(params: GetCustomerTicketsParams): APIPromise<any> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'get'
@@ -71,7 +206,7 @@ export default class Tickets extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.searchOrganizationTickets({...})
      */
-    searchOrganizationTickets(params: any): APIPromise<any> {
+    searchOrganizationTickets(params: SearchOrganizationTicketsParams): APIPromise<any> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'post'
@@ -81,14 +216,14 @@ export default class Tickets extends ResourceBase {
 
     /**
      * @api {post} /v2/organizations/{organization_id}/search/tickets/filters
-     * @apiName searchOrganizationTickets
+     * @apiName searchOrganizationTicketsWithField
      * @apiDescription Search all tickets of the org for the given value This searches the specified search_field in the ES document and finds a match only
                        if the search_field contains the given value
      * @apiParam {Number} organization_id
      * @apiExample {js} Example:
-     *             gigwalk.customers.searchOrganizationTickets({...})
+     *             gigwalk.customers.searchOrganizationTicketsWithField({...})
      */
-    searchOrganizationTickets(params: any): APIPromise<any> {
+    searchOrganizationTicketsWithField(params: SearchOrganizationTicketsWithFieldParams): APIPromise<any> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'post'
@@ -104,7 +239,7 @@ export default class Tickets extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.createTicketDataItem({...})
      */
-    createTicketDataItem(params: any): APIPromise<any> {
+    createTicketDataItem(params: CreateTicketDataItemParams): APIPromise<any> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'post'
@@ -121,7 +256,7 @@ export default class Tickets extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.deleteTicketDataItem({...})
      */
-    deleteTicketDataItem(params: any): APIPromise<any> {
+    deleteTicketDataItem(params: DeleteTicketDataItemParams): APIPromise<any> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'delete'
@@ -138,7 +273,7 @@ export default class Tickets extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.createClonedTicket({...})
      */
-    createClonedTicket(params: any): APIPromise<any> {
+    createClonedTicket(params: CreateClonedTicketParams): APIPromise<any> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'post'
@@ -154,7 +289,7 @@ export default class Tickets extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.submitTicket({...})
      */
-    submitTicket(params: any): APIPromise<any> {
+    submitTicket(params: SubmitTicketParams): APIPromise<any> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'post'
@@ -170,7 +305,7 @@ export default class Tickets extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.getTicket({...})
      */
-    getTicket(params: any): APIPromise<any> {
+    getTicket(params: GetTicketParams): APIPromise<any> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'get'
@@ -180,14 +315,14 @@ export default class Tickets extends ResourceBase {
 
     /**
      * @api {post} /v1/tickets/{ticket_id}
-     * @apiName searchTickets
+     * @apiName searchTicketsWithID
      * @apiDescription Search tickets. This seems deprecated and the semantics do not look right either. Why would a ticket_id be passed to a search?
                        You should use only API /v1/tickets/search. The other endpoints are also directed to the search method.
      * @apiParam {Number} ticket_id
      * @apiExample {js} Example:
-     *             gigwalk.customers.searchTickets({...})
+     *             gigwalk.customers.searchTicketsWithID({...})
      */
-    searchTickets(params: any): APIPromise<any> {
+    searchTicketsWithID(params: SearchTicketsWithIDParams): APIPromise<any> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'post'
@@ -204,7 +339,7 @@ export default class Tickets extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.updateTicket({...})
      */
-    updateTicket(params: any): APIPromise<any> {
+    updateTicket(params: UpdateTicketParams): APIPromise<any> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'put'
@@ -219,7 +354,7 @@ export default class Tickets extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.getTickets({...})
      */
-    getTickets(params: any): APIPromise<any> {
+    getTickets(): APIPromise<any> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'get'
@@ -234,7 +369,7 @@ export default class Tickets extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.searchTickets({...})
      */
-    searchTickets(params: any): APIPromise<any> {
+    searchTickets(params: SearchTicketsParams): APIPromise<any> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'post'
@@ -244,15 +379,15 @@ export default class Tickets extends ResourceBase {
 
     /**
      * @api {put} /v1/tickets/{ticket_id}/execution_state/{execution_state}
-     * @apiName updateTicket
+     * @apiName updateTicketWithState
      * @apiDescription Edit tickets If the ticket_id is present assign the corresponding ticket. Otherwise perform action to multiple tickets identified
                        by the data arguments.
      * @apiParam {Number} ticket_id
      * @apiParam {Number} execution_state
      * @apiExample {js} Example:
-     *             gigwalk.customers.updateTicket({...})
+     *             gigwalk.customers.updateTicketWithState({...})
      */
-    updateTicket(params: any): APIPromise<any> {
+    updateTicketWithState(params: UpdateTicketWithStateParams): APIPromise<any> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'put'
@@ -268,7 +403,7 @@ export default class Tickets extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.getOrganizationTickets({...})
      */
-    getOrganizationTickets(params: any): APIPromise<any> {
+    getOrganizationTickets(params: GetOrganizationTicketsParams): APIPromise<any> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'get'
@@ -278,14 +413,14 @@ export default class Tickets extends ResourceBase {
 
     /**
      * @api {post} /v1/organizations/{organization_id}/tickets/search
-     * @apiName searchOrganizationTickets
+     * @apiName searchOrganizationTicketsWithCriteria
      * @apiDescription Search tickets filtered by the organization This returns tickets of the specified organization that match the search criteria
                        specified in JSON
      * @apiParam {Number} organization_id
      * @apiExample {js} Example:
-     *             gigwalk.customers.searchOrganizationTickets({...})
+     *             gigwalk.customers.searchOrganizationTicketsWithCriteria({...})
      */
-    searchOrganizationTickets(params: any): APIPromise<any> {
+    searchOrganizationTicketsWithCriteria(params: SearchOrganizationTicketsWithCriteriaParams): APIPromise<any> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'post'
@@ -295,13 +430,13 @@ export default class Tickets extends ResourceBase {
 
     /**
      * @api {get} /v1/subscriptions/{subscription_id}/tickets
-     * @apiName getOrganizationSubscriptionTickets
+     * @apiName getSubscriptionTickets
      * @apiDescription Get info about all tickets of the organization_subscription (project) This is a paginated query
      * @apiParam {Number} subscription_id
      * @apiExample {js} Example:
-     *             gigwalk.customers.getOrganizationSubscriptionTickets({...})
+     *             gigwalk.customers.getSubscriptionTickets({...})
      */
-    getOrganizationSubscriptionTickets(params: any): APIPromise<any> {
+    getSubscriptionTickets(params: GetSubscriptionTicketsParams): APIPromise<any> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'get'
@@ -311,14 +446,14 @@ export default class Tickets extends ResourceBase {
 
     /**
      * @api {post} /v1/subscriptions/{subscription_id}/tickets/search
-     * @apiName searchOrganizationSubscriptionTickets
+     * @apiName searchSubscriptionTickets
      * @apiDescription Search tickets filtered by the organization_subscription (project) This returns tickets of the specified organization_subscription
                        that match the search criteria specified in JSON
      * @apiParam {Number} subscription_id
      * @apiExample {js} Example:
-     *             gigwalk.customers.searchOrganizationSubscriptionTickets({...})
+     *             gigwalk.customers.searchSubscriptionTickets({...})
      */
-    searchOrganizationSubscriptionTickets(params: any): APIPromise<any> {
+    searchSubscriptionTickets(params: SearchSubscriptionTicketsParams): APIPromise<any> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'post'
@@ -334,7 +469,7 @@ export default class Tickets extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.getTicketEvents({...})
      */
-    getTicketEvents(params: any): APIPromise<any> {
+    getTicketEvents(params: GetTicketEventsParams): APIPromise<any> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'get'
@@ -344,7 +479,7 @@ export default class Tickets extends ResourceBase {
 
     /**
      * @api {get} /v1/ticket_map
-     * @apiName getTicketsInLocation
+     * @apiName getTicketsInArea
      * @apiDescription Return all applicable tickets that are within the given radius of the specified location Geo-Search. Return the locations of all
                        applicable tickets within 50 KM of the input location for a map display. Unassigned tickets that fit the certification criteria,
                        and that are not due yet are returned
@@ -352,9 +487,9 @@ export default class Tickets extends ResourceBase {
      * @apiParam {Number} map_lon
      * @apiParam {Number} radius
      * @apiExample {js} Example:
-     *             gigwalk.customers.getTicketsInLocation({...})
+     *             gigwalk.customers.getTicketsInArea({...})
      */
-    getTicketsInLocation(params: any): APIPromise<any> {
+    getTicketsInArea(params: GetTicketsInAreaParams): APIPromise<any> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'get'

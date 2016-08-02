@@ -13,16 +13,90 @@ type APIRes<T> = {
 
 type APIPromise<T> = Promise<AxiosXHR<APIRes<T>>>
 
+type SubscriptionTemplate = {
+    version_id: string,
+    group_ids: Array<number>,
+    frequency_amount: number,
+    frequency_byweekday: string,
+    frequency_weekly: string,
+    frequency_window: number,
+    autoassign: boolean,
+    bundle_autoassign: boolean,
+    can_reschedule: boolean,
+    recurrence: boolean,
+    organization_data: {},
+    optin_type: string,
+    dashboard_visible: boolean,
+    location_override: boolean,
+    two_way_rating_enabled: boolean,
+    rating_email: string,
+    is_multi_day: boolean,
+    multi_day_template_id: number,
+    state: string
+}
+
+type DeleteSubscriptionParams = {
+    organization_subscription_id: number
+}
+
+type GetSubscriptionParams = {
+    organization_subscription_id: number
+}
+
+type CreateClonedSubscriptionParams = {
+    organization_subscription_id: number,
+    action: string
+}
+
+type UpdateSubscriptionParams = {
+    organization_subscription_id: number,
+    version_id: number,
+    subscription: SubscriptionTemplate
+}
+
+type CreateSubscriptionsParams = {
+    organization_id: number,
+    subscriptions: Array<SubscriptionTemplate>
+}
+
+type SearchSubscriptionsWithParamsParams = {
+    organization_id: number,
+    query_string: string
+}
+
+type DeleteOrganizationSubscriptionParams = {
+    organization_id: number,
+    organization_subscription_id: number
+}
+
+type UpdateOrganizationSubscriptionParams = {
+    organization_id: number,
+    organization_subscription_id: number,
+    version_id: number,
+    subscription: SubscriptionTemplate
+}
+
+type SearchSubscriptionsWithFieldParams = {
+    organization_id: number,
+    search_field: string,
+    query_string: string
+}
+
+type SearchSubscriptionsParams = {
+    organization_id: number,
+    query_string: string
+}
+
 export default class Subscriptions extends ResourceBase {
     /**
      * @api {delete} /v1/organization_subscriptions/{organization_subscription_id}
-     * @apiName deleteOrganizationSubscription
+     * @apiName deleteSubscription
      * @apiDescription Delete the given organization_subscription from the db
      * @apiParam {Number} organization_subscription_id
      * @apiExample {js} Example:
-     *             gigwalk.customers.deleteOrganizationSubscription({...})
+     *             gigwalk.customers.deleteSubscription({...})
      */
-    deleteOrganizationSubscription(params: any): APIPromise<any> {
+    deleteSubscription(params: DeleteSubscriptionParams): APIPromise<any> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'delete'
@@ -32,14 +106,14 @@ export default class Subscriptions extends ResourceBase {
 
     /**
      * @api {get} /v1/organization_subscriptions/{organization_subscription_id}
-     * @apiName getOrganizationSubscription
+     * @apiName getSubscription
      * @apiDescription Return info about the organization_subscription, if specified. Otherwise list all organization_subscriptions of the given organization.
                        If no organization is specified, use the current_user's organization_id.
      * @apiParam {Number} organization_subscription_id
      * @apiExample {js} Example:
-     *             gigwalk.customers.getOrganizationSubscription({...})
+     *             gigwalk.customers.getSubscription({...})
      */
-    getOrganizationSubscription(params: any): APIPromise<any> {
+    getSubscription(params: GetSubscriptionParams): APIPromise<any> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'get'
@@ -49,14 +123,14 @@ export default class Subscriptions extends ResourceBase {
 
     /**
      * @api {post} /v1/organization_subscriptions/{organization_subscription_id}
-     * @apiName createClonedOrganizationSubscription
+     * @apiName createClonedSubscription
      * @apiDescription Schedule autoassignment for the given organization_subscription; or create a new org_subscription by cloning the given org_subscription
                        and return the info
      * @apiParam {Number} organization_subscription_id
      * @apiExample {js} Example:
-     *             gigwalk.customers.createClonedOrganizationSubscription({...})
+     *             gigwalk.customers.createClonedSubscription({...})
      */
-    createClonedOrganizationSubscription(params: any): APIPromise<any> { // POSSIBLY SPLIT INTO 2?
+    createClonedSubscription(params: CreateSubscriptionsParams): APIPromise<any> { // POSSIBLY SPLIT INTO 2?
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'post'
@@ -66,14 +140,14 @@ export default class Subscriptions extends ResourceBase {
 
     /**
      * @api {put} /v1/organization_subscriptions/{organization_subscription_id}
-     * @apiName updateOrganiztionSubscription
+     * @apiName updateSubscription
      * @apiDescription Using the given parameters, update the organization_subscription
      * @apiParam {Number} organization_subscription_id
      * @apiParam {Number} version_id
      * @apiExample {js} Example:
-     *             gigwalk.customers.updateOrganiztionSubscription({...})
+     *             gigwalk.customers.updateSubscription({...})
      */
-    updateOrganiztionSubscription(params: any): APIPromise<any> {
+    updateSubscription(params: UpdateSubscriptionParams): APIPromise<any> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'put'
@@ -83,13 +157,13 @@ export default class Subscriptions extends ResourceBase {
 
     /**
      * @api {post} /v1/organizations/{organization_id}/subscriptions
-     * @apiName createOranizationSubscriptions
+     * @apiName createSubscriptions
      * @apiDescription Create new organization_subscriptions using the data provided (max 5)
      * @apiParam {Number} organization_id
      * @apiExample {js} Example:
-     *             gigwalk.customers.createOranizationSubscriptions({...})
+     *             gigwalk.customers.createSubscriptions({...})
      */
-    createOranizationSubscriptions(params: any): APIPromise<any> {
+    createSubscriptions(params: CreateSubscriptionsParams): APIPromise<any> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'post'
@@ -99,13 +173,13 @@ export default class Subscriptions extends ResourceBase {
 
     /**
      * @api {post} /v1/organizations/{organization_id}/subscriptions/search
-     * @apiName searchOrganizationSubscription
-     * @apiDescription search_parameters can be of the form "key op value" e.g. date_created > now, or title = 'project_name'
+     * @apiName searchSubscriptionsWithParams
+     * @apiDescription search_parameters can be of the form key op value e.g. date_created > now, or title = 'project_name'
      * @apiParam {Number} organization_id
      * @apiExample {js} Example:
-     *             gigwalk.customers.searchOrganizationSubscription({...})
+     *             gigwalk.customers.searchSubscriptionsWithParams({...})
      */
-    searchOrganizationSubscription(params: any): APIPromise<any> {
+    searchSubscriptionsWithParams(params: SearchSubscriptionsWithParamsParams): APIPromise<any> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'post'
@@ -122,7 +196,7 @@ export default class Subscriptions extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.deleteOrganizationSubscription({...})
      */
-    deleteOrganizationSubscription(params: any): APIPromise<any> {
+    deleteOrganizationSubscription(params: DeleteOrganizationSubscriptionParams): APIPromise<any> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'delete'
@@ -140,7 +214,7 @@ export default class Subscriptions extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.updateOrganizationSubscription({...})
      */
-    updateOrganizationSubscription(params: any): APIPromise<any> {
+    updateOrganizationSubscription(params: UpdateOrganizationSubscriptionParams): APIPromise<any> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'put'
@@ -150,14 +224,14 @@ export default class Subscriptions extends ResourceBase {
 
     /**
      * @api {post} /v2/organizations/{organization_id}/search/subscriptions/filters
-     * @apiName searchOrganizationSubscriptions
+     * @apiName searchSubscriptionsWithField
      * @apiDescription This searches the specified search_field in the ES document and finds a match only if the specified search_field contain the
                        given value. Does not handle limit/offset, metadata not filled up, why?
      * @apiParam {Number} organization_id
      * @apiExample {js} Example:
-     *             gigwalk.customers.searchOrganizationSubscriptions({...})
+     *             gigwalk.customers.searchSubscriptionsWithField({...})
      */
-    searchOrganizationSubscriptions(params: any): APIPromise<any> {
+    searchSubscriptionsWithField(params: SearchSubscriptionsWithFieldParams): APIPromise<any> {
         const request: AxiosXHRConfig<any> = {
             url: `/v2`,
             method: 'post'
@@ -167,14 +241,14 @@ export default class Subscriptions extends ResourceBase {
 
     /**
      * @api {post} /v2/organizations/{organization_id}/search/subscriptions
-     * @apiName searchOrganizationSubscriptions
+     * @apiName searchSubscriptions
      * @apiDescription This searches all strings in the ES document and finds a match if any of these strings contain the given string. Metadata not
                        filled up, why?
      * @apiParam {Number} organization_id
      * @apiExample {js} Example:
-     *             gigwalk.customers.searchOrganizationSubscriptions({...})
+     *             gigwalk.customers.searchSubscriptions({...})
      */
-    searchOrganizationSubscriptions(params: any): APIPromise<any> {
+    searchSubscriptions(params: SearchSubscriptionsParams): APIPromise<any> {
         const request: AxiosXHRConfig<any> = {
             url: `/v2`,
             method: 'post'

@@ -13,6 +13,68 @@ type APIRes<T> = {
 
 type APIPromise<T> = Promise<AxiosXHR<APIRes<T>>>
 
+type TargetListTemplate = {
+  name: string,
+  observation_target_type: string,
+  observation_targets: Array<{
+      title: string
+  }>,
+  status: string
+}
+
+type GetTargetListParams = {
+    observation_target_list_id: number
+}
+
+type GetOrganizationTargetListsParams = {
+    organization_id: number
+}
+
+type CreateOrganizationTargetListParams = {
+    organization_id: number,
+    target_list: TargetListTemplate
+}
+
+type GetOrganzationTargetListParams = {
+    organization_id: number,
+    observation_target_list_id: number
+}
+
+type DeleteTargetListParams = {
+    observation_target_list_id: number
+}
+
+type UpdateTargetListParams = {
+    observation_target_list_id: number,
+    target_list: TargetListTemplate
+}
+
+type SearchTargetsInObservationListParams = {
+    target_list_id: number,
+    query_string: string
+}
+
+type SearchTargetsInListParams = {
+    target_list_id: number,
+    query_string: string
+}
+
+type GetTargetsFromListParams = {
+    target_list_id: number
+}
+
+type UpdateTargetsInListParams = {
+    target_list_id: number,
+    action: string,
+    target_ids: Array<number>
+}
+
+type SearchDataItemsInListParams = {
+    observation_target_id: number,
+    location_id: number,
+    item_count: number
+}
+
 export default class TargetLists extends ResourceBase {
     /**
      * @api {get} /v1/organization_observation_target_lists
@@ -22,7 +84,7 @@ export default class TargetLists extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.getTargetLists({...})
      */
-    getTargetLists(params: any): APIPromise<any> {
+    getTargetLists(): APIPromise<any> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'get'
@@ -38,7 +100,7 @@ export default class TargetLists extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.getTargetList({...})
      */
-    getTargetList(params: any): APIPromise<any> {
+    getTargetList(params: GetTargetListParams): APIPromise<any> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'get'
@@ -55,7 +117,7 @@ export default class TargetLists extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.getOrganizationTargetLists({...})
      */
-    getOrganizationTargetLists(params: any): APIPromise<any> {
+    getOrganizationTargetLists(params: GetOrganizationTargetListsParams): APIPromise<any> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'get'
@@ -72,7 +134,7 @@ export default class TargetLists extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.createOrganizationTargetList({...})
      */
-    createOrganizationTargetList(params: any): APIPromise<any> {
+    createOrganizationTargetList(params: CreateOrganizationTargetListParams): APIPromise<any> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'post'
@@ -89,7 +151,7 @@ export default class TargetLists extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.getOrganzationTargetList({...})
      */
-    getOrganzationTargetList(params: any): APIPromise<any> {
+    getOrganzationTargetList(params: GetOrganzationTargetListParams): APIPromise<any> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'get'
@@ -99,13 +161,13 @@ export default class TargetLists extends ResourceBase {
 
     /**
      * @api {delete} /v1/v1/organization_observation_target_lists/{observation_target_list_id}
-     * @apiName deleteOranizationTargetList
+     * @apiName deleteTargetList
      * @apiDescription Delete the specified org_obs_target_list_id. Soft delete, org_obs_target_list marked as DELETED, but not removed from db
      * @apiParam {Number} observation_target_list_id
      * @apiExample {js} Example:
-     *             gigwalk.customers.deleteOranizationTargetList({...})
+     *             gigwalk.customers.deleteTargetList({...})
      */
-    deleteOranizationTargetList(params: any): APIPromise<any> {
+    deleteTargetList(params: DeleteTargetListParams): APIPromise<any> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'delete'
@@ -115,13 +177,13 @@ export default class TargetLists extends ResourceBase {
 
     /**
      * @api {put} /v1/v1/organization_observation_target_lists/{observation_target_list_id}
-     * @apiName updateOrganizatioTargetList
+     * @apiName updateTargetList
      * @apiDescription Modify the specified org_obs_target_list. JSON Payload is (name, obs_target_type, array of obs_targets and status)
      * @apiParam {Number} observation_target_list_id
      * @apiExample {js} Example:
-     *             gigwalk.customers.updateOrganizatioTargetList({...})
+     *             gigwalk.customers.updateTargetList({...})
      */
-    updateOrganizatioTargetList(params: any): APIPromise<any> {
+    updateTargetList(params: UpdateTargetListParams): APIPromise<any> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'put'
@@ -131,14 +193,14 @@ export default class TargetLists extends ResourceBase {
 
     /**
      * @api {post} /v1/organization_observation_target_lists/{target_list_id}/search/observation_targets
-     * @apiName searchOrganizationTargetList
+     * @apiName searchTargetsInObservationList
      * @apiDescription Search all the targets of the specified org_obs_target_list for the specified query_string Return (title, attributes,
                        obs_target_type_id, status, org_id, date_created, date_updated)
      * @apiParam {Number} target_list_id
      * @apiExample {js} Example:
-     *             gigwalk.customers.searchOrganizationTargetList({...})
+     *             gigwalk.customers.searchTargetsInObservationList({...})
      */
-    searchOrganizationTargetList(params: any): APIPromise<any> {
+    searchTargetsInObservationList(params: SearchTargetsInObservationListParams): APIPromise<any> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'post'
@@ -148,14 +210,14 @@ export default class TargetLists extends ResourceBase {
 
     /**
      * @api {post} /v1/target_lists/{target_list_id}/search/targets
-     * @apiName searchOrganizationTargetList
+     * @apiName searchTargetsInList
      * @apiDescription Search all the targets of the specified org_obs_target_list for the specified query_string Return (title, attributes,
                        obs_target_type_id, status, org_id, date_created, date_updated)
      * @apiParam {Number} target_list_id
      * @apiExample {js} Example:
-     *             gigwalk.customers.searchOrganizationTargetList({...})
+     *             gigwalk.customers.searchTargetsInList({...})
      */
-    searchOrganizationTargetList(params: any): APIPromise<any> {
+    searchTargetsInList(params: SearchTargetsInListParams): APIPromise<any> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'post'
@@ -165,14 +227,14 @@ export default class TargetLists extends ResourceBase {
 
     /**
      * @api {get} /v1/organization_observation_target_lists/{target_list_id}/observation_targets
-     * @apiName getOrganizationTargetList
+     * @apiName getTargetsFromList
      * @apiDescription Return all the targets of the specified org_obs_target_list Return (title, attributes, obs_target_type_id, status, org_id,
                        date_created, date_updated)
      * @apiParam {Number} target_list_id
      * @apiExample {js} Example:
-     *             gigwalk.customers.getOrganizationTargetList({...})
+     *             gigwalk.customers.getTargetsFromList({...})
      */
-    getOrganizationTargetList(params: any): APIPromise<any> {
+    getTargetsFromList(params: GetTargetsFromListParams): APIPromise<any> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'get'
@@ -182,13 +244,13 @@ export default class TargetLists extends ResourceBase {
 
     /**
      * @api {put} /v1/organization_observation_target_lists/{target_list_id}/observation_targets
-     * @apiName updateOrganizationTargetList
+     * @apiName updateTargetsInList
      * @apiDescription Add/Remove targets to the specified org_obs_target_list JSON payload is (action, list of targets)
      * @apiParam {Number} target_list_id
      * @apiExample {js} Example:
-     *             gigwalk.customers.updateOrganizationTargetList({...})
+     *             gigwalk.customers.updateTargetsInList({...})
      */
-    updateOrganizationTargetList(params: any): APIPromise<any> {
+    updateTargetsInList(params: UpdateTargetsInListParams): APIPromise<any> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'put'
@@ -198,13 +260,13 @@ export default class TargetLists extends ResourceBase {
 
     /**
      * @api {post} /v1/target_lists/target_history
-     * @apiName searchTargetList
+     * @apiName searchDataItemsInList
      * @apiDescription Search all the data_items for the specified obs_target_id and location_id Return (data_type_questions, data_item_value,
                        data_item_timestamp, _id) Results sorted by data_item_timestamp Photo data_items will be excluded from returned data
      * @apiExample {js} Example:
-     *             gigwalk.customers.searchTargetList({...})
+     *             gigwalk.customers.searchDataItemsInList({...})
      */
-    searchTargetList(params: any): APIPromise<any> {
+    searchDataItemsInList(params: SearchDataItemsInListParams): APIPromise<any> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'post'
