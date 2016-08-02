@@ -75,6 +75,54 @@ type SearchDataItemsInListParams = {
     item_count: number
 }
 
+type GetTargetListsData = {
+
+}
+
+type GetTargetListData = {
+
+}
+
+type GetOrganizationTargetListsData = {
+
+}
+
+type CreateOrganizationTargetListData = {
+
+}
+
+type GetOrganzationTargetListData = {
+
+}
+
+type DeleteTargetListData = {
+
+}
+
+type UpdateTargetListData = {
+
+}
+
+type SearchTargetsInObservationListData = {
+
+}
+
+type SearchTargetsInListData = {
+
+}
+
+type GetTargetsFromListData = {
+
+}
+
+type UpdateTargetsInListData = {
+
+}
+
+type SearchDataItemsInListData = {
+
+}
+
 export default class TargetLists extends ResourceBase {
     /**
      * @api {get} /v1/organization_observation_target_lists
@@ -84,7 +132,7 @@ export default class TargetLists extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.getTargetLists({...})
      */
-    getTargetLists(): APIPromise<any> {
+    getTargetLists(): APIPromise<GetTargetListsData> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'get'
@@ -100,7 +148,7 @@ export default class TargetLists extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.getTargetList({...})
      */
-    getTargetList(params: GetTargetListParams): APIPromise<any> {
+    getTargetList(params: GetTargetListParams): APIPromise<GetTargetListData> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'get'
@@ -117,7 +165,7 @@ export default class TargetLists extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.getOrganizationTargetLists({...})
      */
-    getOrganizationTargetLists(params: GetOrganizationTargetListsParams): APIPromise<any> {
+    getOrganizationTargetLists(params: GetOrganizationTargetListsParams): APIPromise<GetOrganizationTargetListsData> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'get'
@@ -134,7 +182,7 @@ export default class TargetLists extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.createOrganizationTargetList({...})
      */
-    createOrganizationTargetList(params: CreateOrganizationTargetListParams): APIPromise<any> {
+    createOrganizationTargetList(params: CreateOrganizationTargetListParams): APIPromise<CreateOrganizationTargetListData> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'post'
@@ -151,7 +199,7 @@ export default class TargetLists extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.getOrganzationTargetList({...})
      */
-    getOrganzationTargetList(params: GetOrganzationTargetListParams): APIPromise<any> {
+    getOrganzationTargetList(params: GetOrganzationTargetListParams): APIPromise<GetOrganzationTargetListData> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'get'
@@ -167,7 +215,7 @@ export default class TargetLists extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.deleteTargetList({...})
      */
-    deleteTargetList(params: DeleteTargetListParams): APIPromise<any> {
+    deleteTargetList(params: DeleteTargetListParams): APIPromise<DeleteTargetListData> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'delete'
@@ -183,7 +231,7 @@ export default class TargetLists extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.updateTargetList({...})
      */
-    updateTargetList(params: UpdateTargetListParams): APIPromise<any> {
+    updateTargetList(params: UpdateTargetListParams): APIPromise<UpdateTargetListData> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'put'
@@ -200,7 +248,7 @@ export default class TargetLists extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.searchTargetsInObservationList({...})
      */
-    searchTargetsInObservationList(params: SearchTargetsInObservationListParams): APIPromise<any> {
+    searchTargetsInObservationList(params: SearchTargetsInObservationListParams): APIPromise<SearchTargetsInObservationListData> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'post'
@@ -217,7 +265,7 @@ export default class TargetLists extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.searchTargetsInList({...})
      */
-    searchTargetsInList(params: SearchTargetsInListParams): APIPromise<any> {
+    searchTargetsInList(params: SearchTargetsInListParams): APIPromise<SearchTargetsInListData> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'post'
@@ -234,7 +282,7 @@ export default class TargetLists extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.getTargetsFromList({...})
      */
-    getTargetsFromList(params: GetTargetsFromListParams): APIPromise<any> {
+    getTargetsFromList(params: GetTargetsFromListParams): APIPromise<GetTargetsFromListData> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'get'
@@ -250,7 +298,7 @@ export default class TargetLists extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.updateTargetsInList({...})
      */
-    updateTargetsInList(params: UpdateTargetsInListParams): APIPromise<any> {
+    updateTargetsInList(params: UpdateTargetsInListParams): APIPromise<UpdateTargetsInListData> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'put'
@@ -266,7 +314,7 @@ export default class TargetLists extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.searchDataItemsInList({...})
      */
-    searchDataItemsInList(params: SearchDataItemsInListParams): APIPromise<any> {
+    searchDataItemsInList(params: SearchDataItemsInListParams): APIPromise<SearchDataItemsInListData> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'post'

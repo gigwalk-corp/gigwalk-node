@@ -28,6 +28,14 @@ type DeleteTicketEventParams = {
     ticket_event_id: number
 }
 
+type CreateTicketEventData = {
+
+}
+
+type DeleteTicketEventData = {
+
+}
+
 export default class TicketEvents extends ResourceBase {
     /**
      * @api {post} /v1/tickets/{ticket_id}/events

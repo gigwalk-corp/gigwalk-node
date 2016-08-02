@@ -79,6 +79,50 @@ type CreateOrganizationLocationListParams = {
     subscription_id: number
 }
 
+type GetLocationsData = {
+
+}
+
+type CreateLocationsData = {
+
+}
+
+type GetLocationData = {
+
+}
+
+type GetOrganizationLocationsData = {
+
+}
+
+type CreateOrganizationLocationsData = {
+
+}
+
+type UpdateOrganizaionLocationsData = {
+
+}
+
+type DeleteOrganizationLocationData = {
+
+}
+
+type GetOrganizationLocationData = {
+
+}
+
+type CreateOrganizationLocationData = {
+
+}
+
+type UpdateOrganizationLocationData = {
+
+}
+
+type CreateOrganizationLocationListData = {
+
+}
+
 export default class Locations extends ResourceBase {
     /**
      * @api {get} /v1/locations
@@ -89,7 +133,7 @@ export default class Locations extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.getLocations({...})
      */
-    getLocations(): APIPromise<any> {
+    getLocations(): APIPromise<GetLocationsData> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'get'
@@ -106,7 +150,7 @@ export default class Locations extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.createLocations({...})
      */
-    createLocations(params: CreateLocationsParams): APIPromise<any> {
+    createLocations(params: CreateLocationsParams): APIPromise<CreateLocationsData> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'post'
@@ -123,7 +167,7 @@ export default class Locations extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.getLocation({...})
      */
-    getLocation(params: GetLocationParams): APIPromise<any> {
+    getLocation(params: GetLocationParams): APIPromise<GetLocationData> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'get'
@@ -140,7 +184,7 @@ export default class Locations extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.getOrganizationLocations({...})
      */
-    getOrganizationLocations(params: GetOrganizationLocationsParams): APIPromise<any> {
+    getOrganizationLocations(params: GetOrganizationLocationsParams): APIPromise<GetOrganizationLocationsData> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'get'
@@ -158,7 +202,7 @@ export default class Locations extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.createOrganizationLocations({...})
      */
-    createOrganizationLocations(params: CreateOrganizationLocationsParams): APIPromise<any> {
+    createOrganizationLocations(params: CreateOrganizationLocationsParams): APIPromise<CreateOrganizationLocationData> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'post'
@@ -176,7 +220,7 @@ export default class Locations extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.updateOrganizaionLocations({...})
      */
-    updateOrganizaionLocations(params: UpdateOrganizationLocationParams): APIPromise<any> {
+    updateOrganizaionLocations(params: UpdateOrganizationLocationParams): APIPromise<UpdateOrganizaionLocationsData> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'put'
@@ -193,7 +237,7 @@ export default class Locations extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.deleteOrganizationLocation({...})
      */
-    deleteOrganizationLocation(params: DeleteOrganizationLocationParams): APIPromise<any> {
+    deleteOrganizationLocation(params: DeleteOrganizationLocationParams): APIPromise<DeleteOrganizationLocationData> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'delete'
@@ -212,7 +256,7 @@ export default class Locations extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.getOrganizationLocation({...})
      */
-    getOrganizationLocation(params: GetOrganizationLocationParams): APIPromise<any> {
+    getOrganizationLocation(params: GetOrganizationLocationParams): APIPromise<GetOrganizationLocationData> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'get'
@@ -228,7 +272,7 @@ export default class Locations extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.createOrganizationLocation({...})
      */
-    createOrganizationLocation(params: CreateOrganizationLocationParams): APIPromise<any> {
+    createOrganizationLocation(params: CreateOrganizationLocationParams): APIPromise<CreateOrganizationLocationData> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'post'
@@ -245,7 +289,7 @@ export default class Locations extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.updateOrganizationLocation({...})
      */
-    updateOrganizationLocation(params: UpdateOrganizationLocationParams): APIPromise<any> {
+    updateOrganizationLocation(params: UpdateOrganizationLocationParams): APIPromise<UpdateOrganizationLocationData> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'put'
@@ -263,7 +307,7 @@ export default class Locations extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.createOrganizationLocationList({...})
      */
-    createOrganizationLocationList(params: CreateOrganizationLocationListParams): APIPromise<any> {
+    createOrganizationLocationList(params: CreateOrganizationLocationListParams): APIPromise<CreateOrganizationLocationListData> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'post'

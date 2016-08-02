@@ -49,6 +49,22 @@ type SearchOrganizationTargetsParams = {
     query_string: string
 }
 
+type CreateOrganizationTargetsData = {
+
+}
+
+type GetOrganizationTargetData = {
+
+}
+
+type UpdateOrganizationTargetData = {
+
+}
+
+type SearchOrganizationTargetsData = {
+
+}
+
 export default class Targets extends ResourceBase {
     /**
      * @api {post} /v1/organizations/{organization_id}/observation_targets
@@ -58,7 +74,7 @@ export default class Targets extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.createOrganizationTargets({...})
      */
-    createOrganizationTargets(params: CreateOrganizationTargetsParams): APIPromise<any> {
+    createOrganizationTargets(params: CreateOrganizationTargetsParams): APIPromise<CreateOrganizationTargetsData> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'post'
@@ -76,7 +92,7 @@ export default class Targets extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.getOrganizationTarget({...})
      */
-    getOrganizationTarget(params: GetOrganizationTargetParams): APIPromise<any> {
+    getOrganizationTarget(params: GetOrganizationTargetParams): APIPromise<GetOrganizationTargetData> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'get'
@@ -94,7 +110,7 @@ export default class Targets extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.updateOrganizationTarget({...})
      */
-    updateOrganizationTarget(params: UpdateOrganizationTargetParams): APIPromise<any> {
+    updateOrganizationTarget(params: UpdateOrganizationTargetParams): APIPromise<UpdateOrganizationTargetData> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'put'
@@ -111,7 +127,7 @@ export default class Targets extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.searchOrganizationTargets({...})
      */
-    searchOrganizationTargets(params: SearchOrganizationTargetsParams): APIPromise<any> {
+    searchOrganizationTargets(params: SearchOrganizationTargetsParams): APIPromise<SearchOrganizationTargetsData> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'get'

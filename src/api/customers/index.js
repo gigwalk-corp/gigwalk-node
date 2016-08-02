@@ -79,6 +79,50 @@ type SearchCustomersParams = {
   ticket_ids: Array<number>
 }
 
+type DeleteCustomerWithEmailData = {
+
+}
+
+type GetCustomerWithEmailData = {
+
+}
+
+type UpdateCustomerWithEmailData = {
+
+}
+
+type DeleteCustomerWithIDData = {
+
+}
+
+type GetCustomerWithIDData = {
+
+}
+
+type UpdateCustomerWithIDData = {
+
+}
+
+type GetOrganizationCustomersData = {
+
+}
+
+type UpdateOrganizationCustomersData = {
+
+}
+
+type GetCustomerData = {
+
+}
+
+type UpdateCustomerData = {
+
+}
+
+type SearchCustomersData = {
+
+}
+
 export default class Customers extends ResourceBase {
     /**
      * @api {delete} /v1/organizations/{organization_id}/customers/{customer_email}
@@ -89,7 +133,7 @@ export default class Customers extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.deleteCustomerWithEmail({...})
      */
-    deleteCustomerWithEmail(params: DeleteCustomerWithEmailParams): APIPromise<any> {
+    deleteCustomerWithEmail(params: DeleteCustomerWithEmailParams): APIPromise<DeleteCustomerWithEmailData> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'delete'
@@ -106,7 +150,7 @@ export default class Customers extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.getCustomerWithEmail({...})
      */
-    getCustomerWithEmail(params: GetCustomerWithEmailParams): APIPromise<any> {
+    getCustomerWithEmail(params: GetCustomerWithEmailParams): APIPromise<GetCustomerWithEmailData> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'get'
@@ -123,7 +167,7 @@ export default class Customers extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.updateCustomer({...})
      */
-    updateCustomerWithEmail(params: UpdateCustomerWithEmailParams): APIPromise<any> {
+    updateCustomerWithEmail(params: UpdateCustomerWithEmailParams): APIPromise<UpdateCustomerWithEmailData> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'put'
@@ -140,7 +184,7 @@ export default class Customers extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.deleteCustomerWithID({...})
      */
-    deleteCustomerWithID(params: DeleteCustomerWithIDParams): APIPromise<any> {
+    deleteCustomerWithID(params: DeleteCustomerWithIDParams): APIPromise<DeleteCustomerWithIDData> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'delete'
@@ -157,7 +201,7 @@ export default class Customers extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.getCustomerWithID({...})
      */
-    getCustomerWithID(params: GetCustomerWithIDParams): APIPromise<any> {
+    getCustomerWithID(params: GetCustomerWithIDParams): APIPromise<GetCustomerWithIDData> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'get'
@@ -174,7 +218,7 @@ export default class Customers extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.updateCustomerWithID({...})
      */
-    updateCustomerWithID(params: UpdateCustomerWithIDParams): APIPromise<any> {
+    updateCustomerWithID(params: UpdateCustomerWithIDParams): APIPromise<UpdateCustomerWithIDData> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'put'
@@ -190,7 +234,7 @@ export default class Customers extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.getOrganizationCustomers({...})
      */
-    getOrganizationCustomers(params: GetOrganizationCustomersParams): APIPromise<any> {
+    getOrganizationCustomers(params: GetOrganizationCustomersParams): APIPromise<GetOrganizationCustomersData> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'get'
@@ -206,7 +250,7 @@ export default class Customers extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.updateOrganizationCustomers({...})
      */
-    updateOrganizationCustomers(params: UpdateOrganizationCustomersParams): APIPromise<any> {
+    updateOrganizationCustomers(params: UpdateOrganizationCustomersParams): APIPromise<UpdateOrganizationCustomersData> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'put'
@@ -223,7 +267,7 @@ export default class Customers extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.getCustomer({...})
      */
-    getCustomer(): APIPromise<any> {
+    getCustomer(): APIPromise<GetCustomerData> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'get'
@@ -239,7 +283,7 @@ export default class Customers extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.updateCustomer({...})
      */
-    updateCustomer(params: UpdateCustomerParams): APIPromise<any> {
+    updateCustomer(params: UpdateCustomerParams): APIPromise<UpdateCustomerData> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'put'
@@ -255,7 +299,7 @@ export default class Customers extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.searchCustomers({...})
      */
-    searchCustomers(params: SearchCustomersParams): APIPromise<any> {
+    searchCustomers(params: SearchCustomersParams): APIPromise<SearchCustomersData> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'post'

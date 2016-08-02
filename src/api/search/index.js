@@ -23,6 +23,18 @@ type SearchOrganizationParams = {
     query_string: string
 }
 
+type SearchDocumentsData = {
+
+}
+
+type CreateSearchData = {
+
+}
+
+type SearchOrganizationData = {
+
+}
+
 export default class Search extends ResourceBase {
     /**
      * @api {} GET /v1/search
@@ -31,7 +43,7 @@ export default class Search extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.searchDocuments({...})
      */
-    searchDocuments(params: SearchDocumentsParams): APIPromise<any> {
+    searchDocuments(params: SearchDocumentsParams): APIPromise<SearchDocumentsData> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'get'
@@ -46,7 +58,7 @@ export default class Search extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.createSearch({...})
      */
-    createSearch(): APIPromise<any> {
+    createSearch(): APIPromise<CreateSearchData> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'post'
@@ -63,7 +75,7 @@ export default class Search extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.searchOrganization({...})
      */
-    searchOrganization(params: SearchOrganizationParams): APIPromise<any> {
+    searchOrganization(params: SearchOrganizationParams): APIPromise<SearchOrganizationData> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'get'

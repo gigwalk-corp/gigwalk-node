@@ -47,6 +47,26 @@ type CreateOrganizationParams = {
     organization: OrganizationTemplate
 }
 
+type DeleteOrganizationData = {
+
+}
+
+type GetOrganizationData = {
+
+}
+
+type UpdateOrganizationData = {
+
+}
+
+type GetOrganizationsData = {
+
+}
+
+type CreateOrganizationData = {
+
+}
+
 export default class Organzations extends ResourceBase {
     /**
      * @api {delete} /v1/organizations/{organization_id}
@@ -56,7 +76,7 @@ export default class Organzations extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.deleteOrganization({...})
      */
-    deleteOrganization(params: DeleteOrganizationParams): APIPromise<any> {
+    deleteOrganization(params: DeleteOrganizationParams): APIPromise<DeleteOrganizationData> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'delete'
@@ -73,7 +93,7 @@ export default class Organzations extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.getOrganization({...})
      */
-    getOrganization(params: GetOrganizationParams): APIPromise<any> {
+    getOrganization(params: GetOrganizationParams): APIPromise<GetOrganizationData> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'get'
@@ -92,7 +112,7 @@ export default class Organzations extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.updateOrganization({...})
      */
-    updateOrganization(params: UpdateOrganizationParams): APIPromise<any> {
+    updateOrganization(params: UpdateOrganizationParams): APIPromise<UpdateOrganizationData> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'put'
@@ -108,7 +128,7 @@ export default class Organzations extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.getOrganizations({...})
      */
-    getOrganizations(): APIPromise<any> {
+    getOrganizations(): APIPromise<GetOrganizationsData> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'get'
@@ -124,7 +144,7 @@ export default class Organzations extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.createOrganization({...})
      */
-    createOrganization(params: CreateOrganizationParams): APIPromise<any> {
+    createOrganization(params: CreateOrganizationParams): APIPromise<CreateOrganizationData> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'post'

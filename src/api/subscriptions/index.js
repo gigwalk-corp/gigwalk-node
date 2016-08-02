@@ -87,6 +87,46 @@ type SearchSubscriptionsParams = {
     query_string: string
 }
 
+type DeleteSubscriptionData = {
+
+}
+
+type GetSubscriptionData = {
+
+}
+
+type CreateClonedSubscriptionData = {
+
+}
+
+type UpdateSubscriptionData = {
+
+}
+
+type CreateSubscriptionsData = {
+
+}
+
+type SearchSubscriptionsWithParamsData = {
+
+}
+
+type DeleteOrganizationSubscriptionData = {
+
+}
+
+type UpdateOrganizationSubscriptionData = {
+
+}
+
+type SearchSubscriptionsWithFieldData = {
+
+}
+
+type SearchSubscriptionsData = {
+
+}
+
 export default class Subscriptions extends ResourceBase {
     /**
      * @api {delete} /v1/organization_subscriptions/{organization_subscription_id}
@@ -96,7 +136,7 @@ export default class Subscriptions extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.deleteSubscription({...})
      */
-    deleteSubscription(params: DeleteSubscriptionParams): APIPromise<any> {
+    deleteSubscription(params: DeleteSubscriptionParams): APIPromise<DeleteSubscriptionData> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'delete'
@@ -113,7 +153,7 @@ export default class Subscriptions extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.getSubscription({...})
      */
-    getSubscription(params: GetSubscriptionParams): APIPromise<any> {
+    getSubscription(params: GetSubscriptionParams): APIPromise<GetSubscriptionData> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'get'
@@ -130,7 +170,7 @@ export default class Subscriptions extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.createClonedSubscription({...})
      */
-    createClonedSubscription(params: CreateSubscriptionsParams): APIPromise<any> { // POSSIBLY SPLIT INTO 2?
+    createClonedSubscription(params: CreateSubscriptionsParams): APIPromise<CreateClonedSubscriptionData> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'post'
@@ -147,7 +187,7 @@ export default class Subscriptions extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.updateSubscription({...})
      */
-    updateSubscription(params: UpdateSubscriptionParams): APIPromise<any> {
+    updateSubscription(params: UpdateSubscriptionParams): APIPromise<UpdateSubscriptionData> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'put'
@@ -163,7 +203,7 @@ export default class Subscriptions extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.createSubscriptions({...})
      */
-    createSubscriptions(params: CreateSubscriptionsParams): APIPromise<any> {
+    createSubscriptions(params: CreateSubscriptionsParams): APIPromise<CreateSubscriptionsData> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'post'
@@ -179,7 +219,7 @@ export default class Subscriptions extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.searchSubscriptionsWithParams({...})
      */
-    searchSubscriptionsWithParams(params: SearchSubscriptionsWithParamsParams): APIPromise<any> {
+    searchSubscriptionsWithParams(params: SearchSubscriptionsWithParamsParams): APIPromise<SearchSubscriptionsWithParamsParams> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'post'
@@ -196,7 +236,7 @@ export default class Subscriptions extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.deleteOrganizationSubscription({...})
      */
-    deleteOrganizationSubscription(params: DeleteOrganizationSubscriptionParams): APIPromise<any> {
+    deleteOrganizationSubscription(params: DeleteOrganizationSubscriptionParams): APIPromise<DeleteOrganizationSubscriptionData> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'delete'
@@ -214,7 +254,7 @@ export default class Subscriptions extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.updateOrganizationSubscription({...})
      */
-    updateOrganizationSubscription(params: UpdateOrganizationSubscriptionParams): APIPromise<any> {
+    updateOrganizationSubscription(params: UpdateOrganizationSubscriptionParams): APIPromise<UpdateOrganizationSubscriptionData> {
         const request: AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'put'
@@ -231,7 +271,7 @@ export default class Subscriptions extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.searchSubscriptionsWithField({...})
      */
-    searchSubscriptionsWithField(params: SearchSubscriptionsWithFieldParams): APIPromise<any> {
+    searchSubscriptionsWithField(params: SearchSubscriptionsWithFieldParams): APIPromise<SearchSubscriptionsWithFieldData> {
         const request: AxiosXHRConfig<any> = {
             url: `/v2`,
             method: 'post'
@@ -248,7 +288,7 @@ export default class Subscriptions extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.customers.searchSubscriptions({...})
      */
-    searchSubscriptions(params: SearchSubscriptionsParams): APIPromise<any> {
+    searchSubscriptions(params: SearchSubscriptionsParams): APIPromise<SearchSubscriptionsData> {
         const request: AxiosXHRConfig<any> = {
             url: `/v2`,
             method: 'post'
