@@ -12,6 +12,7 @@ import TargetLists from './api/targetLists';
 import Targets from './api/targets';
 import TicketEvents from './api/ticketEvents';
 import Tickets from './api/tickets';
+import cloneDeep from 'lodash.clonedeep';
 
 export type GigwalkAPIConfig = {
     hostname?: string,
@@ -48,6 +49,11 @@ export default class GigwalkAPI {
     constructor(config?: GigwalkAPIConfig = {}) {
         const client = new GigwalkAxios({ baseURL: `https://${config.hostname || 'api.app.gigwalk.com'}` });
         this.client = client;
+
+        // AxiosIssue - global.defaults and client.defaults reference the same object. Changing the instance
+        // defaults will affect the global namespace (and therefore any other axios instances)
+        // See https://github.com/mzabriskie/axios/issues/391
+        client.defaults = cloneDeep(client.defaults);
 
         this.authorization = new Authorization(client);
         this.certifications = new Certifications(client);
