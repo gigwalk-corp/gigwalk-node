@@ -80,49 +80,80 @@ type SearchCustomersParams = {
   ticket_ids: Array<number>
 }
 
-type DeleteCustomerWithEmailData = {
-
+type CustomerSchema = {
+    id: number,
+    email: string,
+    first_name: string,
+    last_name: string,
+    role: string,
+    phonenumber: string,
+    address_line_1: string,
+    address_line_2: string,
+    photo_url: string,
+    ideal_hours_week: number,
+    max_hours_week: number,
+    rating_score: number,
+    customer_status: string,
+    home_latitude: number,
+    home_longitude: number,
+    date_last_auth: string,
+    certifications: Array<{
+        id: number
+    }>,
+    group_memberships: Array<{
+        group: string,
+        role: string,
+        group_id: number
+    }>,
+    organization: {
+        organization_name: string,
+        id: number,
+        cannot_opt_out: boolean,
+        vertical_type: string,
+        core_customer_account: string,
+        core_private_workforce: string,
+        needs_core: boolean
+    },
+    metadata: Object
 }
 
-type GetCustomerWithEmailData = {
+type DeleteCustomerWithEmailData = [
+    number
+]
 
-}
+type GetCustomerWithEmailData = [
+    CustomerSchema
+]
 
-type UpdateCustomerWithEmailData = {
+type UpdateCustomerWithEmailData = [
+    CustomerSchema
+]
 
-}
+type DeleteCustomerWithIDData = [
+    number
+]
 
-type DeleteCustomerWithIDData = {
+type GetCustomerWithIDData = [
+    CustomerSchema
+]
 
-}
+type UpdateCustomerWithIDData = [
+    CustomerSchema
+]
 
-type GetCustomerWithIDData = {
+type GetOrganizationCustomersData = Array<CustomerSchema>
 
-}
+type UpdateOrganizationCustomersData = Array<CustomerSchema> // NEED TO CHECK
 
-type UpdateCustomerWithIDData = {
+type GetCustomerData = [
+    CustomerSchema
+]
 
-}
+type UpdateCustomerData = [ // NEED TO CHECK
+    CustomerSchema
+]
 
-type GetOrganizationCustomersData = {
-
-}
-
-type UpdateOrganizationCustomersData = {
-
-}
-
-type GetCustomerData = {
-
-}
-
-type UpdateCustomerData = {
-
-}
-
-type SearchCustomersData = {
-
-}
+type SearchCustomersData = Array<CustomerSchema>
 
 export default class Customers extends Resource {
     /**

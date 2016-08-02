@@ -29,13 +29,28 @@ type DeleteTicketEventParams = {
     ticket_event_id: number
 }
 
-type CreateTicketEventData = {
-
+type TicketEventSchema = {
+    id: string,
+    ticket_event_type: string,
+    ticket_id: number,
+    ticket_event_date: string,
+    ticket_event_data: Object,
+    created_customer: {
+        email: string,
+        id: number,
+        first_name: string,
+        last_name: string,
+        photo_url: string
+    }
 }
 
-type DeleteTicketEventData = {
+type CreateTicketEventData = [
+    TicketEventSchema
+]
 
-}
+type DeleteTicketEventData = [
+    number
+]
 
 export default class TicketEvents extends Resource {
     /**
@@ -46,7 +61,7 @@ export default class TicketEvents extends Resource {
      * @apiExample {js} Example:
      *             gigwalk.customers.createTicketEvent({...})
      */
-    createTicketEvent(params: CreateTicketEventParams): APIPromise<any> {
+    createTicketEvent(params: CreateTicketEventParams): APIPromise<CreateTicketEventData> {
         const request: $AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'post'
@@ -62,7 +77,7 @@ export default class TicketEvents extends Resource {
      * @apiExample {js} Example:
      *             gigwalk.customers.deleteTicketEvent({...})
      */
-    deleteTicketEvent(params: DeleteTicketEventParams): APIPromise<any> {
+    deleteTicketEvent(params: DeleteTicketEventParams): APIPromise<DeleteTicketEventData> {
         const request: $AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'delete'

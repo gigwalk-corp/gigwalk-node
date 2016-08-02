@@ -76,53 +76,58 @@ type SearchDataItemsInListParams = {
     item_count: number
 }
 
-type GetTargetListsData = {
-
+type TargetListSummarySchema = {
+    name: string,
+    id: number,
+    observation_target_count: number,
+    observation_target_type_id: number,
+    status: string
 }
 
-type GetTargetListData = {
-
+type ObservationTargetSchema = {
+    title: string,
+    id: number,
+    organization_id: number,
+    observation_target_type_id: number
 }
 
-type GetOrganizationTargetListsData = {
+type GetTargetListsData = Array<TargetListSummarySchema>
 
-}
+type GetTargetListData = [
+    TargetListSummarySchema
+]
 
-type CreateOrganizationTargetListData = {
+type GetOrganizationTargetListsData = Array<TargetListSummarySchema>
 
-}
+type CreateOrganizationTargetListData = [
+    TargetListSummarySchema
+]
 
-type GetOrganzationTargetListData = {
+type GetOrganzationTargetListData = [
+    TargetListSummarySchema
+]
 
-}
+type DeleteTargetListData = [
+    number
+]
 
-type DeleteTargetListData = {
+type UpdateTargetListData = [
+    TargetListSummarySchema
+]
 
-}
+type SearchTargetsInObservationListData = [ // NEED TO CHECK
 
-type UpdateTargetListData = {
+]
 
-}
+type SearchTargetsInListData = [ // NEED TO CHECK
 
-type SearchTargetsInObservationListData = {
+]
 
-}
+type GetTargetsFromListData = Array<ObservationTargetSchema>
 
-type SearchTargetsInListData = {
+type UpdateTargetsInListData = Array<ObservationTargetSchema>
 
-}
-
-type GetTargetsFromListData = {
-
-}
-
-type UpdateTargetsInListData = {
-
-}
-
-type SearchDataItemsInListData = {
-
-}
+type SearchDataItemsInListData = Array<ObservationTargetSchema> // NEED TO CHECK
 
 export default class TargetLists extends Resource {
     /**

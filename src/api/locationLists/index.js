@@ -107,73 +107,129 @@ type UpdateLocationAddressByIDParams = {
     location_id: number
 }
 
-type DeleteLocationListData = {
-
+type LocationListSummarySchema = {
+    name: string,
+    id: number,
+    organization_id: number,
+    status: string,
+    location_count: number
 }
 
-type GetLocationListData = {
-
+type LocationSummarySchema = {
+    title: string,
+    locality: string,
+    id: number,
+    country: string,
+    formatted_address: string,
+    address: string,
+    postal_code: number,
+    administrative_area_level_1: string,
+    administrative_area_level_2: string,
+    specificity: string,
+    latitude: number,
+    longitude: number,
+    metadata: Object,
 }
 
-type UpdateLocationListData = {
-
+type LocationSchema = {
+    title: string,
+    locality: string,
+    id: number,
+    country: string,
+    formatted_address: string,
+    postal_code: number,
+    administrative_area_level_1: string,
+    administrative_area_level_2: string,
+    specificity: string,
+    latitude: number,
+    longitude: number,
+    tzid: string,
+    organization_id: number,
+    source_location_id: number,
+    status: string,
+    state: string,
+    organization_data: Object
 }
 
-type DeleteOrganizationLocationListData = {
-
+type LocationListSchema = {
+    name: string,
+    id: number,
+    organization_id: number,
+    status: string,
+    locations: Array<LocationSummarySchema>
 }
 
-type GetOrganizationLocationListsData = {
-
+type LocationListFileUploadSchema = {
+    name: string,
+    id: number,
+    organization_id: number,
+    status: string,
+    date_created: string,
+    date_updated: string,
+    file_uploads: Array<{
+        id: number,
+        status: string,
+        location_count: number,
+        processed_row_count: number,
+        unresolved_location_count: number,
+        date_created: string,
+        date_updated: string
+    }>
 }
 
-type CreateOrganizationLocationListData = {
+type DeleteLocationListData = [
+    number
+]
 
-}
+type GetLocationListData = [
+    LocationListSummarySchema
+]
 
-type DeleteOrganiztionLocationFromListData = {
+type UpdateLocationListData = [
+    LocationListSchema
+]
 
-}
+type DeleteOrganizationLocationListData = [
+    number
+]
 
-type DeleteLocationFromListData = {
+type GetOrganizationLocationListsData = Array<LocationListSummarySchema>
 
-}
+type CreateOrganizationLocationListData = [
+    LocationListSchema
+]
 
-type GetLocationDetailsForListData = {
+type DeleteOrganiztionLocationFromListData = [
+    number
+]
 
-}
+type DeleteLocationFromListData = [
+    number
+]
 
-type AddLocationsToListData = {
+type GetLocationDetailsForListData = Array<LocationSchema>
 
-}
+type AddLocationsToListData = Array<LocationSchema>
 
-type RemoveLocationsFromListData = {
+type RemoveLocationsFromListData = Array<number>
 
-}
+type SearchLocationListData = Array<LocationSchema> // NEED TO CHECK
 
-type SearchLocationListData = {
+type GetFileInfoForLocationListData = [
+    LocationListFileUploadSchema
+]
 
-}
+type GetFileInfoForOrganizationLocationListData = [
+    LocationListFileUploadSchema
+]
 
-type GetFileInfoForLocationListData = {
+type CreateOrganizationLocationListUsingFileData = [
+    LocationListFileUploadSchema
+]
 
-}
+type UpdateLocationAddressData = any // SPECIFY
 
-type GetFileInfoForOrganizationLocationListData = {
-
-}
-
-type CreateOrganizationLocationListUsingFileData = {
-
-}
-
-type UpdateLocationAddressData = {
-
-}
-
-type UpdateLocationAddressByIDData = {
-
-}
+type UpdateLocationAddressByIDData = any // SPECIFY
 
 export default class LocationLists extends Resource {
     /**
@@ -334,7 +390,7 @@ export default class LocationLists extends Resource {
     /**
      * @api {post} /v1/location_lists/{organization_location_list_id}/locations
      * @apiName addLocationsToList
-     * @apiDescription Add location ids specified in JSON payload to the given location list. JSON payload is an array of ("id": id) dicts. How is this
+     * @apiDescription Add location ids specified in JSON payload to the given location list. JSON payload is an array of (id: id) dicts. How is this
                        supposed to work? 404 if location_list does not exist, but we are trying to add the location_list anyway. Is the intention to create
                        a new location_list or not?
      * @apiParam {Number} organization_location_list_id
@@ -352,7 +408,7 @@ export default class LocationLists extends Resource {
     /**
      * @api {put} /v1/location_lists/{organization_location_list_id}/locations
      * @apiName removeLocationsFromList
-     * @apiDescription Bulk update locations from a location list, ids are specified in JSON payload. Actions allowed: "remove"
+     * @apiDescription Bulk update locations from a location list, ids are specified in JSON payload. Actions allowed: remove
      * @apiParam {Number} organization_location_list_id
      * @apiExample {js} Example:
      *             gigwalk.customers.removeLocationsFromList({...})
