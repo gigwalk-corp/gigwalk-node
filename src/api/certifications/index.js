@@ -1,5 +1,6 @@
 // @flow
-import ResourceBase from '../resourceBase';
+import Resource from '../resource';
+import type { $AxiosXHR } from 'axios';
 
 type APIRes<T> = {
     _meta: Object,
@@ -11,7 +12,7 @@ type APIRes<T> = {
     errors: mixed
 }
 
-type APIPromise<T> = Promise<AxiosXHR<APIRes<T>>>
+type APIPromise<T> = Promise<$AxiosXHR<APIRes<T>>>
 
 type CertificationTemplate = {
     description: string,
@@ -135,7 +136,7 @@ type DeleteOrganizationCertificationsData = null
 
 type CreateOrganizationCertificationsFromFileData = Array<number>
 
-export default class Certifications extends ResourceBase {
+export default class Certifications extends Resource {
     /**
      * @api {delete} /v1/certifications/{certification_id}
      * @apiName DeleteCertification
@@ -145,11 +146,7 @@ export default class Certifications extends ResourceBase {
      *             gigwalk.certification.deleteCertification({...})
      */
     deleteCertification(params: DeleteCertificationParams): APIPromise<DeleteCertificationData> {
-        const request: AxiosXHRConfig<any> = {
-            url: `/v1/certifications/${params.certification_id}`,
-            method: 'delete'
-        };
-        return this.dispatch(request);
+        return this.client.delete(`/v1/certifications/${params.certification_id}`);
     }
 
     /**
@@ -161,12 +158,7 @@ export default class Certifications extends ResourceBase {
      *             gigwalk.certification.getCertification({...})
      */
     getCertification(params: GetCertificationParams): APIPromise<GetCertificationData> {
-        const request: AxiosXHRConfig<any> = {
-            url: `/v1/certifications/${params.certification_id}`,
-            method: 'get'
-        };
-
-        return this.dispatch(request);
+        return this.client.get(`/v1/certifications/${params.certification_id}`);
     }
 
     /**
@@ -179,13 +171,8 @@ export default class Certifications extends ResourceBase {
      *             gigwalk.certification.updateCertification({...})
      */
     updateCertification(params: UpdateCertificationParams): APIPromise<UpdateCertificationData> {
-        const request: AxiosXHRConfig<any> = {
-            url: `/v1/certifications/${params.certification_id}`,
-            method: 'put',
-            data: params.certification
-        };
-
-        return this.dispatch(request);
+        const url = `/v1/certifications/${params.certification_id}`;
+        return this.client.put(url, { ...params.certification });
     }
 
     /**
@@ -198,12 +185,7 @@ export default class Certifications extends ResourceBase {
      *             gigwalk.certification.getCertifications({...})
      */
     getCertifications(): APIPromise<GetCertificationsData> {
-        const request: AxiosXHRConfig<any> = {
-            url: '/v1/certifications',
-            method: 'get'
-        };
-
-        return this.dispatch(request);
+        return this.client.get('/v1/certifications');
     }
 
     /**
@@ -216,15 +198,10 @@ export default class Certifications extends ResourceBase {
      *             gigwalk.certification.createCertifications({...})
      */
     createCertifications(params: CreateCertificationsParams): APIPromise<CreateCertificationsData> {
-        const request: AxiosXHRConfig<any> = {
-            url: '/v1/certifications',
-            method: 'post',
-            data: {
-                certifications: params.certifications
-            }
+        const data = {
+            certifications: params.certifications
         };
-
-        return this.dispatch(request);
+        return this.client.post('/v1/certifications', data);
     }
 
     /**
@@ -238,12 +215,8 @@ export default class Certifications extends ResourceBase {
      *             gigwalk.certification.getCustomerCertifications({...})
      */
     getCustomerCertifications(params: GetCustomerCertificationsParams): APIPromise<GetCustomerCertificationsData> {
-        const request: AxiosXHRConfig<any> = {
-            url: `/v1/organizations/${params.organization_id}/customer/${params.customer_id}/certifications`,
-            method: 'get'
-        };
-
-        return this.dispatch(request);
+        const url = `/v1/organizations/${params.organization_id}/customer/${params.customer_id}/certifications`;
+        return this.client.get(url);
     }
 
     /**
@@ -259,15 +232,13 @@ export default class Certifications extends ResourceBase {
      *             gigwalk.certification.updateCustomerCertifications({...})
      */
     updateCustomerCertifications(params: UpdateCustomerCertificationsParams): APIPromise<UpdateCustomerCertificationsData> {
-        const request: AxiosXHRConfig<any> = {
-            url: `/v1/organizations/${params.organization_id}/customer/${params.customer_id}/certifications`,
-            method: 'put',
-            data: {
-                action: params.action,
-                certification_ids: params.certification_ids
-            }
+        const url = `/v1/organizations/${params.organization_id}/customer/${params.customer_id}/certifications`;
+        const data = {
+            action: params.action,
+            certification_ids: params.certification_ids
         };
-        return this.dispatch(request);
+
+        return this.client.put(url, data);
     }
 
     /**
@@ -280,12 +251,7 @@ export default class Certifications extends ResourceBase {
      *             gigwalk.certification.getOrganizationCertifications({...})
      */
     getOrganizationCertifications(params: GetOrganizationCertificationsParams): APIPromise<GetOrganizationCertificationsData> {
-        const request: AxiosXHRConfig<any> = {
-            url: `/v1/organizations/${params.organization_id}/certifications`,
-            method: 'get'
-        };
-
-        return this.dispatch(request);
+        return this.client.get(`/v1/organizations/${params.organization_id}/certifications`);
     }
 
     /**
@@ -299,15 +265,12 @@ export default class Certifications extends ResourceBase {
      *             gigwalk.certification.createOrganizationCertifications({...})
      */
     createOrganizationCertifications(params: CreateOrganizationCertificationsParams): APIPromise<CreateOrganizationCertificationsData> {
-        const request: AxiosXHRConfig<any> = {
-            url: `/v1/organizations/${params.organization_id}/certifications`,
-            method: 'post',
-            data: {
-                certifications: params.certifications
-            }
+        const url = `/v1/organizations/${params.organization_id}/certifications`;
+        const data = {
+            certifications: params.certifications
         };
 
-        return this.dispatch(request);
+        return this.client.post(url, data);
     }
 
     /**
@@ -320,15 +283,12 @@ export default class Certifications extends ResourceBase {
      *             gigwalk.certification.updateOrganizationCertifications({...})
      */
     updateOrganizationCertifications(params: UpdateOrganizationCertificationsParams): APIPromise<UpdateOrganizationCertificationsData> {
-        const request: AxiosXHRConfig<any> = {
-            url: `/v1/organizations/${params.organization_id}/certifications`,
-            method: 'put',
-            data: {
-                certifications: params.certifications
-            }
+        const url = `/v1/organizations/${params.organization_id}/certifications`;
+        const data = {
+            certifications: params.certifications
         };
 
-        return this.dispatch(request);
+        return this.client.put(url, data);
     }
 
     /**
@@ -341,15 +301,12 @@ export default class Certifications extends ResourceBase {
      *             gigwalk.certification.deleteOrganizationCertifications({...})
      */
     deleteOrganizationCertifications(params: DeleteOrganizationCertificationsParams): APIPromise<DeleteOrganizationCertificationsData> {
-        const request: AxiosXHRConfig<any> = {
-            url: `/v1/organizations/${params.organization_id}/certifications/delete`,
-            method: 'post',
-            data: {
-                certification_ids: params.certification_ids
-            }
+        const url = `/v1/organizations/${params.organization_id}/certifications/delete`;
+        const data = {
+            certification_ids: params.certification_ids
         };
 
-        return this.dispatch(request);
+        return this.client.post(url, data);
     }
 
     /**
@@ -363,14 +320,11 @@ export default class Certifications extends ResourceBase {
      *             gigwalk.certification.createOrganizationCertificationsFromFile({...})
      */
     createOrganizationCertificationsFromFile(params: CreateOrganizationCertificationsFromFileParams): APIPromise<CreateOrganizationCertificationsFromFileData> {
-        const request: AxiosXHRConfig<any> = {
-            url: `/v1/organizations/${params.organization_id}/certifications/upload`,
-            method: 'post',
-            data: {
-                s3_keys: params.s3_keys
-            }
+        const url = `/v1/organizations/${params.organization_id}/certifications/upload`;
+        const data = {
+            s3_keys: params.s3_keys
         };
 
-        return this.dispatch(request);
+        return this.client.post(url, data);
     }
 }

@@ -1,5 +1,6 @@
 // @flow
-import ResourceBase from '../resourceBase';
+import Resource from '../resource';
+import type { $AxiosXHR, $AxiosXHRConfig } from 'axios';
 
 type APIRes<T> = {
     _meta: Object,
@@ -11,7 +12,7 @@ type APIRes<T> = {
     errors: mixed
 }
 
-type APIPromise<T> = Promise<AxiosXHR<APIRes<T>>>
+type APIPromise<T> = Promise<$AxiosXHR<APIRes<T>>>
 
 type SubscriptionTemplate = {
     version_id: string,
@@ -127,7 +128,7 @@ type SearchSubscriptionsData = {
 
 }
 
-export default class Subscriptions extends ResourceBase {
+export default class Subscriptions extends Resource {
     /**
      * @api {delete} /v1/organization_subscriptions/{organization_subscription_id}
      * @apiName deleteSubscription
@@ -137,11 +138,11 @@ export default class Subscriptions extends ResourceBase {
      *             gigwalk.customers.deleteSubscription({...})
      */
     deleteSubscription(params: DeleteSubscriptionParams): APIPromise<DeleteSubscriptionData> {
-        const request: AxiosXHRConfig<any> = {
+        const request: $AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'delete'
         };
-        return this.dispatch(request);
+        return this.client.request(request);
     }
 
     /**
@@ -154,11 +155,11 @@ export default class Subscriptions extends ResourceBase {
      *             gigwalk.customers.getSubscription({...})
      */
     getSubscription(params: GetSubscriptionParams): APIPromise<GetSubscriptionData> {
-        const request: AxiosXHRConfig<any> = {
+        const request: $AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'get'
         };
-        return this.dispatch(request);
+        return this.client.request(request);
     }
 
     /**
@@ -171,11 +172,11 @@ export default class Subscriptions extends ResourceBase {
      *             gigwalk.customers.createClonedSubscription({...})
      */
     createClonedSubscription(params: CreateSubscriptionsParams): APIPromise<CreateClonedSubscriptionData> {
-        const request: AxiosXHRConfig<any> = {
+        const request: $AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'post'
         };
-        return this.dispatch(request);
+        return this.client.request(request);
     }
 
     /**
@@ -188,11 +189,11 @@ export default class Subscriptions extends ResourceBase {
      *             gigwalk.customers.updateSubscription({...})
      */
     updateSubscription(params: UpdateSubscriptionParams): APIPromise<UpdateSubscriptionData> {
-        const request: AxiosXHRConfig<any> = {
+        const request: $AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'put'
         };
-        return this.dispatch(request);
+        return this.client.request(request);
     }
 
     /**
@@ -204,11 +205,11 @@ export default class Subscriptions extends ResourceBase {
      *             gigwalk.customers.createSubscriptions({...})
      */
     createSubscriptions(params: CreateSubscriptionsParams): APIPromise<CreateSubscriptionsData> {
-        const request: AxiosXHRConfig<any> = {
+        const request: $AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'post'
         };
-        return this.dispatch(request);
+        return this.client.request(request);
     }
 
     /**
@@ -220,11 +221,11 @@ export default class Subscriptions extends ResourceBase {
      *             gigwalk.customers.searchSubscriptionsWithParams({...})
      */
     searchSubscriptionsWithParams(params: SearchSubscriptionsWithParamsParams): APIPromise<SearchSubscriptionsWithParamsParams> {
-        const request: AxiosXHRConfig<any> = {
+        const request: $AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'post'
         };
-        return this.dispatch(request);
+        return this.client.request(request);
     }
 
     /**
@@ -237,11 +238,11 @@ export default class Subscriptions extends ResourceBase {
      *             gigwalk.customers.deleteOrganizationSubscription({...})
      */
     deleteOrganizationSubscription(params: DeleteOrganizationSubscriptionParams): APIPromise<DeleteOrganizationSubscriptionData> {
-        const request: AxiosXHRConfig<any> = {
+        const request: $AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'delete'
         };
-        return this.dispatch(request);
+        return this.client.request(request);
     }
 
     /**
@@ -255,11 +256,11 @@ export default class Subscriptions extends ResourceBase {
      *             gigwalk.customers.updateOrganizationSubscription({...})
      */
     updateOrganizationSubscription(params: UpdateOrganizationSubscriptionParams): APIPromise<UpdateOrganizationSubscriptionData> {
-        const request: AxiosXHRConfig<any> = {
+        const request: $AxiosXHRConfig<any> = {
             url: `/v1`,
             method: 'put'
         };
-        return this.dispatch(request);
+        return this.client.request(request);
     }
 
     /**
@@ -272,11 +273,11 @@ export default class Subscriptions extends ResourceBase {
      *             gigwalk.customers.searchSubscriptionsWithField({...})
      */
     searchSubscriptionsWithField(params: SearchSubscriptionsWithFieldParams): APIPromise<SearchSubscriptionsWithFieldData> {
-        const request: AxiosXHRConfig<any> = {
+        const request: $AxiosXHRConfig<any> = {
             url: `/v2`,
             method: 'post'
         };
-        return this.dispatch(request);
+        return this.client.request(request);
     }
 
     /**
@@ -289,10 +290,10 @@ export default class Subscriptions extends ResourceBase {
      *             gigwalk.customers.searchSubscriptions({...})
      */
     searchSubscriptions(params: SearchSubscriptionsParams): APIPromise<SearchSubscriptionsData> {
-        const request: AxiosXHRConfig<any> = {
+        const request: $AxiosXHRConfig<any> = {
             url: `/v2`,
             method: 'post'
         };
-        return this.dispatch(request);
+        return this.client.request(request);
     }
 }

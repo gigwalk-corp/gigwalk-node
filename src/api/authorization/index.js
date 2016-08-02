@@ -1,5 +1,7 @@
 // @flow
-import ResourceBase from '../resourceBase';
+import Resource from '../resource';
+import type { $AxiosXHR } from 'axios';
+import type { APIResponse } from '../resource';
 
 type ForgotPasswordParams = {
     email: string
@@ -12,11 +14,10 @@ type ResetPasswordParams = {
     check_expired: boolean
 }
 
-type ForgotPasswordData = null
+type ForgotPasswordResponse = APIResponse<null>;
+type ResetPasswordResponse = APIResponse<null>;
 
-type ResetPasswordData = null
-
-export default class Authorization extends ResourceBase {
+export default class Authorization extends Resource {
 
     /**
      * @api {post} /v1/forgot_password
@@ -26,14 +27,8 @@ export default class Authorization extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.authorization.forgotPassword({ ... })
      */
-    forgotPassword(params: ForgotPasswordParams): Promise<ForgotPasswordData> {
-        const request: AxiosXHRConfig<any> = {
-            url: '/v1/forgot_password',
-            method: 'post',
-            data: params
-        };
-
-        return this.dispatch(request);
+    forgotPassword(params: ForgotPasswordParams): Promise<$AxiosXHR<ForgotPasswordResponse>> {
+        return this.client.post('/v1/forgot_password', { ...params });
     }
 
     /**
@@ -47,13 +42,7 @@ export default class Authorization extends ResourceBase {
      * @apiExample {js} Example:
      *             gigwalk.authorization.resetPassword({ ... })
      */
-    resetPassword(params: ResetPasswordParams): Promise<ResetPasswordData> {
-        const request: AxiosXHRConfig<any> = {
-            url: '/v1/reset_password',
-            method: 'post',
-            data: params
-        };
-
-        return this.dispatch(request);
+    resetPassword(params: ResetPasswordParams): Promise<$AxiosXHR<ResetPasswordResponse>> {
+        return this.client.post('/v1/reset_password', { ...params });
     }
 }
