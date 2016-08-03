@@ -137,9 +137,9 @@ export default class Organzations extends Resource {
      *             gigwalk.customers.deleteOrganization({...})
      */
     deleteOrganization(params: DeleteOrganizationParams): APIPromise<DeleteOrganizationData> {
-        const url = `/v1`;
+        const url = '/v1';
         const data = {
-
+            params
         };
 
         return this.client.delete(url, data);
@@ -155,9 +155,9 @@ export default class Organzations extends Resource {
      *             gigwalk.customers.getOrganization({...})
      */
     getOrganization(params: GetOrganizationParams): APIPromise<GetOrganizationData> {
-        const url = `/v1`;
+        const url = '/v1';
         const data = {
-
+            params
         };
 
         return this.client.get(url, data);
@@ -175,9 +175,9 @@ export default class Organzations extends Resource {
      *             gigwalk.customers.updateOrganization({...})
      */
     updateOrganization(params: UpdateOrganizationParams): APIPromise<UpdateOrganizationData> {
-        const url = `/v1`;
+        const url = '/v1';
         const data = {
-
+            params
         };
 
         return this.client.put(url, data);
@@ -192,7 +192,7 @@ export default class Organzations extends Resource {
      *             gigwalk.customers.getOrganizations({...})
      */
     getOrganizations(): APIPromise<GetOrganizationsData> {
-        const url = `/v1`;
+        const url = '/v1';
         const data = {
 
         };
@@ -209,9 +209,9 @@ export default class Organzations extends Resource {
      *             gigwalk.customers.createOrganization({...})
      */
     createOrganization(params: CreateOrganizationParams): APIPromise<CreateOrganizationData> {
-        const url = `/v1`;
+        const url = '/v1';
         const data = {
-
+            params
         };
 
         return this.client.post(url, data);

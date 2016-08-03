@@ -70,9 +70,9 @@ export default class Targets extends Resource {
      *             gigwalk.customers.createOrganizationTargets({...})
      */
     createOrganizationTargets(params: CreateOrganizationTargetsParams): APIPromise<CreateOrganizationTargetsData> {
-        const url = `/v1`;
+        const url = '/v1';
         const data = {
-
+            params
         };
 
         return this.client.post(url, data);
@@ -89,9 +89,9 @@ export default class Targets extends Resource {
      *             gigwalk.customers.getOrganizationTarget({...})
      */
     getOrganizationTarget(params: GetOrganizationTargetParams): APIPromise<GetOrganizationTargetData> {
-        const url = `/v1`;
+        const url = '/v1';
         const data = {
-
+            params
         };
 
         return this.client.get(url, data);
@@ -108,9 +108,9 @@ export default class Targets extends Resource {
      *             gigwalk.customers.updateOrganizationTarget({...})
      */
     updateOrganizationTarget(params: UpdateOrganizationTargetParams): APIPromise<UpdateOrganizationTargetData> {
-        const url = `/v1`;
+        const url = '/v1';
         const data = {
-
+            params
         };
 
         return this.client.put(url, data);
@@ -126,9 +126,9 @@ export default class Targets extends Resource {
      *             gigwalk.customers.searchOrganizationTargets({...})
      */
     searchOrganizationTargets(params: SearchOrganizationTargetsParams): APIPromise<SearchOrganizationTargetsData> {
-        const url = `/v1`;
+        const url = '/v1';
         const data = {
-
+            params
         };
 
         return this.client.get(url, data);

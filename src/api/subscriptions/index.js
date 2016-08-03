@@ -13,7 +13,7 @@ type SubscriptionTemplate = {
     bundle_autoassign: boolean,
     can_reschedule: boolean,
     recurrence: boolean,
-    organization_data: {},
+    organization_data: Object,
     optin_type: string,
     dashboard_visible: boolean,
     location_override: boolean,
@@ -76,45 +76,116 @@ type SearchSubscriptionsParams = {
     query_string: string
 }
 
-type DeleteSubscriptionData = [
+type SubscriptionSchema = {
+    title: string,
+    description: string,
+    id: number,
+    start_date: string,
+    end_date: string,
+    can_reschedule: boolean,
+    worker_count: number,
+    ticket_time_estimate: number,
+    frequency_type: string,
+    frequency_window: string,
+    frequency_amount: number,
+    frequency_byweekday: number,
+    recurrence: string,
+    optin_type: string,
+    is_double_optin: boolean,
+    location_override: boolean,
+    two_way_rating_enabled: boolean,
+    rating_email: string,
+    schedule_type: string,
+    autoassign: boolean,
+    bundle_autoassign: boolean,
+    dashboard_visible: boolean,
+    version_id: number,
+    state: string,
+    date_created: string,
+    date_updated: string,
+    needs_core: boolean,
+    groups: Array<number>,
+    wave: {
+        id: string,
+        start_date: string,
+        end_date: string,
+        execution: number,
+        total_locations: number
+    },
+    created_customer_id: number,
+    created_customer: {
+        id: number,
+        first_name: string,
+        last_name: string
+    },
+    organization_observation_target_lists: Array<{
+        observation_target_list_id: number,
+        data_types: Array<{
+            data_type_id: number
+        }>
+    }>,
+    organization_location_lists: Array<number>,
+    organization_data: {
+        hasMaterial: boolean,
+        certifications: Object
+    }
+}
 
+type DeleteSubscriptionData = [ // NEED TO CHECK
+    number
 ]
 
 type GetSubscriptionData = [
-
+    SubscriptionSchema
 ]
 
-type CreateClonedSubscriptionData = [
-
+type CreateClonedSubscriptionData = [ // NEED TO CHECK
+    SubscriptionSchema
 ]
 
-type UpdateSubscriptionData = [
-
+type UpdateSubscriptionData = [ // NEED TO CHECK
+    SubscriptionSchema
 ]
 
-type CreateSubscriptionsData = [
+type CreateSubscriptionsData = Array<SubscriptionSchema> // NEED TO CHECK
 
-]
-
-type SearchSubscriptionsWithParamsData = [
+type SearchSubscriptionsWithParamsData = [ // NEED TO CHECK
 
 ]
 
 type DeleteOrganizationSubscriptionData = [
-
+    number
 ]
 
 type UpdateOrganizationSubscriptionData = [
-
+    SubscriptionSchema
 ]
 
-type SearchSubscriptionsWithFieldData = [
+type SearchSubscriptionsWithFieldData = { // NEED TO FINISH
+    search_field: string,
+    search_results: Object
+}
 
-]
-
-type SearchSubscriptionsData = [
-
-]
+type SearchSubscriptionsData = {
+    total_records: number,
+    search_results: Array<{
+        score: number,
+        data: {
+            title: string,
+            description: string,
+            id: number,
+            organization_id: number,
+            start_date: string,
+            end_date: string,
+            total_locations: number,
+            execution: number,
+            state: string,
+            created_customer: string,
+            group_id: Array<number>,
+            metadata: Object
+        }
+    }>
+  }
 
 export default class Subscriptions extends Resource {
     /**
@@ -126,9 +197,9 @@ export default class Subscriptions extends Resource {
      *             gigwalk.customers.deleteSubscription({...})
      */
     deleteSubscription(params: DeleteSubscriptionParams): APIPromise<DeleteSubscriptionData> {
-        const url = `/v1`;
+        const url = '/v1';
         const data = {
-
+            params
         };
 
         return this.client.delete(url, data);
@@ -144,9 +215,9 @@ export default class Subscriptions extends Resource {
      *             gigwalk.customers.getSubscription({...})
      */
     getSubscription(params: GetSubscriptionParams): APIPromise<GetSubscriptionData> {
-        const url = `/v1`;
+        const url = '/v1';
         const data = {
-
+            params
         };
 
         return this.client.get(url, data);
@@ -161,10 +232,10 @@ export default class Subscriptions extends Resource {
      * @apiExample {js} Example:
      *             gigwalk.customers.createClonedSubscription({...})
      */
-    createClonedSubscription(params: CreateSubscriptionsParams): APIPromise<CreateClonedSubscriptionData> {
-        const url = `/v1`;
+    createClonedSubscription(params: CreateClonedSubscriptionParams): APIPromise<CreateClonedSubscriptionData> {
+        const url = '/v1';
         const data = {
-
+            params
         };
 
         return this.client.post(url, data);
@@ -180,9 +251,9 @@ export default class Subscriptions extends Resource {
      *             gigwalk.customers.updateSubscription({...})
      */
     updateSubscription(params: UpdateSubscriptionParams): APIPromise<UpdateSubscriptionData> {
-        const url = `/v1`;
+        const url = '/v1';
         const data = {
-
+            params
         };
 
         return this.client.put(url, data);
@@ -197,9 +268,9 @@ export default class Subscriptions extends Resource {
      *             gigwalk.customers.createSubscriptions({...})
      */
     createSubscriptions(params: CreateSubscriptionsParams): APIPromise<CreateSubscriptionsData> {
-        const url = `/v1`;
+        const url = '/v1';
         const data = {
-
+            params
         };
 
         return this.client.post(url, data);
@@ -213,10 +284,10 @@ export default class Subscriptions extends Resource {
      * @apiExample {js} Example:
      *             gigwalk.customers.searchSubscriptionsWithParams({...})
      */
-    searchSubscriptionsWithParams(params: SearchSubscriptionsWithParamsParams): APIPromise<SearchSubscriptionsWithParamsParams> {
-        const url = `/v1`;
+    searchSubscriptionsWithParams(params: SearchSubscriptionsWithParamsParams): APIPromise<SearchSubscriptionsWithParamsData> {
+        const url = '/v1';
         const data = {
-
+            params
         };
 
         return this.client.post(url, data);
@@ -232,9 +303,9 @@ export default class Subscriptions extends Resource {
      *             gigwalk.customers.deleteOrganizationSubscription({...})
      */
     deleteOrganizationSubscription(params: DeleteOrganizationSubscriptionParams): APIPromise<DeleteOrganizationSubscriptionData> {
-        const url = `/v1`;
+        const url = '/v1';
         const data = {
-
+            params
         };
 
         return this.client.delete(url, data);
@@ -251,9 +322,9 @@ export default class Subscriptions extends Resource {
      *             gigwalk.customers.updateOrganizationSubscription({...})
      */
     updateOrganizationSubscription(params: UpdateOrganizationSubscriptionParams): APIPromise<UpdateOrganizationSubscriptionData> {
-        const url = `/v1`;
+        const url = '/v1';
         const data = {
-
+            params
         };
 
         return this.client.put(url, data);
@@ -269,9 +340,9 @@ export default class Subscriptions extends Resource {
      *             gigwalk.customers.searchSubscriptionsWithField({...})
      */
     searchSubscriptionsWithField(params: SearchSubscriptionsWithFieldParams): APIPromise<SearchSubscriptionsWithFieldData> {
-        const url = `/v1`;
+        const url = '/v1';
         const data = {
-
+            params
         };
 
         return this.client.post(url, data);
@@ -287,9 +358,9 @@ export default class Subscriptions extends Resource {
      *             gigwalk.customers.searchSubscriptions({...})
      */
     searchSubscriptions(params: SearchSubscriptionsParams): APIPromise<SearchSubscriptionsData> {
-        const url = `/v1`;
+        const url = '/v1';
         const data = {
-
+            params
         };
 
         return this.client.post(url, data);

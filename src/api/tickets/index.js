@@ -137,6 +137,40 @@ type GetTicketsInAreaParams = {
     radius: number
 }
 
+type TicketSchema = {
+    id: number,
+    user_distance: number,
+    map_distance: number,
+    start_date: string,
+    due_date: string,
+    time_estimate: number,
+    optin_type: string,
+    is_double_optin: boolean,
+    status: string,
+    location: {
+        title: string,
+        latitude: number,
+        longitude: number,
+        locality: string,
+        country: string,
+        formatted_address: string,
+        administrative_area_level_1: string,
+        administrative_area_level_2: string,
+        postal_code: number,
+        specificity: string,
+        status: string
+    },
+    organization_subscription: {
+        optin_type: string,
+        description: string,
+        id: number,
+        can_reschedule: boolean,
+        is_double_optin: boolean,
+        title: string,
+        needed_certs: Object
+    }
+}
+
 type SearchGroupTicketsData = [
 
 ]
@@ -217,9 +251,7 @@ type GetTicketEventsData = [
 
 ]
 
-type GetTicketsInAreaData = [
-
-]
+type GetTicketsInAreaData = Array<TicketSchema>
 
 export default class Tickets extends Resource {
     /**
@@ -232,9 +264,9 @@ export default class Tickets extends Resource {
      *             gigwalk.customers.searchGroupTickets({...})
      */
     searchGroupTickets(params: SearchGroupTicketsParams): APIPromise<SearchGroupTicketsData> {
-        const url = `/v1`;
+        const url = '/v1';
         const data = {
-
+            params
         };
 
         return this.client.post(url, data);
@@ -248,7 +280,7 @@ export default class Tickets extends Resource {
      *             gigwalk.customers.getCurrentCustomerTickets({...})
      */
     getCurrentCustomerTickets(): APIPromise<GetCurrentCustomerTicketsData> {
-        const url = `/v1`;
+        const url = '/v1';
         const data = {
 
         };
@@ -265,9 +297,9 @@ export default class Tickets extends Resource {
      *             gigwalk.customers.getCustomerTickets({...})
      */
     getCustomerTickets(params: GetCustomerTicketsParams): APIPromise<GetCustomerTicketsData> {
-        const url = `/v1`;
+        const url = '/v1';
         const data = {
-
+            params
         };
 
         return this.client.get(url, data);
@@ -283,9 +315,9 @@ export default class Tickets extends Resource {
      *             gigwalk.customers.searchOrganizationTickets({...})
      */
     searchOrganizationTickets(params: SearchOrganizationTicketsParams): APIPromise<SearchOrganizationTicketsData> {
-        const url = `/v1`;
+        const url = '/v1';
         const data = {
-
+            params
         };
 
         return this.client.post(url, data);
@@ -301,9 +333,9 @@ export default class Tickets extends Resource {
      *             gigwalk.customers.searchOrganizationTicketsWithField({...})
      */
     searchOrganizationTicketsWithField(params: SearchOrganizationTicketsWithFieldParams): APIPromise<SearchOrganizationTicketsWithFieldData> {
-        const url = `/v1`;
+        const url = '/v1';
         const data = {
-
+            params
         };
 
         return this.client.post(url, data);
@@ -318,9 +350,9 @@ export default class Tickets extends Resource {
      *             gigwalk.customers.createTicketDataItem({...})
      */
     createTicketDataItem(params: CreateTicketDataItemParams): APIPromise<CreateTicketDataItemData> {
-        const url = `/v1`;
+        const url = '/v1';
         const data = {
-
+            params
         };
 
         return this.client.post(url, data);
@@ -336,9 +368,9 @@ export default class Tickets extends Resource {
      *             gigwalk.customers.deleteTicketDataItem({...})
      */
     deleteTicketDataItem(params: DeleteTicketDataItemParams): APIPromise<DeleteTicketDataItemData> {
-        const url = `/v1`;
+        const url = '/v1';
         const data = {
-
+            params
         };
 
         return this.client.delete(url, data);
@@ -354,9 +386,9 @@ export default class Tickets extends Resource {
      *             gigwalk.customers.createClonedTicket({...})
      */
     createClonedTicket(params: CreateClonedTicketParams): APIPromise<CreateClonedTicketData> {
-        const url = `/v1`;
+        const url = '/v1';
         const data = {
-
+            params
         };
 
         return this.client.post(url, data);
@@ -371,9 +403,9 @@ export default class Tickets extends Resource {
      *             gigwalk.customers.submitTicket({...})
      */
     submitTicket(params: SubmitTicketParams): APIPromise<SubmitTicketData> {
-        const url = `/v1`;
+        const url = '/v1';
         const data = {
-
+            params
         };
 
         return this.client.post(url, data);
@@ -388,9 +420,9 @@ export default class Tickets extends Resource {
      *             gigwalk.customers.getTicket({...})
      */
     getTicket(params: GetTicketParams): APIPromise<GetTicketData> {
-        const url = `/v1`;
+        const url = '/v1';
         const data = {
-
+            params
         };
 
         return this.client.get(url, data);
@@ -406,9 +438,9 @@ export default class Tickets extends Resource {
      *             gigwalk.customers.searchTicketsWithID({...})
      */
     searchTicketsWithID(params: SearchTicketsWithIDParams): APIPromise<SearchTicketsWithIDData> {
-        const url = `/v1`;
+        const url = '/v1';
         const data = {
-
+            params
         };
 
         return this.client.post(url, data);
@@ -424,9 +456,9 @@ export default class Tickets extends Resource {
      *             gigwalk.customers.updateTicket({...})
      */
     updateTicket(params: UpdateTicketParams): APIPromise<UpdateTicketData> {
-        const url = `/v1`;
+        const url = '/v1';
         const data = {
-
+            params
         };
 
         return this.client.put(url, data);
@@ -440,7 +472,7 @@ export default class Tickets extends Resource {
      *             gigwalk.customers.getTickets({...})
      */
     getTickets(): APIPromise<GetTicketsData> {
-        const url = `/v1`;
+        const url = '/v1';
         const data = {
 
         };
@@ -456,9 +488,9 @@ export default class Tickets extends Resource {
      *             gigwalk.customers.searchTickets({...})
      */
     searchTickets(params: SearchTicketsParams): APIPromise<SearchTicketsData> {
-        const url = `/v1`;
+        const url = '/v1';
         const data = {
-
+            params
         };
 
         return this.client.post(url, data);
@@ -475,9 +507,9 @@ export default class Tickets extends Resource {
      *             gigwalk.customers.updateTicketWithState({...})
      */
     updateTicketWithState(params: UpdateTicketWithStateParams): APIPromise<UpdateTicketWithStateData> {
-        const url = `/v1`;
+        const url = '/v1';
         const data = {
-
+            params
         };
 
         return this.client.put(url, data);
@@ -492,9 +524,9 @@ export default class Tickets extends Resource {
      *             gigwalk.customers.getOrganizationTickets({...})
      */
     getOrganizationTickets(params: GetOrganizationTicketsParams): APIPromise<GetOrganizationTicketsData> {
-        const url = `/v1`;
+        const url = '/v1';
         const data = {
-
+            params
         };
 
         return this.client.get(url, data);
@@ -510,9 +542,9 @@ export default class Tickets extends Resource {
      *             gigwalk.customers.searchOrganizationTicketsWithCriteria({...})
      */
     searchOrganizationTicketsWithCriteria(params: SearchOrganizationTicketsWithCriteriaParams): APIPromise<SearchOrganizationTicketsWithCriteriaData> {
-        const url = `/v1`;
+        const url = '/v1';
         const data = {
-
+            params
         };
 
         return this.client.post(url, data);
@@ -527,9 +559,9 @@ export default class Tickets extends Resource {
      *             gigwalk.customers.getSubscriptionTickets({...})
      */
     getSubscriptionTickets(params: GetSubscriptionTicketsParams): APIPromise<GetSubscriptionTicketsData> {
-        const url = `/v1`;
+        const url = '/v1';
         const data = {
-
+            params
         };
 
         return this.client.get(url, data);
@@ -545,9 +577,9 @@ export default class Tickets extends Resource {
      *             gigwalk.customers.searchSubscriptionTickets({...})
      */
     searchSubscriptionTickets(params: SearchSubscriptionTicketsParams): APIPromise<SearchSubscriptionTicketsData> {
-        const url = `/v1`;
+        const url = '/v1';
         const data = {
-
+            params
         };
 
         return this.client.post(url, data);
@@ -562,9 +594,9 @@ export default class Tickets extends Resource {
      *             gigwalk.customers.getTicketEvents({...})
      */
     getTicketEvents(params: GetTicketEventsParams): APIPromise<GetTicketEventsData> {
-        const url = `/v1`;
+        const url = '/v1';
         const data = {
-
+            params
         };
 
         return this.client.get(url, data);
@@ -583,9 +615,9 @@ export default class Tickets extends Resource {
      *             gigwalk.customers.getTicketsInArea({...})
      */
     getTicketsInArea(params: GetTicketsInAreaParams): APIPromise<GetTicketsInAreaData> {
-        const url = `/v1`;
+        const url = '/v1';
         const data = {
-
+            params
         };
 
         return this.client.get(url, data);

@@ -127,7 +127,7 @@ export default class TargetLists extends Resource {
      *             gigwalk.customers.getTargetLists({...})
      */
     getTargetLists(): APIPromise<GetTargetListsData> {
-        const url = `/v1`;
+        const url = '/v1';
         const data = {
 
         };
@@ -144,9 +144,9 @@ export default class TargetLists extends Resource {
      *             gigwalk.customers.getTargetList({...})
      */
     getTargetList(params: GetTargetListParams): APIPromise<GetTargetListData> {
-        const url = `/v1`;
+        const url = '/v1';
         const data = {
-
+            params
         };
 
         return this.client.get(url, data);
@@ -162,9 +162,9 @@ export default class TargetLists extends Resource {
      *             gigwalk.customers.getOrganizationTargetLists({...})
      */
     getOrganizationTargetLists(params: GetOrganizationTargetListsParams): APIPromise<GetOrganizationTargetListsData> {
-        const url = `/v1`;
+        const url = '/v1';
         const data = {
-
+            params
         };
 
         return this.client.get(url, data);
@@ -180,9 +180,9 @@ export default class TargetLists extends Resource {
      *             gigwalk.customers.createOrganizationTargetList({...})
      */
     createOrganizationTargetList(params: CreateOrganizationTargetListParams): APIPromise<CreateOrganizationTargetListData> {
-        const url = `/v1`;
+        const url = '/v1';
         const data = {
-
+            params
         };
 
         return this.client.post(url, data);
@@ -198,9 +198,9 @@ export default class TargetLists extends Resource {
      *             gigwalk.customers.getOrganzationTargetList({...})
      */
     getOrganzationTargetList(params: GetOrganzationTargetListParams): APIPromise<GetOrganzationTargetListData> {
-        const url = `/v1`;
+        const url = '/v1';
         const data = {
-
+            params
         };
 
         return this.client.get(url, data);
@@ -215,9 +215,9 @@ export default class TargetLists extends Resource {
      *             gigwalk.customers.deleteTargetList({...})
      */
     deleteTargetList(params: DeleteTargetListParams): APIPromise<DeleteTargetListData> {
-        const url = `/v1`;
+        const url = '/v1';
         const data = {
-
+            params
         };
 
         return this.client.delete(url, data);
@@ -232,9 +232,9 @@ export default class TargetLists extends Resource {
      *             gigwalk.customers.updateTargetList({...})
      */
     updateTargetList(params: UpdateTargetListParams): APIPromise<UpdateTargetListData> {
-        const url = `/v1`;
+        const url = '/v1';
         const data = {
-
+            params
         };
 
         return this.client.put(url, data);
@@ -250,9 +250,9 @@ export default class TargetLists extends Resource {
      *             gigwalk.customers.searchTargetsInObservationList({...})
      */
     searchTargetsInObservationList(params: SearchTargetsInObservationListParams): APIPromise<SearchTargetsInObservationListData> {
-        const url = `/v1`;
+        const url = '/v1';
         const data = {
-
+            params
         };
 
         return this.client.post(url, data);
@@ -268,9 +268,9 @@ export default class TargetLists extends Resource {
      *             gigwalk.customers.searchTargetsInList({...})
      */
     searchTargetsInList(params: SearchTargetsInListParams): APIPromise<SearchTargetsInListData> {
-        const url = `/v1`;
+        const url = '/v1';
         const data = {
-
+            params
         };
 
         return this.client.post(url, data);
@@ -286,9 +286,9 @@ export default class TargetLists extends Resource {
      *             gigwalk.customers.getTargetsFromList({...})
      */
     getTargetsFromList(params: GetTargetsFromListParams): APIPromise<GetTargetsFromListData> {
-        const url = `/v1`;
+        const url = '/v1';
         const data = {
-
+            params
         };
 
         return this.client.get(url, data);
@@ -303,9 +303,9 @@ export default class TargetLists extends Resource {
      *             gigwalk.customers.updateTargetsInList({...})
      */
     updateTargetsInList(params: UpdateTargetsInListParams): APIPromise<UpdateTargetsInListData> {
-        const url = `/v1`;
+        const url = '/v1';
         const data = {
-
+            params
         };
 
         return this.client.put(url, data);
@@ -320,9 +320,9 @@ export default class TargetLists extends Resource {
      *             gigwalk.customers.searchDataItemsInList({...})
      */
     searchDataItemsInList(params: SearchDataItemsInListParams): APIPromise<SearchDataItemsInListData> {
-        const url = `/v1`;
+        const url = '/v1';
         const data = {
-
+            params
         };
 
         return this.client.post(url, data);

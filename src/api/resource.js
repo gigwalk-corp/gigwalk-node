@@ -1,6 +1,5 @@
 // @flow
-import type { Axios } from 'axios';
-import type { $AxiosXHR } from 'axios';
+import type { Axios, $AxiosXHR } from 'axios';
 
 export type APIResponse<T> = {
     _meta: Object,

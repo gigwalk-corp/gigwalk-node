@@ -230,9 +230,9 @@ export default class LocationLists extends Resource {
      *             gigwalk.customers.deleteLocationList({...})
      */
     deleteLocationList(params: DeleteLocationListParams): APIPromise<DeleteLocationListData> {
-        const url = `/v1`;
+        const url = '/v1';
         const data = {
-
+            params
         };
 
         return this.client.delete(url, data);
@@ -248,9 +248,9 @@ export default class LocationLists extends Resource {
      *             gigwalk.customers.getLocationList({...})
      */
     getLocationList(params: GetLocationListParams): APIPromise<GetLocationListData> {
-        const url = `/v1`;
+        const url = '/v1';
         const data = {
-
+            params
         };
 
         return this.client.get(url, data);
@@ -267,9 +267,9 @@ export default class LocationLists extends Resource {
      *             gigwalk.customers.updateLocationList({...})
      */
     updateLocationList(params: UpdateLocationListParams): APIPromise<UpdateLocationListData> {
-        const url = `/v1`;
+        const url = '/v1';
         const data = {
-
+            params
         };
 
         return this.client.put(url, data);
@@ -285,9 +285,9 @@ export default class LocationLists extends Resource {
      *             gigwalk.customers.deleteOrganizationLocationList({...})
      */
     deleteOrganizationLocationList(params: DeleteOrganizationLocationListParams): APIPromise<DeleteOrganizationLocationListData> {
-        const url = `/v1`;
+        const url = '/v1';
         const data = {
-
+            params
         };
 
         return this.client.delete(url, data);
@@ -303,9 +303,9 @@ export default class LocationLists extends Resource {
      *             gigwalk.customers.getOrganizationLocationLists({...})
      */
     getOrganizationLocationLists(params: GetOrganizationLocationListsParams): APIPromise<GetOrganizationLocationListsData> {
-        const url = `/v1`;
+        const url = '/v1';
         const data = {
-
+            params
         };
 
         return this.client.get(url, data);
@@ -322,9 +322,9 @@ export default class LocationLists extends Resource {
      *             gigwalk.customers.createOrganizationLocationList({...})
      */
     createOrganizationLocationList(params: CreateOrganizationLocationListParams): APIPromise<CreateOrganizationLocationListData> {
-        const url = `/v1`;
+        const url = '/v1';
         const data = {
-
+            params
         };
 
         return this.client.post(url, data);
@@ -340,9 +340,9 @@ export default class LocationLists extends Resource {
      *             gigwalk.customers.deleteOrganiztionLocationFromList({...})
      */
     deleteOrganiztionLocationFromList(params: DeleteOrganiztionLocationFromListParams): APIPromise<DeleteOrganiztionLocationFromListData> {
-        const url = `/v1`;
+        const url = '/v1';
         const data = {
-
+            params
         };
 
         return this.client.delete(url, data);
@@ -357,10 +357,10 @@ export default class LocationLists extends Resource {
      * @apiExample {js} Example:
      *             gigwalk.customers.deleteLocationFromList({...})
      */
-    deleteLocationFromList(params: DeleteLocationListParams): APIPromise<DeleteLocationFromListData> {
-        const url = `/v1`;
+    deleteLocationFromList(params: DeleteLocationFromListParams): APIPromise<DeleteLocationFromListData> {
+        const url = '/v1';
         const data = {
-
+            params
         };
 
         return this.client.delete(url, data);
@@ -376,9 +376,9 @@ export default class LocationLists extends Resource {
      *             gigwalk.customers.getLocationDetailsForList({...})
      */
     getLocationDetailsForList(params: GetLocationDetailsForListParams): APIPromise<GetLocationDetailsForListData> {
-        const url = `/v1`;
+        const url = '/v1';
         const data = {
-
+            params
         };
 
         return this.client.get(url, data);
@@ -395,9 +395,9 @@ export default class LocationLists extends Resource {
      *             gigwalk.customers.addLocationsToList({...})
      */
     addLocationsToList(params: AddLocationsToListParams): APIPromise<AddLocationsToListData> {
-        const url = `/v1`;
+        const url = '/v1';
         const data = {
-
+            params
         };
 
         return this.client.post(url, data);
@@ -412,9 +412,9 @@ export default class LocationLists extends Resource {
      *             gigwalk.customers.removeLocationsFromList({...})
      */
     removeLocationsFromList(params: RemoveLocationsFromListParams): APIPromise<RemoveLocationsFromListData> {
-        const url = `/v1`;
+        const url = '/v1';
         const data = {
-
+            params
         };
 
         return this.client.put(url, data);
@@ -429,9 +429,9 @@ export default class LocationLists extends Resource {
      *             gigwalk.customers.searchLocationList({...})
      */
     searchLocationList(params: SearchLocationListParams): APIPromise<SearchLocationListData> {
-        const url = `/v1`;
+        const url = '/v1';
         const data = {
-
+            params
         };
 
         return this.client.post(url, data);
@@ -448,9 +448,9 @@ export default class LocationLists extends Resource {
      *             gigwalk.customers.getFileInfoForLocationList({...})
      */
     getFileInfoForLocationList(params: GetFileInfoForLocationListParams): APIPromise<GetFileInfoForLocationListData> {
-        const url = `/v1`;
+        const url = '/v1';
         const data = {
-
+            params
         };
 
         return this.client.get(url, data);
@@ -468,9 +468,9 @@ export default class LocationLists extends Resource {
      *             gigwalk.customers.getFileInfoForOrganizationLocationList({...})
      */
     getFileInfoForOrganizationLocationList(params: GetFileInfoForOrganizationLocationListParams): APIPromise<GetFileInfoForOrganizationLocationListData> {
-        const url = `/v1`;
+        const url = '/v1';
         const data = {
-
+            params
         };
 
         return this.client.get(url, data);
@@ -485,9 +485,9 @@ export default class LocationLists extends Resource {
      *             gigwalk.customers.createOrganizationLocationListUsingFile({...})
      */
     createOrganizationLocationListUsingFile(params: CreateOrganizationLocationListUsingFileParams): APIPromise<CreateOrganizationLocationListUsingFileData> {
-        const url = `/v1`;
+        const url = '/v1';
         const data = {
-
+            params
         };
 
         return this.client.post(url, data);
@@ -503,9 +503,9 @@ export default class LocationLists extends Resource {
      *             gigwalk.customers.updateLocationAddress({...})
      */
     updateLocationAddress(params: UpdateLocationAddressParams): APIPromise<UpdateLocationAddressData> {
-        const url = `/v1`;
+        const url = '/v1';
         const data = {
-
+            params
         };
 
         return this.client.put(url, data);
@@ -522,9 +522,9 @@ export default class LocationLists extends Resource {
      *             gigwalk.customers.updateLocationAddressByID({...})
      */
     updateLocationAddressByID(params: UpdateLocationAddressByIDParams): APIPromise<UpdateLocationAddressByIDData> {
-        const url = `/v1`;
+        const url = '/v1';
         const data = {
-
+            params
         };
 
         return this.client.put(url, data);

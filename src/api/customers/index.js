@@ -154,9 +154,9 @@ export default class Customers extends Resource {
      *             gigwalk.customers.deleteCustomerWithEmail({...})
      */
     deleteCustomerWithEmail(params: DeleteCustomerWithEmailParams): APIPromise<DeleteCustomerWithEmailData> {
-        const url = `/v1`;
+        const url = '/v1';
         const data = {
-
+            params
         };
 
         return this.client.delete(url, data);
@@ -172,9 +172,9 @@ export default class Customers extends Resource {
      *             gigwalk.customers.getCustomerWithEmail({...})
      */
     getCustomerWithEmail(params: GetCustomerWithEmailParams): APIPromise<GetCustomerWithEmailData> {
-        const url = `/v1`;
+        const url = '/v1';
         const data = {
-
+            params
         };
 
         return this.client.get(url, data);
@@ -190,9 +190,9 @@ export default class Customers extends Resource {
      *             gigwalk.customers.updateCustomer({...})
      */
     updateCustomerWithEmail(params: UpdateCustomerWithEmailParams): APIPromise<UpdateCustomerWithEmailData> {
-        const url = `/v1`;
+        const url = '/v1';
         const data = {
-
+            params
         };
 
         return this.client.put(url, data);
@@ -208,9 +208,9 @@ export default class Customers extends Resource {
      *             gigwalk.customers.deleteCustomerWithID({...})
      */
     deleteCustomerWithID(params: DeleteCustomerWithIDParams): APIPromise<DeleteCustomerWithIDData> {
-        const url = `/v1`;
+        const url = '/v1';
         const data = {
-
+            params
         };
 
         return this.client.delete(url, data);
@@ -226,9 +226,9 @@ export default class Customers extends Resource {
      *             gigwalk.customers.getCustomerWithID({...})
      */
     getCustomerWithID(params: GetCustomerWithIDParams): APIPromise<GetCustomerWithIDData> {
-        const url = `/v1`;
+        const url = '/v1';
         const data = {
-
+            params
         };
 
         return this.client.get(url, data);
@@ -244,9 +244,9 @@ export default class Customers extends Resource {
      *             gigwalk.customers.updateCustomerWithID({...})
      */
     updateCustomerWithID(params: UpdateCustomerWithIDParams): APIPromise<UpdateCustomerWithIDData> {
-        const url = `/v1`;
+        const url = '/v1';
         const data = {
-
+            params
         };
 
         return this.client.put(url, data);
@@ -261,9 +261,9 @@ export default class Customers extends Resource {
      *             gigwalk.customers.getOrganizationCustomers({...})
      */
     getOrganizationCustomers(params: GetOrganizationCustomersParams): APIPromise<GetOrganizationCustomersData> {
-        const url = `/v1`;
+        const url = '/v1';
         const data = {
-
+            params
         };
 
         return this.client.get(url, data);
@@ -278,9 +278,9 @@ export default class Customers extends Resource {
      *             gigwalk.customers.updateOrganizationCustomers({...})
      */
     updateOrganizationCustomers(params: UpdateOrganizationCustomersParams): APIPromise<UpdateOrganizationCustomersData> {
-        const url = `/v1`;
+        const url = '/v1';
         const data = {
-
+            params
         };
 
         return this.client.put(url, data);
@@ -296,7 +296,7 @@ export default class Customers extends Resource {
      *             gigwalk.customers.getCustomer({...})
      */
     getCustomer(): APIPromise<GetCustomerData> {
-        const url = `/v1`;
+        const url = '/v1';
         const data = {
 
         };
@@ -313,9 +313,9 @@ export default class Customers extends Resource {
      *             gigwalk.customers.updateCustomer({...})
      */
     updateCustomer(params: UpdateCustomerParams): APIPromise<UpdateCustomerData> {
-        const url = `/v1`;
+        const url = '/v1';
         const data = {
-
+            params
         };
 
         return this.client.put(url, data);
@@ -330,9 +330,9 @@ export default class Customers extends Resource {
      *             gigwalk.customers.searchCustomers({...})
      */
     searchCustomers(params: SearchCustomersParams): APIPromise<SearchCustomersData> {
-        const url = `/v1`;
+        const url = '/v1';
         const data = {
-
+            params
         };
 
         return this.client.post(url, data);

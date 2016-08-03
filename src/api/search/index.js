@@ -55,9 +55,9 @@ export default class Search extends Resource {
      *             gigwalk.customers.searchDocuments({...})
      */
     searchDocuments(params: SearchDocumentsParams): APIPromise<SearchDocumentsData> {
-        const url = `/v1`;
+        const url = '/v1';
         const data = {
-
+            params
         };
 
         return this.client.get(url, data);
@@ -71,7 +71,7 @@ export default class Search extends Resource {
      *             gigwalk.customers.createSearch({...})
      */
     createSearch(): APIPromise<CreateSearchData> {
-        const url = `/v1`;
+        const url = '/v1';
         const data = {
 
         };
@@ -89,9 +89,9 @@ export default class Search extends Resource {
      *             gigwalk.customers.searchOrganization({...})
      */
     searchOrganization(params: SearchOrganizationParams): APIPromise<SearchOrganizationData> {
-        const url = `/v1`;
+        const url = '/v1';
         const data = {
-
+            params
         };
 
         return this.client.get(url, data);

@@ -50,9 +50,9 @@ export default class TicketEvents extends Resource {
      *             gigwalk.customers.createTicketEvent({...})
      */
     createTicketEvent(params: CreateTicketEventParams): APIPromise<CreateTicketEventData> {
-        const url = `/v1`;
+        const url = '/v1';
         const data = {
-
+            params
         };
 
         return this.client.post(url, data);
@@ -67,9 +67,9 @@ export default class TicketEvents extends Resource {
      *             gigwalk.customers.deleteTicketEvent({...})
      */
     deleteTicketEvent(params: DeleteTicketEventParams): APIPromise<DeleteTicketEventData> {
-        const url = `/v1`;
+        const url = '/v1';
         const data = {
-
+            params
         };
 
         return this.client.delete(url, data);
