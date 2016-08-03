@@ -154,12 +154,9 @@ export default class Customers extends Resource {
      *             gigwalk.customers.deleteCustomerWithEmail({...})
      */
     deleteCustomerWithEmail(params: DeleteCustomerWithEmailParams): APIPromise<DeleteCustomerWithEmailData> {
-        const url = '/v1';
-        const data = {
-            params
-        };
+        const url = `/v1/organizations/${params.organization_id}/customers/${params.customer_email}`;
 
-        return this.client.delete(url, data);
+        return this.client.delete(url);
     }
 
     /**
@@ -172,12 +169,9 @@ export default class Customers extends Resource {
      *             gigwalk.customers.getCustomerWithEmail({...})
      */
     getCustomerWithEmail(params: GetCustomerWithEmailParams): APIPromise<GetCustomerWithEmailData> {
-        const url = '/v1';
-        const data = {
-            params
-        };
+        const url = `/v1/organizations/${params.organization_id}/customers/${params.customer_email}`;
 
-        return this.client.get(url, data);
+        return this.client.get(url);
     }
 
     /**
@@ -186,14 +180,13 @@ export default class Customers extends Resource {
      * @apiDescription Modifies the info of the customer identified by the customer_email.
      * @apiParam {Number} organization_id
      * @apiParam {String} customer_email
+     * @apiParam {CustomerTemplate} customer
      * @apiExample {js} Example:
      *             gigwalk.customers.updateCustomer({...})
      */
     updateCustomerWithEmail(params: UpdateCustomerWithEmailParams): APIPromise<UpdateCustomerWithEmailData> {
-        const url = '/v1';
-        const data = {
-            params
-        };
+        const url = `/v1/organizations/${params.organization_id}/customers/${params.customer_email}`;
+        const data = params.customer;
 
         return this.client.put(url, data);
     }
@@ -208,12 +201,9 @@ export default class Customers extends Resource {
      *             gigwalk.customers.deleteCustomerWithID({...})
      */
     deleteCustomerWithID(params: DeleteCustomerWithIDParams): APIPromise<DeleteCustomerWithIDData> {
-        const url = '/v1';
-        const data = {
-            params
-        };
+        const url = `/v1/organizations/${params.organization_id}/customers/${params.customer_id}`;
 
-        return this.client.delete(url, data);
+        return this.client.delete(url);
     }
 
     /**
@@ -226,12 +216,9 @@ export default class Customers extends Resource {
      *             gigwalk.customers.getCustomerWithID({...})
      */
     getCustomerWithID(params: GetCustomerWithIDParams): APIPromise<GetCustomerWithIDData> {
-        const url = '/v1';
-        const data = {
-            params
-        };
+        const url = `/v1/organizations/${params.organization_id}/customers/${params.customer_id}`;
 
-        return this.client.get(url, data);
+        return this.client.get(url);
     }
 
     /**
@@ -240,14 +227,13 @@ export default class Customers extends Resource {
      * @apiDescription Modifies the info of the customer identified by the customer_id
      * @apiParam {Number} organization_id
      * @apiParam {Number} customer_id
+     * @apiParam {CustomerTemplate} customer
      * @apiExample {js} Example:
      *             gigwalk.customers.updateCustomerWithID({...})
      */
     updateCustomerWithID(params: UpdateCustomerWithIDParams): APIPromise<UpdateCustomerWithIDData> {
-        const url = '/v1';
-        const data = {
-            params
-        };
+        const url = `/v1/organizations/${params.organization_id}/customers/${params.customer_id}`;
+        const data = params.customer;
 
         return this.client.put(url, data);
     }
@@ -261,12 +247,9 @@ export default class Customers extends Resource {
      *             gigwalk.customers.getOrganizationCustomers({...})
      */
     getOrganizationCustomers(params: GetOrganizationCustomersParams): APIPromise<GetOrganizationCustomersData> {
-        const url = '/v1';
-        const data = {
-            params
-        };
+        const url = `/v1/organizations/${params.organization_id}/customers`;
 
-        return this.client.get(url, data);
+        return this.client.get(url);
     }
 
     /**
@@ -274,13 +257,16 @@ export default class Customers extends Resource {
      * @apiName updateOrganizationCustomers
      * @apiDescription Modifies the info of multiple customers identified by the customer_email. Delete multiple customers (by setting DELETED status)
      * @apiParam {Number} organization_id
+     * @apiParam {String} organization_id
+     * @apiParam {Array<CustomerTemplate>} customers
      * @apiExample {js} Example:
      *             gigwalk.customers.updateOrganizationCustomers({...})
      */
     updateOrganizationCustomers(params: UpdateOrganizationCustomersParams): APIPromise<UpdateOrganizationCustomersData> {
-        const url = '/v1';
+        const url = `/v1/organizations/${params.organization_id}/customers`;
         const data = {
-            params
+            action: params.action,
+            customers: params.customers
         };
 
         return this.client.put(url, data);
@@ -296,12 +282,7 @@ export default class Customers extends Resource {
      *             gigwalk.customers.getCustomer({...})
      */
     getCustomer(): APIPromise<GetCustomerData> {
-        const url = '/v1';
-        const data = {
-
-        };
-
-        return this.client.get(url, data);
+        return this.client.get('/v1/customer');
     }
 
     /**
@@ -309,16 +290,14 @@ export default class Customers extends Resource {
      * @apiName updateCustomer
      * @apiDescription Modify current_user's info Shortcut for the put method of OrgCustomerAPIResource with current_user's org_id and current user's id
                        as the customer_id.
+     * @apiParam {CustomerTemplate} customer
      * @apiExample {js} Example:
      *             gigwalk.customers.updateCustomer({...})
      */
     updateCustomer(params: UpdateCustomerParams): APIPromise<UpdateCustomerData> {
-        const url = '/v1';
-        const data = {
-            params
-        };
+        const data = params.customer;
 
-        return this.client.put(url, data);
+        return this.client.put('/v1/customer', data);
     }
 
     /**
@@ -326,15 +305,15 @@ export default class Customers extends Resource {
      * @apiName searchCustomers
      * @apiDescription Return all the customers related with the given groups or with the groups related with the tickets Also checks if the customers
                        have availability and capacity to execute the given tickets
+     * @apiParam {Array<Number>} ticket_ids
      * @apiExample {js} Example:
      *             gigwalk.customers.searchCustomers({...})
      */
     searchCustomers(params: SearchCustomersParams): APIPromise<SearchCustomersData> {
-        const url = '/v1';
         const data = {
-            params
+            ticket_ids: params.ticket_ids
         };
 
-        return this.client.post(url, data);
+        return this.client.post('/v1/tickets/search/customers', data);
     }
 }
