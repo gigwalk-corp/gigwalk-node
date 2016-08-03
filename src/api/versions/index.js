@@ -1,20 +1,8 @@
 // @flow
 import Resource from '../resource';
-import type { $AxiosXHR } from 'axios';
+import type { APIPromise } from '../resource';
 
-export type APIRes<T> = {
-    _meta: Object,
-    warnings: mixed,
-    gw_api_response: Array<Object>,
-    _metadata: Object,
-    code: number,
-    data: T,
-    errors: mixed
-};
-
-export type APIPromise<T> = Promise<$AxiosXHR<APIRes<T>>>;
-
-export type GetData = [{
+type GetData = [{
     minimum_ios_version: string,
     minimum_android_version: string,
     version: string
