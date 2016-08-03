@@ -171,6 +171,21 @@ type TicketSchema = {
     }
 }
 
+type TicketEventSchema = {
+    id: string,
+    ticket_id: number,
+    ticket_event_type: string,
+    ticket_event_date: string,
+    ticket_event_data: Object,
+    created_customer: {
+        id: number,
+        first_name: string,
+        last_name: string,
+        email: string,
+        photo_url: string
+    }
+}
+
 type SearchGroupTicketsData = [
 
 ]
@@ -247,9 +262,7 @@ type SearchSubscriptionTicketsData = [
 
 ]
 
-type GetTicketEventsData = [
-
-]
+type GetTicketEventsData = Array<TicketEventSchema>
 
 type GetTicketsInAreaData = Array<TicketSchema>
 
