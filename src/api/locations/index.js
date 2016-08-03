@@ -1,18 +1,6 @@
 // @flow
 import Resource from '../resource';
-import type { $AxiosXHR, $AxiosXHRConfig } from 'axios';
-
-type APIRes<T> = {
-    _meta: Object,
-    warnings: mixed,
-    gw_api_response: Array<Object>,
-    _metadata: Object,
-    code: number,
-    data: T,
-    errors: mixed
-}
-
-type APIPromise<T> = Promise<$AxiosXHR<APIRes<T>>>
+import type { APIPromise } from '../resource';
 
 type LocationTemplate = {
     title: string,
@@ -145,11 +133,12 @@ export default class Locations extends Resource {
      *             gigwalk.customers.getLocations({...})
      */
     getLocations(): APIPromise<GetLocationsData> {
-        const request: $AxiosXHRConfig<any> = {
-            url: `/v1`,
-            method: 'get'
+        const url = `/v1`;
+        const data = {
+
         };
-        return this.client.request(request);
+
+        return this.client.get(url, data);
     }
 
     /**
@@ -162,11 +151,12 @@ export default class Locations extends Resource {
      *             gigwalk.customers.createLocations({...})
      */
     createLocations(params: CreateLocationsParams): APIPromise<CreateLocationsData> {
-        const request: $AxiosXHRConfig<any> = {
-            url: `/v1`,
-            method: 'post'
+        const url = `/v1`;
+        const data = {
+
         };
-        return this.client.request(request);
+
+        return this.client.post(url, data);
     }
 
     /**
@@ -179,11 +169,12 @@ export default class Locations extends Resource {
      *             gigwalk.customers.getLocation({...})
      */
     getLocation(params: GetLocationParams): APIPromise<GetLocationData> {
-        const request: $AxiosXHRConfig<any> = {
-            url: `/v1`,
-            method: 'get'
+        const url = `/v1`;
+        const data = {
+
         };
-        return this.client.request(request);
+
+        return this.client.get(url, data);
     }
 
     /**
@@ -196,11 +187,12 @@ export default class Locations extends Resource {
      *             gigwalk.customers.getOrganizationLocations({...})
      */
     getOrganizationLocations(params: GetOrganizationLocationsParams): APIPromise<GetOrganizationLocationsData> {
-        const request: $AxiosXHRConfig<any> = {
-            url: `/v1`,
-            method: 'get'
+        const url = `/v1`;
+        const data = {
+
         };
-        return this.client.request(request);
+
+        return this.client.get(url, data);
     }
 
     /**
@@ -214,11 +206,12 @@ export default class Locations extends Resource {
      *             gigwalk.customers.createOrganizationLocations({...})
      */
     createOrganizationLocations(params: CreateOrganizationLocationsParams): APIPromise<CreateOrganizationLocationData> {
-        const request: $AxiosXHRConfig<any> = {
-            url: `/v1`,
-            method: 'post'
+        const url = `/v1`;
+        const data = {
+
         };
-        return this.client.request(request);
+
+        return this.client.post(url, data);
     }
 
     /**
@@ -232,11 +225,12 @@ export default class Locations extends Resource {
      *             gigwalk.customers.updateOrganizaionLocations({...})
      */
     updateOrganizaionLocations(params: UpdateOrganizationLocationParams): APIPromise<UpdateOrganizaionLocationsData> {
-        const request: $AxiosXHRConfig<any> = {
-            url: `/v1`,
-            method: 'put'
+        const url = `/v1`;
+        const data = {
+
         };
-        return this.client.request(request);
+
+        return this.client.put(url, data);
     }
 
     /**
@@ -249,11 +243,12 @@ export default class Locations extends Resource {
      *             gigwalk.customers.deleteOrganizationLocation({...})
      */
     deleteOrganizationLocation(params: DeleteOrganizationLocationParams): APIPromise<DeleteOrganizationLocationData> {
-        const request: $AxiosXHRConfig<any> = {
-            url: `/v1`,
-            method: 'delete'
+        const url = `/v1`;
+        const data = {
+
         };
-        return this.client.request(request);
+
+        return this.client.delete(url, data);
     }
 
     /**
@@ -268,11 +263,12 @@ export default class Locations extends Resource {
      *             gigwalk.customers.getOrganizationLocation({...})
      */
     getOrganizationLocation(params: GetOrganizationLocationParams): APIPromise<GetOrganizationLocationData> {
-        const request: $AxiosXHRConfig<any> = {
-            url: `/v1`,
-            method: 'get'
+        const url = `/v1`;
+        const data = {
+
         };
-        return this.client.request(request);
+
+        return this.client.get(url, data);
     }
 
     /**
@@ -284,11 +280,12 @@ export default class Locations extends Resource {
      *             gigwalk.customers.createOrganizationLocation({...})
      */
     createOrganizationLocation(params: CreateOrganizationLocationParams): APIPromise<CreateOrganizationLocationData> {
-        const request: $AxiosXHRConfig<any> = {
-            url: `/v1`,
-            method: 'post'
+        const url = `/v1`;
+        const data = {
+
         };
-        return this.client.request(request);
+
+        return this.client.post(url, data);
     }
 
     /**
@@ -301,11 +298,12 @@ export default class Locations extends Resource {
      *             gigwalk.customers.updateOrganizationLocation({...})
      */
     updateOrganizationLocation(params: UpdateOrganizationLocationParams): APIPromise<UpdateOrganizationLocationData> {
-        const request: $AxiosXHRConfig<any> = {
-            url: `/v1`,
-            method: 'put'
+        const url = `/v1`;
+        const data = {
+
         };
-        return this.client.request(request);
+
+        return this.client.put(url, data);
     }
 
     /**
@@ -319,10 +317,11 @@ export default class Locations extends Resource {
      *             gigwalk.customers.createOrganizationLocationList({...})
      */
     createOrganizationLocationList(params: CreateOrganizationLocationListParams): APIPromise<CreateOrganizationLocationListData> {
-        const request: $AxiosXHRConfig<any> = {
-            url: `/v1`,
-            method: 'post'
+        const url = `/v1`;
+        const data = {
+
         };
-        return this.client.request(request);
+
+        return this.client.post(url, data);
     }
 }

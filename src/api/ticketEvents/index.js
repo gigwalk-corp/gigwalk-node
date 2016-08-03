@@ -1,18 +1,6 @@
 // @flow
 import Resource from '../resource';
-import type { $AxiosXHR, $AxiosXHRConfig } from 'axios';
-
-type APIRes<T> = {
-    _meta: Object,
-    warnings: mixed,
-    gw_api_response: Array<Object>,
-    _metadata: Object,
-    code: number,
-    data: T,
-    errors: mixed
-}
-
-type APIPromise<T> = Promise<$AxiosXHR<APIRes<T>>>
+import type { APIPromise } from '../resource';
 
 type TicketEventTemplate = {
     ticket_event_type: string,
@@ -62,11 +50,12 @@ export default class TicketEvents extends Resource {
      *             gigwalk.customers.createTicketEvent({...})
      */
     createTicketEvent(params: CreateTicketEventParams): APIPromise<CreateTicketEventData> {
-        const request: $AxiosXHRConfig<any> = {
-            url: `/v1`,
-            method: 'post'
+        const url = `/v1`;
+        const data = {
+
         };
-        return this.client.request(request);
+
+        return this.client.post(url, data);
     }
 
     /**
@@ -78,10 +67,11 @@ export default class TicketEvents extends Resource {
      *             gigwalk.customers.deleteTicketEvent({...})
      */
     deleteTicketEvent(params: DeleteTicketEventParams): APIPromise<DeleteTicketEventData> {
-        const request: $AxiosXHRConfig<any> = {
-            url: `/v1`,
-            method: 'delete'
+        const url = `/v1`;
+        const data = {
+
         };
-        return this.client.request(request);
+
+        return this.client.delete(url, data);
     }
 }

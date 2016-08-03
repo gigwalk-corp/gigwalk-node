@@ -1,18 +1,6 @@
 // @flow
 import Resource from '../resource';
-import type { $AxiosXHR, $AxiosXHRConfig } from 'axios';
-
-type APIRes<T> = {
-    _meta: Object,
-    warnings: mixed,
-    gw_api_response: Array<Object>,
-    _metadata: Object,
-    code: number,
-    data: T,
-    errors: mixed
-}
-
-type APIPromise<T> = Promise<$AxiosXHR<APIRes<T>>>
+import type { APIPromise } from '../resource';
 
 type DataItemTemplate = {
   data_type_id: number,
@@ -244,11 +232,12 @@ export default class Tickets extends Resource {
      *             gigwalk.customers.searchGroupTickets({...})
      */
     searchGroupTickets(params: SearchGroupTicketsParams): APIPromise<SearchGroupTicketsData> {
-        const request: $AxiosXHRConfig<any> = {
-            url: `/v1`,
-            method: 'post'
+        const url = `/v1`;
+        const data = {
+
         };
-        return this.client.request(request);
+
+        return this.client.post(url, data);
     }
 
     /**
@@ -259,11 +248,12 @@ export default class Tickets extends Resource {
      *             gigwalk.customers.getCurrentCustomerTickets({...})
      */
     getCurrentCustomerTickets(): APIPromise<GetCurrentCustomerTicketsData> {
-        const request: $AxiosXHRConfig<any> = {
-            url: `/v1`,
-            method: 'get'
+        const url = `/v1`;
+        const data = {
+
         };
-        return this.client.request(request);
+
+        return this.client.get(url, data);
     }
 
     /**
@@ -275,11 +265,12 @@ export default class Tickets extends Resource {
      *             gigwalk.customers.getCustomerTickets({...})
      */
     getCustomerTickets(params: GetCustomerTicketsParams): APIPromise<GetCustomerTicketsData> {
-        const request: $AxiosXHRConfig<any> = {
-            url: `/v1`,
-            method: 'get'
+        const url = `/v1`;
+        const data = {
+
         };
-        return this.client.request(request);
+
+        return this.client.get(url, data);
     }
 
     /**
@@ -292,11 +283,12 @@ export default class Tickets extends Resource {
      *             gigwalk.customers.searchOrganizationTickets({...})
      */
     searchOrganizationTickets(params: SearchOrganizationTicketsParams): APIPromise<SearchOrganizationTicketsData> {
-        const request: $AxiosXHRConfig<any> = {
-            url: `/v1`,
-            method: 'post'
+        const url = `/v1`;
+        const data = {
+
         };
-        return this.client.request(request);
+
+        return this.client.post(url, data);
     }
 
     /**
@@ -309,11 +301,12 @@ export default class Tickets extends Resource {
      *             gigwalk.customers.searchOrganizationTicketsWithField({...})
      */
     searchOrganizationTicketsWithField(params: SearchOrganizationTicketsWithFieldParams): APIPromise<SearchOrganizationTicketsWithFieldData> {
-        const request: $AxiosXHRConfig<any> = {
-            url: `/v1`,
-            method: 'post'
+        const url = `/v1`;
+        const data = {
+
         };
-        return this.client.request(request);
+
+        return this.client.post(url, data);
     }
 
     /**
@@ -325,11 +318,12 @@ export default class Tickets extends Resource {
      *             gigwalk.customers.createTicketDataItem({...})
      */
     createTicketDataItem(params: CreateTicketDataItemParams): APIPromise<CreateTicketDataItemData> {
-        const request: $AxiosXHRConfig<any> = {
-            url: `/v1`,
-            method: 'post'
+        const url = `/v1`;
+        const data = {
+
         };
-        return this.client.request(request);
+
+        return this.client.post(url, data);
     }
 
     /**
@@ -342,11 +336,12 @@ export default class Tickets extends Resource {
      *             gigwalk.customers.deleteTicketDataItem({...})
      */
     deleteTicketDataItem(params: DeleteTicketDataItemParams): APIPromise<DeleteTicketDataItemData> {
-        const request: $AxiosXHRConfig<any> = {
-            url: `/v1`,
-            method: 'delete'
+        const url = `/v1`;
+        const data = {
+
         };
-        return this.client.request(request);
+
+        return this.client.delete(url, data);
     }
 
     /**
@@ -359,11 +354,12 @@ export default class Tickets extends Resource {
      *             gigwalk.customers.createClonedTicket({...})
      */
     createClonedTicket(params: CreateClonedTicketParams): APIPromise<CreateClonedTicketData> {
-        const request: $AxiosXHRConfig<any> = {
-            url: `/v1`,
-            method: 'post'
+        const url = `/v1`;
+        const data = {
+
         };
-        return this.client.request(request);
+
+        return this.client.post(url, data);
     }
 
     /**
@@ -375,11 +371,12 @@ export default class Tickets extends Resource {
      *             gigwalk.customers.submitTicket({...})
      */
     submitTicket(params: SubmitTicketParams): APIPromise<SubmitTicketData> {
-        const request: $AxiosXHRConfig<any> = {
-            url: `/v1`,
-            method: 'post'
+        const url = `/v1`;
+        const data = {
+
         };
-        return this.client.request(request);
+
+        return this.client.post(url, data);
     }
 
     /**
@@ -391,11 +388,12 @@ export default class Tickets extends Resource {
      *             gigwalk.customers.getTicket({...})
      */
     getTicket(params: GetTicketParams): APIPromise<GetTicketData> {
-        const request: $AxiosXHRConfig<any> = {
-            url: `/v1`,
-            method: 'get'
+        const url = `/v1`;
+        const data = {
+
         };
-        return this.client.request(request);
+
+        return this.client.get(url, data);
     }
 
     /**
@@ -408,11 +406,12 @@ export default class Tickets extends Resource {
      *             gigwalk.customers.searchTicketsWithID({...})
      */
     searchTicketsWithID(params: SearchTicketsWithIDParams): APIPromise<SearchTicketsWithIDData> {
-        const request: $AxiosXHRConfig<any> = {
-            url: `/v1`,
-            method: 'post'
+        const url = `/v1`;
+        const data = {
+
         };
-        return this.client.request(request);
+
+        return this.client.post(url, data);
     }
 
     /**
@@ -425,11 +424,12 @@ export default class Tickets extends Resource {
      *             gigwalk.customers.updateTicket({...})
      */
     updateTicket(params: UpdateTicketParams): APIPromise<UpdateTicketData> {
-        const request: $AxiosXHRConfig<any> = {
-            url: `/v1`,
-            method: 'put'
+        const url = `/v1`;
+        const data = {
+
         };
-        return this.client.request(request);
+
+        return this.client.put(url, data);
     }
 
     /**
@@ -440,11 +440,12 @@ export default class Tickets extends Resource {
      *             gigwalk.customers.getTickets({...})
      */
     getTickets(): APIPromise<GetTicketsData> {
-        const request: $AxiosXHRConfig<any> = {
-            url: `/v1`,
-            method: 'get'
+        const url = `/v1`;
+        const data = {
+
         };
-        return this.client.request(request);
+
+        return this.client.get(url, data);
     }
 
     /**
@@ -455,11 +456,12 @@ export default class Tickets extends Resource {
      *             gigwalk.customers.searchTickets({...})
      */
     searchTickets(params: SearchTicketsParams): APIPromise<SearchTicketsData> {
-        const request: $AxiosXHRConfig<any> = {
-            url: `/v1`,
-            method: 'post'
+        const url = `/v1`;
+        const data = {
+
         };
-        return this.client.request(request);
+
+        return this.client.post(url, data);
     }
 
     /**
@@ -473,11 +475,12 @@ export default class Tickets extends Resource {
      *             gigwalk.customers.updateTicketWithState({...})
      */
     updateTicketWithState(params: UpdateTicketWithStateParams): APIPromise<UpdateTicketWithStateData> {
-        const request: $AxiosXHRConfig<any> = {
-            url: `/v1`,
-            method: 'put'
+        const url = `/v1`;
+        const data = {
+
         };
-        return this.client.request(request);
+
+        return this.client.put(url, data);
     }
 
     /**
@@ -489,11 +492,12 @@ export default class Tickets extends Resource {
      *             gigwalk.customers.getOrganizationTickets({...})
      */
     getOrganizationTickets(params: GetOrganizationTicketsParams): APIPromise<GetOrganizationTicketsData> {
-        const request: $AxiosXHRConfig<any> = {
-            url: `/v1`,
-            method: 'get'
+        const url = `/v1`;
+        const data = {
+
         };
-        return this.client.request(request);
+
+        return this.client.get(url, data);
     }
 
     /**
@@ -506,11 +510,12 @@ export default class Tickets extends Resource {
      *             gigwalk.customers.searchOrganizationTicketsWithCriteria({...})
      */
     searchOrganizationTicketsWithCriteria(params: SearchOrganizationTicketsWithCriteriaParams): APIPromise<SearchOrganizationTicketsWithCriteriaData> {
-        const request: $AxiosXHRConfig<any> = {
-            url: `/v1`,
-            method: 'post'
+        const url = `/v1`;
+        const data = {
+
         };
-        return this.client.request(request);
+
+        return this.client.post(url, data);
     }
 
     /**
@@ -522,11 +527,12 @@ export default class Tickets extends Resource {
      *             gigwalk.customers.getSubscriptionTickets({...})
      */
     getSubscriptionTickets(params: GetSubscriptionTicketsParams): APIPromise<GetSubscriptionTicketsData> {
-        const request: $AxiosXHRConfig<any> = {
-            url: `/v1`,
-            method: 'get'
+        const url = `/v1`;
+        const data = {
+
         };
-        return this.client.request(request);
+
+        return this.client.get(url, data);
     }
 
     /**
@@ -539,11 +545,12 @@ export default class Tickets extends Resource {
      *             gigwalk.customers.searchSubscriptionTickets({...})
      */
     searchSubscriptionTickets(params: SearchSubscriptionTicketsParams): APIPromise<SearchSubscriptionTicketsData> {
-        const request: $AxiosXHRConfig<any> = {
-            url: `/v1`,
-            method: 'post'
+        const url = `/v1`;
+        const data = {
+
         };
-        return this.client.request(request);
+
+        return this.client.post(url, data);
     }
 
     /**
@@ -555,11 +562,12 @@ export default class Tickets extends Resource {
      *             gigwalk.customers.getTicketEvents({...})
      */
     getTicketEvents(params: GetTicketEventsParams): APIPromise<GetTicketEventsData> {
-        const request: $AxiosXHRConfig<any> = {
-            url: `/v1`,
-            method: 'get'
+        const url = `/v1`;
+        const data = {
+
         };
-        return this.client.request(request);
+
+        return this.client.get(url, data);
     }
 
     /**
@@ -575,10 +583,11 @@ export default class Tickets extends Resource {
      *             gigwalk.customers.getTicketsInArea({...})
      */
     getTicketsInArea(params: GetTicketsInAreaParams): APIPromise<GetTicketsInAreaData> {
-        const request: $AxiosXHRConfig<any> = {
-            url: `/v1`,
-            method: 'get'
+        const url = `/v1`;
+        const data = {
+
         };
-        return this.client.request(request);
+
+        return this.client.get(url, data);
     }
 }

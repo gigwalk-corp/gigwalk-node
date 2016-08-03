@@ -1,18 +1,6 @@
 // @flow
 import Resource from '../resource';
-import type { $AxiosXHR, $AxiosXHRConfig } from 'axios';
-
-type APIRes<T> = {
-    _meta: Object,
-    warnings: mixed,
-    gw_api_response: Array<Object>,
-    _metadata: Object,
-    code: number,
-    data: T,
-    errors: mixed
-}
-
-type APIPromise<T> = Promise<$AxiosXHR<APIRes<T>>>
+import type { APIPromise } from '../resource';
 
 type SimpleLocationTemplate = {
     address: string,
@@ -242,11 +230,12 @@ export default class LocationLists extends Resource {
      *             gigwalk.customers.deleteLocationList({...})
      */
     deleteLocationList(params: DeleteLocationListParams): APIPromise<DeleteLocationListData> {
-        const request: $AxiosXHRConfig<any> = {
-            url: `/v1`,
-            method: 'delete'
+        const url = `/v1`;
+        const data = {
+
         };
-        return this.client.request(request);
+
+        return this.client.delete(url, data);
     }
 
     /**
@@ -259,11 +248,12 @@ export default class LocationLists extends Resource {
      *             gigwalk.customers.getLocationList({...})
      */
     getLocationList(params: GetLocationListParams): APIPromise<GetLocationListData> {
-        const request: $AxiosXHRConfig<any> = {
-            url: `/v1`,
-            method: 'get'
+        const url = `/v1`;
+        const data = {
+
         };
-        return this.client.request(request);
+
+        return this.client.get(url, data);
     }
 
     /**
@@ -277,11 +267,12 @@ export default class LocationLists extends Resource {
      *             gigwalk.customers.updateLocationList({...})
      */
     updateLocationList(params: UpdateLocationListParams): APIPromise<UpdateLocationListData> {
-        const request: $AxiosXHRConfig<any> = {
-            url: `/v1`,
-            method: 'put'
+        const url = `/v1`;
+        const data = {
+
         };
-        return this.client.request(request);
+
+        return this.client.put(url, data);
     }
 
     /**
@@ -294,11 +285,12 @@ export default class LocationLists extends Resource {
      *             gigwalk.customers.deleteOrganizationLocationList({...})
      */
     deleteOrganizationLocationList(params: DeleteOrganizationLocationListParams): APIPromise<DeleteOrganizationLocationListData> {
-        const request: $AxiosXHRConfig<any> = {
-            url: `/v1`,
-            method: 'delete'
+        const url = `/v1`;
+        const data = {
+
         };
-        return this.client.request(request);
+
+        return this.client.delete(url, data);
     }
 
     /**
@@ -311,11 +303,12 @@ export default class LocationLists extends Resource {
      *             gigwalk.customers.getOrganizationLocationLists({...})
      */
     getOrganizationLocationLists(params: GetOrganizationLocationListsParams): APIPromise<GetOrganizationLocationListsData> {
-        const request: $AxiosXHRConfig<any> = {
-            url: `/v1`,
-            method: 'get'
+        const url = `/v1`;
+        const data = {
+
         };
-        return this.client.request(request);
+
+        return this.client.get(url, data);
     }
 
     /**
@@ -329,11 +322,12 @@ export default class LocationLists extends Resource {
      *             gigwalk.customers.createOrganizationLocationList({...})
      */
     createOrganizationLocationList(params: CreateOrganizationLocationListParams): APIPromise<CreateOrganizationLocationListData> {
-        const request: $AxiosXHRConfig<any> = {
-            url: `/v1`,
-            method: 'post'
+        const url = `/v1`;
+        const data = {
+
         };
-        return this.client.request(request);
+
+        return this.client.post(url, data);
     }
 
     /**
@@ -346,11 +340,12 @@ export default class LocationLists extends Resource {
      *             gigwalk.customers.deleteOrganiztionLocationFromList({...})
      */
     deleteOrganiztionLocationFromList(params: DeleteOrganiztionLocationFromListParams): APIPromise<DeleteOrganiztionLocationFromListData> {
-        const request: $AxiosXHRConfig<any> = {
-            url: `/v1`,
-            method: 'delete'
+        const url = `/v1`;
+        const data = {
+
         };
-        return this.client.request(request);
+
+        return this.client.delete(url, data);
     }
 
     /**
@@ -363,11 +358,12 @@ export default class LocationLists extends Resource {
      *             gigwalk.customers.deleteLocationFromList({...})
      */
     deleteLocationFromList(params: DeleteLocationListParams): APIPromise<DeleteLocationFromListData> {
-        const request: $AxiosXHRConfig<any> = {
-            url: `/v1`,
-            method: 'delete'
+        const url = `/v1`;
+        const data = {
+
         };
-        return this.client.request(request);
+
+        return this.client.delete(url, data);
     }
 
     /**
@@ -380,11 +376,12 @@ export default class LocationLists extends Resource {
      *             gigwalk.customers.getLocationDetailsForList({...})
      */
     getLocationDetailsForList(params: GetLocationDetailsForListParams): APIPromise<GetLocationDetailsForListData> {
-        const request: $AxiosXHRConfig<any> = {
-            url: `/v1`,
-            method: 'get'
+        const url = `/v1`;
+        const data = {
+
         };
-        return this.client.request(request);
+
+        return this.client.get(url, data);
     }
 
     /**
@@ -398,11 +395,12 @@ export default class LocationLists extends Resource {
      *             gigwalk.customers.addLocationsToList({...})
      */
     addLocationsToList(params: AddLocationsToListParams): APIPromise<AddLocationsToListData> {
-        const request: $AxiosXHRConfig<any> = {
-            url: `/v1`,
-            method: 'post'
+        const url = `/v1`;
+        const data = {
+
         };
-        return this.client.request(request);
+
+        return this.client.post(url, data);
     }
 
     /**
@@ -414,11 +412,12 @@ export default class LocationLists extends Resource {
      *             gigwalk.customers.removeLocationsFromList({...})
      */
     removeLocationsFromList(params: RemoveLocationsFromListParams): APIPromise<RemoveLocationsFromListData> {
-        const request: $AxiosXHRConfig<any> = {
-            url: `/v1`,
-            method: 'put'
+        const url = `/v1`;
+        const data = {
+
         };
-        return this.client.request(request);
+
+        return this.client.put(url, data);
     }
 
     /**
@@ -430,11 +429,12 @@ export default class LocationLists extends Resource {
      *             gigwalk.customers.searchLocationList({...})
      */
     searchLocationList(params: SearchLocationListParams): APIPromise<SearchLocationListData> {
-        const request: $AxiosXHRConfig<any> = {
-            url: `/v1`,
-            method: 'post'
+        const url = `/v1`;
+        const data = {
+
         };
-        return this.client.request(request);
+
+        return this.client.post(url, data);
     }
 
     /**
@@ -448,11 +448,12 @@ export default class LocationLists extends Resource {
      *             gigwalk.customers.getFileInfoForLocationList({...})
      */
     getFileInfoForLocationList(params: GetFileInfoForLocationListParams): APIPromise<GetFileInfoForLocationListData> {
-        const request: $AxiosXHRConfig<any> = {
-            url: `/v1`,
-            method: 'get'
+        const url = `/v1`;
+        const data = {
+
         };
-        return this.client.request(request);
+
+        return this.client.get(url, data);
     }
 
     /**
@@ -467,11 +468,12 @@ export default class LocationLists extends Resource {
      *             gigwalk.customers.getFileInfoForOrganizationLocationList({...})
      */
     getFileInfoForOrganizationLocationList(params: GetFileInfoForOrganizationLocationListParams): APIPromise<GetFileInfoForOrganizationLocationListData> {
-        const request: $AxiosXHRConfig<any> = {
-            url: `/v1`,
-            method: 'get'
+        const url = `/v1`;
+        const data = {
+
         };
-        return this.client.request(request);
+
+        return this.client.get(url, data);
     }
 
     /**
@@ -483,11 +485,12 @@ export default class LocationLists extends Resource {
      *             gigwalk.customers.createOrganizationLocationListUsingFile({...})
      */
     createOrganizationLocationListUsingFile(params: CreateOrganizationLocationListUsingFileParams): APIPromise<CreateOrganizationLocationListUsingFileData> {
-        const request: $AxiosXHRConfig<any> = {
-            url: `/v1`,
-            method: 'post'
+        const url = `/v1`;
+        const data = {
+
         };
-        return this.client.request(request);
+
+        return this.client.post(url, data);
     }
 
     /**
@@ -500,11 +503,12 @@ export default class LocationLists extends Resource {
      *             gigwalk.customers.updateLocationAddress({...})
      */
     updateLocationAddress(params: UpdateLocationAddressParams): APIPromise<UpdateLocationAddressData> {
-        const request: $AxiosXHRConfig<any> = {
-            url: `/v1`,
-            method: 'put'
+        const url = `/v1`;
+        const data = {
+
         };
-        return this.client.request(request);
+
+        return this.client.put(url, data);
     }
 
     /**
@@ -518,10 +522,11 @@ export default class LocationLists extends Resource {
      *             gigwalk.customers.updateLocationAddressByID({...})
      */
     updateLocationAddressByID(params: UpdateLocationAddressByIDParams): APIPromise<UpdateLocationAddressByIDData> {
-        const request: $AxiosXHRConfig<any> = {
-            url: `/v1`,
-            method: 'put'
+        const url = `/v1`;
+        const data = {
+
         };
-        return this.client.request(request);
+
+        return this.client.put(url, data);
     }
 }

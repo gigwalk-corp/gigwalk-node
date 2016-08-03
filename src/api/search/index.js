@@ -1,18 +1,6 @@
 // @flow
 import Resource from '../resource';
-import type { $AxiosXHR, $AxiosXHRConfig } from 'axios';
-
-type APIRes<T> = {
-    _meta: Object,
-    warnings: mixed,
-    gw_api_response: Array<Object>,
-    _metadata: Object,
-    code: number,
-    data: T,
-    errors: mixed
-}
-
-type APIPromise<T> = Promise<$AxiosXHR<APIRes<T>>>
+import type { APIPromise } from '../resource';
 
 type SearchDocumentsParams = {
     query_string: string
@@ -67,11 +55,12 @@ export default class Search extends Resource {
      *             gigwalk.customers.searchDocuments({...})
      */
     searchDocuments(params: SearchDocumentsParams): APIPromise<SearchDocumentsData> {
-        const request: $AxiosXHRConfig<any> = {
-            url: `/v1`,
-            method: 'get'
+        const url = `/v1`;
+        const data = {
+
         };
-        return this.client.request(request);
+
+        return this.client.get(url, data);
     }
 
     /**
@@ -82,11 +71,12 @@ export default class Search extends Resource {
      *             gigwalk.customers.createSearch({...})
      */
     createSearch(): APIPromise<CreateSearchData> {
-        const request: $AxiosXHRConfig<any> = {
-            url: `/v1`,
-            method: 'post'
+        const url = `/v1`;
+        const data = {
+
         };
-        return this.client.request(request);
+
+        return this.client.post(url, data);
     }
 
     /**
@@ -99,10 +89,11 @@ export default class Search extends Resource {
      *             gigwalk.customers.searchOrganization({...})
      */
     searchOrganization(params: SearchOrganizationParams): APIPromise<SearchOrganizationData> {
-        const request: $AxiosXHRConfig<any> = {
-            url: `/v1`,
-            method: 'get'
+        const url = `/v1`;
+        const data = {
+
         };
-        return this.client.request(request);
+
+        return this.client.get(url, data);
     }
 }

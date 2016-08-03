@@ -1,5 +1,6 @@
 // @flow
 import type { Axios } from 'axios';
+import type { $AxiosXHR } from 'axios';
 
 export type APIResponse<T> = {
     _meta: Object,
@@ -10,6 +11,8 @@ export type APIResponse<T> = {
     code: number,
     data: T,
 }
+
+export type APIPromise<T> = Promise<$AxiosXHR<APIResponse<T>>>
 
 export default class Resource {
     client: Axios;

@@ -1,18 +1,6 @@
 // @flow
 import Resource from '../resource';
-import type { $AxiosXHR, $AxiosXHRConfig } from 'axios';
-
-type APIRes<T> = {
-    _meta: Object,
-    warnings: mixed,
-    gw_api_response: Array<Object>,
-    _metadata: Object,
-    code: number,
-    data: T,
-    errors: mixed
-}
-
-type APIPromise<T> = Promise<$AxiosXHR<APIRes<T>>>
+import type { APIPromise } from '../resource';
 
 type OrganizationTemplate = {
     organization_name: string,
@@ -149,11 +137,12 @@ export default class Organzations extends Resource {
      *             gigwalk.customers.deleteOrganization({...})
      */
     deleteOrganization(params: DeleteOrganizationParams): APIPromise<DeleteOrganizationData> {
-        const request: $AxiosXHRConfig<any> = {
-            url: `/v1`,
-            method: 'delete'
+        const url = `/v1`;
+        const data = {
+
         };
-        return this.client.request(request);
+
+        return this.client.delete(url, data);
     }
 
     /**
@@ -166,11 +155,12 @@ export default class Organzations extends Resource {
      *             gigwalk.customers.getOrganization({...})
      */
     getOrganization(params: GetOrganizationParams): APIPromise<GetOrganizationData> {
-        const request: $AxiosXHRConfig<any> = {
-            url: `/v1`,
-            method: 'get'
+        const url = `/v1`;
+        const data = {
+
         };
-        return this.client.request(request);
+
+        return this.client.get(url, data);
     }
 
     /**
@@ -185,11 +175,12 @@ export default class Organzations extends Resource {
      *             gigwalk.customers.updateOrganization({...})
      */
     updateOrganization(params: UpdateOrganizationParams): APIPromise<UpdateOrganizationData> {
-        const request: $AxiosXHRConfig<any> = {
-            url: `/v1`,
-            method: 'put'
+        const url = `/v1`;
+        const data = {
+
         };
-        return this.client.request(request);
+
+        return this.client.put(url, data);
     }
 
     /**
@@ -201,11 +192,12 @@ export default class Organzations extends Resource {
      *             gigwalk.customers.getOrganizations({...})
      */
     getOrganizations(): APIPromise<GetOrganizationsData> {
-        const request: $AxiosXHRConfig<any> = {
-            url: `/v1`,
-            method: 'get'
+        const url = `/v1`;
+        const data = {
+
         };
-        return this.client.request(request);
+
+        return this.client.get(url, data);
     }
 
     /**
@@ -217,10 +209,11 @@ export default class Organzations extends Resource {
      *             gigwalk.customers.createOrganization({...})
      */
     createOrganization(params: CreateOrganizationParams): APIPromise<CreateOrganizationData> {
-        const request: $AxiosXHRConfig<any> = {
-            url: `/v1`,
-            method: 'post'
+        const url = `/v1`;
+        const data = {
+
         };
-        return this.client.request(request);
+
+        return this.client.post(url, data);
     }
 }

@@ -1,18 +1,6 @@
 // @flow
 import Resource from '../resource';
-import type { $AxiosXHR, $AxiosXHRConfig } from 'axios';
-
-type APIRes<T> = {
-    _meta: Object,
-    warnings: mixed,
-    gw_api_response: Array<Object>,
-    _metadata: Object,
-    code: number,
-    data: T,
-    errors: mixed
-}
-
-type APIPromise<T> = Promise<$AxiosXHR<APIRes<T>>>
+import type { APIPromise } from '../resource';
 
 type TargetListTemplate = {
   name: string,
@@ -139,11 +127,12 @@ export default class TargetLists extends Resource {
      *             gigwalk.customers.getTargetLists({...})
      */
     getTargetLists(): APIPromise<GetTargetListsData> {
-        const request: $AxiosXHRConfig<any> = {
-            url: `/v1`,
-            method: 'get'
+        const url = `/v1`;
+        const data = {
+
         };
-        return this.client.request(request);
+
+        return this.client.get(url, data);
     }
 
     /**
@@ -155,11 +144,12 @@ export default class TargetLists extends Resource {
      *             gigwalk.customers.getTargetList({...})
      */
     getTargetList(params: GetTargetListParams): APIPromise<GetTargetListData> {
-        const request: $AxiosXHRConfig<any> = {
-            url: `/v1`,
-            method: 'get'
+        const url = `/v1`;
+        const data = {
+
         };
-        return this.client.request(request);
+
+        return this.client.get(url, data);
     }
 
     /**
@@ -172,11 +162,12 @@ export default class TargetLists extends Resource {
      *             gigwalk.customers.getOrganizationTargetLists({...})
      */
     getOrganizationTargetLists(params: GetOrganizationTargetListsParams): APIPromise<GetOrganizationTargetListsData> {
-        const request: $AxiosXHRConfig<any> = {
-            url: `/v1`,
-            method: 'get'
+        const url = `/v1`;
+        const data = {
+
         };
-        return this.client.request(request);
+
+        return this.client.get(url, data);
     }
 
     /**
@@ -189,11 +180,12 @@ export default class TargetLists extends Resource {
      *             gigwalk.customers.createOrganizationTargetList({...})
      */
     createOrganizationTargetList(params: CreateOrganizationTargetListParams): APIPromise<CreateOrganizationTargetListData> {
-        const request: $AxiosXHRConfig<any> = {
-            url: `/v1`,
-            method: 'post'
+        const url = `/v1`;
+        const data = {
+
         };
-        return this.client.request(request);
+
+        return this.client.post(url, data);
     }
 
     /**
@@ -206,11 +198,12 @@ export default class TargetLists extends Resource {
      *             gigwalk.customers.getOrganzationTargetList({...})
      */
     getOrganzationTargetList(params: GetOrganzationTargetListParams): APIPromise<GetOrganzationTargetListData> {
-        const request: $AxiosXHRConfig<any> = {
-            url: `/v1`,
-            method: 'get'
+        const url = `/v1`;
+        const data = {
+
         };
-        return this.client.request(request);
+
+        return this.client.get(url, data);
     }
 
     /**
@@ -222,11 +215,12 @@ export default class TargetLists extends Resource {
      *             gigwalk.customers.deleteTargetList({...})
      */
     deleteTargetList(params: DeleteTargetListParams): APIPromise<DeleteTargetListData> {
-        const request: $AxiosXHRConfig<any> = {
-            url: `/v1`,
-            method: 'delete'
+        const url = `/v1`;
+        const data = {
+
         };
-        return this.client.request(request);
+
+        return this.client.delete(url, data);
     }
 
     /**
@@ -238,11 +232,12 @@ export default class TargetLists extends Resource {
      *             gigwalk.customers.updateTargetList({...})
      */
     updateTargetList(params: UpdateTargetListParams): APIPromise<UpdateTargetListData> {
-        const request: $AxiosXHRConfig<any> = {
-            url: `/v1`,
-            method: 'put'
+        const url = `/v1`;
+        const data = {
+
         };
-        return this.client.request(request);
+
+        return this.client.put(url, data);
     }
 
     /**
@@ -255,11 +250,12 @@ export default class TargetLists extends Resource {
      *             gigwalk.customers.searchTargetsInObservationList({...})
      */
     searchTargetsInObservationList(params: SearchTargetsInObservationListParams): APIPromise<SearchTargetsInObservationListData> {
-        const request: $AxiosXHRConfig<any> = {
-            url: `/v1`,
-            method: 'post'
+        const url = `/v1`;
+        const data = {
+
         };
-        return this.client.request(request);
+
+        return this.client.post(url, data);
     }
 
     /**
@@ -272,11 +268,12 @@ export default class TargetLists extends Resource {
      *             gigwalk.customers.searchTargetsInList({...})
      */
     searchTargetsInList(params: SearchTargetsInListParams): APIPromise<SearchTargetsInListData> {
-        const request: $AxiosXHRConfig<any> = {
-            url: `/v1`,
-            method: 'post'
+        const url = `/v1`;
+        const data = {
+
         };
-        return this.client.request(request);
+
+        return this.client.post(url, data);
     }
 
     /**
@@ -289,11 +286,12 @@ export default class TargetLists extends Resource {
      *             gigwalk.customers.getTargetsFromList({...})
      */
     getTargetsFromList(params: GetTargetsFromListParams): APIPromise<GetTargetsFromListData> {
-        const request: $AxiosXHRConfig<any> = {
-            url: `/v1`,
-            method: 'get'
+        const url = `/v1`;
+        const data = {
+
         };
-        return this.client.request(request);
+
+        return this.client.get(url, data);
     }
 
     /**
@@ -305,11 +303,12 @@ export default class TargetLists extends Resource {
      *             gigwalk.customers.updateTargetsInList({...})
      */
     updateTargetsInList(params: UpdateTargetsInListParams): APIPromise<UpdateTargetsInListData> {
-        const request: $AxiosXHRConfig<any> = {
-            url: `/v1`,
-            method: 'put'
+        const url = `/v1`;
+        const data = {
+
         };
-        return this.client.request(request);
+
+        return this.client.put(url, data);
     }
 
     /**
@@ -321,10 +320,11 @@ export default class TargetLists extends Resource {
      *             gigwalk.customers.searchDataItemsInList({...})
      */
     searchDataItemsInList(params: SearchDataItemsInListParams): APIPromise<SearchDataItemsInListData> {
-        const request: $AxiosXHRConfig<any> = {
-            url: `/v1`,
-            method: 'post'
+        const url = `/v1`;
+        const data = {
+
         };
-        return this.client.request(request);
+
+        return this.client.post(url, data);
     }
 }
