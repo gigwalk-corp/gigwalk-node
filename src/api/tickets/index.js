@@ -137,7 +137,23 @@ type GetTicketsInAreaParams = {
     radius: number
 }
 
-type TicketSchema = {
+type TicketMediumSchema = {
+    id: number,
+    start_date: string,
+    due_date: string,
+    time_estimate: number,
+    date_created: string,
+    date_updated: string,
+    date_scheduled: string,
+    date_submitted: string,
+    status: string,
+    customer: Object,
+    calendar_event: Object,
+    location: Object,
+    organization_subscription: Object
+}
+
+type TicketSummarySchema = {
     id: number,
     user_distance: number,
     map_distance: number,
@@ -147,28 +163,8 @@ type TicketSchema = {
     optin_type: string,
     is_double_optin: boolean,
     status: string,
-    location: {
-        title: string,
-        latitude: number,
-        longitude: number,
-        locality: string,
-        country: string,
-        formatted_address: string,
-        administrative_area_level_1: string,
-        administrative_area_level_2: string,
-        postal_code: number,
-        specificity: string,
-        status: string
-    },
-    organization_subscription: {
-        optin_type: string,
-        description: string,
-        id: number,
-        can_reschedule: boolean,
-        is_double_optin: boolean,
-        title: string,
-        needed_certs: Object
-    }
+    location: Object,
+    organization_subscription: Object
 }
 
 type TicketEventSchema = {
@@ -186,85 +182,136 @@ type TicketEventSchema = {
     }
 }
 
-type SearchGroupTicketsData = [
+type TicketSchema = {
+    title: string,
+    description: string,
+    id: number,
+    organization_id: number,
+    start_date: string,
+    due_date: string,
+    time_estimate: number,
+    date_created: string,
+    date_updated: string,
+    omni_date_updated: string,
+    date_scheduled: string,
+    can_reschedule: boolean,
+    date_submitted: string,
+    execution_state: string,
+    wave_id: string,
+    status: string,
+    assigned_customer_name: string,
+    assigned_customer_id: number,
+    assigned_customer_email: string,
+    template_map: Object,
+    data_items: Object,
+    data_types: Array<Object>,
+    data_type_map: Object,
+    observation_target_map: Object,
+    observation_target_metadata_map: Object,
+    location: Object,
+    calendar_event: Object,
+    subscription_id: number,
+    organization_subscription_version_id_ref: number,
+    subscription: Object,
+    subscription_metadata: Object,
+    ticket_metadata: Object
+}
 
+type TicketSearchSchema = {
+    total_records: number,
+    search_results: Array<{
+        score: number,
+        data: {
+            title: string,
+            ticket_id: number,
+            date_created: string,
+            date_updated: string,
+            start_date: string,
+            due_date: string,
+            time_estimate: number,
+            dashboard_visible: boolean,
+            optin_type: string,
+            is_double_optin: boolean,
+            ticket_status: string,
+            assigned_customer_id: number,
+            assigned_customer_name: string,
+            assigned_customer_email: string,
+            organization_id: number,
+            organization_subscription_id: number,
+            organization_subscription_description: string,
+            organization_subscription_can_reschedule: boolean,
+            organization_subscription_groups: Array<number>,
+            location_title: string,
+            location_id: number,
+            location_organization_id: number,
+            location_date_created: string,
+            location_date_updated: string,
+            location_country: string,
+            location_locality: string,
+            location_postal_code: number,
+            location_geopoint: string,
+            location_administrative_area_level_1: string,
+            location_administrative_area_level_2: string,
+            location_formatted_address: string,
+            location_specificity: string,
+            location_status: string,
+            group_id: Array<number>,
+            targets: Array<number>,
+        }
+    }>
+}
+
+type SearchGroupTicketsData = Array<TicketMediumSchema>
+
+type GetCurrentCustomerTicketsData = Array<TicketSchema>
+
+type GetCustomerTicketsData = Array<TicketSchema> // NEED TO CHECK
+
+type SearchOrganizationTicketsData = TicketSearchSchema
+
+type SearchOrganizationTicketsWithFieldData = TicketSearchSchema // NEED TO CHECK
+
+type CreateTicketDataItemData = [ // NEED TO CHECK
+    TicketSchema
 ]
 
-type GetCurrentCustomerTicketsData = [
-
+type DeleteTicketDataItemData = [ // NEED TO CHECK
+    number
 ]
 
-type GetCustomerTicketsData = [
-
+type CreateClonedTicketData = [ // NEED TO CHECK
+    TicketSchema
 ]
 
-type SearchOrganizationTicketsData = [
-
+type SubmitTicketData = [ // NEED TO CHECK
+    TicketSchema
 ]
 
-type SearchOrganizationTicketsWithFieldData = [
-
+type GetTicketData = [ // NEED TO CHECK
+    TicketSchema
 ]
 
-type CreateTicketDataItemData = [
+type SearchTicketsWithIDData = Array<TicketSchema>
 
-]
+type UpdateTicketData = Array<TicketSchema> // NEED TO CHECK
 
-type DeleteTicketDataItemData = [
+type GetTicketsData = Array<TicketSchema>
 
-]
+type SearchTicketsData = Array<TicketSchema> // NEED TO CHECK
 
-type CreateClonedTicketData = [
+type UpdateTicketWithStateData = Array<number> // NEED TO CHECK
 
-]
+type GetOrganizationTicketsData = Array<TicketSchema> // NEED TO CHECK
 
-type SubmitTicketData = [
+type SearchOrganizationTicketsWithCriteriaData = Array<TicketSchema> // NEED TO CHECK
 
-]
+type GetSubscriptionTicketsData = Array<TicketSchema> // NEED TO CHECK
 
-type GetTicketData = [
-
-]
-
-type SearchTicketsWithIDData = [
-
-]
-
-type UpdateTicketData = [
-
-]
-
-type GetTicketsData = [
-
-]
-
-type SearchTicketsData = [
-
-]
-
-type UpdateTicketWithStateData = [
-
-]
-
-type GetOrganizationTicketsData = [
-
-]
-
-type SearchOrganizationTicketsWithCriteriaData = [
-
-]
-
-type GetSubscriptionTicketsData = [
-
-]
-
-type SearchSubscriptionTicketsData = [
-
-]
+type SearchSubscriptionTicketsData = Array<TicketSchema> // NEED TO CHECK
 
 type GetTicketEventsData = Array<TicketEventSchema>
 
-type GetTicketsInAreaData = Array<TicketSchema>
+type GetTicketsInAreaData = Array<TicketSummarySchema>
 
 export default class Tickets extends Resource {
     /**
