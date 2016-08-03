@@ -28,23 +28,27 @@ type TicketSearchTemplate = {
   timezone: string
 }
 
+type QueryParamTemplate = {
+    field: string,
+    operator: string,
+    value: string
+}
+
+type BoundingBoxTemplate = {
+    top_left: {
+        lat: number,
+        lon: number
+    },
+    bottom_right: {
+        lat: number,
+        lon: number
+    }
+}
+
 type SearchGroupTicketsParams = {
     group_id: number,
-    query_params: Array<{
-        field: string,
-        operator: string,
-        value: string
-    }>,
-    bounding_box: {
-        top_left: {
-            lat: number,
-            lon: number
-        },
-        bottom_right: {
-            lat: number,
-            lon: number
-        }
-    },
+    query_params: Array<QueryParamTemplate>,
+    bounding_box: BoundingBoxTemplate,
     timezone: string
 }
 
@@ -70,7 +74,7 @@ type CreateTicketDataItemParams = {
 
 type DeleteTicketDataItemParams = {
     ticket_id: number,
-    data_type_id: number
+    data_item_id: number
 }
 
 type CreateClonedTicketParams = {
@@ -320,13 +324,18 @@ export default class Tickets extends Resource {
      * @apiDescription Get all tickets from the specified group that satisfy the search criteria, now we support field bundle_autoassign with
                        operator = and values true or false
      * @apiParam {Number} group_id
+     * @apiParam {Array<QueryParamTemplate>} query_params
+     * @apiParam {BoundingBoxTemplate} bounding_box
+     * @apiParam {String} timezone
      * @apiExample {js} Example:
      *             gigwalk.customers.searchGroupTickets({...})
      */
     searchGroupTickets(params: SearchGroupTicketsParams): APIPromise<SearchGroupTicketsData> {
-        const url = '/v1';
+        const url = `/v1/groups/${params.group_id}/tickets/search`;
         const data = {
-            params
+            query_params: params.query_params,
+            bounding_box: params.bounding_box,
+            timezone: params.timezone
         };
 
         return this.client.post(url, data);
@@ -340,12 +349,7 @@ export default class Tickets extends Resource {
      *             gigwalk.customers.getCurrentCustomerTickets({...})
      */
     getCurrentCustomerTickets(): APIPromise<GetCurrentCustomerTicketsData> {
-        const url = '/v1';
-        const data = {
-
-        };
-
-        return this.client.get(url, data);
+        return this.client.get('/v1/tickets/my_list');
     }
 
     /**
@@ -357,12 +361,9 @@ export default class Tickets extends Resource {
      *             gigwalk.customers.getCustomerTickets({...})
      */
     getCustomerTickets(params: GetCustomerTicketsParams): APIPromise<GetCustomerTicketsData> {
-        const url = '/v1';
-        const data = {
-            params
-        };
+        const url = `/v1/customers/${params.customer_id}/tickets`;
 
-        return this.client.get(url, data);
+        return this.client.get(url);
     }
 
     /**
@@ -371,13 +372,14 @@ export default class Tickets extends Resource {
      * @apiDescription Search all tickets of the organization for the given string This searches all strings in the ES document and finds a match if any
                        of these string contain the given string
      * @apiParam {Number} organization_id
+     * @apiParam {String} query_string
      * @apiExample {js} Example:
      *             gigwalk.customers.searchOrganizationTickets({...})
      */
     searchOrganizationTickets(params: SearchOrganizationTicketsParams): APIPromise<SearchOrganizationTicketsData> {
-        const url = '/v1';
+        const url = `/v2/organizations/${params.organization_id}/search/tickets`;
         const data = {
-            params
+            query_string: params.query_string
         };
 
         return this.client.post(url, data);
@@ -389,13 +391,16 @@ export default class Tickets extends Resource {
      * @apiDescription Search all tickets of the org for the given value This searches the specified search_field in the ES document and finds a match only
                        if the search_field contains the given value
      * @apiParam {Number} organization_id
+     * @apiParam {String} search_field
+     * @apiParam {String} query_string
      * @apiExample {js} Example:
      *             gigwalk.customers.searchOrganizationTicketsWithField({...})
      */
     searchOrganizationTicketsWithField(params: SearchOrganizationTicketsWithFieldParams): APIPromise<SearchOrganizationTicketsWithFieldData> {
-        const url = '/v1';
+        const url = `/v2/organizations/${params.organization_id}/search/tickets/filters`;
         const data = {
-            params
+            search_field: params.search_field,
+            query_string: params.query_string
         };
 
         return this.client.post(url, data);
@@ -406,14 +411,13 @@ export default class Tickets extends Resource {
      * @apiName createTicketDataItem
      * @apiDescription Create a new data_item for the ticket Create a new data_item using the values specified in the JSON payload
      * @apiParam {Number} ticket_id
+     * @apiParam {DataItemTemplate} data_item
      * @apiExample {js} Example:
      *             gigwalk.customers.createTicketDataItem({...})
      */
     createTicketDataItem(params: CreateTicketDataItemParams): APIPromise<CreateTicketDataItemData> {
-        const url = '/v1';
-        const data = {
-            params
-        };
+        const url = `/v1/tickets/${params.ticket_id}/data_items`;
+        const data = params.data_item;
 
         return this.client.post(url, data);
     }
@@ -428,12 +432,9 @@ export default class Tickets extends Resource {
      *             gigwalk.customers.deleteTicketDataItem({...})
      */
     deleteTicketDataItem(params: DeleteTicketDataItemParams): APIPromise<DeleteTicketDataItemData> {
-        const url = '/v1';
-        const data = {
-            params
-        };
+        const url = `/v1/tickets/${params.ticket_id}/data_items/${params.data_item_id}`;
 
-        return this.client.delete(url, data);
+        return this.client.delete(url);
     }
 
     /**
@@ -446,12 +447,9 @@ export default class Tickets extends Resource {
      *             gigwalk.customers.createClonedTicket({...})
      */
     createClonedTicket(params: CreateClonedTicketParams): APIPromise<CreateClonedTicketData> {
-        const url = '/v1';
-        const data = {
-            params
-        };
+        const url = `/v1/tickets/${params.ticket_id}/clone`;
 
-        return this.client.post(url, data);
+        return this.client.post(url);
     }
 
     /**
@@ -463,12 +461,9 @@ export default class Tickets extends Resource {
      *             gigwalk.customers.submitTicket({...})
      */
     submitTicket(params: SubmitTicketParams): APIPromise<SubmitTicketData> {
-        const url = '/v1';
-        const data = {
-            params
-        };
+        const url = `/v1/tickets/${params.ticket_id}/submit`;
 
-        return this.client.post(url, data);
+        return this.client.post(url);
     }
 
     /**
@@ -480,12 +475,9 @@ export default class Tickets extends Resource {
      *             gigwalk.customers.getTicket({...})
      */
     getTicket(params: GetTicketParams): APIPromise<GetTicketData> {
-        const url = '/v1';
-        const data = {
-            params
-        };
+        const url = `/v1/tickets/${params.ticket_id}`;
 
-        return this.client.get(url, data);
+        return this.client.get(url);
     }
 
     /**
@@ -494,14 +486,13 @@ export default class Tickets extends Resource {
      * @apiDescription Search tickets. This seems deprecated and the semantics do not look right either. Why would a ticket_id be passed to a search?
                        You should use only API /v1/tickets/search. The other endpoints are also directed to the search method.
      * @apiParam {Number} ticket_id
+     * @apiParam {TicketSearchTemplate} query
      * @apiExample {js} Example:
      *             gigwalk.customers.searchTicketsWithID({...})
      */
     searchTicketsWithID(params: SearchTicketsWithIDParams): APIPromise<SearchTicketsWithIDData> {
-        const url = '/v1';
-        const data = {
-            params
-        };
+        const url = `/v1/tickets/${params.ticket_id}`;
+        const data = params.query;
 
         return this.client.post(url, data);
     }
@@ -512,13 +503,18 @@ export default class Tickets extends Resource {
      * @apiDescription Edit tickets If the ticket_id is present assign the corresponding ticket. Otherwise perform action to multiple tickets identified
                        by the data arguments.
      * @apiParam {Number} ticket_id
+     * @apiParam {String} action
+     * @apiParam {Array<number>} ticket_ids
+     * @apiParam {String} customer_id
      * @apiExample {js} Example:
      *             gigwalk.customers.updateTicket({...})
      */
     updateTicket(params: UpdateTicketParams): APIPromise<UpdateTicketData> {
-        const url = '/v1';
+        const url = `/v1/tickets/${params.ticket_id}`;
         const data = {
-            params
+            action: params.action,
+            ticket_ids: params.ticket_ids,
+            customer_id: params.customer_id
         };
 
         return this.client.put(url, data);
@@ -532,28 +528,21 @@ export default class Tickets extends Resource {
      *             gigwalk.customers.getTickets({...})
      */
     getTickets(): APIPromise<GetTicketsData> {
-        const url = '/v1';
-        const data = {
-
-        };
-
-        return this.client.get(url, data);
+        return this.client.get('/v1/tickets');
     }
 
     /**
      * @api {post} /v1/tickets
      * @apiName searchTickets
      * @apiDescription Search tickets. You should use only API /v1/tickets/search. The other endpoints are also directed to the search method.
+     * @apiParam {TicketSearchTemplate} query
      * @apiExample {js} Example:
      *             gigwalk.customers.searchTickets({...})
      */
     searchTickets(params: SearchTicketsParams): APIPromise<SearchTicketsData> {
-        const url = '/v1';
-        const data = {
-            params
-        };
+        const data = params.query;
 
-        return this.client.post(url, data);
+        return this.client.post('/v1/tickets', data);
     }
 
     /**
@@ -563,13 +552,18 @@ export default class Tickets extends Resource {
                        by the data arguments.
      * @apiParam {Number} ticket_id
      * @apiParam {Number} execution_state
+     * @apiParam {String} action
+     * @apiParam {Array<number>} ticket_ids
+     * @apiParam {String} customer_id
      * @apiExample {js} Example:
      *             gigwalk.customers.updateTicketWithState({...})
      */
     updateTicketWithState(params: UpdateTicketWithStateParams): APIPromise<UpdateTicketWithStateData> {
-        const url = '/v1';
+        const url = `/v1/tickets/${params.ticket_id}/execution_state/${params.execution_state}`;
         const data = {
-            params
+            action: params.action,
+            ticket_ids: params.ticket_ids,
+            customer_id: params.customer_id
         };
 
         return this.client.put(url, data);
@@ -584,12 +578,9 @@ export default class Tickets extends Resource {
      *             gigwalk.customers.getOrganizationTickets({...})
      */
     getOrganizationTickets(params: GetOrganizationTicketsParams): APIPromise<GetOrganizationTicketsData> {
-        const url = '/v1';
-        const data = {
-            params
-        };
+        const url = `/v1/organizations/${params.organization_id}/tickets`;
 
-        return this.client.get(url, data);
+        return this.client.get(url);
     }
 
     /**
@@ -598,14 +589,13 @@ export default class Tickets extends Resource {
      * @apiDescription Search tickets filtered by the organization This returns tickets of the specified organization that match the search criteria
                        specified in JSON
      * @apiParam {Number} organization_id
+     * @apiParam {TicketSearchTemplate} query
      * @apiExample {js} Example:
      *             gigwalk.customers.searchOrganizationTicketsWithCriteria({...})
      */
     searchOrganizationTicketsWithCriteria(params: SearchOrganizationTicketsWithCriteriaParams): APIPromise<SearchOrganizationTicketsWithCriteriaData> {
-        const url = '/v1';
-        const data = {
-            params
-        };
+        const url = `/v1/organizations/${params.organization_id}/tickets/search`;
+        const data = params.query;
 
         return this.client.post(url, data);
     }
@@ -619,12 +609,9 @@ export default class Tickets extends Resource {
      *             gigwalk.customers.getSubscriptionTickets({...})
      */
     getSubscriptionTickets(params: GetSubscriptionTicketsParams): APIPromise<GetSubscriptionTicketsData> {
-        const url = '/v1';
-        const data = {
-            params
-        };
+        const url = `/v1/subscriptions/${params.subscription_id}/tickets`;
 
-        return this.client.get(url, data);
+        return this.client.get(url);
     }
 
     /**
@@ -633,14 +620,13 @@ export default class Tickets extends Resource {
      * @apiDescription Search tickets filtered by the organization_subscription (project) This returns tickets of the specified organization_subscription
                        that match the search criteria specified in JSON
      * @apiParam {Number} subscription_id
+     * @apiParam {TicketSearchTemplate} query
      * @apiExample {js} Example:
      *             gigwalk.customers.searchSubscriptionTickets({...})
      */
     searchSubscriptionTickets(params: SearchSubscriptionTicketsParams): APIPromise<SearchSubscriptionTicketsData> {
-        const url = '/v1';
-        const data = {
-            params
-        };
+        const url = `/v1/subscriptions/${params.subscription_id}/tickets/search`;
+        const data = params.query
 
         return this.client.post(url, data);
     }
@@ -654,12 +640,9 @@ export default class Tickets extends Resource {
      *             gigwalk.customers.getTicketEvents({...})
      */
     getTicketEvents(params: GetTicketEventsParams): APIPromise<GetTicketEventsData> {
-        const url = '/v1';
-        const data = {
-            params
-        };
+        const url = `/v1/tickets/${params.ticket_id}/events`;
 
-        return this.client.get(url, data);
+        return this.client.get(url);
     }
 
     /**
@@ -675,11 +658,12 @@ export default class Tickets extends Resource {
      *             gigwalk.customers.getTicketsInArea({...})
      */
     getTicketsInArea(params: GetTicketsInAreaParams): APIPromise<GetTicketsInAreaData> {
-        const url = '/v1';
         const data = {
-            params
+            map_lat: params.map_lat,
+            map_lon: params.map_lon,
+            radius: params.radius,
         };
 
-        return this.client.get(url, data);
+        return this.client.get('/v1/ticket_map', data);
     }
 }
