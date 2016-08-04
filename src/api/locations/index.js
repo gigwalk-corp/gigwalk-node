@@ -50,17 +50,17 @@ type GetOrganizationLocationParams = {
 
 type CreateOrganizationLocationParams = {
     organization_id: number,
-    address: string,
     title: string,
-    organization_data: {}
+    address: string,
+    organization_data: Object
 }
 
 type UpdateOrganizationLocationParams = {
     organization_id: number,
     location_id: number,
-    address: string,
     title: string,
-    organization_data: {}
+    address: string,
+    organization_data: Object
 }
 
 type CreateOrganizationLocationListParams = {
@@ -133,12 +133,7 @@ export default class Locations extends Resource {
      *             gigwalk.customers.getLocations({...})
      */
     getLocations(): APIPromise<GetLocationsData> {
-        const url = '/v1';
-        const data = {
-
-        };
-
-        return this.client.get(url, data);
+        return this.client.get('/v1/locations');
     }
 
     /**
@@ -147,16 +142,16 @@ export default class Locations extends Resource {
      * @apiDescription Create new locations with the current_user's organization. JSON payload is an array. Mandatory fields are (title, locality,
                        admin_area_level_1, country, postal_code, latitude, longitude, formatted_address). Optional fields are (admin_area_level_2, status,
                        timezone_id). No check for update permission!
+     * @apiParam {Array<LocationTemplate>} locations
      * @apiExample {js} Example:
      *             gigwalk.customers.createLocations({...})
      */
     createLocations(params: CreateLocationsParams): APIPromise<CreateLocationsData> {
-        const url = '/v1';
         const data = {
-            params
+            locations: params.locations
         };
 
-        return this.client.post(url, data);
+        return this.client.post('/v1/locations', data);
     }
 
     /**
@@ -169,12 +164,9 @@ export default class Locations extends Resource {
      *             gigwalk.customers.getLocation({...})
      */
     getLocation(params: GetLocationParams): APIPromise<GetLocationData> {
-        const url = '/v1';
-        const data = {
-            params
-        };
+        const url = `/v1/locations/${params.location_id}`;
 
-        return this.client.get(url, data);
+        return this.client.get(url);
     }
 
     /**
@@ -187,12 +179,9 @@ export default class Locations extends Resource {
      *             gigwalk.customers.getOrganizationLocations({...})
      */
     getOrganizationLocations(params: GetOrganizationLocationsParams): APIPromise<GetOrganizationLocationsData> {
-        const url = '/v1';
-        const data = {
-            params
-        };
+        const url = `/v1/organizations/${params.organization_id}/locations`;
 
-        return this.client.get(url, data);
+        return this.client.get(url);
     }
 
     /**
@@ -202,13 +191,14 @@ export default class Locations extends Resource {
                        admin_area_level_1, country, postal_code, latitude, longitude, formatted_address). Optional fields are (admin_area_level_2, status,
                        timezone_id). No check for create permission!
      * @apiParam {Number} organization_id
+     * @apiParam {Array<LocationTemplate>} locations
      * @apiExample {js} Example:
      *             gigwalk.customers.createOrganizationLocations({...})
      */
     createOrganizationLocations(params: CreateOrganizationLocationsParams): APIPromise<CreateOrganizationLocationsData> {
-        const url = '/v1';
+        const url = `/v1/organizations/${params.organization_id}/locations`;
         const data = {
-            params
+            locations: params.locations
         };
 
         return this.client.post(url, data);
@@ -221,13 +211,14 @@ export default class Locations extends Resource {
                        can be an array of (id, title, locality, admin_area_level_1/2, country, postal_code, latitude, longitude, formatted_address, status,
                        timezone_id). No check for update permission! No check for create permission!
      * @apiParam {Number} organization_id
+     * @apiParam {Array<LocationTemplate>} locations
      * @apiExample {js} Example:
      *             gigwalk.customers.updateOrganizaionLocations({...})
      */
     updateOrganizaionLocations(params: UpdateOrganizationLocationsParams): APIPromise<UpdateOrganizaionLocationsData> {
-        const url = '/v1';
+        const url = `/v1/organizations/${params.organization_id}/locations`;
         const data = {
-            params
+            locations: params.locations
         };
 
         return this.client.put(url, data);
@@ -243,12 +234,9 @@ export default class Locations extends Resource {
      *             gigwalk.customers.deleteOrganizationLocation({...})
      */
     deleteOrganizationLocation(params: DeleteOrganizationLocationParams): APIPromise<DeleteOrganizationLocationData> {
-        const url = '/v1';
-        const data = {
-            params
-        };
+        const url = `/v1/organizations/${params.organization_id}/locations/${params.location_id}`;
 
-        return this.client.delete(url, data);
+        return this.client.delete(url);
     }
 
     /**
@@ -263,12 +251,9 @@ export default class Locations extends Resource {
      *             gigwalk.customers.getOrganizationLocation({...})
      */
     getOrganizationLocation(params: GetOrganizationLocationParams): APIPromise<GetOrganizationLocationData> {
-        const url = '/v1';
-        const data = {
-            params
-        };
+        const url = `/v1/organizations/${params.organization_id}/locations/${params.location_id}`;
 
-        return this.client.get(url, data);
+        return this.client.get(url);
     }
 
     /**
@@ -276,13 +261,16 @@ export default class Locations extends Resource {
      * @apiName createOrganizationLocation
      * @apiDescription This endpoint adds metadata items to organization location metadata, as well as creates a new location with the address and title.
      * @apiParam {Number} organization_id
+     * @apiParam {String} title
+     * @apiParam {Object} organization_data
      * @apiExample {js} Example:
      *             gigwalk.customers.createOrganizationLocation({...})
      */
     createOrganizationLocation(params: CreateOrganizationLocationParams): APIPromise<CreateOrganizationLocationData> {
-        const url = '/v1';
+        const url = `/v1/organizations/${params.organization_id}/locations/geocode`;
         const data = {
-            params
+            title: params.title,
+            organization_data: params.organization_data
         };
 
         return this.client.post(url, data);
@@ -294,13 +282,16 @@ export default class Locations extends Resource {
      * @apiDescription This endpoint adds metadata items to organization location metadata, as well as modifies the address or title of the location.
      * @apiParam {Number} organization_id
      * @apiParam {Number} location_id
+     * @apiParam {String} title
+     * @apiParam {Object} organization_data
      * @apiExample {js} Example:
      *             gigwalk.customers.updateOrganizationLocation({...})
      */
     updateOrganizationLocation(params: UpdateOrganizationLocationParams): APIPromise<UpdateOrganizationLocationData> {
-        const url = '/v1';
+        const url = `/v1/organizations/${params.organization_id}/locations/geocode/${params.location_id}`;
         const data = {
-            params
+            title: params.title,
+            organization_data: params.organization_data
         };
 
         return this.client.put(url, data);
@@ -317,11 +308,8 @@ export default class Locations extends Resource {
      *             gigwalk.customers.createOrganizationLocationList({...})
      */
     createOrganizationLocationList(params: CreateOrganizationLocationListParams): APIPromise<CreateOrganizationLocationListData> {
-        const url = '/v1';
-        const data = {
-            params
-        };
+        const url = `/v1/organizations/${params.organization_id}/subscriptions/${params.subscription_id}/locations`;
 
-        return this.client.post(url, data);
+        return this.client.post(url);
     }
 }

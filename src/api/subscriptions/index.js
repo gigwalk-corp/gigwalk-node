@@ -197,12 +197,9 @@ export default class Subscriptions extends Resource {
      *             gigwalk.customers.deleteSubscription({...})
      */
     deleteSubscription(params: DeleteSubscriptionParams): APIPromise<DeleteSubscriptionData> {
-        const url = '/v1';
-        const data = {
-            params
-        };
+        const url = `/v1/organization_subscriptions/${params.organization_subscription_id}`;
 
-        return this.client.delete(url, data);
+        return this.client.delete(url);
     }
 
     /**
@@ -215,12 +212,9 @@ export default class Subscriptions extends Resource {
      *             gigwalk.customers.getSubscription({...})
      */
     getSubscription(params: GetSubscriptionParams): APIPromise<GetSubscriptionData> {
-        const url = '/v1';
-        const data = {
-            params
-        };
+        const url = `/v1/organization_subscriptions/${params.organization_subscription_id}`;
 
-        return this.client.get(url, data);
+        return this.client.get(url);
     }
 
     /**
@@ -229,13 +223,14 @@ export default class Subscriptions extends Resource {
      * @apiDescription Schedule autoassignment for the given organization_subscription; or create a new org_subscription by cloning the given org_subscription
                        and return the info
      * @apiParam {Number} organization_subscription_id
+     * @apiParam {String} action
      * @apiExample {js} Example:
      *             gigwalk.customers.createClonedSubscription({...})
      */
     createClonedSubscription(params: CreateClonedSubscriptionParams): APIPromise<CreateClonedSubscriptionData> {
-        const url = '/v1';
+        const url = `/v1/organization_subscriptions/${params.organization_subscription_id}`;
         const data = {
-            params
+            action: params.action
         };
 
         return this.client.post(url, data);
@@ -247,14 +242,13 @@ export default class Subscriptions extends Resource {
      * @apiDescription Using the given parameters, update the organization_subscription
      * @apiParam {Number} organization_subscription_id
      * @apiParam {Number} version_id
+     * @apiParam {SubscriptionTemplate} subscription
      * @apiExample {js} Example:
      *             gigwalk.customers.updateSubscription({...})
      */
     updateSubscription(params: UpdateSubscriptionParams): APIPromise<UpdateSubscriptionData> {
-        const url = '/v1';
-        const data = {
-            params
-        };
+        const url = `/v1/organization_subscriptions/${params.organization_subscription_id}`;
+        const data = params.subscription;
 
         return this.client.put(url, data);
     }
@@ -264,13 +258,14 @@ export default class Subscriptions extends Resource {
      * @apiName createSubscriptions
      * @apiDescription Create new organization_subscriptions using the data provided (max 5)
      * @apiParam {Number} organization_id
+     * @apiParam {Array<SubscriptionTemplate>} subscriptions
      * @apiExample {js} Example:
      *             gigwalk.customers.createSubscriptions({...})
      */
     createSubscriptions(params: CreateSubscriptionsParams): APIPromise<CreateSubscriptionsData> {
-        const url = '/v1';
+        const url = `/v1/organizations/${params.organization_id}/subscriptions`;
         const data = {
-            params
+            subscriptions: params.subscriptions
         };
 
         return this.client.post(url, data);
@@ -281,13 +276,14 @@ export default class Subscriptions extends Resource {
      * @apiName searchSubscriptionsWithParams
      * @apiDescription search_parameters can be of the form key op value e.g. date_created > now, or title = 'project_name'
      * @apiParam {Number} organization_id
+     * @apiParam {String} query_string
      * @apiExample {js} Example:
      *             gigwalk.customers.searchSubscriptionsWithParams({...})
      */
     searchSubscriptionsWithParams(params: SearchSubscriptionsWithParamsParams): APIPromise<SearchSubscriptionsWithParamsData> {
-        const url = '/v1';
+        const url = `/v1/organizations/${params.organization_id}/subscriptions/search`;
         const data = {
-            params
+            query_string: params.query_string
         };
 
         return this.client.post(url, data);
@@ -303,12 +299,9 @@ export default class Subscriptions extends Resource {
      *             gigwalk.customers.deleteOrganizationSubscription({...})
      */
     deleteOrganizationSubscription(params: DeleteOrganizationSubscriptionParams): APIPromise<DeleteOrganizationSubscriptionData> {
-        const url = '/v1';
-        const data = {
-            params
-        };
+        const url = `/v1/organizations/${params.organization_id}/subscriptions/${params.organization_subscription_id}`;
 
-        return this.client.delete(url, data);
+        return this.client.delete(url);
     }
 
     /**
@@ -318,14 +311,13 @@ export default class Subscriptions extends Resource {
      * @apiParam {Number} organization_id
      * @apiParam {Number} organization_subscription_id
      * @apiParam {Number} version_id
+     * @apiParam {SubscriptionTemplate} subscription
      * @apiExample {js} Example:
      *             gigwalk.customers.updateOrganizationSubscription({...})
      */
     updateOrganizationSubscription(params: UpdateOrganizationSubscriptionParams): APIPromise<UpdateOrganizationSubscriptionData> {
-        const url = '/v1';
-        const data = {
-            params
-        };
+        const url = `/v1/organizations/${params.organization_id}/subscriptions/${params.organization_subscription_id}`;
+        const data = params.subscription;
 
         return this.client.put(url, data);
     }
@@ -336,13 +328,16 @@ export default class Subscriptions extends Resource {
      * @apiDescription This searches the specified search_field in the ES document and finds a match only if the specified search_field contain the
                        given value. Does not handle limit/offset, metadata not filled up, why?
      * @apiParam {Number} organization_id
+     * @apiParam {String} search_field
+     * @apiParam {String} query_string
      * @apiExample {js} Example:
      *             gigwalk.customers.searchSubscriptionsWithField({...})
      */
     searchSubscriptionsWithField(params: SearchSubscriptionsWithFieldParams): APIPromise<SearchSubscriptionsWithFieldData> {
-        const url = '/v1';
+        const url = `/v2/organizations/${params.organization_id}/search/subscriptions/filters`;
         const data = {
-            params
+            search_field: params.search_field,
+            query_string: params.query_string
         };
 
         return this.client.post(url, data);
@@ -354,13 +349,14 @@ export default class Subscriptions extends Resource {
      * @apiDescription This searches all strings in the ES document and finds a match if any of these strings contain the given string. Metadata not
                        filled up, why?
      * @apiParam {Number} organization_id
+     * @apiParam {String} query_string
      * @apiExample {js} Example:
      *             gigwalk.customers.searchSubscriptions({...})
      */
     searchSubscriptions(params: SearchSubscriptionsParams): APIPromise<SearchSubscriptionsData> {
-        const url = '/v1';
+        const url = `/v2/organizations/${params.organization_id}/search/subscriptions`;
         const data = {
-            params
+            query_string: params.query_string
         };
 
         return this.client.post(url, data);
