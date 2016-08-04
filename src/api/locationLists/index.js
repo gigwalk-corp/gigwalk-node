@@ -3,14 +3,14 @@ import Resource from '../resource';
 import type { APIPromise } from '../resource';
 
 type SimpleLocationTemplate = {
-    address: string,
-    title: string
+    title: string,
+    address: string
 }
 
 type LocationListTemplate = {
-    name: string,
-    status: string,
-    locations: Array<SimpleLocationTemplate>
+    name?: string,
+    status?: string,
+    locations?: Array<SimpleLocationTemplate>
 }
 
 type DeleteLocationListParams = {
@@ -26,7 +26,7 @@ type UpdateLocationListParams = {
     location_list: LocationListTemplate
 }
 
-type DeleteOrganizationLocationListParams = {
+type DeleteOrganizationLocationListsParams = {
     organization_id: number,
     location_list_ids: Array<number>
 }
@@ -50,7 +50,7 @@ type DeleteLocationFromListParams = {
     location_id: number
 }
 
-type GetLocationDetailsForListParams = {
+type GetLocationsInListParams = {
     organization_location_list_id: number
 }
 
@@ -66,7 +66,7 @@ type RemoveLocationsFromListParams = {
 
 type SearchLocationListParams = {
     organization_location_list_id: number,
-    query_string: string
+    query_string?: string
 }
 
 type GetFileInfoForLocationListParams = {
@@ -177,7 +177,7 @@ type UpdateLocationListData = [
     LocationListSchema
 ]
 
-type DeleteOrganizationLocationListData = [
+type DeleteOrganizationLocationListsData = [
     number
 ]
 
@@ -195,7 +195,7 @@ type DeleteLocationFromListData = [
     number
 ]
 
-type GetLocationDetailsForListData = Array<LocationSchema>
+type GetLocationsInListData = Array<LocationSchema>
 
 type AddLocationsToListData = Array<LocationSchema>
 
@@ -257,7 +257,7 @@ export default class LocationLists extends Resource {
                        ('name': location_list_name, 'status': active/inactive/archive/deleted, 'locations': array of locations) 2. Addresses can be uploaded
                        from a csv file 3. Location ids can be uploaded from a spreadsheet.
      * @apiParam {Number} organization_location_list_id
-     * @apiParam {LocationListTemplate} location_list
+     * @apiParam {} location_list
      * @apiExample {js} Example:
      *             gigwalk.customers.updateLocationList({...})
      */
@@ -270,20 +270,19 @@ export default class LocationLists extends Resource {
 
     /**
      * @api {delete} /v1/organizations/{organization_id}/location_lists
-     * @apiName deleteOrganizationLocationList
+     * @apiName deleteOrganizationLocationLists
      * @apiDescription Delete the specified location list. If location list is associated with an active organization_subscription, it cannot be deleted.
                        This is a soft delete - location list is inactivated, not deleted from the db.
      * @apiParam {Number} organization_id
      * @apiParam {Array<Number>} location_list_ids
      * @apiExample {js} Example:
-     *             gigwalk.customers.deleteOrganizationLocationList({...})
+     *             gigwalk.customers.deleteOrganizationLocationLists({...})
      */
-    deleteOrganizationLocationList(params: DeleteOrganizationLocationListParams): APIPromise<DeleteOrganizationLocationListData> {
+    deleteOrganizationLocationLists(params: DeleteOrganizationLocationListsParams): APIPromise<DeleteOrganizationLocationListsData> {
         const url = `/v1/organizations/${params.organization_id}/location_lists`;
         const data = {
             location_list_ids: params.location_list_ids
         };
-
         return this.client.delete(url, data);
     }
 
@@ -309,7 +308,7 @@ export default class LocationLists extends Resource {
                        specified in JSON format - ('name': location_list_name, 'status': active/inactive/archive/deleted, 'locations': array of locations)
                        2. Addresses can be uploaded from a csv file 3. Location ids can be uploaded from a spreadsheet.
      * @apiParam {Number} organization_id
-     * @apiParam {LocationListTemplate} location_list
+     * @apiParam {} location_list
      * @apiExample {js} Example:
      *             gigwalk.customers.createOrganizationLocationList({...})
      */
@@ -352,14 +351,14 @@ export default class LocationLists extends Resource {
 
     /**
      * @api {get} /v1/location_lists/{organization_location_list_id}/locations
-     * @apiName getLocationDetailsForList
+     * @apiName getLocationsInList
      * @apiDescription Get all the locations of the given location_list For each location, return (location_id, title, specificity, locality,
                        admin_area_level_1/2, country, postal_code, lat/lon, formatted_address, state, status, timezone_id, source_location_id, org_id, org_data)
      * @apiParam {Number} organization_location_list_id
      * @apiExample {js} Example:
-     *             gigwalk.customers.getLocationDetailsForList({...})
+     *             gigwalk.customers.getLocationsInList({...})
      */
-    getLocationDetailsForList(params: GetLocationDetailsForListParams): APIPromise<GetLocationDetailsForListData> {
+    getLocationsInList(params: GetLocationsInListParams): APIPromise<GetLocationsInListData> {
         const url = `/v1/location_lists/${params.organization_location_list_id}/locations`;
 
         return this.client.get(url);
@@ -378,9 +377,15 @@ export default class LocationLists extends Resource {
      */
     addLocationsToList(params: AddLocationsToListParams): APIPromise<AddLocationsToListData> {
         const url = `/v1/location_lists/${params.organization_location_list_id}/locations`;
-        const data = {
-            locations: params.locations
+        let locations = [];
+        let i: number = 0;
+        for (i; i < params.locations.length; i++) {
+            const id: number = params.locations[i];
+            locations.push({
+                id
+            });
         };
+        const data = locations
 
         return this.client.post(url, data);
     }
@@ -397,6 +402,7 @@ export default class LocationLists extends Resource {
     removeLocationsFromList(params: RemoveLocationsFromListParams): APIPromise<RemoveLocationsFromListData> {
         const url = `/v1/location_lists/${params.organization_location_list_id}/locations`;
         const data = {
+            action: 'remove',
             locations: params.locations
         };
 
@@ -459,13 +465,16 @@ export default class LocationLists extends Resource {
      * @apiName createOrganizationLocationListUsingFile
      * @apiDescription Upload location list data JSON payload should have Amazon S3 key and location list file name
      * @apiParam {Number} organization_id
+     * @apiParam {String} location_list_name
+     * @apiParam {Array<String>} s3_keys
      * @apiExample {js} Example:
      *             gigwalk.customers.createOrganizationLocationListUsingFile({...})
      */
     createOrganizationLocationListUsingFile(params: CreateOrganizationLocationListUsingFileParams): APIPromise<CreateOrganizationLocationListUsingFileData> {
         const url = `/v1/organizations/${params.organization_id}/location_lists/upload`;
         const data = {
-            s3_keys: params.s3_keys
+            location_list_name: params.location_list_name,
+            keys: params.s3_keys
         };
 
         return this.client.post(url, data);

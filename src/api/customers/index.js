@@ -66,7 +66,7 @@ type UpdateCustomerParams = {
 }
 
 type SearchCustomersParams = {
-  ticket_ids: Array<number>
+    ticket_ids: Array<number>
 }
 
 type CustomerSchema = {
