@@ -9,7 +9,7 @@
     "postbuild": "gulp",
     "eslint": "eslint .",
     "flow": "flow",
-    "test": "NODE_ENV=test mocha",
+    "test": "NODE_ENV=test mocha --timeout 20000",
     "test-debug": "bugger --brk ./node_modules/.bin/_mocha",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
