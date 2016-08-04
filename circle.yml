@@ -1,7 +1,15 @@
 machine:
-    node:
-        version: 6.3.1
+  node:
+    version: 6.3.1
+
 test:
-    post:
-        - npm run flow
-        - npm run eslint
+  post:
+    - npm run flow
+    - npm run eslint
+
+deployment:
+  npm:
+    branch: master
+    owner: gigwalk-corp
+    commands:
+        - npm run semantic-release
