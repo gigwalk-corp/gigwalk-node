@@ -34,11 +34,11 @@ type TicketEventSchema = {
 
 type CreateTicketEventData = [
     TicketEventSchema
-]
+    ]
 
 type DeleteTicketEventData = [
     number
-]
+    ]
 
 export default class TicketEvents extends Resource {
     /**
@@ -46,14 +46,13 @@ export default class TicketEvents extends Resource {
      * @apiName createTicketEvent
      * @apiDescription Create a new ticket event for the specified ticket JSON payload can have (ticket_event_type, ticket_event_date, ticket_event_data)
      * @apiParam {Number} ticket_id
+     * @apiParam {TicketEventTemplate} ticket_event
      * @apiExample {js} Example:
      *             gigwalk.customers.createTicketEvent({...})
      */
     createTicketEvent(params: CreateTicketEventParams): APIPromise<CreateTicketEventData> {
-        const url = '/v1';
-        const data = {
-            params
-        };
+        const url = `/v1/tickets/${params.ticket_id}/events`;
+        const data = params.ticket_event;
 
         return this.client.post(url, data);
     }
@@ -67,11 +66,8 @@ export default class TicketEvents extends Resource {
      *             gigwalk.customers.deleteTicketEvent({...})
      */
     deleteTicketEvent(params: DeleteTicketEventParams): APIPromise<DeleteTicketEventData> {
-        const url = '/v1';
-        const data = {
-            params
-        };
+        const url = `/v1/ticket_events/${params.ticket_event_id}`;
 
-        return this.client.delete(url, data);
+        return this.client.delete(url);
     }
 }
