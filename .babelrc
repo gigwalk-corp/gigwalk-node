@@ -5,7 +5,8 @@
   ],
   "plugins": [
       "transform-flow-comments",
-      "syntax-flow"
+      "syntax-flow",
+      "transform-runtime"
   ],
   "env": {
     "test": {
