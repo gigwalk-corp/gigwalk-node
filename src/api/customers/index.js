@@ -3,19 +3,20 @@ import Resource from '../resource';
 import type { APIPromise } from '../resource';
 
 type CustomerTemplate = {
-  email: string,
-  first_name: string,
-  last_name: string,
-  photo_url: string,
-  address_line_1: string,
-  address_line_2: string,
-  phonenumber: string,
-  customer_status: string,
-  max_hours_week: number,
-  ideal_hours_week: number,
-  home_latitude: number,
-  home_longitude: number,
-  certifications: Array<number>
+    customer_id?: number,
+    email?: string,
+    first_name?: string,
+    last_name?: string,
+    photo_url?: string,
+    address_line_1?: string,
+    address_line_2?: string,
+    phonenumber?: string,
+    customer_status?: string,
+    max_hours_week?: number,
+    ideal_hours_week?: number,
+    home_latitude?: number,
+    home_longitude?: number,
+    certifications?: Array<number>
 }
 
 type DeleteCustomerWithEmailParams = {
@@ -93,15 +94,7 @@ type CustomerSchema = {
         role: string,
         group_id: number
     }>,
-    organization: {
-        organization_name: string,
-        id: number,
-        cannot_opt_out: boolean,
-        vertical_type: string,
-        core_customer_account: string,
-        core_private_workforce: string,
-        needs_core: boolean
-    },
+    organization: Object,
     metadata: Object
 }
 
