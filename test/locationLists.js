@@ -2,7 +2,7 @@ import LocationLists from '../src/api/locationLists/index';
 import axios from 'axios';
 // import schema from '../src/api/certifications/certifications-schema.json';
 
-describe.only('Loction Lists', () => {
+describe('Loction Lists', () => {
     const client = axios.create({
         baseURL,
         headers: {
@@ -12,6 +12,7 @@ describe.only('Loction Lists', () => {
     const locationLists = new LocationLists(client);
 
     const organizationID: number = 4;
+    const locationIDs: Array<number> = [60, 61, 62];
     let locationListID: number;
     let locationListID2: number;
     let fileUploadID: number;
@@ -73,9 +74,9 @@ describe.only('Loction Lists', () => {
         locationLists.addLocationsToList({
             organization_location_list_id: locationListID,
             locations: [
-                60,
-                61,
-                62
+                locationIDs[0],
+                locationIDs[1],
+                locationIDs[2]
             ]
         })
             .then((res) => {
@@ -89,7 +90,7 @@ describe.only('Loction Lists', () => {
         locationLists.getLocationsInList({
             organization_location_list_id: locationListID,
             locations: [
-                60
+                locationIDs[0]
             ]
         })
             .then((res) => {
@@ -115,7 +116,7 @@ describe.only('Loction Lists', () => {
         locationLists.removeLocationsFromList({
             organization_location_list_id: locationListID,
             locations: [
-                60
+                locationIDs[0]
             ]
         })
             .then((res) => {
@@ -128,7 +129,7 @@ describe.only('Loction Lists', () => {
     it('should be able to delete a location from a list', (done) => {
         locationLists.deleteLocationFromList({
             organization_location_list_id: locationListID,
-            location_id: 61
+            location_id: locationIDs[1]
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
@@ -140,7 +141,7 @@ describe.only('Loction Lists', () => {
     it('should be able to delete a location from an organization list', (done) => {
         locationLists.deleteLocationFromList({
             organization_location_list_id: locationListID,
-            location_id: 62
+            location_id: locationIDs[2]
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
@@ -195,7 +196,6 @@ describe.only('Loction Lists', () => {
             location_list_id: locationListID2
         })
             .then((res) => {
-
                 expect(res.status).to.equal(200);
                 // expect(res.data).to.have.jsonSchema(schema);
                 done();

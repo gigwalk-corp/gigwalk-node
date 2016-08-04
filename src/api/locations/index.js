@@ -6,9 +6,9 @@ type LocationTemplate = {
     title: string,
     locality: string,
     administrative_area_level_1: string,
-    administrative_area_level_2: string,
-    status: string,
-    tzid: string,
+    administrative_area_level_2?: string,
+    status?: string,
+    tzid?: string,
     country: string,
     postal_code: string,
     latitude: number,
@@ -58,8 +58,8 @@ type CreateOrganizationLocationParams = {
 type UpdateOrganizationLocationParams = {
     organization_id: number,
     location_id: number,
-    title: string,
-    address: string,
+    title?: string,
+    address?: string,
     organization_data: Object
 }
 
@@ -262,6 +262,7 @@ export default class Locations extends Resource {
      * @apiDescription This endpoint adds metadata items to organization location metadata, as well as creates a new location with the address and title.
      * @apiParam {Number} organization_id
      * @apiParam {String} title
+     * @apiParam {String} address
      * @apiParam {Object} organization_data
      * @apiExample {js} Example:
      *             gigwalk.customers.createOrganizationLocation({...})
@@ -269,6 +270,7 @@ export default class Locations extends Resource {
     createOrganizationLocation(params: CreateOrganizationLocationParams): APIPromise<CreateOrganizationLocationData> {
         const url = `/v1/organizations/${params.organization_id}/locations/geocode`;
         const data = {
+            address: params.address,
             title: params.title,
             organization_data: params.organization_data
         };
@@ -283,6 +285,7 @@ export default class Locations extends Resource {
      * @apiParam {Number} organization_id
      * @apiParam {Number} location_id
      * @apiParam {String} title
+     * @apiParam {String} address
      * @apiParam {Object} organization_data
      * @apiExample {js} Example:
      *             gigwalk.customers.updateOrganizationLocation({...})
@@ -290,6 +293,7 @@ export default class Locations extends Resource {
     updateOrganizationLocation(params: UpdateOrganizationLocationParams): APIPromise<UpdateOrganizationLocationData> {
         const url = `/v1/organizations/${params.organization_id}/locations/geocode/${params.location_id}`;
         const data = {
+            address: params.address,
             title: params.title,
             organization_data: params.organization_data
         };

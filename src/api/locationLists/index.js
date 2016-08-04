@@ -377,15 +377,15 @@ export default class LocationLists extends Resource {
      */
     addLocationsToList(params: AddLocationsToListParams): APIPromise<AddLocationsToListData> {
         const url = `/v1/location_lists/${params.organization_location_list_id}/locations`;
-        let locations = [];
+        const locations = [];
         let i: number = 0;
         for (i; i < params.locations.length; i++) {
             const id: number = params.locations[i];
             locations.push({
                 id
             });
-        };
-        const data = locations
+        }
+        const data = locations;
 
         return this.client.post(url, data);
     }
