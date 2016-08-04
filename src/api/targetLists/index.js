@@ -156,7 +156,7 @@ export default class TargetLists extends Resource {
     getOrganizationTargetLists(params: GetOrganizationTargetListsParams): APIPromise<GetOrganizationTargetListsData> {
         const url = `/v1/organizations/${params.organization_id}/target_lists`;
 
-        return this.client.get(url, data);
+        return this.client.get(url);
     }
 
     /**

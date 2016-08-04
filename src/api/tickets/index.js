@@ -626,7 +626,7 @@ export default class Tickets extends Resource {
      */
     searchSubscriptionTickets(params: SearchSubscriptionTicketsParams): APIPromise<SearchSubscriptionTicketsData> {
         const url = `/v1/subscriptions/${params.subscription_id}/tickets/search`;
-        const data = params.query
+        const data = params.query;
 
         return this.client.post(url, data);
     }

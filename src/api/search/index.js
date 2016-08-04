@@ -85,7 +85,7 @@ export default class Search extends Resource {
      *             gigwalk.customers.searchOrganization({...})
      */
     searchOrganization(params: SearchOrganizationParams): APIPromise<SearchOrganizationData> {
-        const url = `/v1/organizations/{organization_id}/search/{index_type}`;
+        const url = `/v1/organizations/${params.organization_id}/search/${params.index_type}`;
         const data = {
             q: params.query_string
         };
