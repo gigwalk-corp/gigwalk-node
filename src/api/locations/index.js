@@ -58,8 +58,8 @@ type CreateOrganizationLocationParams = {
 type UpdateOrganizationLocationParams = {
     organization_id: number,
     location_id: number,
-    title?: string,
-    address?: string,
+    title: string,
+    address: string,
     organization_data: Object
 }
 

@@ -5,17 +5,18 @@ import type { APIPromise } from '../resource';
 type OrganizationTemplate = {
     organization_name: string,
     type: string,
-    needs_core: boolean,
-    core_customer_account: string,
-    core_private_workforce: string,
-    config: {
+    email: string,
+    needs_core?: boolean,
+    core_customer_account?: string,
+    core_private_workforce?: string,
+    config?: {
         logo_uri: string,
         hours_after_due: number
     },
-    cloud9urls: Array<{
+    cloud9urls?: Array<{
+        name: string,
         url: string,
-        customer_id: number,
-        name: string
+        customer_id: number
     }>
 }
 
@@ -185,7 +186,7 @@ export default class Organzations extends Resource {
      *             gigwalk.customers.getOrganizations({...})
      */
     getOrganizations(): APIPromise<GetOrganizationsData> {
-        return this.client.get('/v1/organizations');
+        return this.client.get('/v1/organizations?limit=2');
     }
 
     /**
