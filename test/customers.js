@@ -133,7 +133,7 @@ describe('Customers', () => {
                 done();
             })
             .catch(done);
-    }).timeout(5000);
+    }).timeout(10000);
     it('should be able to delete a customer by email', (done) => {
         customers.deleteCustomerWithEmail({
             organization_id: organizationID,

@@ -99,7 +99,7 @@ describe('Loction Lists', () => {
                 done();
             })
             .catch(done);
-    });
+    }).timeout(5000);
     it('should be able to search locations in a list', (done) => {
         locationLists.searchLocationList({
             organization_location_list_id: locationListID,

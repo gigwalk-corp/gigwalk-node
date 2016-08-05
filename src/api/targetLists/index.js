@@ -2,13 +2,15 @@
 import Resource from '../resource';
 import type { APIPromise } from '../resource';
 
+type TargetTemplate = {
+    title: string
+}
+
 type TargetListTemplate = {
   name: string,
-  observation_target_type: string,
-  observation_targets: Array<{
-      title: string
-  }>,
-  status: string
+  observation_target_type: number,
+  observation_targets: Array<TargetTemplate>,
+  status?: string
 }
 
 type GetTargetListParams = {
@@ -127,7 +129,7 @@ export default class TargetLists extends Resource {
      *             gigwalk.customers.getTargetLists({...})
      */
     getTargetLists(): APIPromise<GetTargetListsData> {
-        return this.client.get('/v1/organization_observation_target_lists');
+        return this.client.get('/v1/organization_observation_target_lists?limit=2');
     }
 
     /**
@@ -154,7 +156,7 @@ export default class TargetLists extends Resource {
      *             gigwalk.customers.getOrganizationTargetLists({...})
      */
     getOrganizationTargetLists(params: GetOrganizationTargetListsParams): APIPromise<GetOrganizationTargetListsData> {
-        const url = `/v1/organizations/${params.organization_id}/target_lists`;
+        const url = `/v1/organizations/${params.organization_id}/target_lists?limit=2`;
 
         return this.client.get(url);
     }
@@ -234,7 +236,7 @@ export default class TargetLists extends Resource {
     searchTargetsInObservationList(params: SearchTargetsInObservationListParams): APIPromise<SearchTargetsInObservationListData> {
         const url = `/v1/organization_observation_target_lists/${params.target_list_id}/search/observation_targets`;
         const data = {
-            query_string: params.query_string
+            q: params.query_string
         };
 
         return this.client.post(url, data);
@@ -253,7 +255,7 @@ export default class TargetLists extends Resource {
     searchTargetsInList(params: SearchTargetsInListParams): APIPromise<SearchTargetsInListData> {
         const url = `/v1/target_lists/${params.target_list_id}/search/targets`;
         const data = {
-            query_string: params.query_string
+            q: params.query_string
         };
 
         return this.client.post(url, data);

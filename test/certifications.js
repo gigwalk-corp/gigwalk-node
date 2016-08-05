@@ -51,7 +51,7 @@ describe('Certifications', () => {
                 done();
             })
             .catch(done);
-    });
+    }).timeout(5000);
     it('should be able to get a specific certifiation', (done) => {
         certifications.getCertification({
             certification_id: certificationID

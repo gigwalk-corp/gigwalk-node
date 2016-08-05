@@ -173,7 +173,7 @@ export default class Certifications extends Resource {
      *             gigwalk.certification.getCertifications({...})
      */
     getCertifications(): APIPromise<GetCertificationsData> {
-        return this.client.get('/v1/certifications');
+        return this.client.get('/v1/certifications?limit=2');
     }
 
     /**
