@@ -133,7 +133,7 @@ export default class Locations extends Resource {
      *             gigwalk.customers.getLocations({...})
      */
     getLocations(): APIPromise<GetLocationsData> {
-        return this.client.get('/v1/locations');
+        return this.client.get('/v1/locations?limit=2');
     }
 
     /**

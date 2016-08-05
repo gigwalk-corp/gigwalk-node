@@ -3,25 +3,29 @@ import Resource from '../resource';
 import type { APIPromise } from '../resource';
 
 type SubscriptionTemplate = {
-    version_id: string,
-    group_ids: Array<number>,
-    frequency_amount: number,
-    frequency_byweekday: string,
-    frequency_weekly: string,
-    frequency_window: number,
-    autoassign: boolean,
-    bundle_autoassign: boolean,
-    can_reschedule: boolean,
-    recurrence: boolean,
-    organization_data: Object,
-    optin_type: string,
-    dashboard_visible: boolean,
-    location_override: boolean,
-    two_way_rating_enabled: boolean,
-    rating_email: string,
-    is_multi_day: boolean,
-    multi_day_template_id: number,
-    state: string
+    title: string,
+    description: string,
+    start_date: string, // format yyyy-m-d
+    end_date: string, // format yyyy-m-d
+    version_id?: string,
+    group_ids?: Array<number>,
+    frequency_amount?: number,
+    frequency_byweekday?: string,
+    frequency_weekly?: string,
+    frequency_window?: number,
+    autoassign?: boolean,
+    bundle_autoassign?: boolean,
+    can_reschedule?: boolean,
+    recurrence?: boolean,
+    organization_data?: Object,
+    optin_type?: string,
+    dashboard_visible?: boolean,
+    location_override?: boolean,
+    two_way_rating_enabled?: boolean,
+    rating_email?: string,
+    is_multi_day?: boolean,
+    multi_day_template_id?: number,
+    state?: string
 }
 
 type DeleteSubscriptionParams = {
@@ -265,9 +269,8 @@ export default class Subscriptions extends Resource {
     createSubscriptions(params: CreateSubscriptionsParams): APIPromise<CreateSubscriptionsData> {
         const url = `/v1/organizations/${params.organization_id}/subscriptions`;
         const data = {
-            subscriptions: params.subscriptions
+            projects: params.subscriptions
         };
-
         return this.client.post(url, data);
     }
 
