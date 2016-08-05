@@ -2,7 +2,7 @@ import Certifications from '../src/api/certifications/index';
 import axios from 'axios';
 import schema from '../src/api/certifications/certifications-schema.json';
 
-describe.only('Certifications', () => {
+describe('Certifications', () => {
     const client = axios.create({
         baseURL,
         headers: {
