@@ -1,140 +1,20 @@
 // @flow
 import Resource from '../resource';
-import type { APIPromise } from '../resource';
-
-type CustomerTemplate = {
-    customer_id?: number,
-    email?: string,
-    first_name?: string,
-    last_name?: string,
-    photo_url?: string,
-    address_line_1?: string,
-    address_line_2?: string,
-    phonenumber?: string,
-    customer_status?: string,
-    max_hours_week?: number,
-    ideal_hours_week?: number,
-    home_latitude?: number,
-    home_longitude?: number,
-    certifications?: Array<number>
-}
-
-type DeleteCustomerWithEmailParams = {
-    organization_id: number,
-    customer_email: string
-}
-
-type GetCustomerWithEmailParams = {
-    organization_id: number,
-    customer_email: string
-}
-
-type UpdateCustomerWithEmailParams = {
-    organization_id: number,
-    customer_email: string,
-    customer: CustomerTemplate
-}
-
-type DeleteCustomerWithIDParams = {
-    organization_id: number,
-    customer_id: number
-}
-
-type GetCustomerWithIDParams = {
-    organization_id: number,
-    customer_id: number
-}
-
-type UpdateCustomerWithIDParams = {
-    organization_id: number,
-    customer_id: number,
-    customer: CustomerTemplate
-}
-
-type GetOrganizationCustomersParams = {
-    organization_id: number
-}
-
-type UpdateOrganizationCustomersParams = {
-    organization_id: number,
-    action: string,
-    customers: Array<CustomerTemplate>
-}
-
-type UpdateCustomerParams = {
-    customer: CustomerTemplate
-}
-
-type SearchCustomersParams = {
-    ticket_ids: Array<number>
-}
-
-type CustomerSchema = {
-    id: number,
-    email: string,
-    first_name: string,
-    last_name: string,
-    role: string,
-    phonenumber: string,
-    address_line_1: string,
-    address_line_2: string,
-    photo_url: string,
-    ideal_hours_week: number,
-    max_hours_week: number,
-    rating_score: number,
-    customer_status: string,
-    home_latitude: number,
-    home_longitude: number,
-    date_last_auth: string,
-    certifications: Array<{
-        id: number
-    }>,
-    group_memberships: Array<{
-        group: string,
-        role: string,
-        group_id: number
-    }>,
-    organization: Object,
-    metadata: Object
-}
-
-type DeleteCustomerWithEmailData = [
-    number
-    ]
-
-type GetCustomerWithEmailData = [
-    CustomerSchema
-    ]
-
-type UpdateCustomerWithEmailData = [
-    CustomerSchema
-    ]
-
-type DeleteCustomerWithIDData = [
-    number
-    ]
-
-type GetCustomerWithIDData = [
-    CustomerSchema
-    ]
-
-type UpdateCustomerWithIDData = [
-    CustomerSchema
-    ]
-
-type GetOrganizationCustomersData = Array<CustomerSchema>
-
-type UpdateOrganizationCustomersData = Array<CustomerSchema> // NEED TO CHECK
-
-type GetCustomerData = [
-    CustomerSchema
-    ]
-
-type UpdateCustomerData = [ // NEED TO CHECK
-    CustomerSchema
-    ]
-
-type SearchCustomersData = Array<CustomerSchema>
+import type { APIPromise, ESPromise } from '../resource';
+import type {
+    Customer,
+    ESCustomer,
+    DeleteCustomerWithEmailParams,
+    GetCustomerWithEmailParams,
+    UpdateCustomerWithEmailParams,
+    DeleteCustomerWithIDParams,
+    GetCustomerWithIDParams,
+    UpdateCustomerWithIDParams,
+    GetOrganizationCustomersParams,
+    UpdateOrganizationCustomersParams,
+    UpdateCustomerParams,
+    SearchCustomersParams
+} from './types';
 
 export default class Customers extends Resource {
     /**
@@ -146,9 +26,8 @@ export default class Customers extends Resource {
      * @apiExample {js} Example:
      *             gigwalk.customers.deleteCustomerWithEmail({...})
      */
-    deleteCustomerWithEmail(params: DeleteCustomerWithEmailParams): APIPromise<DeleteCustomerWithEmailData> {
+    deleteCustomerWithEmail(params: DeleteCustomerWithEmailParams): APIPromise<[number]> {
         const url = `/v1/organizations/${params.organization_id}/customers/${params.customer_email}`;
-
         return this.client.delete(url);
     }
 
@@ -161,9 +40,8 @@ export default class Customers extends Resource {
      * @apiExample {js} Example:
      *             gigwalk.customers.getCustomerWithEmail({...})
      */
-    getCustomerWithEmail(params: GetCustomerWithEmailParams): APIPromise<GetCustomerWithEmailData> {
+    getCustomerWithEmail(params: GetCustomerWithEmailParams): APIPromise<[Customer]> {
         const url = `/v1/organizations/${params.organization_id}/customers/${params.customer_email}`;
-
         return this.client.get(url);
     }
 
@@ -177,7 +55,7 @@ export default class Customers extends Resource {
      * @apiExample {js} Example:
      *             gigwalk.customers.updateCustomer({...})
      */
-    updateCustomerWithEmail(params: UpdateCustomerWithEmailParams): APIPromise<UpdateCustomerWithEmailData> {
+    updateCustomerWithEmail(params: UpdateCustomerWithEmailParams): APIPromise<[Customer]> {
         const url = `/v1/organizations/${params.organization_id}/customers/${params.customer_email}`;
         const data = params.customer;
 
@@ -193,9 +71,8 @@ export default class Customers extends Resource {
      * @apiExample {js} Example:
      *             gigwalk.customers.deleteCustomerWithID({...})
      */
-    deleteCustomerWithID(params: DeleteCustomerWithIDParams): APIPromise<DeleteCustomerWithIDData> {
+    deleteCustomerWithID(params: DeleteCustomerWithIDParams): APIPromise<[number]> {
         const url = `/v1/organizations/${params.organization_id}/customers/${params.customer_id}`;
-
         return this.client.delete(url);
     }
 
@@ -208,9 +85,8 @@ export default class Customers extends Resource {
      * @apiExample {js} Example:
      *             gigwalk.customers.getCustomerWithID({...})
      */
-    getCustomerWithID(params: GetCustomerWithIDParams): APIPromise<GetCustomerWithIDData> {
+    getCustomerWithID(params: GetCustomerWithIDParams): APIPromise<[Customer]> {
         const url = `/v1/organizations/${params.organization_id}/customers/${params.customer_id}`;
-
         return this.client.get(url);
     }
 
@@ -224,7 +100,7 @@ export default class Customers extends Resource {
      * @apiExample {js} Example:
      *             gigwalk.customers.updateCustomerWithID({...})
      */
-    updateCustomerWithID(params: UpdateCustomerWithIDParams): APIPromise<UpdateCustomerWithIDData> {
+    updateCustomerWithID(params: UpdateCustomerWithIDParams): APIPromise<[Customer]> {
         const url = `/v1/organizations/${params.organization_id}/customers/${params.customer_id}`;
         const data = params.customer;
 
@@ -239,9 +115,8 @@ export default class Customers extends Resource {
      * @apiExample {js} Example:
      *             gigwalk.customers.getOrganizationCustomers({...})
      */
-    getOrganizationCustomers(params: GetOrganizationCustomersParams): APIPromise<GetOrganizationCustomersData> {
+    getOrganizationCustomers(params: GetOrganizationCustomersParams): APIPromise<Array<Customer>> {
         const url = `/v1/organizations/${params.organization_id}/customers`;
-
         return this.client.get(url);
     }
 
@@ -255,7 +130,7 @@ export default class Customers extends Resource {
      * @apiExample {js} Example:
      *             gigwalk.customers.updateOrganizationCustomers({...})
      */
-    updateOrganizationCustomers(params: UpdateOrganizationCustomersParams): APIPromise<UpdateOrganizationCustomersData> {
+    updateOrganizationCustomers(params: UpdateOrganizationCustomersParams): APIPromise<Array<Customer> | Array<number>> {
         const url = `/v1/organizations/${params.organization_id}/customers`;
         const data = {
             action: params.action,
@@ -274,7 +149,7 @@ export default class Customers extends Resource {
      * @apiExample {js} Example:
      *             gigwalk.customers.getCustomer({...})
      */
-    getCustomer(): APIPromise<GetCustomerData> {
+    getCustomer(): APIPromise<Array<Customer>> {
         return this.client.get('/v1/customer');
     }
 
@@ -287,9 +162,8 @@ export default class Customers extends Resource {
      * @apiExample {js} Example:
      *             gigwalk.customers.updateCustomer({...})
      */
-    updateCustomer(params: UpdateCustomerParams): APIPromise<UpdateCustomerData> {
+    updateCustomer(params: UpdateCustomerParams): APIPromise<[Customer]> {
         const data = params.customer;
-
         return this.client.put('/v1/customer', data);
     }
 
@@ -302,7 +176,8 @@ export default class Customers extends Resource {
      * @apiExample {js} Example:
      *             gigwalk.customers.searchCustomers({...})
      */
-    searchCustomers(params: SearchCustomersParams): APIPromise<SearchCustomersData> {
+    // todo: Move to Search API? Returns ElasticSearch results
+    searchCustomers(params: SearchCustomersParams): ESPromise<ESCustomer> {
         const data = {
             ticket_ids: params.ticket_ids
         };
