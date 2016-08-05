@@ -8,16 +8,16 @@ type ObservationTargetBasicTemplate = {
 }
 
 type ObservationTargetTemplate = {
-    obs_target_id: number,
-    title: string,
-    status: string,
-    key_value_pairs: Array<{
+    obs_target_id?: number,
+    title?: string,
+    status?: string,
+    key_value_pairs?: Array<{
         key: string,
         value: string
     }>
 }
 
-type CreateOrganizationTargetsParams = {
+type CreateOrganizationTargetParams = {
     organization_id: number,
     observation_target: ObservationTargetBasicTemplate
 }
@@ -46,7 +46,7 @@ type ObservationTargetSchema = {
     organization_data: Object
 }
 
-type CreateOrganizationTargetsData = [
+type CreateOrganizationTargetData = [
     ObservationTargetSchema
 ]
 
@@ -63,14 +63,14 @@ type SearchOrganizationTargetsData = Array<ObservationTargetSchema>
 export default class Targets extends Resource {
     /**
      * @api {post} /v1/organizations/{organization_id}/observation_targets
-     * @apiName createOrganizationTargets
+     * @apiName createOrganizationTarget
      * @apiDescription Create new obs_targets of the org using the JSON payload. Even though this is a POST method, it does update/deletion as well.
      * @apiParam {Number} organization_id
      * @apiParam {ObservationTargetBasicTemplate} observation_target
      * @apiExample {js} Example:
-     *             gigwalk.customers.createOrganizationTargets({...})
+     *             gigwalk.customers.createOrganizationTarget({...})
      */
-    createOrganizationTargets(params: CreateOrganizationTargetsParams): APIPromise<CreateOrganizationTargetsData> {
+    createOrganizationTarget(params: CreateOrganizationTargetParams): APIPromise<CreateOrganizationTargetData> {
         const url = `/v1/organizations/${params.organization_id}/observation_targets`;
         const data = params.observation_target;
 
@@ -123,7 +123,7 @@ export default class Targets extends Resource {
     searchOrganizationTargets(params: SearchOrganizationTargetsParams): APIPromise<SearchOrganizationTargetsData> {
         const url = `/v1/organizations/${params.organization_id}/observation_targets/search`;
         const data = {
-            query_string: params.query_string
+            q: params.query_string
         };
 
         return this.client.get(url, data);

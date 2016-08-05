@@ -2,7 +2,7 @@ import TargetLists from '../src/api/targetLists/index';
 import axios from 'axios';
 // import schema from '../src/api/certifications/certifications-schema.json';
 
-describe.only('Target Lists', () => {
+describe('Target Lists', () => {
     const client = axios.create({
         baseURL,
         headers: {
@@ -141,6 +141,7 @@ describe.only('Target Lists', () => {
             query_string: 'string'
         })
             .then((res) => {
+                expect(res.status).to.equal(200);
                 // expect(res.data).to.have.jsonSchema(schema);
                 done();
             })
@@ -152,7 +153,6 @@ describe.only('Target Lists', () => {
             query_string: 'string'
         })
             .then((res) => {
-                console.log(res.data);
                 expect(res.status).to.equal(200);
                 // expect(res.data).to.have.jsonSchema(schema);
                 done();

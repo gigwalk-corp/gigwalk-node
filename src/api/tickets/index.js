@@ -17,15 +17,15 @@ type DataItemTemplate = {
 
 type TicketSearchTemplate = {
   search_type: string,
-  latitude: number,
-  uom: number,
-  longitude: number,
-  radius: number,
-  status: string,
-  date_type: string,
-  start_date: string,
-  end_date: string,
-  timezone: string
+  latitude?: number,
+  uom?: number,
+  longitude?: number,
+  radius?: number,
+  status?: string,
+  date_type?: string,
+  start_date?: string,
+  end_date?: string,
+  timezone?: string
 }
 
 type QueryParamTemplate = {
@@ -47,9 +47,9 @@ type BoundingBoxTemplate = {
 
 type SearchGroupTicketsParams = {
     group_id: number,
-    query_params: Array<QueryParamTemplate>,
-    bounding_box: BoundingBoxTemplate,
-    timezone: string
+    query_params?: Array<QueryParamTemplate>,
+    bounding_box?: BoundingBoxTemplate,
+    timezone?: string
 }
 
 type GetCustomerTicketsParams = {
@@ -513,6 +513,7 @@ export default class Tickets extends Resource {
         const url = `/v1/tickets/${params.ticket_id}`;
         const data = {
             action: params.action,
+            force: true,
             ticket_ids: params.ticket_ids,
             customer_id: params.customer_id
         };
@@ -528,7 +529,7 @@ export default class Tickets extends Resource {
      *             gigwalk.customers.getTickets({...})
      */
     getTickets(): APIPromise<GetTicketsData> {
-        return this.client.get('/v1/tickets');
+        return this.client.get('/v1/tickets?limit=2');
     }
 
     /**
@@ -551,7 +552,7 @@ export default class Tickets extends Resource {
      * @apiDescription Edit tickets If the ticket_id is present assign the corresponding ticket. Otherwise perform action to multiple tickets identified
                        by the data arguments.
      * @apiParam {Number} ticket_id
-     * @apiParam {Number} execution_state
+     * @apiParam {String} execution_state
      * @apiParam {String} action
      * @apiParam {Array<number>} ticket_ids
      * @apiParam {String} customer_id
@@ -578,7 +579,7 @@ export default class Tickets extends Resource {
      *             gigwalk.customers.getOrganizationTickets({...})
      */
     getOrganizationTickets(params: GetOrganizationTicketsParams): APIPromise<GetOrganizationTicketsData> {
-        const url = `/v1/organizations/${params.organization_id}/tickets`;
+        const url = `/v1/organizations/${params.organization_id}/tickets?limit=2`;
 
         return this.client.get(url);
     }

@@ -2,7 +2,7 @@ import Certifications from '../src/api/certifications/index';
 import axios from 'axios';
 import schema from '../src/api/certifications/certifications-schema.json';
 
-describe('Certifications', () => {
+describe.only('Certifications', () => {
     const client = axios.create({
         baseURL,
         headers: {
@@ -153,7 +153,7 @@ describe('Certifications', () => {
                 done();
             })
             .catch(done);
-    });
+    }).timeout(5000);
     it('should be able to edit a certification for an organiztion', (done) => {
         certifications.updateOrganizationCertifications({
             organization_id: organizationID,
@@ -212,5 +212,5 @@ describe('Certifications', () => {
                 done();
             })
             .catch(done);
-    }).timeout(20000);
+    }).timeout(120000);
 });

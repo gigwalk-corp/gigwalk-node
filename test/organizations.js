@@ -22,7 +22,7 @@ describe('Organizations', () => {
                 done();
             })
             .catch(done);
-    }).timeout(5000);
+    }).timeout(10000);
     it('should be able create an organization', (done) => {
         organizations.createOrganization({
             organization: {

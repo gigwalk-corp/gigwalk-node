@@ -27,7 +27,7 @@ describe('Loction Lists', () => {
                 done();
             })
             .catch(done);
-    });
+    }).timeout(10000);
     it('should be able to create a new location list', (done) => {
         locationLists.createOrganizationLocationList({
             organization_id: organizationID,

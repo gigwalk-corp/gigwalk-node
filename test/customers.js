@@ -29,7 +29,7 @@ describe('Customers', () => {
                 done();
             })
             .catch(done);
-    });
+    }).timeout(5000);
     it('should be able to get a customer by ID', (done) => {
         customers.getCustomerWithID({
             organization_id: organizationID,
@@ -56,7 +56,7 @@ describe('Customers', () => {
                 done();
             })
             .catch(done);
-    });
+    }).timeout(5000);
     it('should be able to update a customer by ID', (done) => {
         customers.updateCustomerWithID({
             organization_id: organizationID,
@@ -71,7 +71,7 @@ describe('Customers', () => {
                 done();
             })
             .catch(done);
-    });
+    }).timeout(5000);
     it('should be able to get the current customer', (done) => {
         customers.getCustomer()
             .then((res) => {
@@ -133,7 +133,7 @@ describe('Customers', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    }).timeout(20000);
     it('should be able to delete a customer by email', (done) => {
         customers.deleteCustomerWithEmail({
             organization_id: organizationID,
@@ -145,7 +145,7 @@ describe('Customers', () => {
                 done();
             })
             .catch(done);
-    });
+    }).timeout(5000);
     it('should be able to delete a customer by ID', (done) => {
         customers.deleteCustomerWithID({
             organization_id: organizationID,
@@ -157,5 +157,5 @@ describe('Customers', () => {
                 done();
             })
             .catch(done);
-    });
+    }).timeout(5000);
 });
