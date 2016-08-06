@@ -1,223 +1,30 @@
 // @flow
 import Resource from '../resource';
 import type { APIPromise } from '../resource';
-
-type SimpleLocationTemplate = {
-    address: string,
-    title: string
-}
-
-type LocationListTemplate = {
-    name: string,
-    status: string,
-    locations: Array<SimpleLocationTemplate>
-}
-
-type DeleteLocationListParams = {
-    organization_location_list_id: number
-}
-
-type GetLocationListParams = {
-    organization_location_list_id: number
-}
-
-type UpdateLocationListParams = {
-    organization_location_list_id: number,
-    location_list: LocationListTemplate
-}
-
-type DeleteOrganizationLocationListParams = {
-    organization_id: number,
-    location_list_ids: Array<number>
-}
-
-type GetOrganizationLocationListsParams = {
-    organization_id: number
-}
-
-type CreateOrganizationLocationListParams = {
-    organization_id: number,
-    location_list: LocationListTemplate
-}
-
-type DeleteOrganiztionLocationFromListParams = {
-    organization_location_list_id: number,
-    location_id: number
-}
-
-type DeleteLocationFromListParams = {
-    organization_location_list_id: number,
-    location_id: number
-}
-
-type GetLocationDetailsForListParams = {
-    organization_location_list_id: number
-}
-
-type AddLocationsToListParams = {
-    organization_location_list_id: number,
-    locations: Array<number>
-}
-
-type RemoveLocationsFromListParams = {
-    organization_location_list_id: number,
-    locations: Array<number>
-}
-
-type SearchLocationListParams = {
-    organization_location_list_id: number,
-    query_string: string
-}
-
-type GetFileInfoForLocationListParams = {
-    location_list_id: number
-}
-
-type GetFileInfoForOrganizationLocationListParams = {
-    organization_id: number,
-    location_list_id: number
-}
-
-type CreateOrganizationLocationListUsingFileParams = {
-    organization_id: number,
-    location_list_name: string,
-    s3_keys: Array<string>
-}
-
-type UpdateLocationAddressParams = {
-    file_upload_id: number,
-    location_list_id: number
-}
-
-type UpdateLocationAddressByIDParams = {
-    file_upload_id: number,
-    location_list_id: number,
-    location_id: number
-}
-
-type LocationListSummarySchema = {
-    name: string,
-    id: number,
-    organization_id: number,
-    status: string,
-    location_count: number
-}
-
-type LocationSummarySchema = {
-    title: string,
-    locality: string,
-    id: number,
-    country: string,
-    formatted_address: string,
-    address: string,
-    postal_code: number,
-    administrative_area_level_1: string,
-    administrative_area_level_2: string,
-    specificity: string,
-    latitude: number,
-    longitude: number,
-    metadata: Object,
-}
-
-type LocationSchema = {
-    title: string,
-    locality: string,
-    id: number,
-    country: string,
-    formatted_address: string,
-    postal_code: number,
-    administrative_area_level_1: string,
-    administrative_area_level_2: string,
-    specificity: string,
-    latitude: number,
-    longitude: number,
-    tzid: string,
-    organization_id: number,
-    source_location_id: number,
-    status: string,
-    state: string,
-    organization_data: Object
-}
-
-type LocationListSchema = {
-    name: string,
-    id: number,
-    organization_id: number,
-    status: string,
-    locations: Array<LocationSummarySchema>
-}
-
-type LocationListFileUploadSchema = {
-    name: string,
-    id: number,
-    organization_id: number,
-    status: string,
-    date_created: string,
-    date_updated: string,
-    file_uploads: Array<{
-        id: number,
-        status: string,
-        location_count: number,
-        processed_row_count: number,
-        unresolved_location_count: number,
-        date_created: string,
-        date_updated: string
-    }>
-}
-
-type DeleteLocationListData = [
-    number
-    ]
-
-type GetLocationListData = [
-    LocationListSummarySchema
-    ]
-
-type UpdateLocationListData = [
-    LocationListSchema
-    ]
-
-type DeleteOrganizationLocationListData = [
-    number
-    ]
-
-type GetOrganizationLocationListsData = Array<LocationListSummarySchema>
-
-type CreateOrganizationLocationListData = [
-    LocationListSchema
-    ]
-
-type DeleteOrganiztionLocationFromListData = [
-    number
-    ]
-
-type DeleteLocationFromListData = [
-    number
-    ]
-
-type GetLocationDetailsForListData = Array<LocationSchema>
-
-type AddLocationsToListData = Array<LocationSchema>
-
-type RemoveLocationsFromListData = Array<number>
-
-type SearchLocationListData = Array<LocationSchema> // NEED TO CHECK
-
-type GetFileInfoForLocationListData = [
-    LocationListFileUploadSchema
-    ]
-
-type GetFileInfoForOrganizationLocationListData = [
-    LocationListFileUploadSchema
-    ]
-
-type CreateOrganizationLocationListUsingFileData = [
-    LocationListFileUploadSchema
-    ]
-
-type UpdateLocationAddressData = any // SPECIFY
-
-type UpdateLocationAddressByIDData = any // SPECIFY
+import type { Location } from '../locations/types';
+import type {
+    LocationList,
+    LocationListSummary,
+    LocationListUpload,
+    UnresolvedLocation,
+    DeleteLocationListParams,
+    GetLocationListParams,
+    UpdateLocationListParams,
+    DeleteOrganizationLocationListParams,
+    GetOrganizationLocationListsParams,
+    CreateOrganizationLocationListParams,
+    DeleteOrganiztionLocationFromListParams,
+    DeleteLocationFromListParams,
+    GetLocationDetailsForListParams,
+    AddLocationsToListParams,
+    RemoveLocationsFromListParams,
+    SearchLocationListParams,
+    GetFileInfoForLocationListParams,
+    GetFileInfoForOrganizationLocationListParams,
+    CreateOrganizationLocationListUsingFileParams,
+    GetUnresolvedLocationsParams,
+    UpdateUnresolvedLocationsParams,
+} from './types';
 
 export default class LocationLists extends Resource {
     /**
@@ -229,9 +36,9 @@ export default class LocationLists extends Resource {
      * @apiExample {js} Example:
      *             gigwalk.customers.deleteLocationList({...})
      */
-    deleteLocationList(params: DeleteLocationListParams): APIPromise<DeleteLocationListData> {
+    deleteLocationList(params: DeleteLocationListParams): APIPromise<[number]> {
+        // NOTE: API returns an array containing the id of the 'deleted' location list
         const url = `/v1/organization_location_lists/${params.organization_location_list_id}`;
-
         return this.client.delete(url);
     }
 
@@ -244,9 +51,8 @@ export default class LocationLists extends Resource {
      * @apiExample {js} Example:
      *             gigwalk.customers.getLocationList({...})
      */
-    getLocationList(params: GetLocationListParams): APIPromise<GetLocationListData> {
+    getLocationList(params: GetLocationListParams): APIPromise<[LocationListSummary]> {
         const url = `/v1/organization_location_lists/${params.organization_location_list_id}`;
-
         return this.client.get(url);
     }
 
@@ -261,7 +67,7 @@ export default class LocationLists extends Resource {
      * @apiExample {js} Example:
      *             gigwalk.customers.updateLocationList({...})
      */
-    updateLocationList(params: UpdateLocationListParams): APIPromise<UpdateLocationListData> {
+    updateLocationList(params: UpdateLocationListParams): APIPromise<[LocationList]> {
         const url = `/v1/organization_location_lists/${params.organization_location_list_id}`;
         const data = params.location_list;
 
@@ -278,7 +84,8 @@ export default class LocationLists extends Resource {
      * @apiExample {js} Example:
      *             gigwalk.customers.deleteOrganizationLocationList({...})
      */
-    deleteOrganizationLocationList(params: DeleteOrganizationLocationListParams): APIPromise<DeleteOrganizationLocationListData> {
+    deleteOrganizationLocationList(params: DeleteOrganizationLocationListParams): APIPromise<Array<number>> {
+        // NOTE: API returns array of location list ids there were 'deleted'
         const url = `/v1/organizations/${params.organization_id}/location_lists`;
         const data = {
             location_list_ids: params.location_list_ids
@@ -296,9 +103,8 @@ export default class LocationLists extends Resource {
      * @apiExample {js} Example:
      *             gigwalk.customers.getOrganizationLocationLists({...})
      */
-    getOrganizationLocationLists(params: GetOrganizationLocationListsParams): APIPromise<GetOrganizationLocationListsData> {
+    getOrganizationLocationLists(params: GetOrganizationLocationListsParams): APIPromise<LocationListSummary> {
         const url = `/v1/organizations/${params.organization_id}/location_lists`;
-
         return this.client.get(url);
     }
 
@@ -313,7 +119,7 @@ export default class LocationLists extends Resource {
      * @apiExample {js} Example:
      *             gigwalk.customers.createOrganizationLocationList({...})
      */
-    createOrganizationLocationList(params: CreateOrganizationLocationListParams): APIPromise<CreateOrganizationLocationListData> {
+    createOrganizationLocationList(params: CreateOrganizationLocationListParams): APIPromise<[LocationList]> {
         const url = `/v1/organizations/${params.organization_id}/location_lists`;
         const data = params.location_list;
 
@@ -329,9 +135,9 @@ export default class LocationLists extends Resource {
      * @apiExample {js} Example:
      *             gigwalk.customers.deleteOrganiztionLocationFromList({...})
      */
-    deleteOrganiztionLocationFromList(params: DeleteOrganiztionLocationFromListParams): APIPromise<DeleteOrganiztionLocationFromListData> {
+    deleteOrganizationLocationFromList(params: DeleteOrganiztionLocationFromListParams): APIPromise<[boolean]> {
+        // NOTE: API returns an array containing true. I don't know under what circumstances this would ever be false
         const url = `/v1/organization_location_lists/${params.organization_location_list_id}/locations/${params.location_id}`;
-
         return this.client.delete(url);
     }
 
@@ -344,9 +150,9 @@ export default class LocationLists extends Resource {
      * @apiExample {js} Example:
      *             gigwalk.customers.deleteLocationFromList({...})
      */
-    deleteLocationFromList(params: DeleteLocationFromListParams): APIPromise<DeleteLocationFromListData> {
+    deleteLocationFromList(params: DeleteLocationFromListParams): APIPromise<[boolean]> {
+        // NOTE: API returns an array containing true. I don't know under what circumstances this would ever be false
         const url = `/v1/location_lists/${params.organization_location_list_id}/locations/${params.location_id}`;
-
         return this.client.delete(url);
     }
 
@@ -359,9 +165,8 @@ export default class LocationLists extends Resource {
      * @apiExample {js} Example:
      *             gigwalk.customers.getLocationDetailsForList({...})
      */
-    getLocationDetailsForList(params: GetLocationDetailsForListParams): APIPromise<GetLocationDetailsForListData> {
+    getLocationDetailsForList(params: GetLocationDetailsForListParams): APIPromise<Array<Location>> {
         const url = `/v1/location_lists/${params.organization_location_list_id}/locations`;
-
         return this.client.get(url);
     }
 
@@ -376,7 +181,7 @@ export default class LocationLists extends Resource {
      * @apiExample {js} Example:
      *             gigwalk.customers.addLocationsToList({...})
      */
-    addLocationsToList(params: AddLocationsToListParams): APIPromise<AddLocationsToListData> {
+    addLocationsToList(params: AddLocationsToListParams): APIPromise<Array<Location>> {
         const url = `/v1/location_lists/${params.organization_location_list_id}/locations`;
         const data = {
             locations: params.locations
@@ -394,9 +199,10 @@ export default class LocationLists extends Resource {
      * @apiExample {js} Example:
      *             gigwalk.customers.removeLocationsFromList({...})
      */
-    removeLocationsFromList(params: RemoveLocationsFromListParams): APIPromise<RemoveLocationsFromListData> {
+    removeLocationsFromList(params: RemoveLocationsFromListParams): APIPromise<Array<number>> {
         const url = `/v1/location_lists/${params.organization_location_list_id}/locations`;
         const data = {
+            action: 'remove',
             locations: params.locations
         };
 
@@ -412,7 +218,8 @@ export default class LocationLists extends Resource {
      * @apiExample {js} Example:
      *             gigwalk.customers.searchLocationList({...})
      */
-    searchLocationList(params: SearchLocationListParams): APIPromise<SearchLocationListData> {
+    searchLocationList(params: SearchLocationListParams): APIPromise<Array<Location>> {
+        // todo: rename and move to Locations API. This searches for locations, NOT location lists.
         const url = `/v1/location_lists/${params.organization_location_list_id}/search/locations`;
         const data = {
             q: params.query_string
@@ -431,9 +238,8 @@ export default class LocationLists extends Resource {
      * @apiExample {js} Example:
      *             gigwalk.customers.getFileInfoForLocationList({...})
      */
-    getFileInfoForLocationList(params: GetFileInfoForLocationListParams): APIPromise<GetFileInfoForLocationListData> {
+    getFileInfoForLocationList(params: GetFileInfoForLocationListParams): APIPromise<[LocationListUpload]> {
         const url = `/v1/location_lists/${params.location_list_id}/upload`;
-
         return this.client.get(url);
     }
 
@@ -448,9 +254,8 @@ export default class LocationLists extends Resource {
      * @apiExample {js} Example:
      *             gigwalk.customers.getFileInfoForOrganizationLocationList({...})
      */
-    getFileInfoForOrganizationLocationList(params: GetFileInfoForOrganizationLocationListParams): APIPromise<GetFileInfoForOrganizationLocationListData> {
+    getFileInfoForOrganizationLocationList(params: GetFileInfoForOrganizationLocationListParams): APIPromise<[LocationListUpload]> {
         const url = `/v1/organizations/${params.organization_id}/location_lists/${params.location_list_id}/upload`;
-
         return this.client.get(url);
     }
 
@@ -462,7 +267,7 @@ export default class LocationLists extends Resource {
      * @apiExample {js} Example:
      *             gigwalk.customers.createOrganizationLocationListUsingFile({...})
      */
-    createOrganizationLocationListUsingFile(params: CreateOrganizationLocationListUsingFileParams): APIPromise<CreateOrganizationLocationListUsingFileData> {
+    createOrganizationLocationListUsingFile(params: CreateOrganizationLocationListUsingFileParams): APIPromise<[LocationListUpload]> {
         const url = `/v1/organizations/${params.organization_id}/location_lists/upload`;
         const data = {
             s3_keys: params.s3_keys
@@ -472,18 +277,17 @@ export default class LocationLists extends Resource {
     }
 
     /**
-     * @api {put} /v1/location_lists/{location_list_id}/upload/{file_upload_id}/unresolved_locations
+     * @api {get} /v1/location_lists/{location_list_id}/upload/{file_upload_id}/unresolved_locations
      * @apiName updateLocationAddress
      * @apiDescription Update location address Either a file upload or JSON data can be input
      * @apiParam {Number} file_upload_id
      * @apiParam {Number} location_list_id
      * @apiExample {js} Example:
-     *             gigwalk.customers.updateLocationAddress({...})
+     *             gigwalk.customers.getUnresolvedLocations({...})
      */
-    updateLocationAddress(params: UpdateLocationAddressParams): APIPromise<UpdateLocationAddressData> {
+    getUnresolvedLocations(params: GetUnresolvedLocationsParams): APIPromise<Array<UnresolvedLocation>> {
         const url = `/v1/location_lists/${params.location_list_id}/upload/${params.file_upload_id}/unresolved_locations`;
-
-        return this.client.put(url);
+        return this.client.get(url);
     }
 
     /**
@@ -492,13 +296,12 @@ export default class LocationLists extends Resource {
      * @apiDescription Update location address Either a file upload or JSON data can be input
      * @apiParam {Number} file_upload_id
      * @apiParam {Number} location_list_id
-     * @apiParam {Number} location_id
      * @apiExample {js} Example:
-     *             gigwalk.customers.updateLocationAddressByID({...})
+     *             gigwalk.customers.updateUnresolvedLocations({...})
      */
-    updateLocationAddressByID(params: UpdateLocationAddressByIDParams): APIPromise<UpdateLocationAddressByIDData> {
-        const url = `/v1/location_lists/${params.location_list_id}/upload/${params.file_upload_id}/unresolved_locations/${params.location_id}`;
-
+    updateUnresolvedLocations(params: UpdateUnresolvedLocationsParams): APIPromise<Array<UnresolvedLocation> | Array<number>> {
+        // NOTE: Unsure about API response. Swagger docs are unclear
+        const url = `/v1/location_lists/${params.location_list_id}/upload/${params.file_upload_id}/unresolved_locations`;
         return this.client.put(url);
     }
 }
