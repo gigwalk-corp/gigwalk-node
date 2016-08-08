@@ -212,5 +212,5 @@ describe('Certifications', () => {
                 done();
             })
             .catch(done);
-    }).timeout(120000);
+    }).timeout(5000);
 });

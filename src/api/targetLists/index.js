@@ -13,12 +13,33 @@ type TargetListTemplate = {
   status?: string
 }
 
+type GetTargetListsQuery = {
+    limit?: number,
+    offset?: number,
+    order_by?: string,
+    order_dir?: string,
+    include_auto_generated?: number
+}
+
+type GetTargetListsParams = {
+    query?: GetTargetListsQuery
+}
+
 type GetTargetListParams = {
     observation_target_list_id: number
 }
 
+type GetOrganizationTargetListsQuery = {
+    limit?: number,
+    offset?: number,
+    order_by?: string,
+    order_dir?: string,
+    auto_generated?: number
+}
+
 type GetOrganizationTargetListsParams = {
-    organization_id: number
+    organization_id: number,
+    query?: GetOrganizationTargetListsQuery
 }
 
 type CreateOrganizationTargetListParams = {
@@ -40,18 +61,42 @@ type UpdateTargetListParams = {
     target_list: TargetListTemplate
 }
 
+type SearchTargetsInObservationListQuery = {
+    q?: string,
+    limit?: number,
+    offset?: number,
+    order_by?: string,
+    order_dir?: string
+}
+
 type SearchTargetsInObservationListParams = {
     target_list_id: number,
-    query_string: string
+    query?: SearchTargetsInObservationListQuery
+}
+
+type SearchTargetsInListQuery = {
+    q?: string,
+    limit?: number,
+    offset?: number,
+    order_by?: string,
+    order_dir?: string
 }
 
 type SearchTargetsInListParams = {
     target_list_id: number,
-    query_string: string
+    query?: SearchTargetsInListQuery
+}
+
+type GetTargetsFromListQuery = {
+    limit?: number,
+    offset?: number,
+    order_by?: string,
+    order_dir?: string
 }
 
 type GetTargetsFromListParams = {
-    target_list_id: number
+    target_list_id: number,
+    query?: GetTargetsFromListQuery
 }
 
 type UpdateTargetsInListParams = {
@@ -125,11 +170,14 @@ export default class TargetLists extends Resource {
      * @apiName getTargetLists
      * @apiDescription Return all target lists of all organizations. This can be invoked only by the platform admin. Return (obs_target_id, title, status,
                        org_data, obs_target_type_id). Can be sorted by specifying a order_by field ('id', 'name', 'status') and order_dir
+     * @apiParam {GetTargetListsQuery} query
      * @apiExample {js} Example:
      *             gigwalk.customers.getTargetLists({...})
      */
-    getTargetLists(): APIPromise<GetTargetListsData> {
-        return this.client.get('/v1/organization_observation_target_lists?limit=2');
+    getTargetLists(params: GetTargetListsParams): APIPromise<GetTargetListsData> {
+        const queryString = (params) ? this.queryStringForSearchObject(params.query) : '';
+
+        return this.client.get(`/v1/organization_observation_target_lists${queryString}`);
     }
 
     /**
@@ -141,9 +189,7 @@ export default class TargetLists extends Resource {
      *             gigwalk.customers.getTargetList({...})
      */
     getTargetList(params: GetTargetListParams): APIPromise<GetTargetListData> {
-        const url = `/v1/organization_observation_target_lists/${params.observation_target_list_id}`;
-
-        return this.client.get(url);
+        return this.client.get(`/v1/organization_observation_target_lists/${params.observation_target_list_id}`);
     }
 
     /**
@@ -152,13 +198,14 @@ export default class TargetLists extends Resource {
      * @apiDescription Return the organization_observation_target_lists of the specified org Return (obs_target_id, title, status, org_data,
                        obs_target_type_id). Can be sorted by specifying a order_by field ('id', 'name', 'status') and order_dir
      * @apiParam {Number} organization_id
+     * @apiParam {GetOrganizationTargetListsQuery} query
      * @apiExample {js} Example:
      *             gigwalk.customers.getOrganizationTargetLists({...})
      */
     getOrganizationTargetLists(params: GetOrganizationTargetListsParams): APIPromise<GetOrganizationTargetListsData> {
-        const url = `/v1/organizations/${params.organization_id}/target_lists?limit=2`;
+        const queryString = this.queryStringForSearchObject(params.query);
 
-        return this.client.get(url);
+        return this.client.get(`/v1/organizations/${params.organization_id}/target_lists${queryString}`);
     }
 
     /**
@@ -172,10 +219,7 @@ export default class TargetLists extends Resource {
      *             gigwalk.customers.createOrganizationTargetList({...})
      */
     createOrganizationTargetList(params: CreateOrganizationTargetListParams): APIPromise<CreateOrganizationTargetListData> {
-        const url = `/v1/organizations/${params.organization_id}/target_lists`;
-        const data = params.target_list;
-
-        return this.client.post(url, data);
+        return this.client.post(`/v1/organizations/${params.organization_id}/target_lists`, { ...params.target_list });
     }
 
     /**
@@ -188,9 +232,7 @@ export default class TargetLists extends Resource {
      *             gigwalk.customers.getOrganzationTargetList({...})
      */
     getOrganzationTargetList(params: GetOrganzationTargetListParams): APIPromise<GetOrganzationTargetListData> {
-        const url = `/v1/organizations/${params.organization_id}/target_lists/${params.observation_target_list_id}`;
-
-        return this.client.get(url);
+        return this.client.get(`/v1/organizations/${params.organization_id}/target_lists/${params.observation_target_list_id}`);
     }
 
     /**
@@ -202,9 +244,7 @@ export default class TargetLists extends Resource {
      *             gigwalk.customers.deleteTargetList({...})
      */
     deleteTargetList(params: DeleteTargetListParams): APIPromise<DeleteTargetListData> {
-        const url = `/v1/organization_observation_target_lists/${params.observation_target_list_id}`;
-
-        return this.client.delete(url);
+        return this.client.delete(`/v1/organization_observation_target_lists/${params.observation_target_list_id}`);
     }
 
     /**
@@ -217,10 +257,7 @@ export default class TargetLists extends Resource {
      *             gigwalk.customers.updateTargetList({...})
      */
     updateTargetList(params: UpdateTargetListParams): APIPromise<UpdateTargetListData> {
-        const url = `/v1/organization_observation_target_lists/${params.observation_target_list_id}`;
-        const data = params.target_list;
-
-        return this.client.put(url, data);
+        return this.client.put(`/v1/organization_observation_target_lists/${params.observation_target_list_id}`, { ...params.target_list });
     }
 
     /**
@@ -229,17 +266,14 @@ export default class TargetLists extends Resource {
      * @apiDescription Search all the targets of the specified org_obs_target_list for the specified query_string Return (title, attributes,
                        obs_target_type_id, status, org_id, date_created, date_updated)
      * @apiParam {Number} target_list_id
-     * @apiParam {String} query_string
+     * @apiParam {SearchTargetsInObservationListQuery} query
      * @apiExample {js} Example:
      *             gigwalk.customers.searchTargetsInObservationList({...})
      */
     searchTargetsInObservationList(params: SearchTargetsInObservationListParams): APIPromise<SearchTargetsInObservationListData> {
-        const url = `/v1/organization_observation_target_lists/${params.target_list_id}/search/observation_targets`;
-        const data = {
-            q: params.query_string
-        };
+        const queryString = this.queryStringForSearchObject(params.query);
 
-        return this.client.post(url, data);
+        return this.client.post(`/v1/organization_observation_target_lists/${params.target_list_id}/search/observation_targets${queryString}`);
     }
 
     /**
@@ -248,17 +282,14 @@ export default class TargetLists extends Resource {
      * @apiDescription Search all the targets of the specified org_obs_target_list for the specified query_string Return (title, attributes,
                        obs_target_type_id, status, org_id, date_created, date_updated)
      * @apiParam {Number} target_list_id
-     * @apiParam {String} query_string
+     * @apiParam {SearchTargetsInListQuery} query
      * @apiExample {js} Example:
      *             gigwalk.customers.searchTargetsInList({...})
      */
     searchTargetsInList(params: SearchTargetsInListParams): APIPromise<SearchTargetsInListData> {
-        const url = `/v1/target_lists/${params.target_list_id}/search/targets`;
-        const data = {
-            q: params.query_string
-        };
+        const queryString = this.queryStringForSearchObject(params.query);
 
-        return this.client.post(url, data);
+        return this.client.post(`/v1/target_lists/${params.target_list_id}/search/targets${queryString}`);
     }
 
     /**
@@ -271,9 +302,7 @@ export default class TargetLists extends Resource {
      *             gigwalk.customers.getTargetsFromList({...})
      */
     getTargetsFromList(params: GetTargetsFromListParams): APIPromise<GetTargetsFromListData> {
-        const url = `/v1/organization_observation_target_lists/${params.target_list_id}/observation_targets`;
-
-        return this.client.get(url);
+        return this.client.get(`/v1/organization_observation_target_lists/${params.target_list_id}/observation_targets`);
     }
 
     /**
@@ -287,13 +316,12 @@ export default class TargetLists extends Resource {
      *             gigwalk.customers.updateTargetsInList({...})
      */
     updateTargetsInList(params: UpdateTargetsInListParams): APIPromise<UpdateTargetsInListData> {
-        const url = `/v1/organization_observation_target_lists/${params.target_list_id}/observation_targets`;
         const data = {
             action: params.action,
             target_ids: params.target_ids
         };
 
-        return this.client.put(url, data);
+        return this.client.put(`/v1/organization_observation_target_lists/${params.target_list_id}/observation_targets`, data);
     }
 
     /**

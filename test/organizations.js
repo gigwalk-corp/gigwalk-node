@@ -67,7 +67,7 @@ describe('Organizations', () => {
                 done();
             })
             .catch(done);
-    });
+    }).timeout(5000);
     it('should be able delete a specific organization', (done) => {
         organizations.deleteOrganization({
             organization_id: organizationID

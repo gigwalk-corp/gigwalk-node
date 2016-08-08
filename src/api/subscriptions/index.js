@@ -201,9 +201,7 @@ export default class Subscriptions extends Resource {
      *             gigwalk.customers.deleteSubscription({...})
      */
     deleteSubscription(params: DeleteSubscriptionParams): APIPromise<DeleteSubscriptionData> {
-        const url = `/v1/organization_subscriptions/${params.organization_subscription_id}`;
-
-        return this.client.delete(url);
+        return this.client.delete(`/v1/organization_subscriptions/${params.organization_subscription_id}`);
     }
 
     /**
@@ -216,9 +214,7 @@ export default class Subscriptions extends Resource {
      *             gigwalk.customers.getSubscription({...})
      */
     getSubscription(params: GetSubscriptionParams): APIPromise<GetSubscriptionData> {
-        const url = `/v1/organization_subscriptions/${params.organization_subscription_id}`;
-
-        return this.client.get(url);
+        return this.client.get(`/v1/organization_subscriptions/${params.organization_subscription_id}`);
     }
 
     /**
@@ -232,12 +228,11 @@ export default class Subscriptions extends Resource {
      *             gigwalk.customers.createClonedSubscription({...})
      */
     createClonedSubscription(params: CreateClonedSubscriptionParams): APIPromise<CreateClonedSubscriptionData> {
-        const url = `/v1/organization_subscriptions/${params.organization_subscription_id}`;
         const data = {
             action: params.action
         };
 
-        return this.client.post(url, data);
+        return this.client.post(`/v1/organization_subscriptions/${params.organization_subscription_id}`, data);
     }
 
     /**
@@ -251,10 +246,7 @@ export default class Subscriptions extends Resource {
      *             gigwalk.customers.updateSubscription({...})
      */
     updateSubscription(params: UpdateSubscriptionParams): APIPromise<UpdateSubscriptionData> {
-        const url = `/v1/organization_subscriptions/${params.organization_subscription_id}`;
-        const data = params.subscription;
-
-        return this.client.put(url, data);
+        return this.client.put(`/v1/organization_subscriptions/${params.organization_subscription_id}`, { ...params.subscription });
     }
 
     /**
@@ -267,11 +259,10 @@ export default class Subscriptions extends Resource {
      *             gigwalk.customers.createSubscriptions({...})
      */
     createSubscriptions(params: CreateSubscriptionsParams): APIPromise<CreateSubscriptionsData> {
-        const url = `/v1/organizations/${params.organization_id}/subscriptions`;
         const data = {
             projects: params.subscriptions
         };
-        return this.client.post(url, data);
+        return this.client.post(`/v1/organizations/${params.organization_id}/subscriptions`, data);
     }
 
     /**
@@ -284,12 +275,11 @@ export default class Subscriptions extends Resource {
      *             gigwalk.customers.searchSubscriptionsWithParams({...})
      */
     searchSubscriptionsWithParams(params: SearchSubscriptionsWithParamsParams): APIPromise<SearchSubscriptionsWithParamsData> {
-        const url = `/v1/organizations/${params.organization_id}/subscriptions/search`;
         const data = {
             query_string: params.query_string
         };
 
-        return this.client.post(url, data);
+        return this.client.post(`/v1/organizations/${params.organization_id}/subscriptions/search`, data);
     }
 
     /**
@@ -302,9 +292,7 @@ export default class Subscriptions extends Resource {
      *             gigwalk.customers.deleteOrganizationSubscription({...})
      */
     deleteOrganizationSubscription(params: DeleteOrganizationSubscriptionParams): APIPromise<DeleteOrganizationSubscriptionData> {
-        const url = `/v1/organizations/${params.organization_id}/subscriptions/${params.organization_subscription_id}`;
-
-        return this.client.delete(url);
+        return this.client.delete(`/v1/organizations/${params.organization_id}/subscriptions/${params.organization_subscription_id}`);
     }
 
     /**
@@ -319,10 +307,7 @@ export default class Subscriptions extends Resource {
      *             gigwalk.customers.updateOrganizationSubscription({...})
      */
     updateOrganizationSubscription(params: UpdateOrganizationSubscriptionParams): APIPromise<UpdateOrganizationSubscriptionData> {
-        const url = `/v1/organizations/${params.organization_id}/subscriptions/${params.organization_subscription_id}`;
-        const data = params.subscription;
-
-        return this.client.put(url, data);
+        return this.client.put(`/v1/organizations/${params.organization_id}/subscriptions/${params.organization_subscription_id}`, { ...params.subscription });
     }
 
     /**
@@ -337,13 +322,12 @@ export default class Subscriptions extends Resource {
      *             gigwalk.customers.searchSubscriptionsWithField({...})
      */
     searchSubscriptionsWithField(params: SearchSubscriptionsWithFieldParams): APIPromise<SearchSubscriptionsWithFieldData> {
-        const url = `/v2/organizations/${params.organization_id}/search/subscriptions/filters`;
         const data = {
             search_field: params.search_field,
             query_string: params.query_string
         };
 
-        return this.client.post(url, data);
+        return this.client.post(`/v2/organizations/${params.organization_id}/search/subscriptions/filters`, data);
     }
 
     /**
@@ -357,11 +341,10 @@ export default class Subscriptions extends Resource {
      *             gigwalk.customers.searchSubscriptions({...})
      */
     searchSubscriptions(params: SearchSubscriptionsParams): APIPromise<SearchSubscriptionsData> {
-        const url = `/v2/organizations/${params.organization_id}/search/subscriptions`;
         const data = {
             query_string: params.query_string
         };
 
-        return this.client.post(url, data);
+        return this.client.post(`/v2/organizations/${params.organization_id}/search/subscriptions`, data);
     }
 }
