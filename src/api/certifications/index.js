@@ -22,13 +22,34 @@ type UpdateCertificationParams = {
     certification: CertificationTemplate
 }
 
+type GetCertificationsQuery = {
+    limit?: number,
+    offset?: number,
+    sort_field?: string,
+    sort_order?: string,
+    filter_type?: string,
+    query_string?: string
+}
+
+type GetCertificationsParams = {
+    query?: GetCertificationsQuery
+}
+
 type CreateCertificationsParams = {
     certifications: Array<CertificationTemplate>
 }
 
+type GetCustomerCertificationsQuery = {
+    limit?: number,
+    offset?: number,
+    sort_field?: string,
+    sort_order?: string
+}
+
 type GetCustomerCertificationsParams = {
     organization_id: number,
-    customer_id: number
+    customer_id: number,
+    query?: GetCustomerCertificationsQuery
 }
 
 type UpdateCustomerCertificationsParams = {
@@ -38,8 +59,17 @@ type UpdateCustomerCertificationsParams = {
     certification_ids: Array<number>
 }
 
+type GetOrganizationCertificationsQuery = {
+    limit?: number,
+    offset?: number,
+    sort_field?: string,
+    sort_order?: string,
+    filter_type?: string
+}
+
 type GetOrganizationCertificationsParams = {
-    organization_id: number
+    organization_id: number,
+    query?: GetOrganizationCertificationsQuery
 }
 
 type CreateOrganizationCertificationsParams = {
@@ -159,8 +189,7 @@ export default class Certifications extends Resource {
      *             gigwalk.certification.updateCertification({...})
      */
     updateCertification(params: UpdateCertificationParams): APIPromise<UpdateCertificationData> {
-        const url = `/v1/certifications/${params.certification_id}`;
-        return this.client.put(url, { ...params.certification });
+        return this.client.put(`/v1/certifications/${params.certification_id}`, { ...params.certification });
     }
 
     /**
@@ -169,11 +198,14 @@ export default class Certifications extends Resource {
      * @apiDescription Get all certifications available to the current user Return data fields (id, org_id, description, title, type, state).
                        Including the current user organization certificates and public certificates It could return paginated results and also
                        sorted by given parameters
+     * @apiParam {GetCertificationsQuery} query
      * @apiExample {js} Example:
      *             gigwalk.certification.getCertifications({...})
      */
-    getCertifications(): APIPromise<GetCertificationsData> {
-        return this.client.get('/v1/certifications?limit=2');
+    getCertifications(params: GetCertificationsParams): APIPromise<GetCertificationsData> {
+        const queryString = (params) ? this.queryStringForSearchObject(params.query) : '';
+
+        return this.client.get(`/v1/certifications${queryString}`);
     }
 
     /**
@@ -189,6 +221,7 @@ export default class Certifications extends Resource {
         const data = {
             certifications: params.certifications
         };
+
         return this.client.post('/v1/certifications', data);
     }
 
@@ -199,12 +232,14 @@ export default class Certifications extends Resource {
                        It could return paginated results and also sorted by given parameters
      * @apiParam {Number} organization_id
      * @apiParam {Number} customer_id
+     * @apiParam {GetCustomerCertificationsQuery} query
      * @apiExample {js} Example:
      *             gigwalk.certification.getCustomerCertifications({...})
      */
     getCustomerCertifications(params: GetCustomerCertificationsParams): APIPromise<GetCustomerCertificationsData> {
-        const url = `/v1/organizations/${params.organization_id}/customer/${params.customer_id}/certifications`;
-        return this.client.get(url);
+        const queryString = this.queryStringForSearchObject(params.query);
+
+        return this.client.get(`/v1/organizations/${params.organization_id}/customer/${params.customer_id}/certifications${queryString}`);
     }
 
     /**
@@ -220,13 +255,12 @@ export default class Certifications extends Resource {
      *             gigwalk.certification.updateCustomerCertifications({...})
      */
     updateCustomerCertifications(params: UpdateCustomerCertificationsParams): APIPromise<UpdateCustomerCertificationsData> {
-        const url = `/v1/organizations/${params.organization_id}/customer/${params.customer_id}/certifications`;
         const data = {
             action: params.action,
             certification_ids: params.certification_ids
         };
 
-        return this.client.put(url, data);
+        return this.client.put(`/v1/organizations/${params.organization_id}/customer/${params.customer_id}/certifications`, data);
     }
 
     /**
@@ -235,11 +269,14 @@ export default class Certifications extends Resource {
      * @apiDescription Get Certifications information for a given organization Return data fields (id, org_id, description, title, type, state).
                        It could return paginated results and also sorted by given parameters
      * @apiParam {Number} organization_id
+     * @apiParam {GetOrganizationCertificationsQuery} query
      * @apiExample {js} Example:
      *             gigwalk.certification.getOrganizationCertifications({...})
      */
     getOrganizationCertifications(params: GetOrganizationCertificationsParams): APIPromise<GetOrganizationCertificationsData> {
-        return this.client.get(`/v1/organizations/${params.organization_id}/certifications`);
+        const queryString = this.queryStringForSearchObject(params.query);
+
+        return this.client.get(`/v1/organizations/${params.organization_id}/certifications${queryString}`);
     }
 
     /**
@@ -253,12 +290,11 @@ export default class Certifications extends Resource {
      *             gigwalk.certification.createOrganizationCertifications({...})
      */
     createOrganizationCertifications(params: CreateOrganizationCertificationsParams): APIPromise<CreateOrganizationCertificationsData> {
-        const url = `/v1/organizations/${params.organization_id}/certifications`;
         const data = {
             certifications: params.certifications
         };
 
-        return this.client.post(url, data);
+        return this.client.post(`/v1/organizations/${params.organization_id}/certifications`, data);
     }
 
     /**
@@ -271,12 +307,11 @@ export default class Certifications extends Resource {
      *             gigwalk.certification.updateOrganizationCertifications({...})
      */
     updateOrganizationCertifications(params: UpdateOrganizationCertificationsParams): APIPromise<UpdateOrganizationCertificationsData> {
-        const url = `/v1/organizations/${params.organization_id}/certifications`;
         const data = {
             certifications: params.certifications
         };
 
-        return this.client.put(url, data);
+        return this.client.put(`/v1/organizations/${params.organization_id}/certifications`, data);
     }
 
     /**
@@ -289,12 +324,11 @@ export default class Certifications extends Resource {
      *             gigwalk.certification.deleteOrganizationCertifications({...})
      */
     deleteOrganizationCertifications(params: DeleteOrganizationCertificationsParams): APIPromise<DeleteOrganizationCertificationsData> {
-        const url = `/v1/organizations/${params.organization_id}/certifications/delete`;
         const data = {
             certification_ids: params.certification_ids
         };
 
-        return this.client.post(url, data);
+        return this.client.post(`/v1/organizations/${params.organization_id}/certifications/delete`, data);
     }
 
     /**
@@ -308,11 +342,10 @@ export default class Certifications extends Resource {
      *             gigwalk.certification.createOrganizationCertificationsFromFile({...})
      */
     createOrganizationCertificationsFromFile(params: CreateOrganizationCertificationsFromFileParams): APIPromise<CreateOrganizationCertificationsFromFileData> {
-        const url = `/v1/organizations/${params.organization_id}/certifications/upload`;
         const data = {
             s3_keys: params.s3_keys
         };
 
-        return this.client.post(url, data);
+        return this.client.post(`/v1/organizations/${params.organization_id}/certifications/upload`, data);
     }
 }

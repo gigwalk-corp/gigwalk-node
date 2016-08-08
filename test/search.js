@@ -13,7 +13,7 @@ describe('Search', () => {
 
     const organizationID: number = 4;
 
-    it('should be able to get a customer by email', (done) => {
+    it('should be able to search documents', (done) => {
         search.searchDocuments({
             query_string: 'string'
         })
@@ -24,7 +24,7 @@ describe('Search', () => {
             })
             .catch(done);
     });
-    it('should be able to get a customer by email', (done) => {
+    it('should be able to create a search', (done) => {
         search.createSearch()
             .then((res) => {
                 expect(res.status).to.equal(200);
@@ -33,7 +33,7 @@ describe('Search', () => {
             })
             .catch(done);
     });
-    it('should be able to get a customer by email', (done) => {
+    it('should be able to search an organization', (done) => {
         search.searchOrganization({
             organization_id: organizationID,
             index_type: 'location_lists',

@@ -19,4 +19,14 @@ export default class Resource {
     constructor(client: Axios) {
         this.client = client;
     }
+
+    queryStringForSearchObject(queryObject: any): string {
+        if (!queryObject) return '';
+        let queryString: string = '';
+        for (let i = 0; i < Object.keys(queryObject).length; i++) {
+            const key: string = Object.keys(queryObject)[i];
+            queryString += (queryString.length === 0) ? `?${key}=${queryObject[key]}` : `&${key}=${queryObject[key]}`;
+        }
+        return queryString;
+    }
 }
