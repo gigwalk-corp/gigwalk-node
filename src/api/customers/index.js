@@ -18,7 +18,8 @@ import type {
 
 export default class Customers extends Resource {
     /**
-     * @api {delete} /v1/organizations/{organization_id}/customers/{customer_email}
+     * @api {delete} /v1/organizations/:organization_id/customers/:customer_email deleteByEmail
+     * @apiGroup Customers
      * @apiName deleteByEmail
      * @apiDescription The actual customers are not deleted but only their metadata is. The customer status is set to DELETED.
      * @apiParam {Number} organization_id
@@ -32,7 +33,8 @@ export default class Customers extends Resource {
     }
 
     /**
-     * @api {get} /v1/organizations/{organization_id}/customers/{customer_email}
+     * @api {get} /v1/organizations/:organization_id/customers/:customer_email getByEmail
+     * @apiGroup Customers
      * @apiName getByEmail
      * @apiDescription If the customer exists, then return info about the specified customer.
      * @apiParam {Number} organization_id
@@ -46,12 +48,13 @@ export default class Customers extends Resource {
     }
 
     /**
-     * @api {put} /v1/organizations/{organization_id}/customers/{customer_email}
+     * @api {put} /v1/organizations/:organization_id/customers/:customer_email updateByEmail
+     * @apiGroup Customers
      * @apiName updateByEmail
-     * @apiDescription Modifies the info of the customer identified by the customer_email.
+     * @apiDescription Modifies the info of the customer identified by customer_email.
      * @apiParam {Number} organization_id
      * @apiParam {String} customer_email
-     * @apiParam {CustomerTemplate} customer
+     * @apiParam {Object} customer
      * @apiExample {js} Example:
      *             gigwalk.customers.updateByEmail({...})
      */
@@ -63,7 +66,8 @@ export default class Customers extends Resource {
     }
 
     /**
-     * @api {delete} /v1/organizations/{organization_id}/customers/{customer_id}
+     * @api {delete} /v1/organizations/:organization_id/customers/:customer_id deleteById
+     * @apiGroup Customers
      * @apiName deleteById
      * @apiDescription The actual customers are not deleted but only their metadata is. The customer status is set to DELETED.
      * @apiParam {Number} organization_id
@@ -77,7 +81,8 @@ export default class Customers extends Resource {
     }
 
     /**
-     * @api {get} /v1/organizations/{organization_id}/customers/{customer_id}
+     * @api {get} /v1/organizations/:organization_id/customers/:customer_id getById
+     * @apiGroup Customers
      * @apiName getById
      * @apiDescription If the customer exists, then return info about the specified customer.
      * @apiParam {Number} organization_id
@@ -91,12 +96,13 @@ export default class Customers extends Resource {
     }
 
     /**
-     * @api {put} /v1/organizations/{organization_id}/customers/{customer_id}
+     * @api {put} /v1/organizations/:organization_id/customers/:customer_id updateById
+     * @apiGroup Customers
      * @apiName updateById
-     * @apiDescription Modifies the info of the customer identified by the customer_id
+     * @apiDescription Modifies the info of the customer identified by customer_id
      * @apiParam {Number} organization_id
      * @apiParam {Number} customer_id
-     * @apiParam {CustomerTemplate} customer
+     * @apiParam {Object} customer
      * @apiExample {js} Example:
      *             gigwalk.customers.updateById({...})
      */
@@ -108,7 +114,8 @@ export default class Customers extends Resource {
     }
 
     /**
-     * @api {get} /v1/organizations/{organization_id}/customers
+     * @api {get} /v1/organizations/:organization_id/customers getAllByOrganization
+     * @apiGroup Customers
      * @apiName getAllByOrganization
      * @apiDescription Return info about all customers of the organization
      * @apiParam {Number} organization_id
@@ -121,12 +128,12 @@ export default class Customers extends Resource {
     }
 
     /**
-     * @api {put} /v1/organizations/{organization_id}/customers
+     * @api {put} /v1/organizations/:organization_id/customers bulkUpdate
+     * @apiGroup Customers
      * @apiName bulkUpdate
-     * @apiDescription Modifies the info of multiple customers identified by the customer_email. Delete multiple customers (by setting DELETED status)
+     * @apiDescription Modifies the info of multiple customers identified by customer_email. Delete multiple customers (by setting DELETED status)
      * @apiParam {Number} organization_id
-     * @apiParam {String} organization_id
-     * @apiParam {Array<CustomerTemplate>} customers
+     * @apiParam {Object[]} customers
      * @apiExample {js} Example:
      *             gigwalk.customers.bulkUpdate({...})
      */
@@ -141,11 +148,10 @@ export default class Customers extends Resource {
     }
 
     /**
-     * @api {get} /v1/customer
+     * @api {get} /v1/customer get
+     * @apiGroup Customers
      * @apiName get
-     * @apiDescription Return current customer's info Shortcut for returning OrgCustomerAPIResource with current_user's org_id and current user's id as
-     the customer_id. Returns (id, first_name, last_name, photo_url, address_line_1 and 2, phonenumber, email, role, customer_status,
-     org, group_memberships, metadata, max/ideal_hours_week, home_lat/long, auth_token)
+     * @apiDescription Return the current customer's info.
      * @apiExample {js} Example:
      *             gigwalk.customers.get({...})
      */
@@ -154,11 +160,11 @@ export default class Customers extends Resource {
     }
 
     /**
-     * @api {put} /v1/customer
+     * @api {put} /v1/customer update
+     * @apiGroup Customers
      * @apiName update
-     * @apiDescription Modify current_user's info Shortcut for the put method of OrgCustomerAPIResource with current_user's org_id and current user's id
-     as the customer_id.
-     * @apiParam {CustomerTemplate} customer
+     * @apiDescription Modify the current customers's info.
+     * @apiParam {Object} customer
      * @apiExample {js} Example:
      *             gigwalk.customers.update({...})
      */
@@ -168,11 +174,12 @@ export default class Customers extends Resource {
     }
 
     /**
-     * @api {post} /v1/tickets/search/customers
+     * @api {post} /v1/tickets/search/customers search
+     * @apiGroup Customers
      * @apiName search
-     * @apiDescription Return all the customers related with the given groups or with the groups related with the tickets Also checks if the customers
+     * @apiDescription Return all the customers related with the given groups or with the groups related with the tickets. Also checks if the customers
      have availability and capacity to execute the given tickets
-     * @apiParam {Array<Number>} ticket_ids
+     * @apiParam {Number[]} ticket_ids
      * @apiExample {js} Example:
      *             gigwalk.customers.search({...})
      */
