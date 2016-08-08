@@ -1,0 +1,187 @@
+
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "_metadata": {
+      "type": "object"
+    },
+    "_meta": {
+      "type": "object"
+    },
+    "errors": {
+      "type": [ "null", "array" ]
+    },
+    "warnings": {
+      "type": [ "null", "array" ]
+    },
+    "gw_api_response": {
+      "type": "array"
+    },
+    "code": {
+      "type": "integer"
+    },
+    "data": {
+        "type": "array",
+        "items": {
+            "type": "object",
+            "properties": {
+              "home_longitude": {
+                "type": [ "null", "string" ]
+              },
+              "phonenumber": {
+                "type": [ "null", "string" ]
+              },
+              "address_line_1": {
+                "type": [ "null", "string" ]
+              },
+              "organization": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer"
+                  },
+                  "cannot_opt_out": {
+                    "type": "boolean"
+                  },
+                  "core_customer_account": {
+                    "type": "null"
+                  },
+                  "organization_name": {
+                    "type": "string"
+                  },
+                  "needs_core": {
+                    "type": "boolean"
+                  },
+                  "core_private_workforce": {
+                    "type": "null"
+                  },
+                  "vertical_type": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "id",
+                  "cannot_opt_out",
+                  "core_customer_account",
+                  "organization_name",
+                  "needs_core",
+                  "core_private_workforce",
+                  "vertical_type"
+                ]
+              },
+              "address_line_2": {
+                "type": [ "null", "string" ]
+              },
+              "metadata": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "value": {
+                      "type": "integer"
+                    },
+                    "id": {
+                      "type": "integer"
+                    },
+                    "key": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "value",
+                    "id",
+                    "key"
+                  ]
+                }
+              },
+              "id": {
+                "type": "integer"
+              },
+              "photo_url": {
+                "type": [ "null", "string" ]
+              },
+              "ideal_hours_week": {
+                "type": [ "null", "integer" ]
+              },
+              "role": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string"
+              },
+              "rating_score": {
+                "type": [ "null", "string" ]
+              },
+              "last_name": {
+                "type": [ "null", "string" ]
+              },
+              "first_name": {
+                "type": [ "null", "string" ]
+              },
+              "home_latitude": {
+                "type": [ "null", "string" ]
+              },
+              "customer_status": {
+                "type": "string"
+              },
+              "certifications": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "id"
+                  ]
+                }
+              },
+              "max_hours_week": {
+                "type": [ "null", "integer" ]
+              },
+              "group_memberships": {
+                "type": "array",
+                "items": {}
+              },
+              "date_last_auth": {
+                "type": [ "null", "string" ]
+              }
+            },
+            "required": [
+              "home_longitude",
+              "phonenumber",
+              "address_line_1",
+              "organization",
+              "address_line_2",
+              "metadata",
+              "id",
+              "photo_url",
+              "ideal_hours_week",
+              "role",
+              "email",
+              "rating_score",
+              "last_name",
+              "first_name",
+              "home_latitude",
+              "customer_status",
+              "certifications",
+              "max_hours_week",
+              "group_memberships",
+              "date_last_auth"
+            ]
+          }
+        }
+    },
+    "required": [
+      "_metadata",
+      "_meta",
+      "errors",
+      "warnings",
+      "gw_api_response",
+      "code",
+      "data"
+    ]
+}
