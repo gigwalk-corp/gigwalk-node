@@ -80,7 +80,7 @@ describe('Customers', () => {
                 done();
             })
             .catch(done);
-    });
+    }).timeout(5000);
     it('should be able to update the current customer', (done) => {
         customers.updateCustomer({
             customer: {

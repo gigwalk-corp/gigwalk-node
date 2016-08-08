@@ -24,9 +24,16 @@ type DeleteCustomerWithEmailParams = {
     customer_email: string
 }
 
+type GetCustomerWithEmailQuery = {
+    customer_roles?: string
+}
+
 type GetCustomerWithEmailParams = {
     organization_id: number,
-    customer_email: string
+    customer_email: string,
+    require_cert_ids?: Array<number>,
+    exclude_cert_ids?: Array<number>,
+    query?: GetCustomerWithEmailQuery
 }
 
 type UpdateCustomerWithEmailParams = {
@@ -40,9 +47,14 @@ type DeleteCustomerWithIDParams = {
     customer_id: number
 }
 
+type GetCustomerWithIDQuery = {
+    customer_roles?: string
+}
+
 type GetCustomerWithIDParams = {
     organization_id: number,
-    customer_id: number
+    customer_id: number,
+    query?: GetCustomerWithIDQuery
 }
 
 type UpdateCustomerWithIDParams = {
@@ -51,8 +63,19 @@ type UpdateCustomerWithIDParams = {
     customer: CustomerTemplate
 }
 
+type GetOrganizationCustomersQuery = {
+    offset?: number,
+    limit?: number,
+    order_by?: string,
+    order_dir?: string,
+    customer_roles?: string
+}
+
 type GetOrganizationCustomersParams = {
-    organization_id: number
+    organization_id: number,
+    require_cert_ids?: Array<number>,
+    exclude_cert_ids?: Array<number>,
+    query?: GetOrganizationCustomersQuery
 }
 
 type UpdateOrganizationCustomersParams = {
@@ -65,8 +88,17 @@ type UpdateCustomerParams = {
     customer: CustomerTemplate
 }
 
+type SearchCustomersQuery = {
+    size?: number,
+    from?: number
+}
+
 type SearchCustomersParams = {
-    ticket_ids: Array<number>
+    ticket_ids: Array<number>,
+    group_ids?: Array<number>,
+    required_certifications?: Array<number>,
+    q?: string,
+    query?: SearchCustomersQuery
 }
 
 type CustomerSchema = {
@@ -96,6 +128,27 @@ type CustomerSchema = {
     }>,
     organization: Object,
     metadata: Object
+}
+
+type searchResultsSchema = {
+    took: number,
+    timed_out: boolean,
+    _shards: {
+        successful: number,
+        failed: number,
+        total: number
+    },
+    hits: {
+        total: number,
+        max_score: number,
+        hits: Array<{
+            _score: number,
+            _id: number,
+            _type: string,
+            _index: string,
+            _source: Object
+        }>
+    }
 }
 
 type DeleteCustomerWithEmailData = [
@@ -134,7 +187,9 @@ type UpdateCustomerData = [ // NEED TO CHECK
     CustomerSchema
 ]
 
-type SearchCustomersData = Array<CustomerSchema>
+type SearchCustomersData = [
+    searchResultsSchema
+]
 
 export default class Customers extends Resource {
     /**
@@ -147,9 +202,7 @@ export default class Customers extends Resource {
      *             gigwalk.customers.deleteCustomerWithEmail({...})
      */
     deleteCustomerWithEmail(params: DeleteCustomerWithEmailParams): APIPromise<DeleteCustomerWithEmailData> {
-        const url = `/v1/organizations/${params.organization_id}/customers/${params.customer_email}`;
-
-        return this.client.delete(url);
+        return this.client.delete(`/v1/organizations/${params.organization_id}/customers/${params.customer_email}`);
     }
 
     /**
@@ -158,13 +211,20 @@ export default class Customers extends Resource {
      * @apiDescription If the customer exists, then return info about the specified customer.
      * @apiParam {Number} organization_id
      * @apiParam {String} customer_email
+     * @apiParam {Array<Number>} require_cert_ids
+     * @apiParam {Array<Number>} exclude_cert_ids
+     * @apiParam {GetCustomerWithEmailQuery} query
      * @apiExample {js} Example:
      *             gigwalk.customers.getCustomerWithEmail({...})
      */
     getCustomerWithEmail(params: GetCustomerWithEmailParams): APIPromise<GetCustomerWithEmailData> {
-        const url = `/v1/organizations/${params.organization_id}/customers/${params.customer_email}`;
+        const queryString = this.queryStringForSearchObject(params.query);
+        const data = {
+            require_cert_ids: (params.require_cert_ids) ? params.require_cert_ids : [],
+            exclude_cert_ids: (params.exclude_cert_ids) ? params.exclude_cert_ids : []
+        };
 
-        return this.client.get(url);
+        return this.client.get(`/v1/organizations/${params.organization_id}/customers/${params.customer_email}${queryString}`, data);
     }
 
     /**
@@ -178,10 +238,7 @@ export default class Customers extends Resource {
      *             gigwalk.customers.updateCustomer({...})
      */
     updateCustomerWithEmail(params: UpdateCustomerWithEmailParams): APIPromise<UpdateCustomerWithEmailData> {
-        const url = `/v1/organizations/${params.organization_id}/customers/${params.customer_email}`;
-        const data = params.customer;
-
-        return this.client.put(url, data);
+        return this.client.put(`/v1/organizations/${params.organization_id}/customers/${params.customer_email}`, { ...params.customer });
     }
 
     /**
@@ -194,9 +251,7 @@ export default class Customers extends Resource {
      *             gigwalk.customers.deleteCustomerWithID({...})
      */
     deleteCustomerWithID(params: DeleteCustomerWithIDParams): APIPromise<DeleteCustomerWithIDData> {
-        const url = `/v1/organizations/${params.organization_id}/customers/${params.customer_id}`;
-
-        return this.client.delete(url);
+        return this.client.delete(`/v1/organizations/${params.organization_id}/customers/${params.customer_id}`);
     }
 
     /**
@@ -205,13 +260,14 @@ export default class Customers extends Resource {
      * @apiDescription If the customer exists, then return info about the specified customer.
      * @apiParam {Number} organization_id
      * @apiParam {Number} customer_id
+     * @apiParam {GetCustomerWithIDQuery} query
      * @apiExample {js} Example:
      *             gigwalk.customers.getCustomerWithID({...})
      */
     getCustomerWithID(params: GetCustomerWithIDParams): APIPromise<GetCustomerWithIDData> {
-        const url = `/v1/organizations/${params.organization_id}/customers/${params.customer_id}`;
+        const queryString = this.queryStringForSearchObject(params.query);
 
-        return this.client.get(url);
+        return this.client.get(`/v1/organizations/${params.organization_id}/customers/${params.customer_id}${queryString}`);
     }
 
     /**
@@ -225,10 +281,7 @@ export default class Customers extends Resource {
      *             gigwalk.customers.updateCustomerWithID({...})
      */
     updateCustomerWithID(params: UpdateCustomerWithIDParams): APIPromise<UpdateCustomerWithIDData> {
-        const url = `/v1/organizations/${params.organization_id}/customers/${params.customer_id}`;
-        const data = params.customer;
-
-        return this.client.put(url, data);
+        return this.client.put(`/v1/organizations/${params.organization_id}/customers/${params.customer_id}`, { ...params.customer });
     }
 
     /**
@@ -236,13 +289,20 @@ export default class Customers extends Resource {
      * @apiName getOrganizationCustomers
      * @apiDescription Return info about all customers of the organization
      * @apiParam {Number} organization_id
+     * @apiParam {Array<Number>} require_cert_ids
+     * @apiParam {Array<Number>} exclude_cert_ids
+     * @apiParam {GetOrganizationCustomersQuery} query
      * @apiExample {js} Example:
      *             gigwalk.customers.getOrganizationCustomers({...})
      */
     getOrganizationCustomers(params: GetOrganizationCustomersParams): APIPromise<GetOrganizationCustomersData> {
-        const url = `/v1/organizations/${params.organization_id}/customers`;
+        const queryString = this.queryStringForSearchObject(params.query);
+        const data = {
+            require_cert_ids: (params.require_cert_ids) ? params.require_cert_ids : [],
+            exclude_cert_ids: (params.exclude_cert_ids) ? params.exclude_cert_ids : []
+        };
 
-        return this.client.get(url);
+        return this.client.get(`/v1/organizations/${params.organization_id}/customers${queryString}`, data);
     }
 
     /**
@@ -256,13 +316,12 @@ export default class Customers extends Resource {
      *             gigwalk.customers.updateOrganizationCustomers({...})
      */
     updateOrganizationCustomers(params: UpdateOrganizationCustomersParams): APIPromise<UpdateOrganizationCustomersData> {
-        const url = `/v1/organizations/${params.organization_id}/customers`;
         const data = {
             action: params.action,
             customers: params.customers
         };
 
-        return this.client.put(url, data);
+        return this.client.put(`/v1/organizations/${params.organization_id}/customers`, data);
     }
 
     /**
@@ -288,9 +347,7 @@ export default class Customers extends Resource {
      *             gigwalk.customers.updateCustomer({...})
      */
     updateCustomer(params: UpdateCustomerParams): APIPromise<UpdateCustomerData> {
-        const data = params.customer;
-
-        return this.client.put('/v1/customer', data);
+        return this.client.put('/v1/customer', { ...params.customer });
     }
 
     /**
@@ -299,14 +356,22 @@ export default class Customers extends Resource {
      * @apiDescription Return all the customers related with the given groups or with the groups related with the tickets Also checks if the customers
                        have availability and capacity to execute the given tickets
      * @apiParam {Array<Number>} ticket_ids
+     * @apiParam {Array<Number>} group_ids
+     * @apiParam {Array<Number>} required_certifications
+     * @apiParam {String} q
+     * @apiParam {SearchCustomersQuery} query
      * @apiExample {js} Example:
      *             gigwalk.customers.searchCustomers({...})
      */
     searchCustomers(params: SearchCustomersParams): APIPromise<SearchCustomersData> {
+        const queryString = this.queryStringForSearchObject(params.query);
         const data = {
-            ticket_ids: params.ticket_ids
+            ticket_ids: params.ticket_ids,
+            group_ids: (params.group_ids) ? params.group_ids : [],
+            required_certifications: (params.required_certifications) ? params.required_certifications : [],
+            q: (params.q) ? params.q : '',
         };
 
-        return this.client.post('/v1/tickets/search/customers', data);
+        return this.client.post(`/v1/tickets/search/customers${queryString}`, data);
     }
 }

@@ -24,25 +24,25 @@ type SearchOrganizationParams = {
 }
 
 type searchResultsSchema = {
+    took: number,
+    timed_out: boolean,
     _shards: {
         successful: number,
-        total: number,
-        failed: number
+        failed: number,
+        total: number
     },
     hits: {
         total: number,
         max_score: number,
         hits: Array<{
-            _source: Object,
             _score: number,
-            _type: string,
             _id: number,
+            _type: string,
             _index: string,
+            _source: Object,
             highlight?: Object
         }>
-    },
-    took: number,
-    timed_out: boolean
+    }
 }
 
 type SearchDocumentsData = [
