@@ -15,7 +15,11 @@ describe('Organizations', () => {
     let organizationID: number;
 
     it('should be able to get all organizations', (done) => {
-        organizations.getOrganizations()
+        organizations.getOrganizations({
+            query: {
+                limit: 2
+            }
+        })
             .then((res) => {
                 expect(res.status).to.equal(200);
                 // expect(res.data).to.have.jsonSchema(schema);

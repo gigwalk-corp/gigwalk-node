@@ -33,6 +33,17 @@ type UpdateOrganizationParams = {
     organization: OrganizationTemplate
 }
 
+type GetOrganizationsQuery = {
+    limit?: number,
+    offset?: number,
+    order_by?: string,
+    order_dir?: string
+}
+
+type GetOrganizationsParams = {
+    query?: GetOrganizationsQuery
+}
+
 type CreateOrganizationParams = {
     organization: OrganizationTemplate
 }
@@ -138,9 +149,7 @@ export default class Organzations extends Resource {
      *             gigwalk.customers.deleteOrganization({...})
      */
     deleteOrganization(params: DeleteOrganizationParams): APIPromise<DeleteOrganizationData> {
-        const url = `/v1/organizations/${params.organization_id}`;
-
-        return this.client.delete(url);
+        return this.client.delete(`/v1/organizations/${params.organization_id}`);
     }
 
     /**
@@ -153,9 +162,7 @@ export default class Organzations extends Resource {
      *             gigwalk.customers.getOrganization({...})
      */
     getOrganization(params: GetOrganizationParams): APIPromise<GetOrganizationData> {
-        const url = `/v1/organizations/${params.organization_id}`;
-
-        return this.client.get(url);
+        return this.client.get(`/v1/organizations/${params.organization_id}`);
     }
 
     /**
@@ -171,10 +178,7 @@ export default class Organzations extends Resource {
      *             gigwalk.customers.updateOrganization({...})
      */
     updateOrganization(params: UpdateOrganizationParams): APIPromise<UpdateOrganizationData> {
-        const url = `/v1/organizations/${params.organization_id}`;
-        const data = params.organization;
-
-        return this.client.put(url, data);
+        return this.client.put(`/v1/organizations/${params.organization_id}`, { ...params.organization });
     }
 
     /**
@@ -182,11 +186,14 @@ export default class Organzations extends Resource {
      * @apiName getOrganizations
      * @apiDescription Return data fields (id, org_name, needs_core, core_customer_account, core_private_workforce, type, user_count, date_updated, status,
                        cloud9_urls, config)
+     * @apiParam {GetOrganizationsQuery} query
      * @apiExample {js} Example:
      *             gigwalk.customers.getOrganizations({...})
      */
-    getOrganizations(): APIPromise<GetOrganizationsData> {
-        return this.client.get('/v1/organizations?limit=2');
+    getOrganizations(params: GetOrganizationsParams): APIPromise<GetOrganizationsData> {
+        const queryString = (params) ? this.queryStringForSearchObject(params.query) : '';
+
+        return this.client.get(`/v1/organizations${queryString}`);
     }
 
     /**
@@ -199,8 +206,6 @@ export default class Organzations extends Resource {
      *             gigwalk.customers.createOrganization({...})
      */
     createOrganization(params: CreateOrganizationParams): APIPromise<CreateOrganizationData> {
-        const data = params.organization;
-
-        return this.client.post('/v1/organizations', data);
+        return this.client.post('/v1/organizations', { ...params.organization });
     }
 }

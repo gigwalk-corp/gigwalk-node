@@ -184,12 +184,11 @@ describe('Certifications', () => {
             .then((res) => {
                 expect(res.status).to.equal(200);
                 // expect(res.data).to.have.jsonSchema(schema);
-                console.log(certificationID);
                 done();
             })
             .catch(done);
     });
-    it.skip('should be able to delete a certification for an organization', (done) => { //SEEMS TO BE RETURNING 500 RIGHT NOW
+    it.skip('should be able to delete a certification for an organization', (done) => { // SEEMS TO BE RETURNING 500 RIGHT NOW
         certifications.deleteOrganizationCertifications({
             organization_id: organizationID,
             certification_ids: [

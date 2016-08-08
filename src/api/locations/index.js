@@ -16,16 +16,37 @@ type LocationTemplate = {
     formatted_address: string
 }
 
+type GetLocationsQuery = {
+    limit?: number,
+    offset?: number
+}
+
+type GetLocationsParams = {
+    query?: GetLocationsQuery
+}
+
 type CreateLocationsParams = {
     locations: Array<LocationTemplate>
 }
 
+type GetLocationQuery = {
+    limit?: number,
+    offset?: number
+}
+
 type GetLocationParams = {
-    location_id: number
+    location_id: number,
+    query?: GetLocationQuery
+}
+
+type GetOrganizationLocationsQuery = {
+    limit?: number,
+    offset?: number
 }
 
 type GetOrganizationLocationsParams = {
-    organization_id: number
+    organization_id: number,
+    query?: GetOrganizationLocationsQuery
 }
 
 type CreateOrganizationLocationsParams = {
@@ -129,11 +150,14 @@ export default class Locations extends Resource {
      * @apiDescription Return all locations of the current customer's organization. For each location, return (id, title, specificity, locality,
                        admin_area_level_1/2, country, postal_code, latitude, longitude, formatted_address, state, status, timezone_id, source_location_id,
                        org_id, org_data)
+     * @apiParam {GetLocationsQuery} query
      * @apiExample {js} Example:
      *             gigwalk.customers.getLocations({...})
      */
-    getLocations(): APIPromise<GetLocationsData> {
-        return this.client.get('/v1/locations?limit=2');
+    getLocations(params: GetLocationsParams): APIPromise<GetLocationsData> {
+        const queryString = (params) ? this.queryStringForSearchObject(params.query) : '';
+
+        return this.client.get(`/v1/locations${queryString}`);
     }
 
     /**
@@ -160,13 +184,14 @@ export default class Locations extends Resource {
      * @apiDescription Return info about the specified location Return (id, title, specificity, locality, admin_area_level_1/2, country, postal_code, latitude,
                        longitude, formatted_address, state, status, timezone_id, source_location_id, org_id, org_data)
      * @apiParam {Number} location_id
+     * @apiParam {GetLocationQuery} query
      * @apiExample {js} Example:
      *             gigwalk.customers.getLocation({...})
      */
     getLocation(params: GetLocationParams): APIPromise<GetLocationData> {
-        const url = `/v1/locations/${params.location_id}`;
+        const queryString = this.queryStringForSearchObject(params.query);
 
-        return this.client.get(url);
+        return this.client.get(`/v1/locations/${params.location_id}${queryString}`);
     }
 
     /**
@@ -175,13 +200,14 @@ export default class Locations extends Resource {
      * @apiDescription Return all locations of the specified organization. For each location, return (id, title, specificity, locality, admin_area_level_1/2,
                        country, postal_code, latitude, longitude, formatted_address, state, status, timezone_id, source_location_id, org_id, org_data)
      * @apiParam {Number} organization_id
+     * @apiParam {GetOrganizationLocationsQuery} query
      * @apiExample {js} Example:
      *             gigwalk.customers.getOrganizationLocations({...})
      */
     getOrganizationLocations(params: GetOrganizationLocationsParams): APIPromise<GetOrganizationLocationsData> {
-        const url = `/v1/organizations/${params.organization_id}/locations`;
+        const queryString = this.queryStringForSearchObject(params.query);
 
-        return this.client.get(url);
+        return this.client.get(`/v1/organizations/${params.organization_id}/locations${queryString}`);
     }
 
     /**
@@ -196,12 +222,11 @@ export default class Locations extends Resource {
      *             gigwalk.customers.createOrganizationLocations({...})
      */
     createOrganizationLocations(params: CreateOrganizationLocationsParams): APIPromise<CreateOrganizationLocationsData> {
-        const url = `/v1/organizations/${params.organization_id}/locations`;
         const data = {
             locations: params.locations
         };
 
-        return this.client.post(url, data);
+        return this.client.post(`/v1/organizations/${params.organization_id}/locations`, data);
     }
 
     /**
@@ -216,12 +241,11 @@ export default class Locations extends Resource {
      *             gigwalk.customers.updateOrganizaionLocations({...})
      */
     updateOrganizaionLocations(params: UpdateOrganizationLocationsParams): APIPromise<UpdateOrganizaionLocationsData> {
-        const url = `/v1/organizations/${params.organization_id}/locations`;
         const data = {
             locations: params.locations
         };
 
-        return this.client.put(url, data);
+        return this.client.put(`/v1/organizations/${params.organization_id}/locations`, data);
     }
 
     /**
@@ -234,9 +258,7 @@ export default class Locations extends Resource {
      *             gigwalk.customers.deleteOrganizationLocation({...})
      */
     deleteOrganizationLocation(params: DeleteOrganizationLocationParams): APIPromise<DeleteOrganizationLocationData> {
-        const url = `/v1/organizations/${params.organization_id}/locations/${params.location_id}`;
-
-        return this.client.delete(url);
+        return this.client.delete(`/v1/organizations/${params.organization_id}/locations/${params.location_id}`);
     }
 
     /**
@@ -251,9 +273,7 @@ export default class Locations extends Resource {
      *             gigwalk.customers.getOrganizationLocation({...})
      */
     getOrganizationLocation(params: GetOrganizationLocationParams): APIPromise<GetOrganizationLocationData> {
-        const url = `/v1/organizations/${params.organization_id}/locations/${params.location_id}`;
-
-        return this.client.get(url);
+        return this.client.get(`/v1/organizations/${params.organization_id}/locations/${params.location_id}`);
     }
 
     /**
@@ -268,14 +288,13 @@ export default class Locations extends Resource {
      *             gigwalk.customers.createOrganizationLocation({...})
      */
     createOrganizationLocation(params: CreateOrganizationLocationParams): APIPromise<CreateOrganizationLocationData> {
-        const url = `/v1/organizations/${params.organization_id}/locations/geocode`;
         const data = {
             address: params.address,
             title: params.title,
             organization_data: params.organization_data
         };
 
-        return this.client.post(url, data);
+        return this.client.post(`/v1/organizations/${params.organization_id}/locations/geocode`, data);
     }
 
     /**
@@ -291,14 +310,13 @@ export default class Locations extends Resource {
      *             gigwalk.customers.updateOrganizationLocation({...})
      */
     updateOrganizationLocation(params: UpdateOrganizationLocationParams): APIPromise<UpdateOrganizationLocationData> {
-        const url = `/v1/organizations/${params.organization_id}/locations/geocode/${params.location_id}`;
         const data = {
             address: params.address,
             title: params.title,
             organization_data: params.organization_data
         };
 
-        return this.client.put(url, data);
+        return this.client.put(`/v1/organizations/${params.organization_id}/locations/geocode/${params.location_id}`, data);
     }
 
     /**
@@ -312,8 +330,6 @@ export default class Locations extends Resource {
      *             gigwalk.customers.createOrganizationLocationList({...})
      */
     createOrganizationLocationList(params: CreateOrganizationLocationListParams): APIPromise<CreateOrganizationLocationListData> {
-        const url = `/v1/organizations/${params.organization_id}/subscriptions/${params.subscription_id}/locations`;
-
-        return this.client.post(url);
+        return this.client.post(`/v1/organizations/${params.organization_id}/subscriptions/${params.subscription_id}/locations`);
     }
 }
