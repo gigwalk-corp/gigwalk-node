@@ -4,14 +4,14 @@ import type { APIPromise, ESPromise } from '../resource';
 import type {
     Customer,
     ESCustomer,
-    DeleteCustomerWithEmailParams,
-    GetCustomerWithEmailParams,
-    UpdateCustomerWithEmailParams,
-    DeleteCustomerWithIDParams,
-    GetCustomerWithIDParams,
-    UpdateCustomerWithIDParams,
-    GetOrganizationCustomersParams,
-    UpdateOrganizationCustomersParams,
+    DeleteCustomerByEmailParams,
+    GetCustomerByEmailParams,
+    UpdateCustomerByEmailParams,
+    DeleteCustomerByIdParams,
+    GetCustomerByIdParams,
+    UpdateCustomerByIdParams,
+    GetAllCustomersByOrganizationParams,
+    BulkUpdateCustomersParams,
     UpdateCustomerParams,
     SearchCustomersParams
 } from './types';
@@ -19,43 +19,43 @@ import type {
 export default class Customers extends Resource {
     /**
      * @api {delete} /v1/organizations/{organization_id}/customers/{customer_email}
-     * @apiName deleteCustomerWithEmail
+     * @apiName deleteByEmail
      * @apiDescription The actual customers are not deleted but only their metadata is. The customer status is set to DELETED.
      * @apiParam {Number} organization_id
      * @apiParam {String} customer_email
      * @apiExample {js} Example:
-     *             gigwalk.customers.deleteCustomerWithEmail({...})
+     *             gigwalk.customers.deleteByEmail({...})
      */
-    deleteCustomerWithEmail(params: DeleteCustomerWithEmailParams): APIPromise<[number]> {
+    deleteByEmail(params: DeleteCustomerByEmailParams): APIPromise<[number]> {
         const url = `/v1/organizations/${params.organization_id}/customers/${params.customer_email}`;
         return this.client.delete(url);
     }
 
     /**
      * @api {get} /v1/organizations/{organization_id}/customers/{customer_email}
-     * @apiName getCustomerWithEmail
+     * @apiName getByEmail
      * @apiDescription If the customer exists, then return info about the specified customer.
      * @apiParam {Number} organization_id
      * @apiParam {String} customer_email
      * @apiExample {js} Example:
-     *             gigwalk.customers.getCustomerWithEmail({...})
+     *             gigwalk.customers.getByEmail({...})
      */
-    getCustomerWithEmail(params: GetCustomerWithEmailParams): APIPromise<[Customer]> {
+    getByEmail(params: GetCustomerByEmailParams): APIPromise<[Customer]> {
         const url = `/v1/organizations/${params.organization_id}/customers/${params.customer_email}`;
         return this.client.get(url);
     }
 
     /**
      * @api {put} /v1/organizations/{organization_id}/customers/{customer_email}
-     * @apiName updateCustomer
+     * @apiName updateByEmail
      * @apiDescription Modifies the info of the customer identified by the customer_email.
      * @apiParam {Number} organization_id
      * @apiParam {String} customer_email
      * @apiParam {CustomerTemplate} customer
      * @apiExample {js} Example:
-     *             gigwalk.customers.updateCustomer({...})
+     *             gigwalk.customers.updateByEmail({...})
      */
-    updateCustomerWithEmail(params: UpdateCustomerWithEmailParams): APIPromise<[Customer]> {
+    updateByEmail(params: UpdateCustomerByEmailParams): APIPromise<[Customer]> {
         const url = `/v1/organizations/${params.organization_id}/customers/${params.customer_email}`;
         const data = params.customer;
 
@@ -64,43 +64,43 @@ export default class Customers extends Resource {
 
     /**
      * @api {delete} /v1/organizations/{organization_id}/customers/{customer_id}
-     * @apiName deleteCustomerWithID
+     * @apiName deleteById
      * @apiDescription The actual customers are not deleted but only their metadata is. The customer status is set to DELETED.
      * @apiParam {Number} organization_id
      * @apiParam {Number} customer_id
      * @apiExample {js} Example:
-     *             gigwalk.customers.deleteCustomerWithID({...})
+     *             gigwalk.customers.deleteById({...})
      */
-    deleteCustomerWithID(params: DeleteCustomerWithIDParams): APIPromise<[number]> {
+    deleteById(params: DeleteCustomerByIdParams): APIPromise<[number]> {
         const url = `/v1/organizations/${params.organization_id}/customers/${params.customer_id}`;
         return this.client.delete(url);
     }
 
     /**
      * @api {get} /v1/organizations/{organization_id}/customers/{customer_id}
-     * @apiName getCustomerWithID
+     * @apiName getById
      * @apiDescription If the customer exists, then return info about the specified customer.
      * @apiParam {Number} organization_id
      * @apiParam {Number} customer_id
      * @apiExample {js} Example:
-     *             gigwalk.customers.getCustomerWithID({...})
+     *             gigwalk.customers.getById({...})
      */
-    getCustomerWithID(params: GetCustomerWithIDParams): APIPromise<[Customer]> {
+    getById(params: GetCustomerByIdParams): APIPromise<[Customer]> {
         const url = `/v1/organizations/${params.organization_id}/customers/${params.customer_id}`;
         return this.client.get(url);
     }
 
     /**
      * @api {put} /v1/organizations/{organization_id}/customers/{customer_id}
-     * @apiName updateCustomerWithID
+     * @apiName updateById
      * @apiDescription Modifies the info of the customer identified by the customer_id
      * @apiParam {Number} organization_id
      * @apiParam {Number} customer_id
      * @apiParam {CustomerTemplate} customer
      * @apiExample {js} Example:
-     *             gigwalk.customers.updateCustomerWithID({...})
+     *             gigwalk.customers.updateById({...})
      */
-    updateCustomerWithID(params: UpdateCustomerWithIDParams): APIPromise<[Customer]> {
+    updateById(params: UpdateCustomerByIdParams): APIPromise<[Customer]> {
         const url = `/v1/organizations/${params.organization_id}/customers/${params.customer_id}`;
         const data = params.customer;
 
@@ -109,28 +109,28 @@ export default class Customers extends Resource {
 
     /**
      * @api {get} /v1/organizations/{organization_id}/customers
-     * @apiName getOrganizationCustomers
+     * @apiName getAllByOrganization
      * @apiDescription Return info about all customers of the organization
      * @apiParam {Number} organization_id
      * @apiExample {js} Example:
-     *             gigwalk.customers.getOrganizationCustomers({...})
+     *             gigwalk.customers.getAllByOrganization({...})
      */
-    getOrganizationCustomers(params: GetOrganizationCustomersParams): APIPromise<Array<Customer>> {
+    getAllByOrganization(params: GetAllCustomersByOrganizationParams): APIPromise<Array<Customer>> {
         const url = `/v1/organizations/${params.organization_id}/customers`;
         return this.client.get(url);
     }
 
     /**
      * @api {put} /v1/organizations/{organization_id}/customers
-     * @apiName updateOrganizationCustomers
+     * @apiName bulkUpdate
      * @apiDescription Modifies the info of multiple customers identified by the customer_email. Delete multiple customers (by setting DELETED status)
      * @apiParam {Number} organization_id
      * @apiParam {String} organization_id
      * @apiParam {Array<CustomerTemplate>} customers
      * @apiExample {js} Example:
-     *             gigwalk.customers.updateOrganizationCustomers({...})
+     *             gigwalk.customers.bulkUpdate({...})
      */
-    updateOrganizationCustomers(params: UpdateOrganizationCustomersParams): APIPromise<Array<Customer> | Array<number>> {
+    bulkUpdate(params: BulkUpdateCustomersParams): APIPromise<Array<Customer> | Array<number>> {
         const url = `/v1/organizations/${params.organization_id}/customers`;
         const data = {
             action: params.action,
@@ -142,42 +142,42 @@ export default class Customers extends Resource {
 
     /**
      * @api {get} /v1/customer
-     * @apiName getCustomer
+     * @apiName get
      * @apiDescription Return current customer's info Shortcut for returning OrgCustomerAPIResource with current_user's org_id and current user's id as
      the customer_id. Returns (id, first_name, last_name, photo_url, address_line_1 and 2, phonenumber, email, role, customer_status,
      org, group_memberships, metadata, max/ideal_hours_week, home_lat/long, auth_token)
      * @apiExample {js} Example:
-     *             gigwalk.customers.getCustomer({...})
+     *             gigwalk.customers.get({...})
      */
-    getCustomer(): APIPromise<Array<Customer>> {
+    get(): APIPromise<Array<Customer>> {
         return this.client.get('/v1/customer');
     }
 
     /**
      * @api {put} /v1/customer
-     * @apiName updateCustomer
+     * @apiName update
      * @apiDescription Modify current_user's info Shortcut for the put method of OrgCustomerAPIResource with current_user's org_id and current user's id
      as the customer_id.
      * @apiParam {CustomerTemplate} customer
      * @apiExample {js} Example:
-     *             gigwalk.customers.updateCustomer({...})
+     *             gigwalk.customers.update({...})
      */
-    updateCustomer(params: UpdateCustomerParams): APIPromise<[Customer]> {
+    update(params: UpdateCustomerParams): APIPromise<[Customer]> {
         const data = params.customer;
         return this.client.put('/v1/customer', data);
     }
 
     /**
      * @api {post} /v1/tickets/search/customers
-     * @apiName searchCustomers
+     * @apiName search
      * @apiDescription Return all the customers related with the given groups or with the groups related with the tickets Also checks if the customers
      have availability and capacity to execute the given tickets
      * @apiParam {Array<Number>} ticket_ids
      * @apiExample {js} Example:
-     *             gigwalk.customers.searchCustomers({...})
+     *             gigwalk.customers.search({...})
      */
     // todo: Move to Search API? Returns ElasticSearch results
-    searchCustomers(params: SearchCustomersParams): ESPromise<ESCustomer> {
+    search(params: SearchCustomersParams): ESPromise<ESCustomer> {
         const data = {
             ticket_ids: params.ticket_ids
         };

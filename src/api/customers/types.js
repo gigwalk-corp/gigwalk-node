@@ -77,43 +77,43 @@ type CustomerUpdateFields = {
     certifications?: Array<number>
 }
 
-export type DeleteCustomerWithEmailParams = {
+export type DeleteCustomerByEmailParams = {
     organization_id: number,
     customer_email: string
 }
 
-export type GetCustomerWithEmailParams = {
+export type GetCustomerByEmailParams = {
     organization_id: number,
     customer_email: string
 }
 
-export type UpdateCustomerWithEmailParams = {
+export type UpdateCustomerByEmailParams = {
     organization_id: number,
     customer_email: string,
     customer: CustomerUpdateFields
 }
 
-export type DeleteCustomerWithIDParams = {
+export type DeleteCustomerByIdParams = {
     organization_id: number,
     customer_id: number
 }
 
-export type GetCustomerWithIDParams = {
+export type GetCustomerByIdParams = {
     organization_id: number,
     customer_id: number
 }
 
-export type UpdateCustomerWithIDParams = {
+export type UpdateCustomerByIdParams = {
     organization_id: number,
     customer_id: number,
     customer: CustomerUpdateFields
 }
 
-export type GetOrganizationCustomersParams = {
+export type GetAllCustomersByOrganizationParams = {
     organization_id: number
 }
 
-export type UpdateOrganizationCustomersParams = {
+export type BulkUpdateCustomersParams = {
     organization_id: number,
     action: string,
     customers: Array<CustomerUpdateFields & { customer_id: number }>
