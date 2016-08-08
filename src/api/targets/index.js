@@ -22,9 +22,15 @@ type CreateOrganizationTargetParams = {
     observation_target: ObservationTargetBasicTemplate
 }
 
+type GetOrganizationTargetQuery = {
+    limit?: number,
+    offset?: number
+}
+
 type GetOrganizationTargetParams = {
     organization_id: number,
-    observation_target_id: number
+    observation_target_id: number,
+    query?: GetOrganizationTargetQuery
 }
 
 type UpdateOrganizationTargetParams = {
@@ -33,9 +39,16 @@ type UpdateOrganizationTargetParams = {
     observation_target: ObservationTargetTemplate
 }
 
+type SearchOrganizationTargetsQuery = {
+    q?: string,
+    limit?: number,
+    offset?: number
+}
+
 type SearchOrganizationTargetsParams = {
     organization_id: number,
-    query_string: string
+    query_string: string,
+    query?: SearchOrganizationTargetsQuery
 }
 
 type ObservationTargetSchema = {
@@ -71,10 +84,7 @@ export default class Targets extends Resource {
      *             gigwalk.customers.createOrganizationTarget({...})
      */
     createOrganizationTarget(params: CreateOrganizationTargetParams): APIPromise<CreateOrganizationTargetData> {
-        const url = `/v1/organizations/${params.organization_id}/observation_targets`;
-        const data = params.observation_target;
-
-        return this.client.post(url, data);
+        return this.client.post(`/v1/organizations/${params.organization_id}/observation_targets`, { ...params.observation_target });
     }
 
     /**
@@ -84,13 +94,14 @@ export default class Targets extends Resource {
                        of the org. Return data fields (id, title, status, org_data, obs_target_type_id)
      * @apiParam {Number} organization_id
      * @apiParam {Number} observation_target_id
+     * @apiParam {GetOrganizationTargetQuery} query
      * @apiExample {js} Example:
      *             gigwalk.customers.getOrganizationTarget({...})
      */
     getOrganizationTarget(params: GetOrganizationTargetParams): APIPromise<GetOrganizationTargetData> {
-        const url = `/v1/organizations/${params.organization_id}/observation_targets/${params.observation_target_id}`;
+        const queryString = this.queryStringForSearchObject(params.query);
 
-        return this.client.get(url);
+        return this.client.get(`/v1/organizations/${params.organization_id}/observation_targets/${params.observation_target_id}${queryString}`);
     }
 
     /**
@@ -105,10 +116,8 @@ export default class Targets extends Resource {
      *             gigwalk.customers.updateOrganizationTarget({...})
      */
     updateOrganizationTarget(params: UpdateOrganizationTargetParams): APIPromise<UpdateOrganizationTargetData> {
-        const url = `/v1/organizations/${params.organization_id}/observation_targets/${params.observation_target_id}`;
-        const data = params.observation_target;
-
-        return this.client.put(url, data);
+        return this.client.put(`/v1/organizations/${params.organization_id}/observation_targets/${params.observation_target_id}`,
+                               { ...params.observation_target });
     }
 
     /**
@@ -117,15 +126,13 @@ export default class Targets extends Resource {
      * @apiDescription Find a match if the given string is found in the obs_target titles. If no search string is specified, return all obs targets of the org.
                        Return data fields (id, title, status, org_data, obs_target_type_id)
      * @apiParam {Number} organization_id
+     * @apiParam {SearchOrganizationTargetsQuery} query
      * @apiExample {js} Example:
      *             gigwalk.customers.searchOrganizationTargets({...})
      */
     searchOrganizationTargets(params: SearchOrganizationTargetsParams): APIPromise<SearchOrganizationTargetsData> {
-        const url = `/v1/organizations/${params.organization_id}/observation_targets/search`;
-        const data = {
-            q: params.query_string
-        };
+        const queryString = this.queryStringForSearchObject(params.query);
 
-        return this.client.get(url, data);
+        return this.client.get(`/v1/organizations/${params.organization_id}/observation_targets/search${queryString}`);
     }
 }

@@ -51,10 +51,7 @@ export default class TicketEvents extends Resource {
      *             gigwalk.customers.createTicketEvent({...})
      */
     createTicketEvent(params: CreateTicketEventParams): APIPromise<CreateTicketEventData> {
-        const url = `/v1/tickets/${params.ticket_id}/events`;
-        const data = params.ticket_event;
-
-        return this.client.post(url, data);
+        return this.client.post(`/v1/tickets/${params.ticket_id}/events`, { ...params.ticket_event });
     }
 
     /**
@@ -66,8 +63,6 @@ export default class TicketEvents extends Resource {
      *             gigwalk.customers.deleteTicketEvent({...})
      */
     deleteTicketEvent(params: DeleteTicketEventParams): APIPromise<DeleteTicketEventData> {
-        const url = `/v1/ticket_events/${params.ticket_event_id}`;
-
-        return this.client.delete(url);
+        return this.client.delete(`/v1/ticket_events/${params.ticket_event_id}`);
     }
 }

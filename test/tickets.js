@@ -240,7 +240,7 @@ describe('Tickets', () => {
     it('should be able to search tickets with ID', (done) => {
         tickets.searchTicketsWithID({
             ticket_id: ticketID,
-            query: {
+            search: {
                 search_type: 'status',
                 status: 'ASSIGNED'
             }
@@ -254,7 +254,7 @@ describe('Tickets', () => {
     }).timeout(10000);
     it('should be able to search tickets', (done) => {
         tickets.searchTickets({
-            query: {
+            search: {
                 search_type: 'status',
                 status: 'ASSIGNED'
             }
@@ -269,7 +269,7 @@ describe('Tickets', () => {
     it('should be able to search tickets matching criteria', (done) => {
         tickets.searchOrganizationTicketsWithCriteria({
             organization_id: organizationID,
-            query: {
+            search: {
                 search_type: 'status',
                 status: 'ASSIGNED'
             }
@@ -284,7 +284,7 @@ describe('Tickets', () => {
     it('should be able to search tickets in subscription', (done) => {
         tickets.searchSubscriptionTickets({
             subscription_id: subscriptionID,
-            query: {
+            search: {
                 search_type: 'status',
                 status: 'ASSIGNED'
             }
