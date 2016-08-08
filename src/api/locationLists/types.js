@@ -75,23 +75,18 @@ export type UpdateLocationListParams = {
     location_list: UpdatedLocationList
 }
 
-export type DeleteOrganizationLocationListParams = {
+export type BulkDeleteLocationListParams = {
     organization_id: number,
     location_list_ids: Array<number>
 }
 
-export type GetOrganizationLocationListsParams = {
+export type GetAllLocationListsByOrganizationParams = {
     organization_id: number
 }
 
-export type CreateOrganizationLocationListParams = {
+export type CreateLocationListParams = {
     organization_id: number,
     location_list: NewLocationList
-}
-
-export type DeleteOrganiztionLocationFromListParams = {
-    organization_location_list_id: number,
-    location_id: number
 }
 
 export type DeleteLocationFromListParams = {
@@ -99,7 +94,7 @@ export type DeleteLocationFromListParams = {
     location_id: number
 }
 
-export type GetLocationDetailsForListParams = {
+export type GetLocationsInListParams = {
     organization_location_list_id: number
 }
 
@@ -117,16 +112,11 @@ export type SearchLocationListParams = PaginationParams & {
     organization_location_list_id: number,
 }
 
-export type GetFileInfoForLocationListParams = {
+export type GetLocationListUploadStatsParams = {
     location_list_id: number
 }
 
-export type GetFileInfoForOrganizationLocationListParams = {
-    organization_id: number,
-    location_list_id: number
-}
-
-export type CreateOrganizationLocationListUsingFileParams = {
+export type UploadLocationListParams = {
     organization_id: number,
     location_list_name: string,
     s3_keys: Array<string>
