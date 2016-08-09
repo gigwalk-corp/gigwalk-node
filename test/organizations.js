@@ -1,6 +1,6 @@
 import Organizations from '../src/api/organizations/index';
 import axios from 'axios';
-// import schema from '../src/api/certifications/certifications-schema.json';
+import schema from '../src/api/organizations/organizations-schema.json';
 
 describe('Organizations', () => {
     const client = axios.create({
@@ -22,7 +22,7 @@ describe('Organizations', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                // expect(res.data).to.have.jsonSchema(schema);
+                expect(res.data).to.have.jsonSchema(schema);
                 done();
             })
             .catch(done);
@@ -37,7 +37,7 @@ describe('Organizations', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                // expect(res.data).to.have.jsonSchema(schema);
+                expect(res.data).to.have.jsonSchema(schema);
                 organizationID = res.data.data[0].id;
                 done();
             })
@@ -52,7 +52,7 @@ describe('Organizations', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                // expect(res.data).to.have.jsonSchema(schema);
+                expect(res.data).to.have.jsonSchema(schema);
                 done();
             })
             .catch(done);
@@ -63,7 +63,7 @@ describe('Organizations', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                // expect(res.data).to.have.jsonSchema(schema);
+                expect(res.data).to.have.jsonSchema(schema);
                 done();
             })
             .catch(done);

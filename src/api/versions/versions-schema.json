@@ -2,6 +2,21 @@
     "$schema": "http://json-schema.org/draft-04/schema#",
     "type": "object",
     "properties": {
+        "code": {
+            "type": "integer"
+        },
+        "gw_api_response": {
+            "type": "array"
+        },
+        "errors": {
+            "type": [ "null", "array" ]
+        },
+        "warnings": {
+            "type": [ "null", "array" ]
+        },
+        "_meta": {
+            "type": "object"
+        },
         "data": {
             "type": "array",
             "items": {
@@ -23,27 +38,6 @@
                     "version"
                 ]
             }
-        },
-        "errors": {
-            "type": "null"
-        },
-        "_meta": {
-            "type": "object",
-            "properties": {}
-        },
-        "code": {
-            "type": "integer"
-        },
-        "gw_api_response": {
-            "type": "array",
-            "items": {}
-        },
-        "warnings": {
-            "type": "null"
-        },
-        "_metadata": {
-            "type": "object",
-            "properties": {}
         }
     },
     "required": [

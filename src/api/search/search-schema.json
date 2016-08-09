@@ -1,0 +1,83 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "properties": {
+        "took": {
+            "type": "integer"
+        },
+        "timed_out": {
+            "type": "boolean"
+        },
+        "_shards": {
+            "type": "object",
+            "properties": {
+                "failed": {
+                    "type": "integer"
+                },
+                "total": {
+                    "type": "integer"
+                },
+                "successful": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "failed",
+                "total",
+                "successful"
+            ]
+        },
+        "hits": {
+            "type": "object",
+            "properties": {
+                "total": {
+                    "type": "integer"
+                },
+                "max_score": {
+                    "type": "integer"
+                },
+                "hits": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "_id": {
+                                "type": "string"
+                            },
+                            "_source": {
+                                
+                            },
+                            "_score": {
+                                "type": "integer"
+                            },
+                            "_index": {
+                                "type": "string"
+                            },
+                            "_type": {
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "_id",
+                            "_source",
+                            "_score",
+                            "_index",
+                            "_type"
+                        ]
+                    }
+                }
+            },
+            "required": [
+                "hits",
+                "total",
+                "max_score"
+            ]
+        }
+    },
+    "required": [
+        "_shards",
+        "hits",
+        "took",
+        "timed_out"
+    ]
+}

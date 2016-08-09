@@ -1,6 +1,6 @@
 import Subscriptions from '../src/api/subscriptions/index';
 import axios from 'axios';
-// import schema from '../src/api/certifications/certifications-schema.json';
+import schema from '../src/api/subscriptions/subscriptions-schema.json';
 
 describe('Subscriptions', () => {
     const client = axios.create({
@@ -33,13 +33,13 @@ describe('Subscriptions', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                // expect(res.data).to.have.jsonSchema(schema);
+                expect(res.data).to.have.jsonSchema(schema);
                 subscriptionID = res.data.data[0].id;
                 subscriptionID2 = res.data.data[1].id;
                 done();
             })
             .catch(done);
-    });
+    }).timeout(5000);
     it.skip('should be able to clone a specific subscription', (done) => {
         subscriptions.createClonedSubscription({
             organization_subscription_id: subscriptionID,
@@ -47,7 +47,7 @@ describe('Subscriptions', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                // expect(res.data).to.have.jsonSchema(schema);
+                expect(res.data).to.have.jsonSchema(schema);
                 done();
             })
             .catch(done);
@@ -62,7 +62,7 @@ describe('Subscriptions', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                // expect(res.data).to.have.jsonSchema(schema);
+                expect(res.data).to.have.jsonSchema(schema);
                 done();
             })
             .catch(done);
@@ -78,7 +78,7 @@ describe('Subscriptions', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                // expect(res.data).to.have.jsonSchema(schema);
+                expect(res.data).to.have.jsonSchema(schema);
                 done();
             })
             .catch(done);
@@ -89,7 +89,7 @@ describe('Subscriptions', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                // expect(res.data).to.have.jsonSchema(schema);
+                expect(res.data).to.have.jsonSchema(schema);
                 done();
             })
             .catch(done);

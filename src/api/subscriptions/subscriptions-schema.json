@@ -1,0 +1,247 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "properties": {
+        "code": {
+            "type": "integer"
+        },
+        "gw_api_response": {
+            "type": "array"
+        },
+        "errors": {
+            "type": [ "null", "array" ]
+        },
+        "warnings": {
+            "type": [ "null", "array" ]
+        },
+        "_meta": {
+            "type": "object"
+        },
+        "data": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "frequency_amount": {
+                        "type": ["null", "number"]
+                    },
+                    "is_double_optin": {
+                        "type": "boolean"
+                    },
+                    "frequency_window": {
+                        "type": ["null", "string"]
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "rating_email": {
+                        "type": ["null", "string"]
+                    },
+                    "certifications": {
+                        "type": ["string", "array"]
+                    },
+                    "autoassign": {
+                        "type": "boolean"
+                    },
+                    "id": {
+                        "type": "integer"
+                    },
+                    "frequency_byweekday": {
+                        "type": "null"
+                    },
+                    "wave": {
+                        "type": "object",
+                        "properties": {
+                            "end_date": {
+                                "type": "string"
+                            },
+                            "total_locations": {
+                                "type": "integer"
+                            },
+                            "id": {
+                                "type": "string"
+                            },
+                            "execution": {
+                                "type": "integer"
+                            },
+                            "start_date": {
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "end_date",
+                            "total_locations",
+                            "id",
+                            "execution",
+                            "start_date"
+                        ]
+                    },
+                    "worker_count": {
+                        "type": "integer"
+                    },
+                    "end_date": {
+                        "type": ["null", "string"]
+                    },
+                    "title": {
+                        "type": "string"
+                    },
+                    "organization_data": {
+                        "type": "object"
+                    },
+                    "two_way_rating_enabled": {
+                        "type": "boolean"
+                    },
+                    "needs_core": {
+                        "type": "boolean"
+                    },
+                    "ticket_time_estimate": {
+                        "type": ["null", "integer"]
+                    },
+                    "frequency_type": {
+                        "type": "null"
+                    },
+                    "state": {
+                        "type": "string"
+                    },
+                    "recurrence": {
+                        "type": ["null", "string"]
+                    },
+                    "version_id": {
+                        "type": "integer"
+                    },
+                    "created_customer": {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": ["null", "integer"]
+                            },
+                            "first_name": {
+                                "type": ["null", "string"]
+                            },
+                            "last_name": {
+                                "type": ["null", "string"]
+                            }
+                        },
+                        "required": [
+                            "id",
+                            "first_name",
+                            "last_name"
+                        ]
+                    },
+                    "date_updated": {
+                        "type": ["null", "string"]
+                    },
+                    "location_override": {
+                        "type": "boolean"
+                    },
+                    "optin_type": {
+                        "type": "string"
+                    },
+                    "date_created": {
+                        "type": "string"
+                    },
+                    "created_customer_id": {
+                        "type": ["null", "integer"]
+                    },
+                    "groups": {
+                        "type": "array"
+                    },
+                    "bundle_autoassign": {
+                        "type": "boolean"
+                    },
+                    "dashboard_visible": {
+                        "type": "boolean"
+                    },
+                    "schedule_type": {
+                        "type": ["null", "string"]
+                    },
+                    "start_date": {
+                        "type": ["null", "string"]
+                    },
+                    "organization_location_lists": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer"
+                        }
+                    },
+                    "organization_observation_target_lists": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "data_types": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "data_type_id": {
+                                                "type": "integer"
+                                            }
+                                        },
+                                        "required": [
+                                            "data_type_id"
+                                        ]
+                                    }
+                                },
+                                "observation_target_list_id": {
+                                    "type": "integer"
+                                }
+                            },
+                            "required": [
+                                "data_types",
+                                "observation_target_list_id"
+                            ]
+                        }
+                    },
+                    "can_reschedule": {
+                        "type": "boolean"
+                    }
+                },
+                "required": [
+                    "frequency_amount",
+                    "is_double_optin",
+                    "frequency_window",
+                    "description",
+                    "rating_email",
+                    "certifications",
+                    "autoassign",
+                    "id",
+                    "frequency_byweekday",
+                    "worker_count",
+                    "end_date",
+                    "title",
+                    "organization_data",
+                    "two_way_rating_enabled",
+                    "needs_core",
+                    "ticket_time_estimate",
+                    "frequency_type",
+                    "state",
+                    "recurrence",
+                    "version_id",
+                    "date_updated",
+                    "location_override",
+                    "optin_type",
+                    "date_created",
+                    "created_customer_id",
+                    "groups",
+                    "bundle_autoassign",
+                    "dashboard_visible",
+                    "schedule_type",
+                    "start_date",
+                    "organization_location_lists",
+                    "organization_observation_target_lists",
+                    "can_reschedule"
+                ]
+            }
+        }
+    },
+    "required": [
+        "gw_api_response",
+        "warnings",
+        "_meta",
+        "errors",
+        "code",
+        "data",
+        "_metadata"
+    ]
+}

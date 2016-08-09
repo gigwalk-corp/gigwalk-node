@@ -1,6 +1,6 @@
 import Search from '../src/api/search/index';
 import axios from 'axios';
-// import schema from '../src/api/certifications/certifications-schema.json';
+import schema from '../src/api/search/search-schema.json';
 
 describe('Search', () => {
     const client = axios.create({
@@ -19,7 +19,7 @@ describe('Search', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                // expect(res.data).to.have.jsonSchema(schema);
+                expect(res.data).to.have.jsonSchema(schema);
                 done();
             })
             .catch(done);
@@ -41,7 +41,7 @@ describe('Search', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                // expect(res.data).to.have.jsonSchema(schema);
+                expect(res.data).to.have.jsonSchema(schema);
                 done();
             })
             .catch(done);
