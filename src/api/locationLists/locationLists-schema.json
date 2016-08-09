@@ -1,0 +1,56 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "properties": {
+        "code": {
+            "type": "integer"
+        },
+        "gw_api_response": {
+            "type": "array"
+        },
+        "errors": {
+            "type": [ "null", "array" ]
+        },
+        "warnings": {
+            "type": [ "null", "array" ]
+        },
+        "_meta": {
+            "type": "object"
+        },
+        "data": {
+            "type": ["array", "object"],
+            "properties": {
+                "id": {
+                  "type": "integer"
+                },
+                "organization_id": {
+                  "type": "integer"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "status": {
+                  "type": "string"
+                },
+                "location_count": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "id",
+                "organization_id",
+                "name",
+                "status",
+                "location_count"
+            ]
+        }
+    },
+    "required": [
+        "code",
+        "gw_api_response",
+        "errors",
+        "_meta",
+        "data",
+        "warnings"
+    ]
+}

@@ -114,7 +114,7 @@ type CreateOrganizationLocationListUsingFileParams = {
     s3_keys: Array<string>
 }
 
-type UpdateLocationAddressParams = {
+type GetUnresolvedLocationsParams = {
     file_upload_id: number,
     location_list_id: number
 }
@@ -248,7 +248,7 @@ type CreateOrganizationLocationListUsingFileData = [
     LocationListFileUploadSchema
 ]
 
-type UpdateLocationAddressData = any // SPECIFY
+type GetUnresolvedLocationsData = any // SPECIFY
 
 type UpdateLocationAddressByIDData = any // SPECIFY
 
@@ -491,16 +491,16 @@ export default class LocationLists extends Resource {
     }
 
     /**
-     * @api {put} /v1/location_lists/{location_list_id}/upload/{file_upload_id}/unresolved_locations
-     * @apiName updateLocationAddress
+     * @api {get} /v1/location_lists/{location_list_id}/upload/{file_upload_id}/unresolved_locations
+     * @apiName getUnresolvedLocations
      * @apiDescription Update location address Either a file upload or JSON data can be input
      * @apiParam {Number} file_upload_id
      * @apiParam {Number} location_list_id
      * @apiExample {js} Example:
-     *             gigwalk.customers.updateLocationAddress({...})
+     *             gigwalk.customers.getUnresolvedLocations({...})
      */
-    updateLocationAddress(params: UpdateLocationAddressParams): APIPromise<UpdateLocationAddressData> {
-        return this.client.put(`/v1/location_lists/${params.location_list_id}/upload/${params.file_upload_id}/unresolved_locations`);
+    getUnresolvedLocations(params: GetUnresolvedLocationsParams): APIPromise<GetUnresolvedLocationsData> {
+        return this.client.get(`/v1/location_lists/${params.location_list_id}/upload/${params.file_upload_id}/unresolved_locations`);
     }
 
     /**

@@ -1,0 +1,112 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "properties": {
+        "code": {
+            "type": "integer"
+        },
+        "gw_api_response": {
+            "type": "array"
+        },
+        "errors": {
+            "type": [ "null", "array" ]
+        },
+        "warnings": {
+            "type": [ "null", "array" ]
+        },
+        "_meta": {
+            "type": "object"
+        },
+        "data": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "locality": {
+                        "type": ["null", "string"]
+                    },
+                    "country": {
+                        "type": ["null", "string"]
+                    },
+                    "title": {
+                        "type": "string"
+                    },
+                    "state": {
+                        "type": ["null", "string"]
+                    },
+                    "latitude": {
+                        "type": ["null", "string"]
+                    },
+                    "formatted_address": {
+                        "type": ["null", "string"]
+                    },
+                    "specificity": {
+                        "type": ["null", "string"]
+                    },
+                    "longitude": {
+                        "type": ["null", "string"]
+                    },
+                    "id": {
+                        "type": "integer"
+                    },
+                    "status": {
+                        "type": "string"
+                    },
+                    "source_location_id": {
+                        "type": "integer"
+                    },
+                    "organization_id": {
+                        "type": "integer"
+                    },
+                    "postal_code": {
+                        "type": ["null", "string"]
+                    },
+                    "tzid": {
+                        "type": ["null", "string"]
+                    },
+                    "organization_data": {
+                        "type": "object"
+                    },
+                    "administrative_area_level_1": {
+                        "type": ["null", "string"]
+                    },
+                    "administrative_area_level_2": {
+                        "type": ["null", "string"]
+                    },
+                    "relation_id": {
+                        "type": "integer"
+                    }
+                },
+                "required": [
+                    "locality",
+                    "country",
+                    "title",
+                    "state",
+                    "latitude",
+                    "formatted_address",
+                    "specificity",
+                    "longitude",
+                    "id",
+                    "status",
+                    "source_location_id",
+                    "organization_id",
+                    "postal_code",
+                    "tzid",
+                    "organization_data",
+                    "administrative_area_level_1",
+                    "administrative_area_level_2",
+                    "relation_id"
+                ]
+            }
+        }
+    },
+    "required": [
+        "_meta",
+        "errors",
+        "code",
+        "warnings",
+        "_metadata",
+        "data",
+        "gw_api_response"
+    ]
+}

@@ -1,6 +1,6 @@
 import LocationLists from '../src/api/locationLists/index';
 import axios from 'axios';
-// import schema from '../src/api/certifications/certifications-schema.json';
+import schema from '../src/api/locationLists/locationLists-schema.json';
 
 describe('Loction Lists', () => {
     const client = axios.create({
@@ -19,15 +19,18 @@ describe('Loction Lists', () => {
 
     it('should be able to get all location lists in an organization', (done) => {
         locationLists.getOrganizationLocationLists({
-            organization_id: organizationID
+            organization_id: organizationID,
+            query: {
+                limit: 2
+            }
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                // expect(res.data).to.have.jsonSchema(schema);
+                expect(res.data).to.have.jsonSchema(schema);
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    }).timeout(5000);
     it('should be able to create a new location list', (done) => {
         locationLists.createOrganizationLocationList({
             organization_id: organizationID,
@@ -39,7 +42,7 @@ describe('Loction Lists', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                // expect(res.data).to.have.jsonSchema(schema);
+                expect(res.data).to.have.jsonSchema(schema);
                 locationListID = res.data.data[0].id;
                 done();
             })
@@ -51,7 +54,7 @@ describe('Loction Lists', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                // expect(res.data).to.have.jsonSchema(schema);
+                expect(res.data).to.have.jsonSchema(schema);
                 done();
             })
             .catch(done);
@@ -81,7 +84,7 @@ describe('Loction Lists', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                // expect(res.data).to.have.jsonSchema(schema);
+                expect(res.data).to.have.jsonSchema(schema);
                 done();
             })
             .catch(done);
@@ -95,7 +98,7 @@ describe('Loction Lists', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                // expect(res.data).to.have.jsonSchema(schema);
+                expect(res.data).to.have.jsonSchema(schema);
                 done();
             })
             .catch(done);
@@ -107,7 +110,7 @@ describe('Loction Lists', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                // expect(res.data).to.have.jsonSchema(schema);
+                expect(res.data).to.have.jsonSchema(schema);
                 done();
             })
             .catch(done);
@@ -133,7 +136,7 @@ describe('Loction Lists', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                // expect(res.data).to.have.jsonSchema(schema);
+                expect(res.data).to.have.jsonSchema(schema);
                 done();
             })
             .catch(done);
@@ -145,7 +148,7 @@ describe('Loction Lists', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                // expect(res.data).to.have.jsonSchema(schema);
+                expect(res.data).to.have.jsonSchema(schema);
                 done();
             })
             .catch(done);
@@ -160,7 +163,7 @@ describe('Loction Lists', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                // expect(res.data).to.have.jsonSchema(schema);
+                expect(res.data).to.have.jsonSchema(schema);
                 locationListID2 = res.data.data[0].id;
                 done();
             })
@@ -172,7 +175,7 @@ describe('Loction Lists', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                // expect(res.data).to.have.jsonSchema(schema);
+                expect(res.data).to.have.jsonSchema(schema);
                 fileUploadID = res.data.data[0].file_uploads[0].id;
                 done();
             })
@@ -185,13 +188,13 @@ describe('Loction Lists', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                // expect(res.data).to.have.jsonSchema(schema);
+                expect(res.data).to.have.jsonSchema(schema);
                 done();
             })
             .catch(done);
     });
-    it.skip('should be able to update location addresses', (done) => {
-        locationLists.updateLocationAddress({
+    it('should be able to get file upload unresolved locations', (done) => {
+        locationLists.getUnresolvedLocations({
             file_upload_id: fileUploadID,
             location_list_id: locationListID2
         })
@@ -210,7 +213,7 @@ describe('Loction Lists', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                // expect(res.data).to.have.jsonSchema(schema);
+                expect(res.data).to.have.jsonSchema(schema);
                 done();
             })
             .catch(done);
@@ -221,7 +224,7 @@ describe('Loction Lists', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                // expect(res.data).to.have.jsonSchema(schema);
+                expect(res.data).to.have.jsonSchema(schema);
                 done();
             })
             .catch(done);
@@ -235,7 +238,7 @@ describe('Loction Lists', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                // expect(res.data).to.have.jsonSchema(schema);
+                expect(res.data).to.have.jsonSchema(schema);
                 done();
             })
             .catch(done);
