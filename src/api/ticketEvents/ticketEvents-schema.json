@@ -1,0 +1,99 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "properties": {
+        "code": {
+            "type": "integer"
+        },
+        "gw_api_response": {
+            "type": "array"
+        },
+        "errors": {
+            "type": [ "null", "array" ]
+        },
+        "warnings": {
+            "type": [ "null", "array" ]
+        },
+        "_meta": {
+            "type": "object"
+        },
+        "_metadata": {
+            "type": "object"
+        },
+        "data": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "ticket_event_date": {
+                        "type": "string"
+                    },
+                    "ticket_event_type": {
+                        "type": "string"
+                    },
+                    "ticket_event_data": {
+                        "type": "object",
+                        "properties": {
+                            "comment": {
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "comment"
+                        ]
+                    },
+                    "created_customer": {
+                        "type": "object",
+                        "properties": {
+                            "first_name": {
+                                "type": "string"
+                            },
+                            "email": {
+                                "type": "string"
+                            },
+                            "id": {
+                                "type": "integer"
+                            },
+                            "last_name": {
+                                "type": "string"
+                            },
+                            "photo_url": {
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "first_name",
+                            "email",
+                            "id",
+                            "last_name",
+                            "photo_url"
+                        ]
+                    },
+                    "ticket_id": {
+                        "type": "integer"
+                    }
+                },
+                "required": [
+                    "id",
+                    "ticket_event_date",
+                    "ticket_event_type",
+                    "ticket_event_data",
+                    "created_customer",
+                    "ticket_id"
+                ]
+            }
+        },
+        "required": [
+            "_metadata",
+            "code",
+            "gw_api_response",
+            "errors",
+            "_meta",
+            "data",
+            "warnings"
+        ]
+    }
+}

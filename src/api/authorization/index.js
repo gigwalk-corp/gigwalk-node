@@ -10,7 +10,7 @@ type ResetPasswordParams = {
     email: string,
     password: string,
     token: string,
-    check_expired: boolean
+    check_expired?: boolean
 }
 
 type ForgotPasswordData = null
