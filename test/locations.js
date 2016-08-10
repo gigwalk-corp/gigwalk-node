@@ -1,6 +1,7 @@
 import Locations from '../src/api/locations/index';
 import axios from 'axios';
 import schema from '../src/api/locations/locations-schema.json';
+import schema_delete from '../src/api/delete-schema.json';
 
 describe('Loctions', () => {
     const client = axios.create({
@@ -156,7 +157,7 @@ describe('Loctions', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                // expect(res.data).to.have.jsonSchema(schema);
+                expect(res.data).to.have.jsonSchema(schema_delete);
                 done();
             })
             .catch(done);

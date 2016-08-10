@@ -1,6 +1,7 @@
 import TargetLists from '../src/api/targetLists/index';
 import axios from 'axios';
 import schema from '../src/api/targetLists/targetLists-schema.json';
+import schema_delete from '../src/api/delete-schema.json';
 
 describe('Target Lists', () => {
     const client = axios.create({
@@ -71,6 +72,7 @@ describe('Target Lists', () => {
             target_list_id: targetListID
         })
             .then((res) => {
+                console.log(res.data);
                 expect(res.status).to.equal(200);
                 // expect(res.data).to.have.jsonSchema(schema);
                 targetID = res.data.data[0].id;
@@ -78,7 +80,7 @@ describe('Target Lists', () => {
             })
             .catch(done);
     }).timeout(5000);
-    it('should be able to add targets to a list', (done) => {
+    it('should be able to remove targets to a list', (done) => {
         targetLists.updateTargetsInList({
             target_list_id: targetListID,
             action: 'remove',
@@ -88,12 +90,12 @@ describe('Target Lists', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                // expect(res.data).to.have.jsonSchema(schema);
+                expect(res.data).to.have.jsonSchema(schema_delete);
                 done();
             })
             .catch(done);
     });
-    it('should be able to remove targets from a list', (done) => {
+    it('should be able to add targets from a list', (done) => {
         targetLists.updateTargetsInList({
             target_list_id: targetListID,
             action: 'add',
@@ -103,7 +105,7 @@ describe('Target Lists', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                // expect(res.data).to.have.jsonSchema(schema);
+                expect(res.data).to.have.jsonSchema(schema_delete);
                 done();
             })
             .catch(done);

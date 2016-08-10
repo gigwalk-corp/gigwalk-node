@@ -1,6 +1,9 @@
 import Certifications from '../src/api/certifications/index';
 import axios from 'axios';
 import schema from '../src/api/certifications/certifications-schema.json';
+import schema_update from '../src/api/certifications/certifications_update-schema.json';
+import schema_empty from '../src/api/empty-schema.json';
+import schema_delete from '../src/api/delete-schema.json';
 
 describe('Certifications', () => {
     const client = axios.create({
@@ -84,22 +87,6 @@ describe('Certifications', () => {
             })
             .catch(done);
     });
-    it('should be able to remove a certification from a customer', (done) => {
-        certifications.updateCustomerCertifications({
-            organization_id: organizationID,
-            customer_id: customerID,
-            action: 'remove',
-            certification_ids: [
-                certificationID
-            ]
-        })
-            .then((res) => {
-                expect(res.status).to.equal(200);
-                // expect(res.data).to.have.jsonSchema(schema);
-                done();
-            })
-            .catch(done);
-    });
     it('should be able to add a certification to a customer', (done) => {
         certifications.updateCustomerCertifications({
             organization_id: organizationID,
@@ -111,11 +98,27 @@ describe('Certifications', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                // expect(res.data).to.have.jsonSchema(schema);
+                expect(res.data).to.have.jsonSchema(schema_update);
                 done();
             })
             .catch(done);
-    });
+    }).timeout(5000);
+    it('should be able to remove a certification from a customer', (done) => {
+        certifications.updateCustomerCertifications({
+            organization_id: organizationID,
+            customer_id: customerID,
+            action: 'remove',
+            certification_ids: [
+                certificationID
+            ]
+        })
+            .then((res) => {
+                expect(res.status).to.equal(200);
+                expect(res.data).to.have.jsonSchema(schema_update);
+                done();
+            })
+            .catch(done);
+    }).timeout(5000);
     it('should be able to get a customers certifications', (done) => {
         certifications.getCustomerCertifications({
             organization_id: organizationID,
@@ -160,7 +163,7 @@ describe('Certifications', () => {
                 done();
             })
             .catch(done);
-    }).timeout(5000);
+    }).timeout(10000);
     it('should be able to edit a certification for an organiztion', (done) => {
         certifications.updateOrganizationCertifications({
             organization_id: organizationID,
@@ -176,7 +179,7 @@ describe('Certifications', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                // expect(res.data).to.have.jsonSchema(schema);
+                expect(res.data).to.have.jsonSchema(schema_empty);
                 done();
             })
             .catch(done);
@@ -190,7 +193,7 @@ describe('Certifications', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                // expect(res.data).to.have.jsonSchema(schema);
+                expect(res.data).to.have.jsonSchema(schema_delete);
                 done();
             })
             .catch(done);
@@ -204,7 +207,7 @@ describe('Certifications', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                // expect(res.data).to.have.jsonSchema(schema);
+                expect(res.data).to.have.jsonSchema(schema_delete);
                 done();
             })
             .catch(done);
@@ -215,7 +218,7 @@ describe('Certifications', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                // expect(res.data).to.have.jsonSchema(schema);
+                expect(res.data).to.have.jsonSchema(schema_delete);
                 done();
             })
             .catch(done);

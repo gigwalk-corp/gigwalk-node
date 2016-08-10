@@ -35,16 +35,20 @@
                 "status": {
                   "type": "string"
                 },
-                "location_count": {
-                    "type": "integer"
+                "oneof": {
+                    "location_count": {
+                        "type": "integer"
+                    },
+                    "locations": {
+                        "type": "array"
+                    }
                 }
             },
             "required": [
                 "id",
                 "organization_id",
                 "name",
-                "status",
-                "location_count"
+                "status"
             ]
         }
     },
