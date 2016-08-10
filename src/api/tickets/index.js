@@ -365,7 +365,7 @@ type DeleteTicketDataItemData = [ // NEED TO CHECK
     number
 ]
 
-type CreateClonedTicketData = [ // NEED TO CHECK
+type CreateClonedTicketData = [
     TicketSchema
 ]
 

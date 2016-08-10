@@ -1,6 +1,6 @@
 import Tickets from '../src/api/tickets/index';
 import axios from 'axios';
-// import schema from '../src/api/certifications/certifications-schema.json';
+import schema from '../src/api/tickets/tickets-schema.json';
 
 describe('Tickets', () => {
     const client = axios.create({
@@ -21,7 +21,7 @@ describe('Tickets', () => {
         tickets.getCurrentCustomerTickets()
             .then((res) => {
                 expect(res.status).to.equal(200);
-                // expect(res.data).to.have.jsonSchema(schema);
+                expect(res.data).to.have.jsonSchema(schema);
                 done();
             })
             .catch(done);
@@ -32,16 +32,20 @@ describe('Tickets', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                // expect(res.data).to.have.jsonSchema(schema);
+                expect(res.data).to.have.jsonSchema(schema);
                 done();
             })
             .catch(done);
     }).timeout(10000);
     it('should be able to get all tickets available to customer', (done) => {
-        tickets.getTickets()
+        tickets.getTickets({
+            query: {
+                limit: 2
+            }
+        })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                // expect(res.data).to.have.jsonSchema(schema);
+                expect(res.data).to.have.jsonSchema(schema);
                 ticketID = res.data.data[0].id;
                 done();
             })
@@ -53,7 +57,7 @@ describe('Tickets', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                // expect(res.data).to.have.jsonSchema(schema);
+                expect(res.data).to.have.jsonSchema(schema);
                 done();
             })
             .catch(done);
@@ -75,7 +79,7 @@ describe('Tickets', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                // expect(res.data).to.have.jsonSchema(schema);
+                expect(res.data).to.have.jsonSchema(schema);
                 done();
             })
             .catch(done);
@@ -86,7 +90,7 @@ describe('Tickets', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                // expect(res.data).to.have.jsonSchema(schema);
+                expect(res.data).to.have.jsonSchema(schema);
                 done();
             })
             .catch(done);
@@ -99,7 +103,7 @@ describe('Tickets', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                // expect(res.data).to.have.jsonSchema(schema);
+                expect(res.data).to.have.jsonSchema(schema);
                 done();
             })
             .catch(done);
@@ -111,7 +115,7 @@ describe('Tickets', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                // expect(res.data).to.have.jsonSchema(schema);
+                expect(res.data).to.have.jsonSchema(schema);
                 done();
             })
             .catch(done);
@@ -124,7 +128,7 @@ describe('Tickets', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                // expect(res.data).to.have.jsonSchema(schema);
+                expect(res.data).to.have.jsonSchema(schema);
                 done();
             })
             .catch(done);
@@ -140,7 +144,7 @@ describe('Tickets', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                // expect(res.data).to.have.jsonSchema(schema);
+                expect(res.data).to.have.jsonSchema(schema);
                 done();
             })
             .catch(done);
@@ -163,7 +167,7 @@ describe('Tickets', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                // expect(res.data).to.have.jsonSchema(schema);
+                expect(res.data).to.have.jsonSchema(schema);
                 done();
             })
             .catch(done);
@@ -174,7 +178,7 @@ describe('Tickets', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                // expect(res.data).to.have.jsonSchema(schema);
+                expect(res.data).to.have.jsonSchema(schema);
                 done();
             })
             .catch(done);
@@ -185,7 +189,7 @@ describe('Tickets', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                // expect(res.data).to.have.jsonSchema(schema);
+                expect(res.data).to.have.jsonSchema(schema);
                 done();
             })
             .catch(done);
@@ -196,7 +200,7 @@ describe('Tickets', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                // expect(res.data).to.have.jsonSchema(schema);
+                expect(res.data).to.have.jsonSchema(schema);
                 done();
             })
             .catch(done);
@@ -207,7 +211,7 @@ describe('Tickets', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                // expect(res.data).to.have.jsonSchema(schema);
+                expect(res.data).to.have.jsonSchema(schema);
                 done();
             })
             .catch(done);
@@ -247,7 +251,7 @@ describe('Tickets', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                // expect(res.data).to.have.jsonSchema(schema);
+                expect(res.data).to.have.jsonSchema(schema);
                 done();
             })
             .catch(done);
@@ -261,7 +265,7 @@ describe('Tickets', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                // expect(res.data).to.have.jsonSchema(schema);
+                expect(res.data).to.have.jsonSchema(schema);
                 done();
             })
             .catch(done);
@@ -276,7 +280,7 @@ describe('Tickets', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                // expect(res.data).to.have.jsonSchema(schema);
+                expect(res.data).to.have.jsonSchema(schema);
                 done();
             })
             .catch(done);
@@ -291,7 +295,7 @@ describe('Tickets', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                // expect(res.data).to.have.jsonSchema(schema);
+                expect(res.data).to.have.jsonSchema(schema);
                 done();
             })
             .catch(done);
