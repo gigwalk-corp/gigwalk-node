@@ -17,6 +17,9 @@
         "_meta": {
             "type": "object"
         },
+        "_metadata": {
+            "type": "object"
+        },
         "data": {
             "type": "array",
             "items": {

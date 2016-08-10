@@ -30,7 +30,7 @@ describe('Targets', () => {
                 done();
             })
             .catch(done);
-    });
+    }).timeout(5000);
     it.skip('should be able to get a specific target', (done) => {
         targets.getOrganizationTarget({
             organization_id: organizationID,

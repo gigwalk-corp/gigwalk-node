@@ -25,47 +25,39 @@
             "items": {
                 "type": "object",
                 "properties": {
-                    "state": {
-                        "type": "string"
+                    "observation_target_count": {
+                        "type": "integer"
                     },
-                    "type": {
-                        "type": "string"
+                    "observation_target_type_id": {
+                        "type": ["null", "integer"]
                     },
                     "id": {
                         "type": "integer"
                     },
-                    "organization_id": {
-                        "type": "integer"
-                    },
-                    "user_count": {
-                        "type": "integer"
-                    },
-                    "title": {
+                    "name": {
                         "type": "string"
                     },
-                    "description": {
+                    "status": {
                         "type": "string"
                     }
                 },
                 "required": [
-                    "state",
-                    "type",
+                    "observation_target_count",
+                    "observation_target_type_id",
                     "id",
-                    "organization_id",
-                    "user_count",
-                    "title",
-                    "description"
+                    "name",
+                    "status"
                 ]
             }
         }
     },
     "required": [
         "_metadata",
-        "_meta",
-        "errors",
-        "warnings",
-        "gw_api_response",
         "code",
-        "data"
+        "gw_api_response",
+        "errors",
+        "_meta",
+        "data",
+        "warnings"
     ]
 }

@@ -16,17 +16,10 @@ describe('Loctions', () => {
     let locationID: number;
 
     it('should be able to get all locations in an organization', (done) => {
-        locations.getLocations()
-            .then((res) => {
-                expect(res.status).to.equal(200);
-                expect(res.data).to.have.jsonSchema(schema);
-                done();
-            })
-            .catch(done);
-    });
-    it('should be able to get all locations in an organization', (done) => {
-        locations.getOrganizationLocations({
-            organization_id: organizationID
+        locations.getLocations({
+            query: {
+                limit: 2
+            }
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
@@ -34,7 +27,21 @@ describe('Loctions', () => {
                 done();
             })
             .catch(done);
-    });
+    }).timeout(5000);
+    it('should be able to get all organization locations in an organization', (done) => {
+        locations.getOrganizationLocations({
+            organization_id: organizationID,
+            query: {
+                limit: 2
+            }
+        })
+            .then((res) => {
+                expect(res.status).to.equal(200);
+                expect(res.data).to.have.jsonSchema(schema);
+                done();
+            })
+            .catch(done);
+    }).timeout(5000);
     it('should be able to create a new location', (done) => {
         locations.createLocations({
             locations: [{
@@ -114,12 +121,12 @@ describe('Loctions', () => {
                 done();
             })
             .catch(done);
-    });
+    }).timeout(5000);
     it('should be able to create organization location', (done) => {
         locations.createOrganizationLocation({
             organization_id: organizationID,
             title: randString,
-            address: '600 Bryant',
+            address: '600 Bryant'
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
@@ -127,7 +134,7 @@ describe('Loctions', () => {
                 done();
             })
             .catch(done);
-    });
+    }).timeout(5000);
     it('should be able to update organization location', (done) => {
         locations.updateOrganizationLocation({
             organization_id: organizationID,

@@ -96,7 +96,10 @@ describe('Customers', () => {
     });
     it('should be able to get all customers from an organization', (done) => {
         customers.getOrganizationCustomers({
-            organization_id: organizationID
+            organization_id: organizationID,
+            query: {
+                limit: 2
+            }
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
@@ -104,7 +107,7 @@ describe('Customers', () => {
                 done();
             })
             .catch(done);
-    });
+    }).timeout(5000);
     it('should be able to update customers in an organization', (done) => {
         customers.updateOrganizationCustomers({
             organization_id: 4,

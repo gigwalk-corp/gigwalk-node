@@ -118,7 +118,7 @@ describe('Subscriptions', () => {
                 done();
             })
             .catch(done);
-    });
+    }).timeout(5000);
     it('should be able to search subscriptions', (done) => {
         subscriptions.searchSubscriptions({
             organization_id: organizationID,
@@ -130,7 +130,7 @@ describe('Subscriptions', () => {
                 done();
             })
             .catch(done);
-    });
+    }).timeout(5000);
     it.skip('should be able to delete a specific subscription', (done) => {
         subscriptions.deleteSubscription({
             organization_subscription_id: subscriptionID

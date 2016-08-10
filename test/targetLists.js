@@ -1,6 +1,6 @@
 import TargetLists from '../src/api/targetLists/index';
 import axios from 'axios';
-// import schema from '../src/api/certifications/certifications-schema.json';
+import schema from '../src/api/targetLists/targetLists-schema.json';
 
 describe('Target Lists', () => {
     const client = axios.create({
@@ -28,7 +28,7 @@ describe('Target Lists', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                // expect(res.data).to.have.jsonSchema(schema);
+                expect(res.data).to.have.jsonSchema(schema);
                 targetListID = res.data.data[0].id;
                 done();
             })
@@ -38,7 +38,7 @@ describe('Target Lists', () => {
         targetLists.getTargetLists()
             .then((res) => {
                 expect(res.status).to.equal(200);
-                // expect(res.data).to.have.jsonSchema(schema);
+                expect(res.data).to.have.jsonSchema(schema);
                 done();
             })
             .catch(done);
@@ -49,7 +49,7 @@ describe('Target Lists', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                // expect(res.data).to.have.jsonSchema(schema);
+                expect(res.data).to.have.jsonSchema(schema);
                 done();
             })
             .catch(done);
@@ -61,7 +61,7 @@ describe('Target Lists', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                // expect(res.data).to.have.jsonSchema(schema);
+                expect(res.data).to.have.jsonSchema(schema);
                 done();
             })
             .catch(done);
@@ -117,7 +117,7 @@ describe('Target Lists', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                // expect(res.data).to.have.jsonSchema(schema);
+                expect(res.data).to.have.jsonSchema(schema);
                 done();
             })
             .catch(done);
@@ -130,7 +130,7 @@ describe('Target Lists', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                // expect(res.data).to.have.jsonSchema(schema);
+                expect(res.data).to.have.jsonSchema(schema);
                 done();
             })
             .catch(done);
@@ -142,7 +142,7 @@ describe('Target Lists', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                // expect(res.data).to.have.jsonSchema(schema);
+                expect(res.data).to.have.jsonSchema(schema);
                 done();
             })
             .catch(done);
@@ -154,7 +154,7 @@ describe('Target Lists', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                // expect(res.data).to.have.jsonSchema(schema);
+                expect(res.data).to.have.jsonSchema(schema);
                 done();
             })
             .catch(done);
@@ -165,7 +165,7 @@ describe('Target Lists', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                // expect(res.data).to.have.jsonSchema(schema);
+                expect(res.data).to.have.jsonSchema(schema);
                 done();
             })
             .catch(done);
@@ -176,7 +176,7 @@ describe('Target Lists', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                // expect(res.data).to.have.jsonSchema(schema);
+                expect(res.data).to.have.jsonSchema(schema);
                 done();
             })
             .catch(done);
