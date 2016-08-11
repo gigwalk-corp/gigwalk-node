@@ -12,4 +12,4 @@ deployment:
     branch: master
     owner: gigwalk-corp
     commands:
-        - npm run semantic-release
+        - npm run semantic-release || true
