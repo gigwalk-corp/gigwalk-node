@@ -546,7 +546,7 @@ export default class Tickets extends Resource {
     /**
      * @api {get} /v1/tickets/{ticket_id}
      * @apiName getTicket
-     * @apiDescription Get ticket info. it returns info about the specified ticket.
+     * @apiDescription Get ticket information. it returns information about the specified ticket.
      * @apiParam {Number} ticket_id
      * @apiParam {GetTicketQuery} query
      * @apiExample {js} Example:

@@ -21,7 +21,7 @@ export default class Authorization extends Resource {
 
     /**
      * @api {post} /v1/forgot_password
-     * @apiName ForgotPassword
+     * @apiName forgotPassword
      * @apiDescription Sends an email to the customer to reset their password. Authorization is not required.
      * @apiParam {String} email
      * @apiExample {js} Example:
@@ -33,8 +33,8 @@ export default class Authorization extends Resource {
 
     /**
      * @api {post} /v1/reset_password
-     * @apiName ResetPassword
-     * @apiDescription Reset the customer's password. Returns the customer's info.
+     * @apiName resetPassword
+     * @apiDescription Reset the customer's password. Returns the customer's information.
      * @apiParam {String} email
      * @apiParam {String} password
      * @apiParam {String} token

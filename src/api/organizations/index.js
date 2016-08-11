@@ -167,8 +167,8 @@ export default class Organzations extends Resource {
     /**
      * @api {put} /v1/organizations/{organization_id}
      * @apiName updateOrganization
-     * @apiDescription Update organization info. The endpoint can also be used to update the company logo. A file with name
-                       'logo' has to be added in a multipart form in order to do that. For example, the following curl:
+     * @apiDescription Update organization information. The endpoint can also be used to update the company logo. A file with
+                       name 'logo' has to be added in a multipart form in order to do that. For example, the following curl:
                        - curl -X PUT http://stage-api.apps.gigwalk.com/v1/organizations/7 -F logo=@path/to/file.png --user user:password
      * @apiParam {Number} organization_id
      * @apiParam {OrganizationTemplate} organization
@@ -196,7 +196,7 @@ export default class Organzations extends Resource {
     /**
      * @api {post} /v1/organizations
      * @apiName createOrganization
-     * @apiDescription Crete organization. Only super-admins and above can create or update organization info.
+     * @apiDescription Crete organization. Only super-admins and above can create or update organization information.
      * @apiParam {OrganizationTemplate} organization
      * @apiExample {js} Example:
      *             gigwalk.customers.createOrganization({...})

@@ -157,7 +157,7 @@ type CreateOrganizationCertificationsFromFileData = Array<number>
 export default class Certifications extends Resource {
     /**
      * @api {delete} /v1/certifications/{certification_id}
-     * @apiName DeleteCertification
+     * @apiName deleteCertification
      * @apiDescription Delete the given certification. This is a hard delete
      * @apiParam {Number} certification_id
      * @apiExample {js} Example:
@@ -169,7 +169,7 @@ export default class Certifications extends Resource {
 
     /**
      * @api {get} /v1/certifications/{certification_id}
-     * @apiName GetCertification
+     * @apiName getCertification
      * @apiDescription Get certification information.
      * @apiParam {Number} certification_id
      * @apiExample {js} Example:
@@ -181,7 +181,7 @@ export default class Certifications extends Resource {
 
     /**
      * @api {put} /v1/certifications/{certification_id}
-     * @apiName UpdateCertification
+     * @apiName updateCertification
      * @apiDescription Update certification(s).
      * @apiParam {Number} certification_id
      * @apiParam {CertificationTemplate} certification
@@ -194,7 +194,7 @@ export default class Certifications extends Resource {
 
     /**
      * @api {get} /v1/certifications
-     * @apiName GetCertifications
+     * @apiName getCertifications
      * @apiDescription Get all certifications available to the current user. Returns the current user organization's certificates and public certificates.
                        Capable of returning paginated results.
      * @apiParam {GetCertificationsQuery} query
@@ -209,7 +209,7 @@ export default class Certifications extends Resource {
 
     /**
      * @api {post} /v1/certifications
-     * @apiName CreateCertifications
+     * @apiName createCertifications
      * @apiDescription Create certification(s). If the certification already exists (checked by title), then existing certification(s) returned.
      * @apiParam {Array<CertificationTemplate>} certifications
      * @apiExample {js} Example:
@@ -225,7 +225,7 @@ export default class Certifications extends Resource {
 
     /**
      * @api {get} /v1/organizations/{organization_id}/customer/{customer_id}/certifications
-     * @apiName GetCustomerCertifications
+     * @apiName getCustomerCertifications
      * @apiDescription Get certification information for a given customer. Capable of returning paginated results.
      * @apiParam {Number} organization_id
      * @apiParam {Number} customer_id
@@ -241,7 +241,7 @@ export default class Certifications extends Resource {
 
     /**
      * @api {put} /v1/organizations/{organization_id}/customer/{customer_id}/certifications
-     * @apiName UpdateCustomerCertifications
+     * @apiName updateCustomerCertifications
      * @apiDescription Add or remove certifications for a customer. A WORKER can use this endpoint only to add/remove SELF_CERTS certifications to themselves.
      * @apiParam {Number} organization_id
      * @apiParam {Number} customer_id
@@ -261,7 +261,7 @@ export default class Certifications extends Resource {
 
     /**
      * @api {get} /v1/organizations/{organization_id}/certifications
-     * @apiName GetOrganizationCertifications
+     * @apiName getOrganizationCertifications
      * @apiDescription Get certifications information for a given organization. Capable of returning paginated results.
      * @apiParam {Number} organization_id
      * @apiParam {GetOrganizationCertificationsQuery} query
@@ -276,7 +276,7 @@ export default class Certifications extends Resource {
 
     /**
      * @api {post} /v1/organizations/{organization_id}/certifications
-     * @apiName CreateOrganizationCertifications
+     * @apiName createOrganizationCertifications
      * @apiDescription Create certification(s) for a given organization. If the certification already exists (checked by title), then existing
                        certification(s) returned.
      * @apiParam {Number} organization_id
@@ -294,7 +294,7 @@ export default class Certifications extends Resource {
 
     /**
      * @api {put} /v1/organizations/{organization_id}/certifications
-     * @apiName UpdateOrganizationCertifications
+     * @apiName updateOrganizationCertifications
      * @apiDescription Update certification(s) for a given organization.
      * @apiParam {Number} organization_id
      * @apiParam {Array<CertificationTemplate>} certifications
@@ -311,7 +311,7 @@ export default class Certifications extends Resource {
 
     /**
      * @api {post} /v1/organizations/{organization_id}/certifications/delete
-     * @apiName DeleteOrganizationCertifications
+     * @apiName deleteOrganizationCertifications
      * @apiDescription Mark the certification(s) with the passed ids as deleted.
      * @apiParam {Number} organization_id
      * @apiParam {Array<number>} certification_ids
@@ -328,9 +328,9 @@ export default class Certifications extends Resource {
 
     /**
      * @api {post} /v1/organizations/{organization_id}/certifications/upload
-     * @apiName CreateOrganizationCertificationsFromFile
+     * @apiName createOrganizationCertificationsFromFile
      * @apiDescription Create certifications from a file that has been uploaded to S3.
-                       See https://docs.google.com/document/d/1Q14OKBva_2VhWdSQCbrwjq2Q8dVH6TwXgZ83jTGxHRc/ for more info about our file upload api.
+                       See https://docs.google.com/document/d/1Q14OKBva_2VhWdSQCbrwjq2Q8dVH6TwXgZ83jTGxHRc/ for more information about our file upload api.
      * @apiParam {Number} organization_id
      * @apiParam {Array<string>} s3_keys
      * @apiExample {js} Example:

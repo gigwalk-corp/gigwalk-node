@@ -90,7 +90,7 @@ export default class Targets extends Resource {
     /**
      * @api {get} /v1/organizations/{organization_id}/observation_targets/{observation_target_id}
      * @apiName getOrganizationTarget
-     * @apiDescription If target_id is specified, return org_observation_target_id info; else return the info for all targets of the org.
+     * @apiDescription If target_id is specified, return org_observation_target_id information; else return the information for all targets of the org.
                        Capable of returning paginated results.
      * @apiParam {Number} organization_id
      * @apiParam {Number} observation_target_id
