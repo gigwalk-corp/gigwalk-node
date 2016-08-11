@@ -149,7 +149,7 @@ export default class Locations extends Resource {
      * @apiName getLocations
      * @apiDescription Return all locations of the current customer's organization. For each location, return (id, title, specificity, locality,
                        admin_area_level_1/2, country, postal_code, latitude, longitude, formatted_address, state, status, timezone_id, source_location_id,
-                       org_id, org_data)
+                       org_id, org_data). Capable of returning paginated results.
      * @apiParam {GetLocationsQuery} query
      * @apiExample {js} Example:
      *             gigwalk.customers.getLocations({...})
@@ -182,7 +182,7 @@ export default class Locations extends Resource {
      * @api {get} /v1/locations/{location_id}
      * @apiName getLocation
      * @apiDescription Return info about the specified location Return (id, title, specificity, locality, admin_area_level_1/2, country, postal_code, latitude,
-                       longitude, formatted_address, state, status, timezone_id, source_location_id, org_id, org_data)
+                       longitude, formatted_address, state, status, timezone_id, source_location_id, org_id, org_data). Capable of returning paginated results.
      * @apiParam {Number} location_id
      * @apiParam {GetLocationQuery} query
      * @apiExample {js} Example:
@@ -198,7 +198,8 @@ export default class Locations extends Resource {
      * @api {get} /v1/organizations/{organization_id}/locations
      * @apiName getOrganizationLocations
      * @apiDescription Return all locations of the specified organization. For each location, return (id, title, specificity, locality, admin_area_level_1/2,
-                       country, postal_code, latitude, longitude, formatted_address, state, status, timezone_id, source_location_id, org_id, org_data)
+                       country, postal_code, latitude, longitude, formatted_address, state, status, timezone_id, source_location_id, org_id, org_data).
+                       Capable of returning paginated results.
      * @apiParam {Number} organization_id
      * @apiParam {GetOrganizationLocationsQuery} query
      * @apiExample {js} Example:

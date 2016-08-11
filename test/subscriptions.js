@@ -4,7 +4,7 @@ import schema from '../src/api/subscriptions/subscriptions-schema.json';
 import schemaSearch from '../src/api/subscriptions/subscriptions_search-schema.json';
 import schemaDelete from '../src/api/delete-schema.json';
 
-describe('Subscriptions', () => {
+describe.only('Subscriptions', () => {
     const client = axios.create({
         baseURL,
         headers: {
@@ -155,5 +155,5 @@ describe('Subscriptions', () => {
                 done();
             })
             .catch(done);
-    });
+    }).timeout(5000);
 });

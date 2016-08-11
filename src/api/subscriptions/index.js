@@ -262,6 +262,7 @@ export default class Subscriptions extends Resource {
         const data = {
             projects: params.subscriptions
         };
+
         return this.client.post(`/v1/organizations/${params.organization_id}/subscriptions`, data);
     }
 

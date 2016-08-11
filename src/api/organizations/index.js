@@ -185,7 +185,7 @@ export default class Organzations extends Resource {
      * @api {get} /v1/organizations
      * @apiName getOrganizations
      * @apiDescription Return data fields (id, org_name, needs_core, core_customer_account, core_private_workforce, type, user_count, date_updated, status,
-                       cloud9_urls, config)
+                       cloud9_urls, config). Capable of returning paginated results.
      * @apiParam {GetOrganizationsQuery} query
      * @apiExample {js} Example:
      *             gigwalk.customers.getOrganizations({...})

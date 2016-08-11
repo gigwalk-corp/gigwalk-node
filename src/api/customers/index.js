@@ -195,7 +195,7 @@ export default class Customers extends Resource {
     /**
      * @api {delete} /v1/organizations/{organization_id}/customers/{customer_email}
      * @apiName deleteCustomerWithEmail
-     * @apiDescription The actual customers are not deleted but only their metadata is. The customer status is set to DELETED.
+     * @apiDescription The customers status is set to DELETED. The customers metadata is hard deleted.
      * @apiParam {Number} organization_id
      * @apiParam {String} customer_email
      * @apiExample {js} Example:
@@ -208,7 +208,7 @@ export default class Customers extends Resource {
     /**
      * @api {get} /v1/organizations/{organization_id}/customers/{customer_email}
      * @apiName getCustomerWithEmail
-     * @apiDescription If the customer exists, then return info about the specified customer.
+     * @apiDescription If the customer exists, return info about the specified customer.
      * @apiParam {Number} organization_id
      * @apiParam {String} customer_email
      * @apiParam {Array<Number>} require_cert_ids
@@ -230,7 +230,7 @@ export default class Customers extends Resource {
     /**
      * @api {put} /v1/organizations/{organization_id}/customers/{customer_email}
      * @apiName updateCustomer
-     * @apiDescription Modifies the info of the customer identified by the customer_email.
+     * @apiDescription Modifies customer info identified by customer_email.
      * @apiParam {Number} organization_id
      * @apiParam {String} customer_email
      * @apiParam {CustomerTemplate} customer
@@ -244,7 +244,7 @@ export default class Customers extends Resource {
     /**
      * @api {delete} /v1/organizations/{organization_id}/customers/{customer_id}
      * @apiName deleteCustomerWithID
-     * @apiDescription The actual customers are not deleted but only their metadata is. The customer status is set to DELETED.
+     * @apiDescription The customers status is set to DELETED. The customers metadata is hard deleted.
      * @apiParam {Number} organization_id
      * @apiParam {Number} customer_id
      * @apiExample {js} Example:
@@ -257,7 +257,7 @@ export default class Customers extends Resource {
     /**
      * @api {get} /v1/organizations/{organization_id}/customers/{customer_id}
      * @apiName getCustomerWithID
-     * @apiDescription If the customer exists, then return info about the specified customer.
+     * @apiDescription If the customer exists, return info about the specified customer.
      * @apiParam {Number} organization_id
      * @apiParam {Number} customer_id
      * @apiParam {GetCustomerWithIDQuery} query
@@ -273,7 +273,7 @@ export default class Customers extends Resource {
     /**
      * @api {put} /v1/organizations/{organization_id}/customers/{customer_id}
      * @apiName updateCustomerWithID
-     * @apiDescription Modifies the info of the customer identified by the customer_id
+     * @apiDescription Modifies customer information identified by customer_id.
      * @apiParam {Number} organization_id
      * @apiParam {Number} customer_id
      * @apiParam {CustomerTemplate} customer
@@ -287,7 +287,7 @@ export default class Customers extends Resource {
     /**
      * @api {get} /v1/organizations/{organization_id}/customers
      * @apiName getOrganizationCustomers
-     * @apiDescription Return info about all customers of the organization
+     * @apiDescription Return information about all customers of an organization. Capable of returning paginated results.
      * @apiParam {Number} organization_id
      * @apiParam {Array<Number>} require_cert_ids
      * @apiParam {Array<Number>} exclude_cert_ids
@@ -308,7 +308,7 @@ export default class Customers extends Resource {
     /**
      * @api {put} /v1/organizations/{organization_id}/customers
      * @apiName updateOrganizationCustomers
-     * @apiDescription Modifies the info of multiple customers identified by the customer_email. Delete multiple customers (by setting DELETED status)
+     * @apiDescription Modify information of customer(s) identified by customer_email. Soft delete multiple customers by setting DELETED status.
      * @apiParam {Number} organization_id
      * @apiParam {String} organization_id
      * @apiParam {Array<CustomerTemplate>} customers
@@ -327,9 +327,7 @@ export default class Customers extends Resource {
     /**
      * @api {get} /v1/customer
      * @apiName getCustomer
-     * @apiDescription Return current customer's info Shortcut for returning OrgCustomerAPIResource with current_user's org_id and current user's id as
-                       the customer_id. Returns (id, first_name, last_name, photo_url, address_line_1 and 2, phonenumber, email, role, customer_status,
-                       org, group_memberships, metadata, max/ideal_hours_week, home_lat/long, auth_token)
+     * @apiDescription Return current customer's information.
      * @apiExample {js} Example:
      *             gigwalk.customers.getCustomer({...})
      */
@@ -340,8 +338,7 @@ export default class Customers extends Resource {
     /**
      * @api {put} /v1/customer
      * @apiName updateCustomer
-     * @apiDescription Modify current_user's info Shortcut for the put method of OrgCustomerAPIResource with current_user's org_id and current user's id
-                       as the customer_id.
+     * @apiDescription Modify current users information.
      * @apiParam {CustomerTemplate} customer
      * @apiExample {js} Example:
      *             gigwalk.customers.updateCustomer({...})
@@ -353,8 +350,8 @@ export default class Customers extends Resource {
     /**
      * @api {post} /v1/tickets/search/customers
      * @apiName searchCustomers
-     * @apiDescription Return all the customers related with the given groups or with the groups related with the tickets Also checks if the customers
-                       have availability and capacity to execute the given tickets
+     * @apiDescription Return all the customers related with the given group(s) or with the groups related with the ticket(s). Also checks if the customers
+                       have availability to execute given tickets. Capable of returning paginated results.
      * @apiParam {Array<Number>} ticket_ids
      * @apiParam {Array<Number>} group_ids
      * @apiParam {Array<Number>} required_certifications

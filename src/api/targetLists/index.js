@@ -169,7 +169,8 @@ export default class TargetLists extends Resource {
      * @api {get} /v1/organization_observation_target_lists
      * @apiName getTargetLists
      * @apiDescription Return all target lists of all organizations. This can be invoked only by the platform admin. Return (obs_target_id, title, status,
-                       org_data, obs_target_type_id). Can be sorted by specifying a order_by field ('id', 'name', 'status') and order_dir
+                       org_data, obs_target_type_id). Can be sorted by specifying a order_by field ('id', 'name', 'status') and order_dir.
+                       Capable of returning paginated results.
      * @apiParam {GetTargetListsQuery} query
      * @apiExample {js} Example:
      *             gigwalk.customers.getTargetLists({...})
@@ -196,7 +197,8 @@ export default class TargetLists extends Resource {
      * @api {get} /v1/organizations/{organization_id}/target_lists
      * @apiName getOrganizationTargetLists
      * @apiDescription Return the organization_observation_target_lists of the specified org Return (obs_target_id, title, status, org_data,
-                       obs_target_type_id). Can be sorted by specifying a order_by field ('id', 'name', 'status') and order_dir
+                       obs_target_type_id). Can be sorted by specifying a order_by field ('id', 'name', 'status') and order_dir.
+                       Capable of returning paginated results.
      * @apiParam {Number} organization_id
      * @apiParam {GetOrganizationTargetListsQuery} query
      * @apiExample {js} Example:
@@ -264,7 +266,7 @@ export default class TargetLists extends Resource {
      * @api {post} /v1/organization_observation_target_lists/{target_list_id}/search/observation_targets
      * @apiName searchTargetsInObservationList
      * @apiDescription Search all the targets of the specified org_obs_target_list for the specified query_string Return (title, attributes,
-                       obs_target_type_id, status, org_id, date_created, date_updated)
+                       obs_target_type_id, status, org_id, date_created, date_updated). Capable of returning paginated results.
      * @apiParam {Number} target_list_id
      * @apiParam {SearchTargetsInObservationListQuery} query
      * @apiExample {js} Example:
@@ -280,7 +282,7 @@ export default class TargetLists extends Resource {
      * @api {post} /v1/target_lists/{target_list_id}/search/targets
      * @apiName searchTargetsInList
      * @apiDescription Search all the targets of the specified org_obs_target_list for the specified query_string Return (title, attributes,
-                       obs_target_type_id, status, org_id, date_created, date_updated)
+                       obs_target_type_id, status, org_id, date_created, date_updated). Capable of returning paginated results.
      * @apiParam {Number} target_list_id
      * @apiParam {SearchTargetsInListQuery} query
      * @apiExample {js} Example:

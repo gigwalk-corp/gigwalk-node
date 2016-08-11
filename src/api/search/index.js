@@ -86,7 +86,7 @@ export default class Search extends Resource {
     /**
      * @api {get} /v1/organizations/{organization_id}/search/{index_type}
      * @apiName searchOrganization
-     * @apiDescription We can search in groups, members, location_lists, target_lists, tickets or subscriptions filtered by the org
+     * @apiDescription We can search in groups, members, location_lists, target_lists, tickets or subscriptions filtered by the org. Capable of returning paginated results.
      * @apiParam {Number} organization_id
      * @apiParam {String} index_type
      * @apiParam {SearchOrganizationQuery} query

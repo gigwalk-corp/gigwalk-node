@@ -91,7 +91,7 @@ export default class Targets extends Resource {
      * @api {get} /v1/organizations/{organization_id}/observation_targets/{observation_target_id}
      * @apiName getOrganizationTarget
      * @apiDescription If target_id is specified, return org_observation_target_id info for the specified target_id or return the info for all targets
-                       of the org. Return data fields (id, title, status, org_data, obs_target_type_id)
+                       of the org. Return data fields (id, title, status, org_data, obs_target_type_id). Capable of returning paginated results.
      * @apiParam {Number} organization_id
      * @apiParam {Number} observation_target_id
      * @apiParam {GetOrganizationTargetQuery} query
@@ -124,7 +124,7 @@ export default class Targets extends Resource {
      * @api {get} /v1/organizations/{organization_id}/observation_targets/search
      * @apiName searchOrganizationTargets
      * @apiDescription Find a match if the given string is found in the obs_target titles. If no search string is specified, return all obs targets of the org.
-                       Return data fields (id, title, status, org_data, obs_target_type_id)
+                       Return data fields (id, title, status, org_data, obs_target_type_id). Capable of returning paginated results.
      * @apiParam {Number} organization_id
      * @apiParam {SearchOrganizationTargetsQuery} query
      * @apiExample {js} Example:

@@ -1,40 +1,40 @@
 {
-  "$schema": "http://json-schema.org/draft-04/schema#",
-  "type": "object",
-  "properties": {
-    "data": {
-      "type": "array"
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "properties": {
+        "data": {
+            "type": "array"
+        },
+        "_meta": {
+            "type": "object",
+            "properties": {}
+        },
+        "warnings": {
+            "type": "null"
+        },
+        "code": {
+            "type": "integer"
+        },
+        "_metadata": {
+            "type": "object",
+            "properties": {}
+        },
+        "errors": {
+            "type": "array",
+            "items": {}
+        },
+        "gw_api_response": {
+            "type": "array",
+            "items": {}
+        }
     },
-    "_meta": {
-      "type": "object",
-      "properties": {}
-    },
-    "warnings": {
-      "type": "null"
-    },
-    "code": {
-      "type": "integer"
-    },
-    "_metadata": {
-      "type": "object",
-      "properties": {}
-    },
-    "errors": {
-      "type": "array",
-      "items": {}
-    },
-    "gw_api_response": {
-      "type": "array",
-      "items": {}
-    }
-  },
-  "required": [
-    "data",
-    "_meta",
-    "warnings",
-    "code",
-    "_metadata",
-    "errors",
-    "gw_api_response"
-  ]
+    "required": [
+        "data",
+        "_meta",
+        "warnings",
+        "code",
+        "_metadata",
+        "errors",
+        "gw_api_response"
+    ]
 }
