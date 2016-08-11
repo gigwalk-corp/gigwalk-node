@@ -1,0 +1,147 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "properties": {
+        "code": {
+            "type": "integer"
+        },
+        "gw_api_response": {
+            "type": "array"
+        },
+        "errors": {
+            "type": [ "null", "array" ]
+        },
+        "warnings": {
+            "type": [ "null", "array" ]
+        },
+        "_meta": {
+            "type": "object"
+        },
+        "_metadata": {
+            "type": "object"
+        },
+        "oneof": {
+            "data": {
+                "type": "object",
+                "properties": {
+                    "search_results": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "score": {
+                                    "type": "integer"
+                                },
+                                "data": {
+                                    "type": "object",
+                                    "properties": {
+                                        "execution": {
+                                            "type": "integer"
+                                        },
+                                        "created_customer": {
+                                            "type": ["null", "string"]
+                                        },
+                                        "organization_id": {
+                                            "type": "integer"
+                                        },
+                                        "end_date": {
+                                            "type": "string"
+                                        },
+                                        "start_date": {
+                                            "type": "string"
+                                        },
+                                        "metadata": {
+                                            "type": "object"
+                                        },
+                                        "title": {
+                                            "type": "string"
+                                        },
+                                        "group_id": {
+                                            "type": "array"
+                                        },
+                                        "description": {
+                                            "type": "string"
+                                        },
+                                        "state": {
+                                            "type": "string"
+                                        },
+                                        "total_locations": {
+                                            "type": "integer"
+                                        },
+                                        "id": {
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "required": [
+                                        "execution",
+                                        "created_customer",
+                                        "organization_id",
+                                        "end_date",
+                                        "start_date",
+                                        "metadata",
+                                        "title",
+                                        "group_id",
+                                        "description",
+                                        "state",
+                                        "total_locations",
+                                        "id"
+                                    ]
+                                }
+                            },
+                            "required": [
+                                "data",
+                                "score"
+                            ]
+                        }
+                    },
+                    "total_records": {
+                        "type": "integer"
+                    }
+                },
+                "required": [
+                    "search_results",
+                    "total_records"
+                ]
+            },
+            "data": {
+                "type": "object",
+                "properties": {
+                    "search_results": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "key": {
+                                    "type": "string"
+                                },
+                                "record_count": {
+                                    "type": "integer"
+                                }
+                            },
+                            "required": [
+                                "key",
+                                "record_count"
+                            ]
+                        }
+                    },
+                    "search_field": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "search_results",
+                    "search_field"
+                ]
+            }
+        }
+    },
+    "required": [
+        "_meta",
+        "data",
+        "gw_api_response",
+        "_metadata",
+        "errors",
+        "warnings",
+        "code"
+    ]
+}

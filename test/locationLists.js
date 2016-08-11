@@ -124,7 +124,7 @@ describe('Loction Lists', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                expect(res.data).to.have.all.keys('data','errors');
+                expect(res.data).to.have.all.keys('data', 'errors');
                 expect(res.data.data).to.be.an('array');
                 done();
             })
@@ -201,7 +201,7 @@ describe('Loction Lists', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                expect(res.data).to.have.all.keys('data','metadata');
+                expect(res.data).to.have.all.keys('data', 'metadata');
                 expect(res.data.data).to.be.an('array');
                 expect(res.data.metadata).to.be.an('object');
                 done();

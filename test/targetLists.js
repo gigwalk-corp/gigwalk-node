@@ -1,7 +1,8 @@
 import TargetLists from '../src/api/targetLists/index';
 import axios from 'axios';
 import schema from '../src/api/targetLists/targetLists-schema.json';
-import schema_delete from '../src/api/delete-schema.json';
+import schemaAlt from '../src/api/targetLists/targetLists_alt-schema.json';
+import schemaDelete from '../src/api/delete-schema.json';
 
 describe('Target Lists', () => {
     const client = axios.create({
@@ -72,9 +73,8 @@ describe('Target Lists', () => {
             target_list_id: targetListID
         })
             .then((res) => {
-                console.log(res.data);
                 expect(res.status).to.equal(200);
-                // expect(res.data).to.have.jsonSchema(schema);
+                expect(res.data).to.have.jsonSchema(schemaAlt);
                 targetID = res.data.data[0].id;
                 done();
             })
@@ -90,7 +90,7 @@ describe('Target Lists', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                expect(res.data).to.have.jsonSchema(schema_delete);
+                expect(res.data).to.have.jsonSchema(schemaDelete);
                 done();
             })
             .catch(done);
@@ -105,7 +105,7 @@ describe('Target Lists', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                expect(res.data).to.have.jsonSchema(schema_delete);
+                expect(res.data).to.have.jsonSchema(schemaDelete);
                 done();
             })
             .catch(done);

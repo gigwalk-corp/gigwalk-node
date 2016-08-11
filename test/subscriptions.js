@@ -1,6 +1,8 @@
 import Subscriptions from '../src/api/subscriptions/index';
 import axios from 'axios';
 import schema from '../src/api/subscriptions/subscriptions-schema.json';
+import schemaSearch from '../src/api/subscriptions/subscriptions_search-schema.json';
+import schemaDelete from '../src/api/delete-schema.json';
 
 describe('Subscriptions', () => {
     const client = axios.create({
@@ -101,7 +103,7 @@ describe('Subscriptions', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                // expect(res.data).to.have.jsonSchema(schema);
+                expect(res.data).to.have.jsonSchema(schemaSearch);
                 done();
             })
             .catch(done);
@@ -114,7 +116,7 @@ describe('Subscriptions', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                // expect(res.data).to.have.jsonSchema(schema);
+                expect(res.data).to.have.jsonSchema(schemaSearch);
                 done();
             })
             .catch(done);
@@ -126,7 +128,7 @@ describe('Subscriptions', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                // expect(res.data).to.have.jsonSchema(schema);
+                expect(res.data).to.have.jsonSchema(schemaSearch);
                 done();
             })
             .catch(done);
@@ -137,7 +139,7 @@ describe('Subscriptions', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                // expect(res.data).to.have.jsonSchema(schema);
+                expect(res.data).to.have.jsonSchema(schemaDelete);
                 done();
             })
             .catch(done);
@@ -149,7 +151,7 @@ describe('Subscriptions', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                // expect(res.data).to.have.jsonSchema(schema);
+                expect(res.data).to.have.jsonSchema(schemaDelete);
                 done();
             })
             .catch(done);

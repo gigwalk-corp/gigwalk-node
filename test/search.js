@@ -28,11 +28,11 @@ describe('Search', () => {
         search.createSearch()
             .then((res) => {
                 expect(res.status).to.equal(200);
-                // expect(res.data).to.have.jsonSchema(schema);
+                expect(res.data).to.be.a('string');
                 done();
             })
             .catch(done);
-    });
+    }).timeout(5000);
     it('should be able to search an organization', (done) => {
         search.searchOrganization({
             organization_id: organizationID,

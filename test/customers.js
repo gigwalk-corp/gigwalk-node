@@ -1,8 +1,8 @@
 import Customers from '../src/api/customers/index';
 import axios from 'axios';
 import schema from '../src/api/customers/customers-schema.json';
-import schema_search from '../src/api/search/search-schema.json';
-import schema_delete from '../src/api/delete-schema.json';
+import schemaSearch from '../src/api/search/search-schema.json';
+import schemaDelete from '../src/api/delete-schema.json';
 
 describe('Customers', () => {
     const client = axios.create({
@@ -134,7 +134,7 @@ describe('Customers', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                expect(res.data).to.have.jsonSchema(schema_search);
+                expect(res.data).to.have.jsonSchema(schemaSearch);
                 done();
             })
             .catch(done);
@@ -146,7 +146,7 @@ describe('Customers', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                expect(res.data).to.have.jsonSchema(schema_delete);
+                expect(res.data).to.have.jsonSchema(schemaDelete);
                 done();
             })
             .catch(done);
@@ -158,7 +158,7 @@ describe('Customers', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                expect(res.data).to.have.jsonSchema(schema_delete);
+                expect(res.data).to.have.jsonSchema(schemaDelete);
                 done();
             })
             .catch(done);

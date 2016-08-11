@@ -1,6 +1,7 @@
 import Tickets from '../src/api/tickets/index';
 import axios from 'axios';
 import schema from '../src/api/tickets/tickets-schema.json';
+import schemaAlt from '../src/api/tickets/tickets_alt-schema.json';
 
 describe('Tickets', () => {
     const client = axios.create({
@@ -68,7 +69,7 @@ describe('Tickets', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                // expect(res.data).to.have.jsonSchema(schema);
+                expect(res.data).to.have.jsonSchema(schemaAlt);
                 done();
             })
             .catch(done);
@@ -223,7 +224,8 @@ describe('Tickets', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                // expect(res.data).to.have.jsonSchema(schema);
+                expect(res.data.data.search_results).to.be.an('array');
+                expect(res.data.data.total_records).to.be.a('number');
                 done();
             })
             .catch(done);
@@ -236,7 +238,7 @@ describe('Tickets', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                // expect(res.data).to.have.jsonSchema(schema);
+                expect(res.data.data).to.be.an('array');
                 done();
             })
             .catch(done);

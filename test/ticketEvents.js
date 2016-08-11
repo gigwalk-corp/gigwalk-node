@@ -1,7 +1,7 @@
 import TicketEvents from '../src/api/ticketEvents/index';
 import axios from 'axios';
 import schema from '../src/api/ticketEvents/ticketEvents-schema.json';
-import schema_delete from '../src/api/delete-schema.json';
+import schemaDelete from '../src/api/delete-schema.json';
 
 describe('Ticket Events', () => {
     const client = axios.create({
@@ -40,7 +40,7 @@ describe('Ticket Events', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                expect(res.data).to.have.jsonSchema(schema_delete);
+                expect(res.data).to.have.jsonSchema(schemaDelete);
                 done();
             })
             .catch(done);

@@ -1,9 +1,9 @@
 import Certifications from '../src/api/certifications/index';
 import axios from 'axios';
 import schema from '../src/api/certifications/certifications-schema.json';
-import schema_update from '../src/api/certifications/certifications_update-schema.json';
-import schema_empty from '../src/api/empty-schema.json';
-import schema_delete from '../src/api/delete-schema.json';
+import schemaUpdate from '../src/api/certifications/certifications_update-schema.json';
+import schemaEmpty from '../src/api/empty-schema.json';
+import schemaDelete from '../src/api/delete-schema.json';
 
 describe('Certifications', () => {
     const client = axios.create({
@@ -98,7 +98,7 @@ describe('Certifications', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                expect(res.data).to.have.jsonSchema(schema_update);
+                expect(res.data).to.have.jsonSchema(schemaUpdate);
                 done();
             })
             .catch(done);
@@ -114,7 +114,7 @@ describe('Certifications', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                expect(res.data).to.have.jsonSchema(schema_update);
+                expect(res.data).to.have.jsonSchema(schemaUpdate);
                 done();
             })
             .catch(done);
@@ -179,7 +179,7 @@ describe('Certifications', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                expect(res.data).to.have.jsonSchema(schema_empty);
+                expect(res.data).to.have.jsonSchema(schemaEmpty);
                 done();
             })
             .catch(done);
@@ -193,7 +193,7 @@ describe('Certifications', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                expect(res.data).to.have.jsonSchema(schema_delete);
+                expect(res.data).to.have.jsonSchema(schemaDelete);
                 done();
             })
             .catch(done);
@@ -207,7 +207,7 @@ describe('Certifications', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                expect(res.data).to.have.jsonSchema(schema_delete);
+                expect(res.data).to.have.jsonSchema(schemaDelete);
                 done();
             })
             .catch(done);
@@ -218,7 +218,7 @@ describe('Certifications', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                expect(res.data).to.have.jsonSchema(schema_delete);
+                expect(res.data).to.have.jsonSchema(schemaDelete);
                 done();
             })
             .catch(done);
