@@ -43,8 +43,25 @@ export default class RequestQueue {
         // Note: To pass type checking, manual assignment of maybe types is required. See https://github.com/facebook/flow/issues/2167
         if (config.data) request.data = config.data;
         if (config.method) request.method = config.method;
+        if (config.auth) request.auth = config.auth;
+        if (config.progress) request.progress = config.progress;
+        if (config.maxContentLength) request.maxContentLength = config.maxContentLength;
+        if (config.maxRedirects) request.maxRedirects = config.maxRedirects;
+        if (config.headers) request.headers = config.headers;
+        if (config.params) request.params = config.params;
+        if (config.paramsSerializer) request.paramsSerializer = config.paramsSerializer;
+        if (config.responseType) request.responseType = config.responseType;
+        if (config.transformResponse) request.transformResponse = config.transformResponse;
+        if (config.transformRequest) request.transformRequest = config.transformRequest;
+        if (config.timeout) request.timeout = config.timeout;
+        if (config.validateStatus) request.validateStatus = config.validateStatus;
+        if (config.withCredentials) request.withCredentials = config.withCredentials;
+        if (config.xsrfCookieName) request.xsrfCookieName = config.xsrfCookieName;
+        if (config.xsrfHeaderName) request.xsrfHeaderName = config.xsrfHeaderName;
+        if (config.httpAgent) request.httpAgent = config.httpAgent;
+        if (config.httpsAgent) request.httpsAgent = config.httpsAgent;
 
-        const key = stringify(config);
+        const key = stringify(request);
 
         if (this.activeRequests.has(key)) {
             const record = this.activeRequests.get(key);
