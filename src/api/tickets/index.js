@@ -3,48 +3,52 @@ import Resource from '../resource';
 import type { APIPromise } from '../resource';
 
 type DataItemTemplate = {
-  data_type_id: number,
-  observation_target_id: number,
-  data_item_value: Array<number>,
-  timestamp: number,
-  latitude: number,
-  longitude: number,
-  template_id: number,
-  device_id: number,
-  app_version: number,
-  user_agent: string
+    data_type_id: number,
+    observation_target_id: number,
+    data_item_value: Array<number>,
+    timestamp: number,
+    latitude: number,
+    longitude: number,
+    template_id: number,
+    device_id: number,
+    app_version: number,
+    user_agent: string
 }
 
 type TicketSearchTemplate = {
-  search_type: string,
-  latitude: number,
-  uom: number,
-  longitude: number,
-  radius: number,
-  status: string,
-  date_type: string,
-  start_date: string,
-  end_date: string,
-  timezone: string
+    search_type: string,
+    latitude: number,
+    uom: number,
+    longitude: number,
+    radius: number,
+    status: string,
+    date_type: string,
+    start_date: string,
+    end_date: string,
+    timezone: string
+}
+
+type QueryParamTemplate = {
+    field: string,
+    operator: string,
+    value: string
+}
+
+type BoundingBoxTemplate = {
+    top_left: {
+        lat: number,
+        lon: number
+    },
+    bottom_right: {
+        lat: number,
+        lon: number
+    }
 }
 
 type SearchGroupTicketsParams = {
     group_id: number,
-    query_params: Array<{
-        field: string,
-        operator: string,
-        value: string
-    }>,
-    bounding_box: {
-        top_left: {
-            lat: number,
-            lon: number
-        },
-        bottom_right: {
-            lat: number,
-            lon: number
-        }
-    },
+    query_params: Array<QueryParamTemplate>,
+    bounding_box: BoundingBoxTemplate,
     timezone: string
 }
 
@@ -70,7 +74,7 @@ type CreateTicketDataItemParams = {
 
 type DeleteTicketDataItemParams = {
     ticket_id: number,
-    data_type_id: number
+    data_item_id: number
 }
 
 type CreateClonedTicketParams = {
@@ -137,7 +141,23 @@ type GetTicketsInAreaParams = {
     radius: number
 }
 
-type TicketSchema = {
+type TicketMediumSchema = {
+    id: number,
+    start_date: string,
+    due_date: string,
+    time_estimate: number,
+    date_created: string,
+    date_updated: string,
+    date_scheduled: string,
+    date_submitted: string,
+    status: string,
+    customer: Object,
+    calendar_event: Object,
+    location: Object,
+    organization_subscription: Object
+}
+
+type TicketSummarySchema = {
     id: number,
     user_distance: number,
     map_distance: number,
@@ -147,28 +167,8 @@ type TicketSchema = {
     optin_type: string,
     is_double_optin: boolean,
     status: string,
-    location: {
-        title: string,
-        latitude: number,
-        longitude: number,
-        locality: string,
-        country: string,
-        formatted_address: string,
-        administrative_area_level_1: string,
-        administrative_area_level_2: string,
-        postal_code: number,
-        specificity: string,
-        status: string
-    },
-    organization_subscription: {
-        optin_type: string,
-        description: string,
-        id: number,
-        can_reschedule: boolean,
-        is_double_optin: boolean,
-        title: string,
-        needed_certs: Object
-    }
+    location: Object,
+    organization_subscription: Object
 }
 
 type TicketEventSchema = {
@@ -186,100 +186,156 @@ type TicketEventSchema = {
     }
 }
 
-type SearchGroupTicketsData = [
+type TicketSchema = {
+    title: string,
+    description: string,
+    id: number,
+    organization_id: number,
+    start_date: string,
+    due_date: string,
+    time_estimate: number,
+    date_created: string,
+    date_updated: string,
+    omni_date_updated: string,
+    date_scheduled: string,
+    can_reschedule: boolean,
+    date_submitted: string,
+    execution_state: string,
+    wave_id: string,
+    status: string,
+    assigned_customer_name: string,
+    assigned_customer_id: number,
+    assigned_customer_email: string,
+    template_map: Object,
+    data_items: Object,
+    data_types: Array<Object>,
+    data_type_map: Object,
+    observation_target_map: Object,
+    observation_target_metadata_map: Object,
+    location: Object,
+    calendar_event: Object,
+    subscription_id: number,
+    organization_subscription_version_id_ref: number,
+    subscription: Object,
+    subscription_metadata: Object,
+    ticket_metadata: Object
+}
 
-]
+type TicketSearchSchema = {
+    total_records: number,
+    search_results: Array<{
+        score: number,
+        data: {
+            title: string,
+            ticket_id: number,
+            date_created: string,
+            date_updated: string,
+            start_date: string,
+            due_date: string,
+            time_estimate: number,
+            dashboard_visible: boolean,
+            optin_type: string,
+            is_double_optin: boolean,
+            ticket_status: string,
+            assigned_customer_id: number,
+            assigned_customer_name: string,
+            assigned_customer_email: string,
+            organization_id: number,
+            organization_subscription_id: number,
+            organization_subscription_description: string,
+            organization_subscription_can_reschedule: boolean,
+            organization_subscription_groups: Array<number>,
+            location_title: string,
+            location_id: number,
+            location_organization_id: number,
+            location_date_created: string,
+            location_date_updated: string,
+            location_country: string,
+            location_locality: string,
+            location_postal_code: number,
+            location_geopoint: string,
+            location_administrative_area_level_1: string,
+            location_administrative_area_level_2: string,
+            location_formatted_address: string,
+            location_specificity: string,
+            location_status: string,
+            group_id: Array<number>,
+            targets: Array<number>,
+        }
+    }>
+}
 
-type GetCurrentCustomerTicketsData = [
+type SearchGroupTicketsData = Array<TicketMediumSchema>
 
-]
+type GetCurrentCustomerTicketsData = Array<TicketSchema>
 
-type GetCustomerTicketsData = [
+type GetCustomerTicketsData = Array<TicketSchema> // NEED TO CHECK
 
-]
+type SearchOrganizationTicketsData = TicketSearchSchema
 
-type SearchOrganizationTicketsData = [
+type SearchOrganizationTicketsWithFieldData = TicketSearchSchema // NEED TO CHECK
 
-]
+type CreateTicketDataItemData = [ // NEED TO CHECK
+    TicketSchema
+    ]
 
-type SearchOrganizationTicketsWithFieldData = [
+type DeleteTicketDataItemData = [ // NEED TO CHECK
+    number
+    ]
 
-]
+type CreateClonedTicketData = [ // NEED TO CHECK
+    TicketSchema
+    ]
 
-type CreateTicketDataItemData = [
+type SubmitTicketData = [ // NEED TO CHECK
+    TicketSchema
+    ]
 
-]
+type GetTicketData = [ // NEED TO CHECK
+    TicketSchema
+    ]
 
-type DeleteTicketDataItemData = [
+type SearchTicketsWithIDData = Array<TicketSchema>
 
-]
+type UpdateTicketData = Array<TicketSchema> // NEED TO CHECK
 
-type CreateClonedTicketData = [
+type GetTicketsData = Array<TicketSchema>
 
-]
+type SearchTicketsData = Array<TicketSchema> // NEED TO CHECK
 
-type SubmitTicketData = [
+type UpdateTicketWithStateData = Array<number> // NEED TO CHECK
 
-]
+type GetOrganizationTicketsData = Array<TicketSchema> // NEED TO CHECK
 
-type GetTicketData = [
+type SearchOrganizationTicketsWithCriteriaData = Array<TicketSchema> // NEED TO CHECK
 
-]
+type GetSubscriptionTicketsData = Array<TicketSchema> // NEED TO CHECK
 
-type SearchTicketsWithIDData = [
-
-]
-
-type UpdateTicketData = [
-
-]
-
-type GetTicketsData = [
-
-]
-
-type SearchTicketsData = [
-
-]
-
-type UpdateTicketWithStateData = [
-
-]
-
-type GetOrganizationTicketsData = [
-
-]
-
-type SearchOrganizationTicketsWithCriteriaData = [
-
-]
-
-type GetSubscriptionTicketsData = [
-
-]
-
-type SearchSubscriptionTicketsData = [
-
-]
+type SearchSubscriptionTicketsData = Array<TicketSchema> // NEED TO CHECK
 
 type GetTicketEventsData = Array<TicketEventSchema>
 
-type GetTicketsInAreaData = Array<TicketSchema>
+type GetTicketsInAreaData = Array<TicketSummarySchema>
 
 export default class Tickets extends Resource {
     /**
      * @api {post} /v1/groups/{group_id}/tickets/search
      * @apiName searchGroupTickets
      * @apiDescription Get all tickets from the specified group that satisfy the search criteria, now we support field bundle_autoassign with
-                       operator = and values true or false
+     operator = and values true or false
      * @apiParam {Number} group_id
+     * @apiParam {Array<QueryParamTemplate>} query_params
+     * @apiParam {BoundingBoxTemplate} bounding_box
+     * @apiParam {String} timezone
      * @apiExample {js} Example:
      *             gigwalk.customers.searchGroupTickets({...})
      */
     searchGroupTickets(params: SearchGroupTicketsParams): APIPromise<SearchGroupTicketsData> {
-        const url = '/v1';
+        const url = `/v1/groups/${params.group_id}/tickets/search`;
         const data = {
-            params
+            query_params: params.query_params,
+            bounding_box: params.bounding_box,
+            timezone: params.timezone
         };
 
         return this.client.post(url, data);
@@ -293,12 +349,7 @@ export default class Tickets extends Resource {
      *             gigwalk.customers.getCurrentCustomerTickets({...})
      */
     getCurrentCustomerTickets(): APIPromise<GetCurrentCustomerTicketsData> {
-        const url = '/v1';
-        const data = {
-
-        };
-
-        return this.client.get(url, data);
+        return this.client.get('/v1/tickets/my_list');
     }
 
     /**
@@ -310,27 +361,25 @@ export default class Tickets extends Resource {
      *             gigwalk.customers.getCustomerTickets({...})
      */
     getCustomerTickets(params: GetCustomerTicketsParams): APIPromise<GetCustomerTicketsData> {
-        const url = '/v1';
-        const data = {
-            params
-        };
+        const url = `/v1/customers/${params.customer_id}/tickets`;
 
-        return this.client.get(url, data);
+        return this.client.get(url);
     }
 
     /**
      * @api {post} /v2/organizations/{organization_id}/search/tickets
      * @apiName searchOrganizationTickets
      * @apiDescription Search all tickets of the organization for the given string This searches all strings in the ES document and finds a match if any
-                       of these string contain the given string
+     of these string contain the given string
      * @apiParam {Number} organization_id
+     * @apiParam {String} query_string
      * @apiExample {js} Example:
      *             gigwalk.customers.searchOrganizationTickets({...})
      */
     searchOrganizationTickets(params: SearchOrganizationTicketsParams): APIPromise<SearchOrganizationTicketsData> {
-        const url = '/v1';
+        const url = `/v2/organizations/${params.organization_id}/search/tickets`;
         const data = {
-            params
+            query_string: params.query_string
         };
 
         return this.client.post(url, data);
@@ -340,15 +389,18 @@ export default class Tickets extends Resource {
      * @api {post} /v2/organizations/{organization_id}/search/tickets/filters
      * @apiName searchOrganizationTicketsWithField
      * @apiDescription Search all tickets of the org for the given value This searches the specified search_field in the ES document and finds a match only
-                       if the search_field contains the given value
+     if the search_field contains the given value
      * @apiParam {Number} organization_id
+     * @apiParam {String} search_field
+     * @apiParam {String} query_string
      * @apiExample {js} Example:
      *             gigwalk.customers.searchOrganizationTicketsWithField({...})
      */
     searchOrganizationTicketsWithField(params: SearchOrganizationTicketsWithFieldParams): APIPromise<SearchOrganizationTicketsWithFieldData> {
-        const url = '/v1';
+        const url = `/v2/organizations/${params.organization_id}/search/tickets/filters`;
         const data = {
-            params
+            search_field: params.search_field,
+            query_string: params.query_string
         };
 
         return this.client.post(url, data);
@@ -359,14 +411,13 @@ export default class Tickets extends Resource {
      * @apiName createTicketDataItem
      * @apiDescription Create a new data_item for the ticket Create a new data_item using the values specified in the JSON payload
      * @apiParam {Number} ticket_id
+     * @apiParam {DataItemTemplate} data_item
      * @apiExample {js} Example:
      *             gigwalk.customers.createTicketDataItem({...})
      */
     createTicketDataItem(params: CreateTicketDataItemParams): APIPromise<CreateTicketDataItemData> {
-        const url = '/v1';
-        const data = {
-            params
-        };
+        const url = `/v1/tickets/${params.ticket_id}/data_items`;
+        const data = params.data_item;
 
         return this.client.post(url, data);
     }
@@ -381,30 +432,24 @@ export default class Tickets extends Resource {
      *             gigwalk.customers.deleteTicketDataItem({...})
      */
     deleteTicketDataItem(params: DeleteTicketDataItemParams): APIPromise<DeleteTicketDataItemData> {
-        const url = '/v1';
-        const data = {
-            params
-        };
+        const url = `/v1/tickets/${params.ticket_id}/data_items/${params.data_item_id}`;
 
-        return this.client.delete(url, data);
+        return this.client.delete(url);
     }
 
     /**
      * @api {post} /v1/tickets/{ticket_id}/clone
      * @apiName createClonedTicket
      * @apiDescription Clone the given ticket Create a new ticket by cloning the given ticket. Deep copy, the ticket metadata is copied as well.
-                       The ticket status will always be UNASSIGNED.
+     The ticket status will always be UNASSIGNED.
      * @apiParam {Number} ticket_id
      * @apiExample {js} Example:
      *             gigwalk.customers.createClonedTicket({...})
      */
     createClonedTicket(params: CreateClonedTicketParams): APIPromise<CreateClonedTicketData> {
-        const url = '/v1';
-        const data = {
-            params
-        };
+        const url = `/v1/tickets/${params.ticket_id}/clone`;
 
-        return this.client.post(url, data);
+        return this.client.post(url);
     }
 
     /**
@@ -416,12 +461,9 @@ export default class Tickets extends Resource {
      *             gigwalk.customers.submitTicket({...})
      */
     submitTicket(params: SubmitTicketParams): APIPromise<SubmitTicketData> {
-        const url = '/v1';
-        const data = {
-            params
-        };
+        const url = `/v1/tickets/${params.ticket_id}/submit`;
 
-        return this.client.post(url, data);
+        return this.client.post(url);
     }
 
     /**
@@ -433,28 +475,24 @@ export default class Tickets extends Resource {
      *             gigwalk.customers.getTicket({...})
      */
     getTicket(params: GetTicketParams): APIPromise<GetTicketData> {
-        const url = '/v1';
-        const data = {
-            params
-        };
+        const url = `/v1/tickets/${params.ticket_id}`;
 
-        return this.client.get(url, data);
+        return this.client.get(url);
     }
 
     /**
      * @api {post} /v1/tickets/{ticket_id}
      * @apiName searchTicketsWithID
      * @apiDescription Search tickets. This seems deprecated and the semantics do not look right either. Why would a ticket_id be passed to a search?
-                       You should use only API /v1/tickets/search. The other endpoints are also directed to the search method.
+     You should use only API /v1/tickets/search. The other endpoints are also directed to the search method.
      * @apiParam {Number} ticket_id
+     * @apiParam {TicketSearchTemplate} query
      * @apiExample {js} Example:
      *             gigwalk.customers.searchTicketsWithID({...})
      */
     searchTicketsWithID(params: SearchTicketsWithIDParams): APIPromise<SearchTicketsWithIDData> {
-        const url = '/v1';
-        const data = {
-            params
-        };
+        const url = `/v1/tickets/${params.ticket_id}`;
+        const data = params.query;
 
         return this.client.post(url, data);
     }
@@ -463,15 +501,20 @@ export default class Tickets extends Resource {
      * @api {put} /v1/tickets/{ticket_id}
      * @apiName updateTicket
      * @apiDescription Edit tickets If the ticket_id is present assign the corresponding ticket. Otherwise perform action to multiple tickets identified
-                       by the data arguments.
+     by the data arguments.
      * @apiParam {Number} ticket_id
+     * @apiParam {String} action
+     * @apiParam {Array<number>} ticket_ids
+     * @apiParam {String} customer_id
      * @apiExample {js} Example:
      *             gigwalk.customers.updateTicket({...})
      */
     updateTicket(params: UpdateTicketParams): APIPromise<UpdateTicketData> {
-        const url = '/v1';
+        const url = `/v1/tickets/${params.ticket_id}`;
         const data = {
-            params
+            action: params.action,
+            ticket_ids: params.ticket_ids,
+            customer_id: params.customer_id
         };
 
         return this.client.put(url, data);
@@ -485,44 +528,42 @@ export default class Tickets extends Resource {
      *             gigwalk.customers.getTickets({...})
      */
     getTickets(): APIPromise<GetTicketsData> {
-        const url = '/v1';
-        const data = {
-
-        };
-
-        return this.client.get(url, data);
+        return this.client.get('/v1/tickets');
     }
 
     /**
      * @api {post} /v1/tickets
      * @apiName searchTickets
      * @apiDescription Search tickets. You should use only API /v1/tickets/search. The other endpoints are also directed to the search method.
+     * @apiParam {TicketSearchTemplate} query
      * @apiExample {js} Example:
      *             gigwalk.customers.searchTickets({...})
      */
     searchTickets(params: SearchTicketsParams): APIPromise<SearchTicketsData> {
-        const url = '/v1';
-        const data = {
-            params
-        };
+        const data = params.query;
 
-        return this.client.post(url, data);
+        return this.client.post('/v1/tickets', data);
     }
 
     /**
      * @api {put} /v1/tickets/{ticket_id}/execution_state/{execution_state}
      * @apiName updateTicketWithState
      * @apiDescription Edit tickets If the ticket_id is present assign the corresponding ticket. Otherwise perform action to multiple tickets identified
-                       by the data arguments.
+     by the data arguments.
      * @apiParam {Number} ticket_id
      * @apiParam {Number} execution_state
+     * @apiParam {String} action
+     * @apiParam {Array<number>} ticket_ids
+     * @apiParam {String} customer_id
      * @apiExample {js} Example:
      *             gigwalk.customers.updateTicketWithState({...})
      */
     updateTicketWithState(params: UpdateTicketWithStateParams): APIPromise<UpdateTicketWithStateData> {
-        const url = '/v1';
+        const url = `/v1/tickets/${params.ticket_id}/execution_state/${params.execution_state}`;
         const data = {
-            params
+            action: params.action,
+            ticket_ids: params.ticket_ids,
+            customer_id: params.customer_id
         };
 
         return this.client.put(url, data);
@@ -537,28 +578,24 @@ export default class Tickets extends Resource {
      *             gigwalk.customers.getOrganizationTickets({...})
      */
     getOrganizationTickets(params: GetOrganizationTicketsParams): APIPromise<GetOrganizationTicketsData> {
-        const url = '/v1';
-        const data = {
-            params
-        };
+        const url = `/v1/organizations/${params.organization_id}/tickets`;
 
-        return this.client.get(url, data);
+        return this.client.get(url);
     }
 
     /**
      * @api {post} /v1/organizations/{organization_id}/tickets/search
      * @apiName searchOrganizationTicketsWithCriteria
      * @apiDescription Search tickets filtered by the organization This returns tickets of the specified organization that match the search criteria
-                       specified in JSON
+     specified in JSON
      * @apiParam {Number} organization_id
+     * @apiParam {TicketSearchTemplate} query
      * @apiExample {js} Example:
      *             gigwalk.customers.searchOrganizationTicketsWithCriteria({...})
      */
     searchOrganizationTicketsWithCriteria(params: SearchOrganizationTicketsWithCriteriaParams): APIPromise<SearchOrganizationTicketsWithCriteriaData> {
-        const url = '/v1';
-        const data = {
-            params
-        };
+        const url = `/v1/organizations/${params.organization_id}/tickets/search`;
+        const data = params.query;
 
         return this.client.post(url, data);
     }
@@ -572,28 +609,24 @@ export default class Tickets extends Resource {
      *             gigwalk.customers.getSubscriptionTickets({...})
      */
     getSubscriptionTickets(params: GetSubscriptionTicketsParams): APIPromise<GetSubscriptionTicketsData> {
-        const url = '/v1';
-        const data = {
-            params
-        };
+        const url = `/v1/subscriptions/${params.subscription_id}/tickets`;
 
-        return this.client.get(url, data);
+        return this.client.get(url);
     }
 
     /**
      * @api {post} /v1/subscriptions/{subscription_id}/tickets/search
      * @apiName searchSubscriptionTickets
      * @apiDescription Search tickets filtered by the organization_subscription (project) This returns tickets of the specified organization_subscription
-                       that match the search criteria specified in JSON
+     that match the search criteria specified in JSON
      * @apiParam {Number} subscription_id
+     * @apiParam {TicketSearchTemplate} query
      * @apiExample {js} Example:
      *             gigwalk.customers.searchSubscriptionTickets({...})
      */
     searchSubscriptionTickets(params: SearchSubscriptionTicketsParams): APIPromise<SearchSubscriptionTicketsData> {
-        const url = '/v1';
-        const data = {
-            params
-        };
+        const url = `/v1/subscriptions/${params.subscription_id}/tickets/search`;
+        const data = params.query
 
         return this.client.post(url, data);
     }
@@ -607,20 +640,17 @@ export default class Tickets extends Resource {
      *             gigwalk.customers.getTicketEvents({...})
      */
     getTicketEvents(params: GetTicketEventsParams): APIPromise<GetTicketEventsData> {
-        const url = '/v1';
-        const data = {
-            params
-        };
+        const url = `/v1/tickets/${params.ticket_id}/events`;
 
-        return this.client.get(url, data);
+        return this.client.get(url);
     }
 
     /**
      * @api {get} /v1/ticket_map
      * @apiName getTicketsInArea
      * @apiDescription Return all applicable tickets that are within the given radius of the specified location Geo-Search. Return the locations of all
-                       applicable tickets within 50 KM of the input location for a map display. Unassigned tickets that fit the certification criteria,
-                       and that are not due yet are returned
+     applicable tickets within 50 KM of the input location for a map display. Unassigned tickets that fit the certification criteria,
+     and that are not due yet are returned
      * @apiParam {Number} map_lat
      * @apiParam {Number} map_lon
      * @apiParam {Number} radius
@@ -628,11 +658,12 @@ export default class Tickets extends Resource {
      *             gigwalk.customers.getTicketsInArea({...})
      */
     getTicketsInArea(params: GetTicketsInAreaParams): APIPromise<GetTicketsInAreaData> {
-        const url = '/v1';
         const data = {
-            params
+            map_lat: params.map_lat,
+            map_lon: params.map_lon,
+            radius: params.radius,
         };
 
-        return this.client.get(url, data);
+        return this.client.get('/v1/ticket_map', data);
     }
 }
