@@ -1,128 +1,22 @@
 // @flow
 import Resource from '../resource';
 import type { APIPromise } from '../resource';
+import type {
+    Certification,
+    CustomerCertification,
+    DeleteCertificationParams,
+    GetCertificationParams,
+    UpdateCertificationParams,
+    CreateCertificationsParams,
+    GetAllCertificationsForCustomerParams,
+    AddRemoveCertificationsForCustomerParams,
+    GetAllCertificationsForOrganizationParams,
+    CreateCertificationsForOrganizationParams,
+    UpdateCertificationsForOrganizationParams,
+    DeleteCertificationsForOrganizationParams,
+    UploadCertificationsForOrganizationParams
+} from './types';
 
-type CertificationTemplate = {
-    description: string,
-    title: string,
-    type: string,
-    state: string
-}
-
-type DeleteCertificationParams = {
-    certification_id: number
-}
-
-type GetCertificationParams = {
-    certification_id: number
-}
-
-type UpdateCertificationParams = {
-    certification_id: number,
-    certification: CertificationTemplate
-}
-
-type CreateCertificationsParams = {
-    certifications: Array<CertificationTemplate>
-}
-
-type GetCustomerCertificationsParams = {
-    organization_id: number,
-    customer_id: number
-}
-
-type UpdateCustomerCertificationsParams = {
-    organization_id: number,
-    customer_id: number,
-    action: string,
-    certification_ids: Array<number>
-}
-
-type GetOrganizationCertificationsParams = {
-    organization_id: number
-}
-
-type CreateOrganizationCertificationsParams = {
-    organization_id: number,
-    certifications: Array<CertificationTemplate>
-}
-
-type UpdateOrganizationCertificationsParams = {
-    organization_id: number,
-    certifications: Array<{
-        id: number,
-        description: string,
-        title: string,
-        type: string,
-        state: string
-    }>
-}
-
-type DeleteOrganizationCertificationsParams = {
-    organization_id: number,
-    certification_ids: Array<number>
-}
-
-type CreateOrganizationCertificationsFromFileParams = {
-    organization_id: number,
-    s3_keys: Array<string>
-}
-
-type CertificationSchema = {
-    title: string,
-    user_count: number,
-    description: string,
-    id: number,
-    type: string,
-    state: string,
-    organization_id: number
-}
-
-type DeleteCertificationData = [
-    number
-]
-
-type GetCertificationData = [
-    CertificationSchema
-]
-
-type UpdateCertificationData = [
-    CertificationSchema
-]
-
-type GetCertificationsData = Array<CertificationSchema>
-
-type CreateCertificationsData = Array<CertificationSchema>
-
-type GetCustomerCertificationsData = Array<{
-    title: string,
-    user_count: number,
-    description: string,
-    id: number,
-    type: string,
-    state: string,
-    organization_id: number,
-    assigned_by: {
-        full_name: string,
-        id: number,
-        customer_status: string
-    }
-}>
-
-type UpdateCustomerCertificationsData = Array<[
-    number,
-    number
-]>
-
-type GetOrganizationCertificationsData = Array<CertificationSchema>
-
-type CreateOrganizationCertificationsData = Array<CertificationSchema>
-
-type UpdateOrganizationCertificationsData = null
-
-type DeleteOrganizationCertificationsData = null
-
-type CreateOrganizationCertificationsFromFileData = Array<number>
 
 export default class Certifications extends Resource {
     /**
@@ -131,9 +25,9 @@ export default class Certifications extends Resource {
      * @apiDescription Delete given cert This is a hard delete
      * @apiParam {Number} certification_id
      * @apiExample {js} Example:
-     *             gigwalk.certification.deleteCertification({...})
+     *             gigwalk.certifications.delete({...})
      */
-    deleteCertification(params: DeleteCertificationParams): APIPromise<DeleteCertificationData> {
+    delete(params: DeleteCertificationParams): APIPromise<[number]> {
         return this.client.delete(`/v1/certifications/${params.certification_id}`);
     }
 
@@ -143,9 +37,9 @@ export default class Certifications extends Resource {
      * @apiDescription Get Certification info. Return data fields (id, org_id, description, title, type, state).
      * @apiParam {Number} certification_id
      * @apiExample {js} Example:
-     *             gigwalk.certification.getCertification({...})
+     *             gigwalk.certifications.get({...})
      */
-    getCertification(params: GetCertificationParams): APIPromise<GetCertificationData> {
+    get(params: GetCertificationParams): APIPromise<[Certification]> {
         return this.client.get(`/v1/certifications/${params.certification_id}`);
     }
 
@@ -156,9 +50,9 @@ export default class Certifications extends Resource {
      * @apiParam {Number} certification_id
      * @apiParam {CertificationTemplate} certification
      * @apiExample {js} Example:
-     *             gigwalk.certification.updateCertification({...})
+     *             gigwalk.certifications.update({...})
      */
-    updateCertification(params: UpdateCertificationParams): APIPromise<UpdateCertificationData> {
+    update(params: UpdateCertificationParams): APIPromise<[Certification]> {
         const url = `/v1/certifications/${params.certification_id}`;
         return this.client.put(url, { ...params.certification });
     }
@@ -170,9 +64,9 @@ export default class Certifications extends Resource {
                        Including the current user organization certificates and public certificates It could return paginated results and also
                        sorted by given parameters
      * @apiExample {js} Example:
-     *             gigwalk.certification.getCertifications({...})
+     *             gigwalk.certifications.getAll({...})
      */
-    getCertifications(): APIPromise<GetCertificationsData> {
+    getAll(): APIPromise<Array<Certification>> {
         return this.client.get('/v1/certifications');
     }
 
@@ -183,9 +77,9 @@ export default class Certifications extends Resource {
                        If the cert already exists (check by title), then we return existing cert(s)
      * @apiParam {Array<CertificationTemplate>} certifications
      * @apiExample {js} Example:
-     *             gigwalk.certification.createCertifications({...})
+     *             gigwalk.certifications.create({...})
      */
-    createCertifications(params: CreateCertificationsParams): APIPromise<CreateCertificationsData> {
+    create(params: CreateCertificationsParams): APIPromise<Array<Certification>> {
         const data = {
             certifications: params.certifications
         };
@@ -200,9 +94,9 @@ export default class Certifications extends Resource {
      * @apiParam {Number} organization_id
      * @apiParam {Number} customer_id
      * @apiExample {js} Example:
-     *             gigwalk.certification.getCustomerCertifications({...})
+     *             gigwalk.certifications.getForCustomer({...})
      */
-    getCustomerCertifications(params: GetCustomerCertificationsParams): APIPromise<GetCustomerCertificationsData> {
+    getForCustomer(params: GetAllCertificationsForCustomerParams): APIPromise<CustomerCertification> {
         const url = `/v1/organizations/${params.organization_id}/customer/${params.customer_id}/certifications`;
         return this.client.get(url);
     }
@@ -210,19 +104,41 @@ export default class Certifications extends Resource {
     /**
      * @api {put} /v1/organizations/{organization_id}/customer/{customer_id}/certifications
      * @apiName UpdateCustomerCertifications
-     * @apiDescription Add or remove certifications for a customer A customer WORKER can use this
-                       endpoint only to add/remove SELF_CERTS certifications to himself
+     * @apiDescription Add certifications to a customer. A customer WORKER can use this
+     *                 endpoint only to add SELF_CERTS certifications to himself
      * @apiParam {Number} organization_id
      * @apiParam {Number} customer_id
      * @apiParam {String} action
      * @apiParam {Array<number>} certification_ids
      * @apiExample {js} Example:
-     *             gigwalk.certification.updateCustomerCertifications({...})
+     *             gigwalk.certifications.addToCustomer({...})
      */
-    updateCustomerCertifications(params: UpdateCustomerCertificationsParams): APIPromise<UpdateCustomerCertificationsData> {
+    addToCustomer(params: AddRemoveCertificationsForCustomerParams): APIPromise<Array<[number, number]>> {
         const url = `/v1/organizations/${params.organization_id}/customer/${params.customer_id}/certifications`;
         const data = {
-            action: params.action,
+            action: 'add',
+            certification_ids: params.certification_ids
+        };
+
+        return this.client.put(url, data);
+    }
+
+    /**
+     * @api {put} /v1/organizations/{organization_id}/customer/{customer_id}/certifications
+     * @apiName UpdateCustomerCertifications
+     * @apiDescription Remove certifications for a customer. A customer WORKER can use this
+     *                 endpoint only to remove SELF_CERTS certifications from himself
+     * @apiParam {Number} organization_id
+     * @apiParam {Number} customer_id
+     * @apiParam {String} action
+     * @apiParam {Array<number>} certification_ids
+     * @apiExample {js} Example:
+     *             gigwalk.certifications.removeFromCustomer({...})
+     */
+    removeFromCustomer(params: AddRemoveCertificationsForCustomerParams): APIPromise<Array<[number, number]>> {
+        const url = `/v1/organizations/${params.organization_id}/customer/${params.customer_id}/certifications`;
+        const data = {
+            action: 'remove',
             certification_ids: params.certification_ids
         };
 
@@ -236,9 +152,9 @@ export default class Certifications extends Resource {
                        It could return paginated results and also sorted by given parameters
      * @apiParam {Number} organization_id
      * @apiExample {js} Example:
-     *             gigwalk.certification.getOrganizationCertifications({...})
+     *             gigwalk.certifications.getForOrganization({...})
      */
-    getOrganizationCertifications(params: GetOrganizationCertificationsParams): APIPromise<GetOrganizationCertificationsData> {
+    getForOrganization(params: GetAllCertificationsForOrganizationParams): APIPromise<Array<Certification>> {
         return this.client.get(`/v1/organizations/${params.organization_id}/certifications`);
     }
 
@@ -250,9 +166,9 @@ export default class Certifications extends Resource {
      * @apiParam {Number} organization_id
      * @apiParam {Array<CertificationTemplate>} certifications
      * @apiExample {js} Example:
-     *             gigwalk.certification.createOrganizationCertifications({...})
+     *             gigwalk.certifications.createForOrganization({...})
      */
-    createOrganizationCertifications(params: CreateOrganizationCertificationsParams): APIPromise<CreateOrganizationCertificationsData> {
+    createForOrganization(params: CreateCertificationsForOrganizationParams): APIPromise<Array<Certification>> {
         const url = `/v1/organizations/${params.organization_id}/certifications`;
         const data = {
             certifications: params.certifications
@@ -268,9 +184,9 @@ export default class Certifications extends Resource {
      * @apiParam {Number} organization_id
      * @apiParam {Array<CertificationTemplate>} certifications
      * @apiExample {js} Example:
-     *             gigwalk.certification.updateOrganizationCertifications({...})
+     *             gigwalk.certifications.updateForOrganization({...})
      */
-    updateOrganizationCertifications(params: UpdateOrganizationCertificationsParams): APIPromise<UpdateOrganizationCertificationsData> {
+    updateForOrganization(params: UpdateCertificationsForOrganizationParams): APIPromise<null> {
         const url = `/v1/organizations/${params.organization_id}/certifications`;
         const data = {
             certifications: params.certifications
@@ -286,9 +202,9 @@ export default class Certifications extends Resource {
      * @apiParam {Number} organization_id
      * @apiParam {Array<number>} certification_ids
      * @apiExample {js} Example:
-     *             gigwalk.certification.deleteOrganizationCertifications({...})
+     *             gigwalk.certifications.deleteForOrganization({...})
      */
-    deleteOrganizationCertifications(params: DeleteOrganizationCertificationsParams): APIPromise<DeleteOrganizationCertificationsData> {
+    deleteForOrganization(params: DeleteCertificationsForOrganizationParams): APIPromise<null> {
         const url = `/v1/organizations/${params.organization_id}/certifications/delete`;
         const data = {
             certification_ids: params.certification_ids
@@ -305,9 +221,9 @@ export default class Certifications extends Resource {
      * @apiParam {Number} organization_id
      * @apiParam {Array<string>} s3_keys
      * @apiExample {js} Example:
-     *             gigwalk.certification.createOrganizationCertificationsFromFile({...})
+     *             gigwalk.certifications.uploadForOrganization({...})
      */
-    createOrganizationCertificationsFromFile(params: CreateOrganizationCertificationsFromFileParams): APIPromise<CreateOrganizationCertificationsFromFileData> {
+    uploadForOrganization(params: UploadCertificationsForOrganizationParams): APIPromise<Array<number>> {
         const url = `/v1/organizations/${params.organization_id}/certifications/upload`;
         const data = {
             s3_keys: params.s3_keys

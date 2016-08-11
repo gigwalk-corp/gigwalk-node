@@ -17,8 +17,8 @@ describe('Certifications', () => {
     const organizationID: number = 4;
     const customerID: number = 1;
 
-    it('should be able to create cerfitications', (done) => {
-        certifications.createCertifications({
+    it('should be able to create certifications', (done) => {
+        certifications.create({
             certifications: [
                 {
                     description: randString,
@@ -44,7 +44,7 @@ describe('Certifications', () => {
             .catch(done);
     });
     it('should be able to get all certifications', (done) => {
-        certifications.getCertifications()
+        certifications.getAll()
             .then((res) => {
                 expect(res.status).to.equal(200);
                 expect(res.data).to.have.jsonSchema(schema);
@@ -53,7 +53,7 @@ describe('Certifications', () => {
             .catch(done);
     });
     it('should be able to get a specific certifiation', (done) => {
-        certifications.getCertification({
+        certifications.get({
             certification_id: certificationID
         })
             .then((res) => {
@@ -64,7 +64,7 @@ describe('Certifications', () => {
             .catch(done);
     });
     it('should be able to edit a specific certification', (done) => {
-        certifications.updateCertification({
+        certifications.update({
             certification_id: certificationID,
             certification: {
                 description: randString.substr(0, 8),
@@ -81,10 +81,9 @@ describe('Certifications', () => {
             .catch(done);
     });
     it('should be able to remove a certification from a customer', (done) => {
-        certifications.updateCustomerCertifications({
+        certifications.removeFromCustomer({
             organization_id: organizationID,
             customer_id: customerID,
-            action: 'remove',
             certification_ids: [
                 certificationID
             ]
@@ -97,10 +96,9 @@ describe('Certifications', () => {
             .catch(done);
     });
     it('should be able to add a certification to a customer', (done) => {
-        certifications.updateCustomerCertifications({
+        certifications.addToCustomer({
             organization_id: organizationID,
             customer_id: customerID,
-            action: 'add',
             certification_ids: [
                 certificationID
             ]
@@ -113,7 +111,7 @@ describe('Certifications', () => {
             .catch(done);
     });
     it('should be able to get a customers certifications', (done) => {
-        certifications.getCustomerCertifications({
+        certifications.getForCustomer({
             organization_id: organizationID,
             customer_id: customerID
         })
@@ -125,7 +123,7 @@ describe('Certifications', () => {
             .catch(done);
     });
     it('should be create certifications for an organization', (done) => {
-        certifications.createOrganizationCertifications({
+        certifications.createForOrganization({
             organization_id: organizationID,
             certifications: [
                 {
@@ -144,7 +142,7 @@ describe('Certifications', () => {
             .catch(done);
     });
     it('should be able to get all certifications for an organization', (done) => {
-        certifications.getOrganizationCertifications({
+        certifications.getForOrganization({
             organization_id: organizationID
         })
             .then((res) => {
@@ -155,7 +153,7 @@ describe('Certifications', () => {
             .catch(done);
     });
     it('should be able to edit a certification for an organiztion', (done) => {
-        certifications.updateOrganizationCertifications({
+        certifications.updateForOrganization({
             organization_id: organizationID,
             certifications: [
                 {
@@ -174,8 +172,8 @@ describe('Certifications', () => {
             })
             .catch(done);
     });
-    it('should be able to create certifications for an organiztion from a file', (done) => {
-        certifications.createOrganizationCertificationsFromFile({
+    it('should be able to create certifications for an organization from a file', (done) => {
+        certifications.uploadForOrganization({
             organization_id: organizationID,
             s3_keys: [
                 'null'
@@ -189,7 +187,7 @@ describe('Certifications', () => {
             .catch(done);
     });
     it('should be able to delete a certification for an organization', (done) => {
-        certifications.deleteOrganizationCertifications({
+        certifications.deleteForOrganization({
             organization_id: organizationID,
             certification_ids: [
                 certificationID
@@ -203,7 +201,7 @@ describe('Certifications', () => {
             .catch(done);
     });
     it('should be able to delete a specific certification', (done) => {
-        certifications.deleteCertification({
+        certifications.delete({
             certification_id: certificationID2
         })
             .then((res) => {
