@@ -44,7 +44,7 @@ export default class TicketEvents extends Resource {
     /**
      * @api {post} /v1/tickets/{ticket_id}/events
      * @apiName createTicketEvent
-     * @apiDescription Create a new ticket event for the specified ticket JSON payload can have (ticket_event_type, ticket_event_date, ticket_event_data)
+     * @apiDescription Create a new ticket event for ticket.
      * @apiParam {Number} ticket_id
      * @apiParam {TicketEventTemplate} ticket_event
      * @apiExample {js} Example:
@@ -57,7 +57,7 @@ export default class TicketEvents extends Resource {
     /**
      * @api {delete} /v1/ticket_events/{ticket_event_id}
      * @apiName deleteTicketEvent
-     * @apiDescription Delete the specified ticket event
+     * @apiDescription Delete the specified ticket event.
      * @apiParam {Number} ticket_event_id
      * @apiExample {js} Example:
      *             gigwalk.customers.deleteTicketEvent({...})

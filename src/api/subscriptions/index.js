@@ -195,7 +195,7 @@ export default class Subscriptions extends Resource {
     /**
      * @api {delete} /v1/organization_subscriptions/{organization_subscription_id}
      * @apiName deleteSubscription
-     * @apiDescription Delete the given organization_subscription from the db
+     * @apiDescription Delete the organization_subscription. This is a hard delete.
      * @apiParam {Number} organization_subscription_id
      * @apiExample {js} Example:
      *             gigwalk.customers.deleteSubscription({...})
@@ -207,8 +207,8 @@ export default class Subscriptions extends Resource {
     /**
      * @api {get} /v1/organization_subscriptions/{organization_subscription_id}
      * @apiName getSubscription
-     * @apiDescription Return info about the organization_subscription, if specified. Otherwise list all organization_subscriptions of the given organization.
-                       If no organization is specified, use the current_user's organization_id.
+     * @apiDescription If specified, return information about the organization_subscription. Otherwise, list all organization_subscriptions of the organization.
+                       Defaults to the current_user's organization if no organization_id is specified.
      * @apiParam {Number} organization_subscription_id
      * @apiExample {js} Example:
      *             gigwalk.customers.getSubscription({...})
@@ -220,8 +220,7 @@ export default class Subscriptions extends Resource {
     /**
      * @api {post} /v1/organization_subscriptions/{organization_subscription_id}
      * @apiName createClonedSubscription
-     * @apiDescription Schedule autoassignment for the given organization_subscription; or create a new org_subscription by cloning the given org_subscription
-                       and return the info
+     * @apiDescription Create a new subscription by cloning the given org_subscription or schedule autoassignment for the subscription.
      * @apiParam {Number} organization_subscription_id
      * @apiParam {String} action
      * @apiExample {js} Example:
@@ -238,7 +237,7 @@ export default class Subscriptions extends Resource {
     /**
      * @api {put} /v1/organization_subscriptions/{organization_subscription_id}
      * @apiName updateSubscription
-     * @apiDescription Using the given parameters, update the organization_subscription
+     * @apiDescription Update organization_subscription.
      * @apiParam {Number} organization_subscription_id
      * @apiParam {Number} version_id
      * @apiParam {SubscriptionTemplate} subscription
@@ -252,7 +251,7 @@ export default class Subscriptions extends Resource {
     /**
      * @api {post} /v1/organizations/{organization_id}/subscriptions
      * @apiName createSubscriptions
-     * @apiDescription Create new organization_subscriptions using the data provided (max 5)
+     * @apiDescription Create new organization_subscription(s). Maximum of five new subscriptions.
      * @apiParam {Number} organization_id
      * @apiParam {Array<SubscriptionTemplate>} subscriptions
      * @apiExample {js} Example:
@@ -269,7 +268,7 @@ export default class Subscriptions extends Resource {
     /**
      * @api {post} /v1/organizations/{organization_id}/subscriptions/search
      * @apiName searchSubscriptionsWithParams
-     * @apiDescription search_parameters can be of the form key op value e.g. date_created > now, or title = 'project_name'
+     * @apiDescription Search organization_subscriptions. search_parameters should be in key op value (e.g. date_created > now; title = 'project_name').
      * @apiParam {Number} organization_id
      * @apiParam {String} query_string
      * @apiExample {js} Example:
@@ -286,7 +285,7 @@ export default class Subscriptions extends Resource {
     /**
      * @api {delete} /v1/organizations/{organization_id}/subscriptions/{organization_subscription_id}
      * @apiName deleteOrganizationSubscription
-     * @apiDescription Delete the specified project (Only Draft projects may be deleted)
+     * @apiDescription Delete the specified project. Only DRAFT projects may be deleted.
      * @apiParam {Number} organization_id
      * @apiParam {Number} organization_subscription_id
      * @apiExample {js} Example:
@@ -299,7 +298,7 @@ export default class Subscriptions extends Resource {
     /**
      * @api {put} /v1/organizations/{organization_id}/subscriptions/{organization_subscription_id}
      * @apiName updateOrganizationSubscription
-     * @apiDescription Edit the specified project with the given JSON payload
+     * @apiDescription Modify project.
      * @apiParam {Number} organization_id
      * @apiParam {Number} organization_subscription_id
      * @apiParam {Number} version_id
@@ -314,8 +313,7 @@ export default class Subscriptions extends Resource {
     /**
      * @api {post} /v2/organizations/{organization_id}/search/subscriptions/filters
      * @apiName searchSubscriptionsWithField
-     * @apiDescription This searches the specified search_field in the ES document and finds a match only if the specified search_field contain the
-                       given value. Does not handle limit/offset, metadata not filled up, why?
+     * @apiDescription Searches ES documents using search_field.
      * @apiParam {Number} organization_id
      * @apiParam {String} search_field
      * @apiParam {String} query_string
@@ -334,8 +332,7 @@ export default class Subscriptions extends Resource {
     /**
      * @api {post} /v2/organizations/{organization_id}/search/subscriptions
      * @apiName searchSubscriptions
-     * @apiDescription This searches all strings in the ES document and finds a match if any of these strings contain the given string. Metadata not
-                       filled up, why?
+     * @apiDescription Searches all strings in ES documents.
      * @apiParam {Number} organization_id
      * @apiParam {String} query_string
      * @apiExample {js} Example:

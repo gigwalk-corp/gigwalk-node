@@ -77,7 +77,7 @@ export default class Targets extends Resource {
     /**
      * @api {post} /v1/organizations/{organization_id}/observation_targets
      * @apiName createOrganizationTarget
-     * @apiDescription Create new obs_targets of the org using the JSON payload. Even though this is a POST method, it does update/deletion as well.
+     * @apiDescription Create new obs_target(s). Endpoint also does update/deletion.
      * @apiParam {Number} organization_id
      * @apiParam {ObservationTargetBasicTemplate} observation_target
      * @apiExample {js} Example:
@@ -90,8 +90,8 @@ export default class Targets extends Resource {
     /**
      * @api {get} /v1/organizations/{organization_id}/observation_targets/{observation_target_id}
      * @apiName getOrganizationTarget
-     * @apiDescription If target_id is specified, return org_observation_target_id info for the specified target_id or return the info for all targets
-                       of the org. Return data fields (id, title, status, org_data, obs_target_type_id). Capable of returning paginated results.
+     * @apiDescription If target_id is specified, return org_observation_target_id info; else return the info for all targets of the org.
+                       Capable of returning paginated results.
      * @apiParam {Number} organization_id
      * @apiParam {Number} observation_target_id
      * @apiParam {GetOrganizationTargetQuery} query
@@ -107,8 +107,8 @@ export default class Targets extends Resource {
     /**
      * @api {put} /v1/organizations/{organization_id}/observation_targets/{observation_target_id}
      * @apiName updateOrganizationTarget
-     * @apiDescription If target_id is specified, update a single org_observation_target. Else update all targets of the org using the JSON payload.
-                       Even though this is a PUT method, it does creation/deletion as well.
+     * @apiDescription If target_id is specified, update org_observation_target; else update all targets of the organization.
+                       Endpoint also does update/deletion.
      * @apiParam {Number} organization_id
      * @apiParam {Number} observation_target_id
      * @apiParam {ObservationTargetTemplate} observation_target
@@ -123,8 +123,7 @@ export default class Targets extends Resource {
     /**
      * @api {get} /v1/organizations/{organization_id}/observation_targets/search
      * @apiName searchOrganizationTargets
-     * @apiDescription Find a match if the given string is found in the obs_target titles. If no search string is specified, return all obs targets of the org.
-                       Return data fields (id, title, status, org_data, obs_target_type_id). Capable of returning paginated results.
+     * @apiDescription Search obs_target titles. Capable of returning paginated results.
      * @apiParam {Number} organization_id
      * @apiParam {SearchOrganizationTargetsQuery} query
      * @apiExample {js} Example:

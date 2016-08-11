@@ -168,9 +168,7 @@ export default class TargetLists extends Resource {
     /**
      * @api {get} /v1/organization_observation_target_lists
      * @apiName getTargetLists
-     * @apiDescription Return all target lists of all organizations. This can be invoked only by the platform admin. Return (obs_target_id, title, status,
-                       org_data, obs_target_type_id). Can be sorted by specifying a order_by field ('id', 'name', 'status') and order_dir.
-                       Capable of returning paginated results.
+     * @apiDescription Return all target lists. This can only be invoked by the platform admin. Capable of returning paginated results.
      * @apiParam {GetTargetListsQuery} query
      * @apiExample {js} Example:
      *             gigwalk.customers.getTargetLists({...})
@@ -184,7 +182,7 @@ export default class TargetLists extends Resource {
     /**
      * @api {get} /v1/organization_observation_target_lists/{observation_target_list_id}
      * @apiName getTargetList
-     * @apiDescription Return the specified org_observation_target_list Return (obs_target_id, title, status, org_data, obs_target_type_id).
+     * @apiDescription Get org_observation_target_list.
      * @apiParam {Number} observation_target_list_id
      * @apiExample {js} Example:
      *             gigwalk.customers.getTargetList({...})
@@ -196,9 +194,7 @@ export default class TargetLists extends Resource {
     /**
      * @api {get} /v1/organizations/{organization_id}/target_lists
      * @apiName getOrganizationTargetLists
-     * @apiDescription Return the organization_observation_target_lists of the specified org Return (obs_target_id, title, status, org_data,
-                       obs_target_type_id). Can be sorted by specifying a order_by field ('id', 'name', 'status') and order_dir.
-                       Capable of returning paginated results.
+     * @apiDescription Get all organization_observation_target_lists in organiation. Capable of returning paginated results.
      * @apiParam {Number} organization_id
      * @apiParam {GetOrganizationTargetListsQuery} query
      * @apiExample {js} Example:
@@ -213,8 +209,7 @@ export default class TargetLists extends Resource {
     /**
      * @api {post} /v1/organizations/{organization_id}/target_lists
      * @apiName createOrganizationTargetList
-     * @apiDescription Create a new org_observation_target_list using the JSON payload. JSON payload is (name, obs_target_type, array of obs_targets and
-                       status) No permissions check
+     * @apiDescription Create a new org_observation_target_list. Currently, there are no permissions checks.
      * @apiParam {Number} organization_id
      * @apiParam {TargetListTemplate} target_list
      * @apiExample {js} Example:
@@ -227,7 +222,7 @@ export default class TargetLists extends Resource {
     /**
      * @api {get} /v1/organizations/{organization_id}/target_lists/{observation_target_list_id}
      * @apiName getOrganzationTargetList
-     * @apiDescription Return the specified organization_observation_target_list Return (obs_target_id, title, status, org_data, obs_target_type_id).
+     * @apiDescription Get organization_observation_target_list.
      * @apiParam {Number} organization_id
      * @apiParam {Number} observation_target_list_id
      * @apiExample {js} Example:
@@ -240,7 +235,7 @@ export default class TargetLists extends Resource {
     /**
      * @api {delete} /v1/organization_observation_target_lists/{observation_target_list_id}
      * @apiName deleteTargetList
-     * @apiDescription Delete the specified org_obs_target_list_id. Soft delete, org_obs_target_list marked as DELETED, but not removed from db
+     * @apiDescription Delete org_obs_target_list_id. This is a soft delete; org_obs_target_list marked as DELETED.
      * @apiParam {Number} observation_target_list_id
      * @apiExample {js} Example:
      *             gigwalk.customers.deleteTargetList({...})
@@ -252,7 +247,7 @@ export default class TargetLists extends Resource {
     /**
      * @api {put} /v1/organization_observation_target_lists/{observation_target_list_id}
      * @apiName updateTargetList
-     * @apiDescription Modify the specified org_obs_target_list. JSON Payload is (name, obs_target_type, array of obs_targets and status)
+     * @apiDescription Modify the specified org_obs_target_list.
      * @apiParam {Number} observation_target_list_id
      * @apiParam {TargetListTemplate} target_list
      * @apiExample {js} Example:
@@ -265,8 +260,7 @@ export default class TargetLists extends Resource {
     /**
      * @api {post} /v1/organization_observation_target_lists/{target_list_id}/search/observation_targets
      * @apiName searchTargetsInObservationList
-     * @apiDescription Search all the targets of the specified org_obs_target_list for the specified query_string Return (title, attributes,
-                       obs_target_type_id, status, org_id, date_created, date_updated). Capable of returning paginated results.
+     * @apiDescription Search all targets of an org_obs_target_list for the specified query_string. Capable of returning paginated results.
      * @apiParam {Number} target_list_id
      * @apiParam {SearchTargetsInObservationListQuery} query
      * @apiExample {js} Example:
@@ -281,8 +275,7 @@ export default class TargetLists extends Resource {
     /**
      * @api {post} /v1/target_lists/{target_list_id}/search/targets
      * @apiName searchTargetsInList
-     * @apiDescription Search all the targets of the specified org_obs_target_list for the specified query_string Return (title, attributes,
-                       obs_target_type_id, status, org_id, date_created, date_updated). Capable of returning paginated results.
+     * @apiDescription Search all targets of an org_obs_target_list for the specified query_string. Capable of returning paginated results.
      * @apiParam {Number} target_list_id
      * @apiParam {SearchTargetsInListQuery} query
      * @apiExample {js} Example:
@@ -297,8 +290,7 @@ export default class TargetLists extends Resource {
     /**
      * @api {get} /v1/organization_observation_target_lists/{target_list_id}/observation_targets
      * @apiName getTargetsFromList
-     * @apiDescription Return all the targets of the specified org_obs_target_list Return (title, attributes, obs_target_type_id, status, org_id,
-                       date_created, date_updated)
+     * @apiDescription Return all targets of the specified org_obs_target_list.
      * @apiParam {Number} target_list_id
      * @apiExample {js} Example:
      *             gigwalk.customers.getTargetsFromList({...})
@@ -310,7 +302,7 @@ export default class TargetLists extends Resource {
     /**
      * @api {put} /v1/organization_observation_target_lists/{target_list_id}/observation_targets
      * @apiName updateTargetsInList
-     * @apiDescription Add/Remove targets to the specified org_obs_target_list JSON payload is (action, list of targets)
+     * @apiDescription ADD or REMOVE targets from the specified org_obs_target_list.
      * @apiParam {Number} target_list_id
      * @apiParam {String} action
      * @apiParam {Array<Number>} target_ids
@@ -329,8 +321,8 @@ export default class TargetLists extends Resource {
     /**
      * @api {post} /v1/target_lists/target_history
      * @apiName searchDataItemsInList
-     * @apiDescription Search all the data_items for the specified obs_target_id and location_id Return (data_type_questions, data_item_value,
-                       data_item_timestamp, _id) Results sorted by data_item_timestamp Photo data_items will be excluded from returned data
+     * @apiDescription Search all the data_items for the specified obs_target_id and location_id. Results sorted by data_item_timestamp.
+                       Photo data_items will be excluded from returned data.
      * @apiParam {Number} observation_target_id
      * @apiParam {Number} location_id
      * @apiParam {Number} item_count

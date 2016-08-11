@@ -61,7 +61,7 @@ export default class Search extends Resource {
     /**
      * @api {get} /v1/search
      * @apiName searchDocuments
-     * @apiDescription ES Search for the given query_string This searches all the ES docs for the given query_string and returns results in ES idiom. Unused?
+     * @apiDescription Search all ES docs for the given query_string. Returns results in ES idiom.
      * @apiParam {SearchDocumentsQuery} query
      * @apiExample {js} Example:
      *             gigwalk.customers.searchDocuments({...})
@@ -75,7 +75,7 @@ export default class Search extends Resource {
     /**
      * @api {post} /v1/search
      * @apiName createSearch
-     * @apiDescription Not implemented
+     * @apiDescription Not implemented.
      * @apiExample {js} Example:
      *             gigwalk.customers.createSearch({...})
      */
@@ -86,7 +86,8 @@ export default class Search extends Resource {
     /**
      * @api {get} /v1/organizations/{organization_id}/search/{index_type}
      * @apiName searchOrganization
-     * @apiDescription We can search in groups, members, location_lists, target_lists, tickets or subscriptions filtered by the org. Capable of returning paginated results.
+     * @apiDescription Search in an organization within groups, members, location_lists, target_lists, tickets or subscriptions.
+                       Capable of returning paginated results.
      * @apiParam {Number} organization_id
      * @apiParam {String} index_type
      * @apiParam {SearchOrganizationQuery} query

@@ -143,7 +143,7 @@ export default class Organzations extends Resource {
     /**
      * @api {delete} /v1/organizations/{organization_id}
      * @apiName deleteOrganization
-     * @apiDescription Delete specified organization
+     * @apiDescription Delete organization.
      * @apiParam {Number} organization_id
      * @apiExample {js} Example:
      *             gigwalk.customers.deleteOrganization({...})
@@ -155,8 +155,7 @@ export default class Organzations extends Resource {
     /**
      * @api {get} /v1/organizations/{organization_id}
      * @apiName getOrganization
-     * @apiDescription Return data fields (id, org_name, needs_core, core_customer_account, core_private_workforce, type, user_count, date_updated, status,
-                       cloud9_urls, config)
+     * @apiDescription Get organization.
      * @apiParam {Number} organization_id
      * @apiExample {js} Example:
      *             gigwalk.customers.getOrganization({...})
@@ -168,10 +167,9 @@ export default class Organzations extends Resource {
     /**
      * @api {put} /v1/organizations/{organization_id}
      * @apiName updateOrganization
-     * @apiDescription JSON payload (email, org_name, needs_core, core_customer_account, core_private_workforce, type, status, config). Only super-admins
-                       and above can update organization info. The endpoint can also be used to update the company logo. A file with name 'logo' has to be
-                       added in a multipart form in order to do that. For example the following curl - curl -X PUT
-                       http://stage-api.apps.gigwalk.com/v1/organizations/7 -F logo=@path/to/file.png --user user:password
+     * @apiDescription Update organization info. The endpoint can also be used to update the company logo. A file with name
+                       'logo' has to be added in a multipart form in order to do that. For example, the following curl:
+                       - curl -X PUT http://stage-api.apps.gigwalk.com/v1/organizations/7 -F logo=@path/to/file.png --user user:password
      * @apiParam {Number} organization_id
      * @apiParam {OrganizationTemplate} organization
      * @apiExample {js} Example:
@@ -184,8 +182,7 @@ export default class Organzations extends Resource {
     /**
      * @api {get} /v1/organizations
      * @apiName getOrganizations
-     * @apiDescription Return data fields (id, org_name, needs_core, core_customer_account, core_private_workforce, type, user_count, date_updated, status,
-                       cloud9_urls, config). Capable of returning paginated results.
+     * @apiDescription Get all organizations. Capable of returning paginated results.
      * @apiParam {GetOrganizationsQuery} query
      * @apiExample {js} Example:
      *             gigwalk.customers.getOrganizations({...})
@@ -199,8 +196,7 @@ export default class Organzations extends Resource {
     /**
      * @api {post} /v1/organizations
      * @apiName createOrganization
-     * @apiDescription JSON payload may have (email, org_name, needs_core, core_customer_account, core_private_workforce, type, status, config).
-                       Only super-admins and above can update organization info
+     * @apiDescription Crete organization. Only super-admins and above can create or update organization info.
      * @apiParam {OrganizationTemplate} organization
      * @apiExample {js} Example:
      *             gigwalk.customers.createOrganization({...})

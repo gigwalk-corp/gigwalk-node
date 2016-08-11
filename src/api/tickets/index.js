@@ -427,7 +427,7 @@ export default class Tickets extends Resource {
     /**
      * @api {get} /v1/tickets/my_list
      * @apiName getCurrentCustomerTickets
-     * @apiDescription Get all tickets that belong to current_user's id
+     * @apiDescription Get all tickets that belong to current user's id.
      * @apiParam {GetCurrentCustomerTicketsQuery} query
      * @apiExample {js} Example:
      *             gigwalk.customers.getCurrentCustomerTickets({...})
@@ -441,7 +441,7 @@ export default class Tickets extends Resource {
     /**
      * @api {get} /v1/customers/{customer_id}/tickets
      * @apiName getCustomerTickets
-     * @apiDescription Get all tickets that belong to the given customer
+     * @apiDescription Get all tickets that belong to the given customer.
      * @apiParam {Number} customer_id
      * @apiParam {GetCustomerTicketsQuery} query
      * @apiExample {js} Example:
@@ -456,8 +456,7 @@ export default class Tickets extends Resource {
     /**
      * @api {post} /v2/organizations/{organization_id}/search/tickets
      * @apiName searchOrganizationTickets
-     * @apiDescription Search all tickets of the organization for the given string This searches all strings in the ES document and finds a match if any
-                       of these string contain the given string. Capable of returning paginated results.
+     * @apiDescription Search all tickets of an organization. Capable of returning paginated results.
      * @apiParam {Number} organization_id
      * @apiParam {String} query_string
      * @apiParam {SearchOrganizationTicketsQuery} query
@@ -476,8 +475,7 @@ export default class Tickets extends Resource {
     /**
      * @api {post} /v2/organizations/{organization_id}/search/tickets/filters
      * @apiName searchOrganizationTicketsWithField
-     * @apiDescription Search all tickets of the org for the given value This searches the specified search_field in the ES document and finds a match only
-                       if the search_field contains the given value. Capable of returning paginated results.
+     * @apiDescription Search all tickets of an organization in the specified search_field. Capable of returning paginated results.
      * @apiParam {Number} organization_id
      * @apiParam {String} search_field
      * @apiParam {String} query_string
@@ -498,7 +496,7 @@ export default class Tickets extends Resource {
     /**
      * @api {post} /v1/tickets/{ticket_id}/data_items
      * @apiName createTicketDataItem
-     * @apiDescription Create a new data_item for the ticket Create a new data_item using the values specified in the JSON payload
+     * @apiDescription Create a new data_item for the ticket.
      * @apiParam {Number} ticket_id
      * @apiParam {DataItemTemplate} data_item
      * @apiExample {js} Example:
@@ -511,7 +509,7 @@ export default class Tickets extends Resource {
     /**
      * @api {delete} /v1/tickets/{ticket_id}/data_items/{data_item_id}
      * @apiName deleteTicketDataItem
-     * @apiDescription Delete the specified data_item from the specified ticket This is a hard delete. Data items are stored in mongo.
+     * @apiDescription Delete the specified data_item from the specified ticket. This is a hard delete.
      * @apiParam {Number} ticket_id
      * @apiParam {Number} data_item_id
      * @apiExample {js} Example:
@@ -524,8 +522,7 @@ export default class Tickets extends Resource {
     /**
      * @api {post} /v1/tickets/{ticket_id}/clone
      * @apiName createClonedTicket
-     * @apiDescription Clone the given ticket Create a new ticket by cloning the given ticket. Deep copy, the ticket metadata is copied as well.
-                       The ticket status will always be UNASSIGNED.
+     * @apiDescription Create a new ticket by cloning the given ticket. This is a deep copy: metadata is copied as well. Ticket status will be UNASSIGNED.
      * @apiParam {Number} ticket_id
      * @apiExample {js} Example:
      *             gigwalk.customers.createClonedTicket({...})
@@ -537,7 +534,7 @@ export default class Tickets extends Resource {
     /**
      * @api {post} /v1/tickets/{ticket_id}/submit
      * @apiName submitTicket
-     * @apiDescription Submit the given ticket This is a terminal state for the ticket
+     * @apiDescription Submit the given ticket. This is a terminal state for the ticket.
      * @apiParam {Number} ticket_id
      * @apiExample {js} Example:
      *             gigwalk.customers.submitTicket({...})
@@ -564,9 +561,7 @@ export default class Tickets extends Resource {
     /**
      * @api {post} /v1/tickets/{ticket_id}
      * @apiName searchTicketsWithID
-     * @apiDescription Search tickets. This seems deprecated and the semantics do not look right either. Why would a ticket_id be passed to a search?
-                       You should use only API /v1/tickets/search. The other endpoints are also directed to the search method.
-                       Capable of returning paginated results.
+     * @apiDescription You should use only /v1/tickets/search, other endpoints directed to the search method. Capable of returning paginated results.
      * @apiParam {Number} ticket_id
      * @apiParam {TicketSearchTemplate} search
      * @apiParam {SearchTicketsWithIDQuery} query
@@ -582,8 +577,7 @@ export default class Tickets extends Resource {
     /**
      * @api {put} /v1/tickets/{ticket_id}
      * @apiName updateTicket
-     * @apiDescription Edit tickets If the ticket_id is present assign the corresponding ticket. Otherwise perform action to multiple tickets identified
-                       by the data arguments.
+     * @apiDescription Edit ticket(s). If ticket_id is present, assign the corresponding ticket. Otherwise, perform action to multiple tickets.
      * @apiParam {Number} ticket_id
      * @apiParam {String} action
      * @apiParam {Array<number>} ticket_ids
@@ -605,7 +599,7 @@ export default class Tickets extends Resource {
     /**
      * @api {get} /v1/tickets
      * @apiName getTickets
-     * @apiDescription Get ticket info. it lists all tickets of the current user's organization.
+     * @apiDescription Gets all tickets of the current user's organization.
      * @apiExample {js} Example:
      *             gigwalk.customers.getTickets({...})
      */
@@ -616,8 +610,7 @@ export default class Tickets extends Resource {
     /**
      * @api {post} /v1/tickets
      * @apiName searchTickets
-     * @apiDescription Search tickets. You should use only API /v1/tickets/search. The other endpoints are also directed to the search method.
-                       Capable of returning paginated results.
+     * @apiDescription You should use only /v1/tickets/search, other endpoints directed to the search method. Capable of returning paginated results.
      * @apiParam {TicketSearchTemplate} search
      * @apiParam {SearchTicketsQuery} query
      * @apiExample {js} Example:
@@ -632,8 +625,7 @@ export default class Tickets extends Resource {
     /**
      * @api {put} /v1/tickets/{ticket_id}/execution_state/{execution_state}
      * @apiName updateTicketWithState
-     * @apiDescription Edit tickets If the ticket_id is present assign the corresponding ticket. Otherwise perform action to multiple tickets identified
-                       by the data arguments.
+     * @apiDescription Edit ticket(s). If ticket_id is present, assign the corresponding ticket. Otherwise, perform action to multiple tickets.
      * @apiParam {Number} ticket_id
      * @apiParam {String} execution_state
      * @apiParam {String} action
@@ -655,7 +647,7 @@ export default class Tickets extends Resource {
     /**
      * @api {get} /v1/organizations/{organization_id}/tickets
      * @apiName getOrganizationTickets
-     * @apiDescription Get info about all tickets of the organization This is a paginated query. Capable of returning paginated results.
+     * @apiDescription Get information about all tickets of the organization. Capable of returning paginated results.
      * @apiParam {Number} organization_id
      * @apiParam {GetOrganizationTicketsQuery} query
      * @apiExample {js} Example:
@@ -670,8 +662,7 @@ export default class Tickets extends Resource {
     /**
      * @api {post} /v1/organizations/{organization_id}/tickets/search
      * @apiName searchOrganizationTicketsWithCriteria
-     * @apiDescription Search tickets filtered by the organization This returns tickets of the specified organization that match the search criteria
-                       specified in JSON. Capable of returning paginated results.
+     * @apiDescription Search tickets filtered by organization. Capable of returning paginated results.
      * @apiParam {Number} organization_id
      * @apiParam {TicketSearchTemplate} search
      * @apiParam {SearchOrganizationTicketsWithCriteriaQuery} query
@@ -687,7 +678,7 @@ export default class Tickets extends Resource {
     /**
      * @api {get} /v1/subscriptions/{subscription_id}/tickets
      * @apiName getSubscriptionTickets
-     * @apiDescription Get info about all tickets of the organization_subscription (project) This is a paginated query. Capable of returning paginated results.
+     * @apiDescription Get information of all tickets in organization_subscription (project). Capable of returning paginated results.
      * @apiParam {Number} subscription_id
      * @apiParam {GetSubscriptionTicketsQuery} query
      * @apiExample {js} Example:
@@ -702,8 +693,7 @@ export default class Tickets extends Resource {
     /**
      * @api {post} /v1/subscriptions/{subscription_id}/tickets/search
      * @apiName searchSubscriptionTickets
-     * @apiDescription Search tickets filtered by the organization_subscription (project) This returns tickets of the specified organization_subscription
-                       that match the search criteria specified in JSON. Capable of returning paginated results.
+     * @apiDescription Search tickets filtered by the organization_subscription (project). Capable of returning paginated results.
      * @apiParam {Number} subscription_id
      * @apiParam {TicketSearchTemplate} search
      * @apiParam {SearchSubscriptionTicketsQuery} query
@@ -719,7 +709,7 @@ export default class Tickets extends Resource {
     /**
      * @api {get} /v1/tickets/{ticket_id}/events
      * @apiName getTicketEvents
-     * @apiDescription Return the events of the given ticket. Capable of returning paginated results.
+     * @apiDescription Return events of ticket. Capable of returning paginated results.
      * @apiParam {Number} ticket_id
      * @apiParam {GetTicketEventsQuery} query
      * @apiExample {js} Example:
@@ -734,9 +724,8 @@ export default class Tickets extends Resource {
     /**
      * @api {get} /v1/ticket_map
      * @apiName getTicketsInArea
-     * @apiDescription Return all applicable tickets that are within the given radius of the specified location Geo-Search. Return the locations of all
-                       applicable tickets within 50 KM of the input location for a map display. Unassigned tickets that fit the certification criteria,
-                       and that are not due yet are returned
+     * @apiDescription Return all applicable tickets within a radius of the specified location for a map display. Only nassigned tickets that fit the
+                       certification criteria and are not yet due are returned.
      * @apiParam {Number} map_lat
      * @apiParam {Number} map_lon
      * @apiParam {Number} radius
