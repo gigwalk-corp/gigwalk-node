@@ -95,7 +95,7 @@ describe('Customers', () => {
             .catch(done);
     });
     it('should be able to get all customers from an organization', (done) => {
-        customers.getAllByOrganization({
+        customers.getForOrganization({
             organization_id: organizationID
         })
             .then((res) => {
@@ -106,9 +106,8 @@ describe('Customers', () => {
             .catch(done);
     });
     it('should be able to update customers in an organization', (done) => {
-        customers.bulkUpdate({
+        customers.updateForOrganization({
             organization_id: 4,
-            action: 'UPDATE',
             customers: [{
                 customer_id: deleteCustomerID,
                 ideal_hours_week: 20

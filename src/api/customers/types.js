@@ -61,7 +61,7 @@ export type ESCustomer = {
     organization_id: number
 }
 
-type CustomerUpdateFields = {
+type CustomerFields = {
     email?: string,
     first_name?: string,
     last_name?: string,
@@ -90,7 +90,7 @@ export type GetCustomerByEmailParams = {
 export type UpdateCustomerByEmailParams = {
     organization_id: number,
     customer_email: string,
-    customer: CustomerUpdateFields
+    customer: CustomerFields
 }
 
 export type DeleteCustomerByIdParams = {
@@ -106,21 +106,25 @@ export type GetCustomerByIdParams = {
 export type UpdateCustomerByIdParams = {
     organization_id: number,
     customer_id: number,
-    customer: CustomerUpdateFields
+    customer: CustomerFields
 }
 
-export type GetAllCustomersByOrganizationParams = {
+export type GetAllCustomersForOrganizationParams = {
     organization_id: number
 }
 
-export type BulkUpdateCustomersParams = {
+export type UpdateCustomersForOrganizationParams = {
     organization_id: number,
-    action: string,
-    customers: Array<CustomerUpdateFields & { customer_id: number }>
+    customers: Array<CustomerFields & { customer_id: number }>
+}
+
+export type DeleteCustomersForOrganizationParams = {
+    organization_id: number,
+    customers: Array<{ customer_id: number }>
 }
 
 export type UpdateCustomerParams = {
-    customer: CustomerUpdateFields & { password?: string }
+    customer: CustomerFields & { password?: string }
 }
 
 export type SearchCustomersParams = ESParams & {

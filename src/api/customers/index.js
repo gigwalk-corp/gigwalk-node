@@ -10,8 +10,9 @@ import type {
     DeleteCustomerByIdParams,
     GetCustomerByIdParams,
     UpdateCustomerByIdParams,
-    GetAllCustomersByOrganizationParams,
-    BulkUpdateCustomersParams,
+    GetAllCustomersForOrganizationParams,
+    UpdateCustomersForOrganizationParams,
+    DeleteCustomersForOrganizationParams,
     UpdateCustomerParams,
     SearchCustomersParams
 } from './types';
@@ -120,9 +121,9 @@ export default class Customers extends Resource {
      * @apiDescription Return info about all customers of the organization
      * @apiParam {Number} organization_id
      * @apiExample {js} Example:
-     *             gigwalk.customers.getAllByOrganization({...})
+     *             gigwalk.customers.getByOrganization({...})
      */
-    getAllByOrganization(params: GetAllCustomersByOrganizationParams): APIPromise<Array<Customer>> {
+    getForOrganization(params: GetAllCustomersForOrganizationParams): APIPromise<Array<Customer>> {
         const url = `/v1/organizations/${params.organization_id}/customers`;
         return this.client.get(url);
     }
@@ -130,17 +131,37 @@ export default class Customers extends Resource {
     /**
      * @api {put} /v1/organizations/:organization_id/customers bulkUpdate
      * @apiGroup Customers
-     * @apiName bulkUpdate
-     * @apiDescription Modifies the info of multiple customers identified by customer_email. Delete multiple customers (by setting DELETED status)
+     * @apiName updateForOrganization
+     * @apiDescription Modifies the info of multiple customers identified by customer_email.
      * @apiParam {Number} organization_id
      * @apiParam {Object[]} customers
      * @apiExample {js} Example:
-     *             gigwalk.customers.bulkUpdate({...})
+     *             gigwalk.customers.updateForOrganization({...})
      */
-    bulkUpdate(params: BulkUpdateCustomersParams): APIPromise<Array<Customer> | Array<number>> {
+    updateForOrganization(params: UpdateCustomersForOrganizationParams): APIPromise<Array<Customer>> {
         const url = `/v1/organizations/${params.organization_id}/customers`;
         const data = {
-            action: params.action,
+            action: 'UPDATE',
+            customers: params.customers
+        };
+
+        return this.client.put(url, data);
+    }
+
+    /**
+     * @api {put} /v1/organizations/:organization_id/customers deleteForOrganization
+     * @apiGroup Customers
+     * @apiName deleteForOrganization
+     * @apiDescription Delete multiple customers (by setting DELETED status)
+     * @apiParam {Number} organization_id
+     * @apiParam {Object[]} customers
+     * @apiExample {js} Example:
+     *             gigwalk.customers.deleteForOrganization({...})
+     */
+    deleteForOrganization(params: DeleteCustomersForOrganizationParams): APIPromise<Array<number>> {
+        const url = `/v1/organizations/${params.organization_id}/customers`;
+        const data = {
+            action: 'REMOVE',
             customers: params.customers
         };
 
