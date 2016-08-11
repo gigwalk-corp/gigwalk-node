@@ -186,7 +186,7 @@ describe('Certifications', () => {
             })
             .catch(done);
     });
-    it('should be able to delete a certification for an organization', (done) => {
+    it.skip('should be able to delete a certification for an organization', (done) => {
         certifications.deleteForOrganization({
             organization_id: organizationID,
             certification_ids: [
