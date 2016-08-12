@@ -31,7 +31,7 @@ describe('Customers', () => {
                 done();
             })
             .catch(done);
-    }).timeout(5000);
+    }).timeout(10000);
     it('should be able to get a customer by ID', (done) => {
         customers.getCustomerWithID({
             organization_id: organizationID,
@@ -43,7 +43,7 @@ describe('Customers', () => {
                 done();
             })
             .catch(done);
-    });
+    }).timeout(10000);
     it('should be able to update a customer by Email', (done) => {
         customers.updateCustomerWithEmail({
             organization_id: organizationID,
@@ -58,7 +58,7 @@ describe('Customers', () => {
                 done();
             })
             .catch(done);
-    }).timeout(5000);
+    }).timeout(10000);
     it('should be able to update a customer by ID', (done) => {
         customers.updateCustomerWithID({
             organization_id: organizationID,
@@ -73,7 +73,7 @@ describe('Customers', () => {
                 done();
             })
             .catch(done);
-    }).timeout(5000);
+    }).timeout(10000);
     it('should be able to get the current customer', (done) => {
         customers.getCustomer()
             .then((res) => {
@@ -82,7 +82,7 @@ describe('Customers', () => {
                 done();
             })
             .catch(done);
-    }).timeout(5000);
+    }).timeout(10000);
     it('should be able to update the current customer', (done) => {
         customers.updateCustomer({
             customer: {
@@ -95,7 +95,7 @@ describe('Customers', () => {
                 done();
             })
             .catch(done);
-    });
+    }).timeout(10000);
     it('should be able to get all customers from an organization', (done) => {
         customers.getOrganizationCustomers({
             organization_id: organizationID,
@@ -109,7 +109,7 @@ describe('Customers', () => {
                 done();
             })
             .catch(done);
-    }).timeout(5000);
+    }).timeout(10000);
     it('should be able to update customers in an organization', (done) => {
         customers.updateOrganizationCustomers({
             organization_id: 4,
@@ -125,12 +125,15 @@ describe('Customers', () => {
                 done();
             })
             .catch(done);
-    });
+    }).timeout(10000);
     it('should be able to search for customers associated with a ticketID', (done) => {
         customers.searchCustomers({
             ticket_ids: [
                 ticketID
-            ]
+            ],
+            query: {
+                limit: 2
+            }
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
@@ -150,7 +153,7 @@ describe('Customers', () => {
                 done();
             })
             .catch(done);
-    }).timeout(5000);
+    }).timeout(10000);
     it('should be able to delete a customer by ID', (done) => {
         customers.deleteCustomerWithID({
             organization_id: organizationID,
@@ -162,5 +165,5 @@ describe('Customers', () => {
                 done();
             })
             .catch(done);
-    }).timeout(5000);
+    }).timeout(10000);
 });

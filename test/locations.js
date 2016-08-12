@@ -28,7 +28,7 @@ describe('Loctions', () => {
                 done();
             })
             .catch(done);
-    }).timeout(5000);
+    }).timeout(10000);
     it('should be able to get all organization locations in an organization', (done) => {
         locations.getOrganizationLocations({
             organization_id: organizationID,
@@ -42,7 +42,7 @@ describe('Loctions', () => {
                 done();
             })
             .catch(done);
-    }).timeout(5000);
+    }).timeout(10000);
     it('should be able to create a new location', (done) => {
         locations.createLocations({
             locations: [{
@@ -63,7 +63,7 @@ describe('Loctions', () => {
                 done();
             })
             .catch(done);
-    });
+    }).timeout(10000);
     it('should be able to get a specific location', (done) => {
         locations.getLocation({
             location_id: locationID
@@ -74,7 +74,7 @@ describe('Loctions', () => {
                 done();
             })
             .catch(done);
-    });
+    }).timeout(10000);
     it('should be able to get a specific organization location', (done) => {
         locations.getOrganizationLocation({
             organization_id: organizationID,
@@ -86,7 +86,7 @@ describe('Loctions', () => {
                 done();
             })
             .catch(done);
-    });
+    }).timeout(10000);
     it('should be able to create new organization locations', (done) => {
         locations.createOrganizationLocations({
             organization_id: organizationID,
@@ -107,7 +107,7 @@ describe('Loctions', () => {
                 done();
             })
             .catch(done);
-    });
+    }).timeout(10000);
     it('should be able to update organization locations', (done) => {
         locations.updateOrganizaionLocations({
             organization_id: organizationID,
@@ -122,7 +122,7 @@ describe('Loctions', () => {
                 done();
             })
             .catch(done);
-    }).timeout(5000);
+    }).timeout(10000);
     it('should be able to create organization location', (done) => {
         locations.createOrganizationLocation({
             organization_id: organizationID,
@@ -135,7 +135,7 @@ describe('Loctions', () => {
                 done();
             })
             .catch(done);
-    }).timeout(5000);
+    }).timeout(10000);
     it('should be able to update organization location', (done) => {
         locations.updateOrganizationLocation({
             organization_id: organizationID,
@@ -149,7 +149,7 @@ describe('Loctions', () => {
                 done();
             })
             .catch(done);
-    });
+    }).timeout(10000);
     it('should be able to delete a specific location', (done) => {
         locations.deleteOrganizationLocation({
             organization_id: organizationID,
@@ -161,7 +161,7 @@ describe('Loctions', () => {
                 done();
             })
             .catch(done);
-    });
+    }).timeout(10000);
     it.skip('should be able to create a location list', (done) => {
         locations.createOrganizationLocationList({
             organization_id: organizationID,

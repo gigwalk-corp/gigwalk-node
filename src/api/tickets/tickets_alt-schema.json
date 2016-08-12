@@ -1,91 +1,73 @@
 {
     "$schema": "http://json-schema.org/draft-04/schema#",
+    "id": "http://gigwalk.com/src/api/tickets/tickets_alt-schema.json#",
     "type": "object",
     "properties": {
-        "code": {
-            "type": "integer"
-        },
-        "gw_api_response": {
-            "type": "array"
-        },
-        "errors": {
-            "type": [ "null", "array" ]
-        },
-        "warnings": {
-            "type": [ "null", "array" ]
-        },
-        "_meta": {
-            "type": "object"
-        },
-        "_metadata": {
-            "type": "object"
-        },
-        "data": {
-            "type": "array",
-            "items": {
-                "type": "object",
-                "properties": {
-                    "ticket_event_type": {
-                        "type": "string"
-                    },
-                    "id": {
-                        "type": "string"
-                    },
-                    "ticket_id": {
-                        "type": "integer"
-                    },
-                    "ticket_event_data": {
-                        "type": ["null", "object"]
-                    },
-                    "created_customer": {
+        "allOf": [
+            { "$ref": "http://gigwalk.com/src/api/base-schema.json#" },
+            { "properties": {
+                "data": {
+                    "type": "array",
+                    "items": {
                         "type": "object",
                         "properties": {
-                            "last_name": {
-                                "type": ["null", "string"]
-                            },
-                            "photo_url": {
-                                "type": ["null", "string"]
+                            "ticket_event_type": {
+                                "type": "string"
                             },
                             "id": {
+                                "type": "string"
+                            },
+                            "ticket_id": {
                                 "type": "integer"
                             },
-                            "first_name": {
-                                "type": ["null", "string"]
+                            "ticket_event_data": {
+                                "type": ["null", "object"]
                             },
-                            "email": {
+                            "created_customer": {
+                                "type": "object",
+                                "properties": {
+                                    "last_name": {
+                                        "type": ["null", "string"]
+                                    },
+                                    "photo_url": {
+                                        "type": ["null", "string"]
+                                    },
+                                    "id": {
+                                        "type": "integer"
+                                    },
+                                    "first_name": {
+                                        "type": ["null", "string"]
+                                    },
+                                    "email": {
+                                        "type": ["null", "string"]
+                                    }
+                                },
+                                "required": [
+                                    "last_name",
+                                    "photo_url",
+                                    "id",
+                                    "first_name",
+                                    "email"
+                                ]
+                            },
+                            "ticket_event_date": {
                                 "type": ["null", "string"]
                             }
                         },
                         "required": [
-                            "last_name",
-                            "photo_url",
+                            "ticket_event_type",
                             "id",
-                            "first_name",
-                            "email"
+                            "ticket_id",
+                            "ticket_event_data",
+                            "created_customer",
+                            "ticket_event_date"
                         ]
-                    },
-                    "ticket_event_date": {
-                        "type": ["null", "string"]
                     }
-                },
-                "required": [
-                    "ticket_event_type",
-                    "id",
-                    "ticket_id",
-                    "ticket_event_data",
-                    "created_customer",
-                    "ticket_event_date"
-                ]
-            }
-        }
-    },
-    "required": [
-        "_meta",
-        "data",
-        "gw_api_response",
-        "_metadata",
-        "errors",
-        "warnings",
-        "code"
-    ]
+                }
+            },
+            "required": [
+                "data"
+            ] }
+        ]
+    }
 }

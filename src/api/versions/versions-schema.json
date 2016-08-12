@@ -1,55 +1,37 @@
 {
     "$schema": "http://json-schema.org/draft-04/schema#",
+    "id": "http://gigwalk.com/src/api/versions/versions-schema.json#",
     "type": "object",
     "properties": {
-        "code": {
-            "type": "integer"
-        },
-        "gw_api_response": {
-            "type": "array"
-        },
-        "errors": {
-            "type": [ "null", "array" ]
-        },
-        "warnings": {
-            "type": [ "null", "array" ]
-        },
-        "_meta": {
-            "type": "object"
-        },
-        "_metadata": {
-            "type": "object"
-        },
-        "data": {
-            "type": "array",
-            "items": {
-                "type": "object",
-                "properties": {
-                    "minimum_ios_version": {
-                        "type": "string"
-                    },
-                    "minimum_android_version": {
-                        "type": "string"
-                    },
-                    "version": {
-                        "type": "string"
+        "allOf": [
+            { "$ref": "http://gigwalk.com/src/api/base-schema.json#" },
+            { "properties": {
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "minimum_ios_version": {
+                                "type": "string"
+                            },
+                            "minimum_android_version": {
+                                "type": "string"
+                            },
+                            "version": {
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "minimum_ios_version",
+                            "minimum_android_version",
+                            "version"
+                        ]
                     }
-                },
-                "required": [
-                    "minimum_ios_version",
-                    "minimum_android_version",
-                    "version"
-                ]
-            }
-        }
-    },
-    "required": [
-        "data",
-        "errors",
-        "_meta",
-        "code",
-        "gw_api_response",
-        "warnings",
-        "_metadata"
-    ]
+                }
+            },
+            "required": [
+                "data"
+            ] }
+        ]
+    }
 }

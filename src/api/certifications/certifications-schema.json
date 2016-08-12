@@ -1,71 +1,53 @@
 {
     "$schema": "http://json-schema.org/draft-04/schema#",
+    "id": "http://gigwalk.com/src/api/certifications/certifications-schema.json#",
     "type": "object",
     "properties": {
-        "code": {
-            "type": "integer"
-        },
-        "gw_api_response": {
-            "type": "array"
-        },
-        "errors": {
-            "type": [ "null", "array" ]
-        },
-        "warnings": {
-            "type": [ "null", "array" ]
-        },
-        "_meta": {
-            "type": "object"
-        },
-        "_metadata": {
-            "type": "object"
-        },
-        "data": {
-            "type": "array",
-            "items": {
-                "type": "object",
-                "properties": {
-                    "state": {
-                        "type": "string"
-                    },
-                    "type": {
-                        "type": "string"
-                    },
-                    "id": {
-                        "type": "integer"
-                    },
-                    "organization_id": {
-                        "type": "integer"
-                    },
-                    "user_count": {
-                        "type": "integer"
-                    },
-                    "title": {
-                        "type": "string"
-                    },
-                    "description": {
-                        "type": "string"
+        "allOf": [
+            { "$ref": "http://gigwalk.com/src/api/base-schema.json#" },
+            { "properties": {
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "state": {
+                                "type": "string"
+                            },
+                            "type": {
+                                "type": "string"
+                            },
+                            "id": {
+                                "type": "integer"
+                            },
+                            "organization_id": {
+                                "type": "integer"
+                            },
+                            "user_count": {
+                                "type": "integer"
+                            },
+                            "title": {
+                                "type": "string"
+                            },
+                            "description": {
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "state",
+                            "type",
+                            "id",
+                            "organization_id",
+                            "user_count",
+                            "title",
+                            "description"
+                        ]
                     }
-                },
-                "required": [
-                    "state",
-                    "type",
-                    "id",
-                    "organization_id",
-                    "user_count",
-                    "title",
-                    "description"
-                ]
-            }
-        }
-    },
-    "required": [
-        "_metadata",
-        "_meta",
-        "errors",
-        "warnings",
-        "gw_api_response",
-        "code",
-        "data"
-    ]
+                }
+            },
+            "required": [
+                "data"
+            ] }
+        ]
+    }
 }

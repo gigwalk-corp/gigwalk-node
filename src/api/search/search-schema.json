@@ -1,5 +1,6 @@
 {
     "$schema": "http://json-schema.org/draft-04/schema#",
+    "id": "http://gigwalk.com/src/api/search/search-schema.json#",
     "type": "object",
     "properties": {
         "took": {
@@ -45,7 +46,7 @@
                                 "type": "string"
                             },
                             "_source": {
-                                
+
                             },
                             "_score": {
                                 "type": "integer"

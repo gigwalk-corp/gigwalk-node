@@ -1,7 +1,6 @@
 import TargetLists from '../src/api/targetLists/index';
 import axios from 'axios';
 import schema from '../src/api/targetLists/targetLists-schema.json';
-import schemaAlt from '../src/api/targetLists/targetLists_alt-schema.json';
 import schemaDelete from '../src/api/delete-schema.json';
 
 describe('Target Lists', () => {
@@ -35,7 +34,7 @@ describe('Target Lists', () => {
                 done();
             })
             .catch(done);
-    });
+    }).timeout(10000);
     it('should be able to get all target lists', (done) => {
         targetLists.getTargetLists()
             .then((res) => {
@@ -74,12 +73,12 @@ describe('Target Lists', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                expect(res.data).to.have.jsonSchema(schemaAlt);
+                expect(res.data).to.have.jsonSchema(schema);
                 targetID = res.data.data[0].id;
                 done();
             })
             .catch(done);
-    }).timeout(5000);
+    }).timeout(10000);
     it('should be able to remove targets to a list', (done) => {
         targetLists.updateTargetsInList({
             target_list_id: targetListID,
@@ -94,7 +93,7 @@ describe('Target Lists', () => {
                 done();
             })
             .catch(done);
-    });
+    }).timeout(10000);
     it('should be able to add targets from a list', (done) => {
         targetLists.updateTargetsInList({
             target_list_id: targetListID,
@@ -109,7 +108,7 @@ describe('Target Lists', () => {
                 done();
             })
             .catch(done);
-    });
+    }).timeout(10000);
     it('should be able to update a specific target list', (done) => {
         targetLists.updateTargetList({
             observation_target_list_id: targetListID,
@@ -123,7 +122,7 @@ describe('Target Lists', () => {
                 done();
             })
             .catch(done);
-    });
+    }).timeout(10000);
     it.skip('should be able to search data items', (done) => {
         targetLists.searchDataItemsInList({
             observation_target_id: targetID,
@@ -148,7 +147,7 @@ describe('Target Lists', () => {
                 done();
             })
             .catch(done);
-    });
+    }).timeout(10000);
     it('should be able to search observation targets in a list', (done) => {
         targetLists.searchTargetsInObservationList({
             target_list_id: targetListID,
@@ -160,7 +159,7 @@ describe('Target Lists', () => {
                 done();
             })
             .catch(done);
-    });
+    }).timeout(10000);
     it('should be able to get a specific target list', (done) => {
         targetLists.getTargetList({
             observation_target_list_id: targetListID
@@ -171,7 +170,7 @@ describe('Target Lists', () => {
                 done();
             })
             .catch(done);
-    });
+    }).timeout(10000);
     it.skip('should be able to delete a specific target list', (done) => {
         targetLists.deleteTargetList({
             observation_target_list_id: targetListID

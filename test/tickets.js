@@ -37,7 +37,7 @@ describe('Tickets', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    }).timeout(20000);
     it('should be able to get all tickets available to customer', (done) => {
         tickets.getTickets({
             query: {

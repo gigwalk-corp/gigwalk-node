@@ -41,7 +41,7 @@ describe('Subscriptions', () => {
                 done();
             })
             .catch(done);
-    }).timeout(5000);
+    }).timeout(10000);
     it.skip('should be able to clone a specific subscription', (done) => {
         subscriptions.createClonedSubscription({
             organization_subscription_id: subscriptionID,
@@ -84,7 +84,7 @@ describe('Subscriptions', () => {
                 done();
             })
             .catch(done);
-    });
+    }).timeout(10000);
     it('should be able to get a specific subscription', (done) => {
         subscriptions.getSubscription({
             organization_subscription_id: subscriptionID
@@ -95,7 +95,7 @@ describe('Subscriptions', () => {
                 done();
             })
             .catch(done);
-    });
+    }).timeout(10000);
     it.skip('should be able to search subscriptions with params', (done) => {
         subscriptions.searchSubscriptionsWithParams({
             organization_id: organizationID,
@@ -120,7 +120,7 @@ describe('Subscriptions', () => {
                 done();
             })
             .catch(done);
-    }).timeout(5000);
+    }).timeout(10000);
     it('should be able to search subscriptions', (done) => {
         subscriptions.searchSubscriptions({
             organization_id: organizationID,
@@ -132,7 +132,7 @@ describe('Subscriptions', () => {
                 done();
             })
             .catch(done);
-    }).timeout(5000);
+    }).timeout(10000);
     it.skip('should be able to delete a specific subscription', (done) => {
         subscriptions.deleteSubscription({
             organization_subscription_id: subscriptionID
@@ -155,5 +155,5 @@ describe('Subscriptions', () => {
                 done();
             })
             .catch(done);
-    }).timeout(5000);
+    }).timeout(10000);
 });

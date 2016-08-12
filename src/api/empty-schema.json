@@ -1,36 +1,18 @@
 {
     "$schema": "http://json-schema.org/draft-04/schema#",
+    "id": "http://gigwalk.com/src/api/empty-schema.json#",
     "type": "object",
     "properties": {
-        "code": {
-            "type": "integer"
-        },
-        "gw_api_response": {
-            "type": "array"
-        },
-        "errors": {
-            "type": [ "null", "array" ]
-        },
-        "warnings": {
-            "type": [ "null", "array" ]
-        },
-        "_meta": {
-            "type": "object"
-        },
-        "_metadata": {
-            "type": "object"
-        },
-        "data": {
-            "type": ["null", "array"]
-        }
-    },
-    "required": [
-        "data",
-        "_meta",
-        "warnings",
-        "code",
-        "_metadata",
-        "errors",
-        "gw_api_response"
-    ]
+        "allOf": [
+            { "$ref": "http://gigwalk.com/src/api/base-schema.json#" },
+            { "properties": {
+                "data": {
+                    "type": ["null", "array"]
+                }
+            },
+            "required": [
+                "data"
+            ] }
+        ]
+    }
 }

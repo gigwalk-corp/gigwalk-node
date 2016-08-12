@@ -1,7 +1,6 @@
 import Certifications from '../src/api/certifications/index';
 import axios from 'axios';
 import schema from '../src/api/certifications/certifications-schema.json';
-import schemaUpdate from '../src/api/certifications/certifications_update-schema.json';
 import schemaEmpty from '../src/api/empty-schema.json';
 import schemaDelete from '../src/api/delete-schema.json';
 
@@ -45,7 +44,7 @@ describe('Certifications', () => {
                 done();
             })
             .catch(done);
-    }).timeout(5000);
+    }).timeout(10000);
     it('should be able to get all certifications', (done) => {
         certifications.getCertifications({
             query: {
@@ -58,7 +57,7 @@ describe('Certifications', () => {
                 done();
             })
             .catch(done);
-    }).timeout(5000);
+    }).timeout(10000);
     it('should be able to get a specific certifiation', (done) => {
         certifications.getCertification({
             certification_id: certificationID
@@ -69,7 +68,7 @@ describe('Certifications', () => {
                 done();
             })
             .catch(done);
-    });
+    }).timeout(10000);
     it('should be able to edit a specific certification', (done) => {
         certifications.updateCertification({
             certification_id: certificationID,
@@ -86,7 +85,7 @@ describe('Certifications', () => {
                 done();
             })
             .catch(done);
-    });
+    }).timeout(10000);
     it('should be able to add a certification to a customer', (done) => {
         certifications.updateCustomerCertifications({
             organization_id: organizationID,
@@ -98,11 +97,11 @@ describe('Certifications', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                expect(res.data).to.have.jsonSchema(schemaUpdate);
+                expect(res.data).to.have.jsonSchema(schemaEmpty);
                 done();
             })
             .catch(done);
-    }).timeout(5000);
+    }).timeout(10000);
     it('should be able to remove a certification from a customer', (done) => {
         certifications.updateCustomerCertifications({
             organization_id: organizationID,
@@ -114,11 +113,11 @@ describe('Certifications', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                expect(res.data).to.have.jsonSchema(schemaUpdate);
+                expect(res.data).to.have.jsonSchema(schemaEmpty);
                 done();
             })
             .catch(done);
-    }).timeout(5000);
+    }).timeout(10000);
     it('should be able to get a customers certifications', (done) => {
         certifications.getCustomerCertifications({
             organization_id: organizationID,
@@ -133,7 +132,7 @@ describe('Certifications', () => {
                 done();
             })
             .catch(done);
-    }).timeout(5000);
+    }).timeout(10000);
     it('should be create certifications for an organization', (done) => {
         certifications.createOrganizationCertifications({
             organization_id: organizationID,
@@ -152,7 +151,7 @@ describe('Certifications', () => {
                 done();
             })
             .catch(done);
-    });
+    }).timeout(10000);
     it('should be able to get all certifications for an organization', (done) => {
         certifications.getOrganizationCertifications({
             organization_id: organizationID
@@ -183,7 +182,7 @@ describe('Certifications', () => {
                 done();
             })
             .catch(done);
-    });
+    }).timeout(10000);
     it('should be able to create certifications for an organiztion from a file', (done) => {
         certifications.createOrganizationCertificationsFromFile({
             organization_id: organizationID,
@@ -197,7 +196,7 @@ describe('Certifications', () => {
                 done();
             })
             .catch(done);
-    });
+    }).timeout(10000);
     it.skip('should be able to delete a certification for an organization', (done) => { // SEEMS TO BE RETURNING 500 RIGHT NOW
         certifications.deleteOrganizationCertifications({
             organization_id: organizationID,
@@ -222,5 +221,5 @@ describe('Certifications', () => {
                 done();
             })
             .catch(done);
-    }).timeout(5000);
+    }).timeout(10000);
 });

@@ -30,7 +30,7 @@ describe('Loction Lists', () => {
                 done();
             })
             .catch(done);
-    }).timeout(5000);
+    }).timeout(10000);
     it('should be able to create a new location list', (done) => {
         locationLists.createOrganizationLocationList({
             organization_id: organizationID,
@@ -47,7 +47,7 @@ describe('Loction Lists', () => {
                 done();
             })
             .catch(done);
-    });
+    }).timeout(10000);
     it('should be able to get a specific location list', (done) => {
         locationLists.getLocationList({
             organization_location_list_id: locationListID
@@ -58,7 +58,7 @@ describe('Loction Lists', () => {
                 done();
             })
             .catch(done);
-    });
+    }).timeout(10000);
     it('should be able to update a specific location list', (done) => {
         locationLists.updateLocationList({
             organization_location_list_id: locationListID,
@@ -72,7 +72,7 @@ describe('Loction Lists', () => {
                 done();
             })
             .catch(done);
-    });
+    }).timeout(10000);
     it('should be able to add locations to a list', (done) => {
         locationLists.addLocationsToList({
             organization_location_list_id: locationListID,
@@ -88,7 +88,7 @@ describe('Loction Lists', () => {
                 done();
             })
             .catch(done);
-    });
+    }).timeout(10000);
     it('should be able to get locations in a list', (done) => {
         locationLists.getLocationsInList({
             organization_location_list_id: locationListID,
@@ -102,7 +102,7 @@ describe('Loction Lists', () => {
                 done();
             })
             .catch(done);
-    }).timeout(5000);
+    }).timeout(10000);
     it('should be able to search locations in a list', (done) => {
         locationLists.searchLocationList({
             organization_location_list_id: locationListID,
@@ -114,7 +114,7 @@ describe('Loction Lists', () => {
                 done();
             })
             .catch(done);
-    });
+    }).timeout(10000);
     it('should be able to remove locations in a list', (done) => {
         locationLists.removeLocationsFromList({
             organization_location_list_id: locationListID,
@@ -129,7 +129,7 @@ describe('Loction Lists', () => {
                 done();
             })
             .catch(done);
-    });
+    }).timeout(10000);
     it('should be able to delete a location from a list', (done) => {
         locationLists.deleteLocationFromList({
             organization_location_list_id: locationListID,
@@ -141,7 +141,7 @@ describe('Loction Lists', () => {
                 done();
             })
             .catch(done);
-    });
+    }).timeout(10000);
     it('should be able to delete a location from an organization list', (done) => {
         locationLists.deleteLocationFromList({
             organization_location_list_id: locationListID,
@@ -153,7 +153,7 @@ describe('Loction Lists', () => {
                 done();
             })
             .catch(done);
-    });
+    }).timeout(10000);
     it('should be able to upload a location list from a file', (done) => {
         locationLists.createOrganizationLocationListUsingFile({
             organization_id: organizationID,
@@ -169,7 +169,7 @@ describe('Loction Lists', () => {
                 done();
             })
             .catch(done);
-    });
+    }).timeout(10000);
     it('should be able to get info about a lists file upload', (done) => {
         locationLists.getFileInfoForLocationList({
             location_list_id: locationListID2
@@ -181,7 +181,7 @@ describe('Loction Lists', () => {
                 done();
             })
             .catch(done);
-    });
+    }).timeout(10000);
     it('should be able to get info about an organization lists file upload', (done) => {
         locationLists.getFileInfoForOrganizationLocationList({
             organization_id: organizationID,
@@ -193,7 +193,7 @@ describe('Loction Lists', () => {
                 done();
             })
             .catch(done);
-    });
+    }).timeout(10000);
     it('should be able to get file upload unresolved locations', (done) => {
         locationLists.getUnresolvedLocations({
             file_upload_id: fileUploadID,
@@ -207,7 +207,7 @@ describe('Loction Lists', () => {
                 done();
             })
             .catch(done);
-    });
+    }).timeout(10000);
     it('should be able to update location adresses via ID', (done) => {
         locationLists.getFileInfoForOrganizationLocationList({
             organization_id: organizationID,
@@ -220,7 +220,7 @@ describe('Loction Lists', () => {
                 done();
             })
             .catch(done);
-    });
+    }).timeout(10000);
     it('should be able to delete a specific location list', (done) => {
         locationLists.deleteLocationList({
             organization_location_list_id: locationListID
@@ -231,7 +231,7 @@ describe('Loction Lists', () => {
                 done();
             })
             .catch(done);
-    });
+    }).timeout(10000);
     it.skip('should be able to delete a specific organization location list', (done) => {
         locationLists.deleteOrganizationLocationLists({
             organization_id: organizationID,
