@@ -115,17 +115,17 @@ type DeleteOrganizationData = null
 
 type GetOrganizationData = [
     OrganizationSchema
-]
+    ]
 
 type UpdateOrganizationData = [
     OrganizationSchema
-]
+    ]
 
 type GetOrganizationsData = Array<OrganizationSchema>
 
 type CreateOrganizationData = [ // NEED TO CHECK
     OrganizationSchema
-]
+    ]
 
 export default class Organzations extends Resource {
     /**
@@ -137,48 +137,41 @@ export default class Organzations extends Resource {
      *             gigwalk.customers.deleteOrganization({...})
      */
     deleteOrganization(params: DeleteOrganizationParams): APIPromise<DeleteOrganizationData> {
-        const url = '/v1';
-        const data = {
-            params
-        };
+        const url = `/v1/organizations/${params.organization_id}`;
 
-        return this.client.delete(url, data);
+        return this.client.delete(url);
     }
 
     /**
-     * @api {get} /v1/organizations/{organization_id
+     * @api {get} /v1/organizations/{organization_id}
      * @apiName getOrganization
      * @apiDescription Return data fields (id, org_name, needs_core, core_customer_account, core_private_workforce, type, user_count, date_updated, status,
-                       cloud9_urls, config)
+     cloud9_urls, config)
      * @apiParam {Number} organization_id
      * @apiExample {js} Example:
      *             gigwalk.customers.getOrganization({...})
      */
     getOrganization(params: GetOrganizationParams): APIPromise<GetOrganizationData> {
-        const url = '/v1';
-        const data = {
-            params
-        };
+        const url = `/v1/organizations/${params.organization_id}`;
 
-        return this.client.get(url, data);
+        return this.client.get(url);
     }
 
     /**
      * @api {put} /v1/organizations/{organization_id}
      * @apiName updateOrganization
      * @apiDescription JSON payload (email, org_name, needs_core, core_customer_account, core_private_workforce, type, status, config). Only super-admins
-                       and above can update organization info. The endpoint can also be used to update the company logo. A file with name 'logo' has to be
-                       added in a multipart form in order to do that. For example the following curl - curl -X PUT
-                       http://stage-api.apps.gigwalk.com/v1/organizations/7 -F logo=@path/to/file.png --user user:password
+     and above can update organization info. The endpoint can also be used to update the company logo. A file with name 'logo' has to be
+     added in a multipart form in order to do that. For example the following curl - curl -X PUT
+     http://stage-api.apps.gigwalk.com/v1/organizations/7 -F logo=@path/to/file.png --user user:password
      * @apiParam {Number} organization_id
+     * @apiParam {OrganizationTemplate} organization
      * @apiExample {js} Example:
      *             gigwalk.customers.updateOrganization({...})
      */
     updateOrganization(params: UpdateOrganizationParams): APIPromise<UpdateOrganizationData> {
-        const url = '/v1';
-        const data = {
-            params
-        };
+        const url = `/v1/organizations/${params.organization_id}`;
+        const data = params.organization;
 
         return this.client.put(url, data);
     }
@@ -187,33 +180,26 @@ export default class Organzations extends Resource {
      * @api {get} /v1/organizations
      * @apiName getOrganizations
      * @apiDescription Return data fields (id, org_name, needs_core, core_customer_account, core_private_workforce, type, user_count, date_updated, status,
-                       cloud9_urls, config)
+     cloud9_urls, config)
      * @apiExample {js} Example:
      *             gigwalk.customers.getOrganizations({...})
      */
     getOrganizations(): APIPromise<GetOrganizationsData> {
-        const url = '/v1';
-        const data = {
-
-        };
-
-        return this.client.get(url, data);
+        return this.client.get('/v1/organizations');
     }
 
     /**
      * @api {post} /v1/organizations
      * @apiName createOrganization
      * @apiDescription JSON payload may have (email, org_name, needs_core, core_customer_account, core_private_workforce, type, status, config).
-                       Only super-admins and above can update organization info
+     Only super-admins and above can update organization info
+     * @apiParam {OrganizationTemplate} organization
      * @apiExample {js} Example:
      *             gigwalk.customers.createOrganization({...})
      */
     createOrganization(params: CreateOrganizationParams): APIPromise<CreateOrganizationData> {
-        const url = '/v1';
-        const data = {
-            params
-        };
+        const data = params.organization;
 
-        return this.client.post(url, data);
+        return this.client.post('/v1/organizations', data);
     }
 }
