@@ -37,7 +37,7 @@ type GetOrganizationsQuery = {
     limit?: number,
     offset?: number,
     order_by?: string,
-    order_dir?: string
+    order_dir?: 'ASCENDING' | 'DESCENDING'
 }
 
 type GetOrganizationsParams = {

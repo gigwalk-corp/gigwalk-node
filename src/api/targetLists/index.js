@@ -17,7 +17,7 @@ type GetTargetListsQuery = {
     limit?: number,
     offset?: number,
     order_by?: string,
-    order_dir?: string,
+    order_dir?: 'ASCENDING' | 'DESCENDING',
     include_auto_generated?: number
 }
 
@@ -33,7 +33,7 @@ type GetOrganizationTargetListsQuery = {
     limit?: number,
     offset?: number,
     order_by?: string,
-    order_dir?: string,
+    order_dir?: 'ASCENDING' | 'DESCENDING',
     auto_generated?: number
 }
 
@@ -66,7 +66,7 @@ type SearchTargetsInObservationListQuery = {
     limit?: number,
     offset?: number,
     order_by?: string,
-    order_dir?: string
+    order_dir?: 'ASCENDING' | 'DESCENDING'
 }
 
 type SearchTargetsInObservationListParams = {
@@ -79,7 +79,7 @@ type SearchTargetsInListQuery = {
     limit?: number,
     offset?: number,
     order_by?: string,
-    order_dir?: string
+    order_dir?: 'ASCENDING' | 'DESCENDING'
 }
 
 type SearchTargetsInListParams = {
@@ -91,7 +91,7 @@ type GetTargetsFromListQuery = {
     limit?: number,
     offset?: number,
     order_by?: string,
-    order_dir?: string
+    order_dir?: 'ASCENDING' | 'DESCENDING'
 }
 
 type GetTargetsFromListParams = {

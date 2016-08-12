@@ -40,7 +40,7 @@ type GetOrganizationLocationListsQuery = {
     limit?: number,
     offset?: number,
     order_by?: string,
-    order_dir?: string,
+    order_dir?: 'ASCENDING' | 'DESCENDING',
     include_auto_generated?: number
 }
 
@@ -68,7 +68,7 @@ type GetLocationsInListQuery = {
     limit?: number,
     offset?: number,
     order_by?: string,
-    order_dir?: string
+    order_dir?: 'ASCENDING' | 'DESCENDING'
 }
 
 type GetLocationsInListParams = {
@@ -91,7 +91,7 @@ type SearchLocationListQuery = {
     limit?: number,
     offset?: number,
     order_by?: string,
-    order_dir?: string
+    order_dir?: 'ASCENDING' | 'DESCENDING'
 }
 
 type SearchLocationListParams = {
