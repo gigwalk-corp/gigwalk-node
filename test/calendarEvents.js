@@ -1,4 +1,4 @@
-import CalendarEvent from '../src/api/calendarEvent/index';
+import CalendarEvents from '../src/api/calendarEvents/index';
 import axios from 'axios';
 import schema from '../src/api/groups/groups-schema.json';
 import schemaDelete from '../src/api/delete-schema.json';
@@ -10,13 +10,13 @@ describe('Calendar Event', () => {
             Authorization: token
         }
     });
-    const calendarEvent = new CalendarEvent(client);
+    const calendarEvents = new CalendarEvents(client);
 
     const customerID: number = 100;
     let calendarEventID: number;
 
     it('should be able to create a calendar event', (done) => {
-        calendarEvent.create({
+        calendarEvents.create({
             calendar_event: {
                 summary: 'string',
                 start: '2220-1-1',
@@ -34,7 +34,7 @@ describe('Calendar Event', () => {
             .catch(done);
     }).timeout(10000);
     it('should be able to get all calendar events for a customer', (done) => {
-        calendarEvent.getForCustomer({
+        calendarEvents.getForCustomer({
             customer_id: customerID,
             query: {
                 limit: 2,
@@ -49,7 +49,7 @@ describe('Calendar Event', () => {
             .catch(done);
     }).timeout(10000);
     it('should be able to get a specific calendar event ', (done) => {
-        calendarEvent.get({
+        calendarEvents.get({
             calendar_event_id: calendarEventID
         })
             .then((res) => {
@@ -60,7 +60,7 @@ describe('Calendar Event', () => {
             .catch(done);
     }).timeout(10000);
     it('should be able to update calendar event', (done) => {
-        calendarEvent.update({
+        calendarEvents.update({
             calendar_event_id: calendarEventID,
             calendar_event: {
                 summary: 'string 2',
@@ -78,7 +78,7 @@ describe('Calendar Event', () => {
             .catch(done);
     }).timeout(10000);
     it('should be able to delete calendar event', (done) => {
-        calendarEvent.delete({
+        calendarEvents.delete({
             calendar_event_id: calendarEventID
         })
             .then((res) => {
