@@ -2,6 +2,7 @@
 import Resource from '../resource';
 import type { APIPromise } from '../resource';
 import type {
+    DataType,
     SearchDataTypesWithFieldParams,
     SearchDataTypesParams,
     GetAllDataTypesParams,
@@ -24,7 +25,7 @@ export default class DataTypes extends Resource {
      * @apiExample {js} Example:
      *             gigwalk.dataTypes.searchWithField({...})
      */
-    searchWithField(params: SearchDataTypesWithFieldParams): APIPromise<any> {
+    searchWithField(params: SearchDataTypesWithFieldParams): APIPromise<Array<DataType>> {
         const queryString = this.queryStringForSearchObject(params.query);
         const data = {
             search_field: params.search_field,
@@ -45,7 +46,7 @@ export default class DataTypes extends Resource {
      * @apiExample {js} Example:
      *             gigwalk.dataTypes.search({...})
      */
-    search(params: SearchDataTypesParams): APIPromise<any> {
+    search(params: SearchDataTypesParams): APIPromise<Array<DataType>> {
         const queryString = this.queryStringForSearchObject(params.query);
         const data = {
             query_string: params.query_string
@@ -65,7 +66,7 @@ export default class DataTypes extends Resource {
      * @apiExample {js} Example:
      *             gigwalk.dataTypes.getAll({...})
      */
-    getAll(params: GetAllDataTypesParams): APIPromise<any> {
+    getAll(params: GetAllDataTypesParams): APIPromise<Array<DataType>> {
         const queryString = this.queryStringForSearchObject(params.query);
         const data = {
             observation_target_type_id: params.observation_target_type_id,
@@ -84,7 +85,7 @@ export default class DataTypes extends Resource {
      * @apiExample {js} Example:
      *             gigwalk.dataTypes.create({...})
      */
-    create(params: CreateDataTypeParams): APIPromise<any> {
+    create(params: CreateDataTypeParams): APIPromise<[DataType]> {
         return this.client.post('/v1/data_types', { ...params.dataType });
     }
 
@@ -100,7 +101,7 @@ export default class DataTypes extends Resource {
      * @apiExample {js} Example:
      *             gigwalk.dataTypes.get({...})
      */
-    get(params: GetDataTypeParams): APIPromise<any> {
+    get(params: GetDataTypeParams): APIPromise<[DataType]> {
         const queryString = this.queryStringForSearchObject(params.query);
         const data = {
             observation_target_type_id: params.observation_target_type_id,
@@ -120,7 +121,7 @@ export default class DataTypes extends Resource {
      * @apiExample {js} Example:
      *             gigwalk.dataTypes.update({...})
      */
-    update(params: UpdateDataTypeParams): APIPromise<any> {
+    update(params: UpdateDataTypeParams): APIPromise<[DataType]> {
         return this.client.put(`/v1/data_types/${params.data_type_id}`, { ...params.dataType });
     }
 }

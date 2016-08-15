@@ -67,7 +67,7 @@ export type GetAllDataTypesParams = {
 }
 
 export type CreateDataTypeParams = {
-    dataType?: DataTypeFields
+    dataType: DataTypeFields
 }
 
 type GetDataTypeQuery = {
@@ -84,5 +84,5 @@ export type GetDataTypeParams = {
 
 export type UpdateDataTypeParams = {
     data_type_id: number,
-    dataType?: DataTypeFields
+    dataType: DataTypeFields
 }
