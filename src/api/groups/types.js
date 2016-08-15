@@ -59,7 +59,7 @@ export type GetGroupSubgroupsParams = {
 }
 
 export type GetGroupHierchyParams = {
-    group_id: number
+    group_id?: number
 }
 
 type GetGroupForOrganizationQuery = {
@@ -99,11 +99,11 @@ export type AddGroupMemberParams = {
 
 export type UpdateGroupMembersParams = {
     group_id: number,
-    action: 'REMOVE' | 'UPDATE',
+    action: 'remove' | 'update',
     members: Array<MemberFields>
 }
 
-export type DeleteGroupMemberParams = {
+export type RemoveGroupMemberParams = {
     customer_id: number,
     group_id: number
 }

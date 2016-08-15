@@ -14,7 +14,7 @@ import type {
     GetGroupMembersParams,
     AddGroupMemberParams,
     UpdateGroupMembersParams,
-    DeleteGroupMemberParams,
+    RemoveGroupMemberParams,
     CloneGroupParams
 } from './types';
 
@@ -24,7 +24,7 @@ export default class Groups extends Resource {
      * @api {delete} /v1/organizations/:organization_id/groups/:group_id delete
      * @apiGroup Groups
      * @apiName delete
-     * @apiDescription Delete the given group. By default, child groups will be moved one level up. Optional parameter org_id is ignored.
+     * @apiDescription Delete group. By default, child groups will be moved one level up. Optional parameter organization_id is ignored.
      * @apiParam {Number} organization_id
      * @apiParam {Number} group_id
      * @apiParam {Number} cascade
@@ -43,7 +43,7 @@ export default class Groups extends Resource {
      * @api {get} /v1/organizations/:organization_id/groups/:group_id get
      * @apiGroup Groups
      * @apiName get
-     * @apiDescription Get the info for the group. Optional parameter org_id is ignored.
+     * @apiDescription Get the information of a group. Optional parameter organization_id is ignored.
      * @apiParam {Number} organization_id
      * @apiParam {Number} group_id
      * @apiExample {js} Example:
@@ -57,7 +57,7 @@ export default class Groups extends Resource {
      * @api {put} /v1/organizations/:organization_id/groups/:group_id update
      * @apiGroup Groups
      * @apiName update
-     * @apiDescription Update group by using the values in JSON payload. Optional parameter org_id is ignored.
+     * @apiDescription Update group. Optional parameter organization_id is ignored.
      * @apiParam {Number} organization_id
      * @apiParam {Number} group_id
      * @apiParam {Object} group
@@ -72,7 +72,7 @@ export default class Groups extends Resource {
      * @api {get} /v1/groups/:group_id/sub_groups getSubgroups
      * @apiGroup Groups
      * @apiName getSubgroups
-     * @apiDescription Get info about all the descendant groups of the given group. Subgroups, sub-subgroups and so on will be fetched.
+     * @apiDescription Get information about all the descendant groups of a group. All Subgroups will be fetched.
      * @apiParam {Number} group_id
      * @apiExample {js} Example:
      *             gigwalk.groups.getSubgroups({...})
@@ -85,22 +85,22 @@ export default class Groups extends Resource {
      * @api {get} /v1/group_hierarchy/:group_id getHierchy
      * @apiGroup Groups
      * @apiName getHierchy
-     * @apiDescription If group_id is specified, return hierarchy info for the tree in which the group is present. Else, return hierarchy info for each group
-                       current_user belongs to.
+     * @apiDescription If group_id is specified, return the hierarchy tree in which the group is present. Otherwise, return hierarchy for each group
+                       the current user belongs to.
      * @apiParam {Number} group_id
      * @apiExample {js} Example:
      *             gigwalk.groups.getHierchy({...})
      */
     getHierchy(params: GetGroupHierchyParams): APIPromise<null> {
-        return this.client.get(`/v1/group_hierarchy/${params.group_id}`);
+        if (params && params.group_id) return this.client.get(`/v1/group_hierarchy/${params.group_id}`);
+        else return this.client.get('/v1/group_hierarchy');
     }
 
     /**
      * @api {get} /v1/organizations/:organization_id/groups getForOrganization
      * @apiGroup Groups
      * @apiName getForOrganization
-     * @apiDescription Platform admin can fetch all groups. Admins can fetch all groups of the organization. Workers can fetch info about the groups they
-                       belong to.
+     * @apiDescription Platform admins get all groups, Admins get all groups of the organization, Workers get info about the groups they belong to.
      * @apiParam {Number} organization_id
      * @apiParam {Object} query
      * @apiExample {js} Example:
@@ -116,7 +116,7 @@ export default class Groups extends Resource {
      * @api {post} /v1/organizations/:organization_id/groups create
      * @apiGroup Groups
      * @apiName create
-     * @apiDescription Create a group using the values in JSON payload (name, parent_id, organization_data)
+     * @apiDescription Create a group.
      * @apiParam {Number} organization_id
      * @apiExample {js} Example:
      *             gigwalk.groups.create({...})
@@ -129,8 +129,7 @@ export default class Groups extends Resource {
      * @api {get} /v1/groups/:group_id/customers getMembers
      * @apiGroup Groups
      * @apiName getMembers
-     * @apiDescription Return info about the customers belonging to this group if the subgroup_members flag is set, the customers of the descendant groups
-                       will also be returned
+     * @apiDescription Return info about the customers belonging to this group. Customers of descendant groups will also be returned.
      * @apiParam {Number} group_id
      * @apiParam {Number} subgroup_members
      * @apiParam {Object} query
@@ -150,7 +149,7 @@ export default class Groups extends Resource {
      * @api {post} /v1/groups/:group_id/customers addMember
      * @apiGroup Groups
      * @apiName addMember
-     * @apiDescription Add a member to the group using the values in JSON payload (role, customer_id)
+     * @apiDescription Add a member to a group.
      * @apiParam {Number} group_id
      * @apiParam {Object} member
      * @apiExample {js} Example:
@@ -164,10 +163,10 @@ export default class Groups extends Resource {
      * @api {put} /v1/groups/:group_id/customers updateMembers
      * @apiGroup Groups
      * @apiName updateMembers
-     * @apiDescription Used for bulk updates or bulk removes
+     * @apiDescription Used for bulk updates or bulk removes.
      * @apiParam {Number} group_id
      * @apiParam {string} action
-     * @apiParam {Object} memberships
+     * @apiParam {Array<Object>} members
      * @apiExample {js} Example:
      *             gigwalk.groups.updateMembers({...})
      */
@@ -181,16 +180,16 @@ export default class Groups extends Resource {
     }
 
     /**
-     * @api {delete} /v1/groups/:group_id/customers:customer_id deleteMember
+     * @api {delete} /v1/groups/:group_id/customers:customer_id removeMember
      * @apiGroup Groups
-     * @apiName deleteMember
-     * @apiDescription Delete the given member from the given group
+     * @apiName removeMember
+     * @apiDescription Remove the given member from a group.
      * @apiParam {Number} customer_id
      * @apiParam {Number} group_id
      * @apiExample {js} Example:
-     *             gigwalk.groups.deleteMember({...})
+     *             gigwalk.groups.removeMember({...})
      */
-    deleteMember(params: DeleteGroupMemberParams): APIPromise<[number]> {
+    removeMember(params: RemoveGroupMemberParams): APIPromise<[number]> {
         return this.client.delete(`/v1/groups/${params.group_id}/customers/${params.customer_id}`);
     }
 
@@ -198,7 +197,7 @@ export default class Groups extends Resource {
      * @api {post} /v1/groups/:group_id/clone clone
      * @apiGroup Groups
      * @apiName clone
-     * @apiDescription Clone a group (with its subgroups)
+     * @apiDescription Clone a group and its subgroups.
      * @apiParam {Number} group_id
      * @apiParam {Number} parent_id
      * @apiParam {String} suffix
