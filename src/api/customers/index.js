@@ -67,7 +67,7 @@ type GetOrganizationCustomersQuery = {
     offset?: number,
     limit?: number,
     order_by?: string,
-    order_dir?: string,
+    order_dir?: 'ASCENDING' | 'DESCENDING',
     customer_roles?: string
 }
 
@@ -208,7 +208,7 @@ export default class Customers extends Resource {
     /**
      * @api {get} /v1/organizations/{organization_id}/customers/{customer_email}
      * @apiName getCustomerWithEmail
-     * @apiDescription If the customer exists, return info about the specified customer.
+     * @apiDescription Get customer.
      * @apiParam {Number} organization_id
      * @apiParam {String} customer_email
      * @apiParam {Array<Number>} require_cert_ids
@@ -230,7 +230,7 @@ export default class Customers extends Resource {
     /**
      * @api {put} /v1/organizations/{organization_id}/customers/{customer_email}
      * @apiName updateCustomer
-     * @apiDescription Modifies customer info identified by customer_email.
+     * @apiDescription Modifies customer information identified by customer_email.
      * @apiParam {Number} organization_id
      * @apiParam {String} customer_email
      * @apiParam {CustomerTemplate} customer
@@ -257,7 +257,7 @@ export default class Customers extends Resource {
     /**
      * @api {get} /v1/organizations/{organization_id}/customers/{customer_id}
      * @apiName getCustomerWithID
-     * @apiDescription If the customer exists, return info about the specified customer.
+     * @apiDescription Get customer.
      * @apiParam {Number} organization_id
      * @apiParam {Number} customer_id
      * @apiParam {GetCustomerWithIDQuery} query

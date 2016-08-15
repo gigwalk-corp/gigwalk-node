@@ -1,0 +1,95 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "id": "http://gigwalk.com/src/api/dataTypes/dataTypes-schema.json#",
+    "type": "object",
+    "properties": {
+        "allOf": [
+            { "$ref": "http://gigwalk.com/src/api/base-schema.json#" },
+            { "properties": {
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "value_type": {
+                                "type": "string"
+                            },
+                            "id": {
+                                "type": "integer"
+                            },
+                            "expected_value_expression": {
+                                "type": ["null", "object"]
+                            },
+                            "parent_id": {
+                                "type": ["null", "number"]
+                            },
+                            "attachments": {
+                                "type": ["null", "object"]
+                            },
+                            "is_required": {
+                                "type": ["null", "boolean"]
+                            },
+                            "description": {
+                                "type": "string"
+                            },
+                            "importance": {
+                                "type": ["null", "integer"]
+                            },
+                            "questions": {
+                                "type": "object",
+                                "properties": {
+                                    "question_text": {
+                                        "type": "string"
+                                    },
+                                    "question_type": {
+                                        "type": "string"
+                                    },
+                                    "propositions": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "required": [
+                                    "question_text",
+                                    "question_type"
+                                ]
+                            },
+                            "observation_target_type_id": {
+                                "type": "integer"
+                            },
+                            "is_shared": {
+                                "type": "boolean"
+                            },
+                            "time_estimate": {
+                                "type": ["null", "number"]
+                            },
+                            "dashboard_visible": {
+                                "type": "boolean"
+                            }
+                        },
+                        "required": [
+                            "value_type",
+                            "id",
+                            "expected_value_expression",
+                            "parent_id",
+                            "attachments",
+                            "is_required",
+                            "description",
+                            "importance",
+                            "questions",
+                            "observation_target_type_id",
+                            "is_shared",
+                            "time_estimate",
+                            "dashboard_visible"
+                        ]
+                    }
+                }
+            },
+            "required": [
+                "data"
+                ] }
+            ]
+        }
+    }

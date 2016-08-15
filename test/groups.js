@@ -4,7 +4,7 @@ import schema from '../src/api/groups/groups-schema.json';
 import schemaEmpty from '../src/api/empty-schema.json';
 import schemaDelete from '../src/api/delete-schema.json';
 
-describe.only('Groups', () => {
+describe('Groups', () => {
     const client = axios.create({
         baseURL,
         headers: {
@@ -19,7 +19,7 @@ describe.only('Groups', () => {
     let groupID: number;
     let groupID2: number;
 
-    it('should be able to get all location lists in an organization', (done) => {
+    it('should be able to get all groups in an organization', (done) => {
         groups.getForOrganization({
             organization_id: organizationID,
             query: {
@@ -34,7 +34,7 @@ describe.only('Groups', () => {
             })
             .catch(done);
     }).timeout(10000);
-    it('should be able to get all location lists in an organization', (done) => {
+    it('should be able to create a new group', (done) => {
         groups.create({
             organization_id: organizationID,
             group: {
@@ -51,7 +51,7 @@ describe.only('Groups', () => {
             })
             .catch(done);
     }).timeout(10000);
-    it('should be able to get all location lists in an organization', (done) => {
+    it('should be able to get the heirchy of a group', (done) => {
         groups.getHierchy()
             .then((res) => {
                 expect(res.status).to.equal(200);
@@ -60,7 +60,7 @@ describe.only('Groups', () => {
             })
             .catch(done);
     }).timeout(10000);
-    it('should be able to get all location lists in an organization', (done) => {
+    it('should be able to get the subgroups of a group', (done) => {
         groups.getSubgroups({
             group_id: groupID
         })
@@ -71,7 +71,7 @@ describe.only('Groups', () => {
             })
             .catch(done);
     }).timeout(10000);
-    it('should be able to get all location lists in an organization', (done) => {
+    it('should be able to add a member to a group', (done) => {
         groups.addMember({
             group_id: groupID2,
             member: {
@@ -86,7 +86,7 @@ describe.only('Groups', () => {
             })
             .catch(done);
     }).timeout(10000);
-    it('should be able to get all location lists in an organization', (done) => {
+    it('should be able to get all members in a group', (done) => {
         groups.getMembers({
             group_id: groupID2
         })
@@ -97,7 +97,7 @@ describe.only('Groups', () => {
             })
             .catch(done);
     }).timeout(10000);
-    it('should be able to get all location lists in an organization', (done) => {
+    it('should be able to update members in a group', (done) => {
         groups.updateMembers({
             group_id: groupID2,
             action: 'update',
@@ -113,7 +113,7 @@ describe.only('Groups', () => {
             })
             .catch(done);
     }).timeout(10000);
-    it('should be able to get all location lists in an organization', (done) => {
+    it('should be able to remove a member from a group', (done) => {
         groups.removeMember({
             group_id: groupID2,
             customer_id: customerID
@@ -124,8 +124,8 @@ describe.only('Groups', () => {
                 done();
             })
             .catch(done);
-    });
-    it('should be able to get all location lists in an organization', (done) => {
+    }).timeout(10000);
+    it('should be able to clone a group', (done) => {
         groups.clone({
             group_id: groupID2,
             parent_id: groupID2,
@@ -137,8 +137,8 @@ describe.only('Groups', () => {
                 done();
             })
             .catch(done);
-    });
-    it('should be able to get all location lists in an organization', (done) => {
+    }).timeout(10000);
+    it('should be able to update a group', (done) => {
         groups.update({
             organization_id: organizationID,
             group_id: groupID2,
@@ -152,8 +152,8 @@ describe.only('Groups', () => {
                 done();
             })
             .catch(done);
-    });
-    it('should be able to get all location lists in an organization', (done) => {
+    }).timeout(10000);
+    it('should be able to get a specific group', (done) => {
         groups.get({
             organization_id: organizationID,
             group_id: groupID
@@ -164,8 +164,8 @@ describe.only('Groups', () => {
                 done();
             })
             .catch(done);
-    });
-    it('should be able to get all location lists in an organization', (done) => {
+    }).timeout(10000);
+    it('should be able to delete a group', (done) => {
         groups.delete({
             organization_id: organizationID,
             group_id: groupID2
@@ -176,5 +176,5 @@ describe.only('Groups', () => {
                 done();
             })
             .catch(done);
-    });
+    }).timeout(10000);
 });

@@ -93,7 +93,7 @@ export default class Groups extends Resource {
      */
     getHierchy(params: GetGroupHierchyParams): APIPromise<null> {
         if (params && params.group_id) return this.client.get(`/v1/group_hierarchy/${params.group_id}`);
-        else return this.client.get('/v1/group_hierarchy');
+        return this.client.get('/v1/group_hierarchy');
     }
 
     /**
