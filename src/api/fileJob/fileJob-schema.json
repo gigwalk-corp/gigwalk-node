@@ -1,0 +1,25 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "id": "http://gigwalk.com/src/api/fileJob/fileJob-schema.json#",
+    "type": "object",
+    "properties": {
+        "data": {
+            "type": "object",
+            "properties": {
+                "file": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "file",
+                "status"
+            ]
+        }
+    },
+    "required": [
+        "data"
+    ]
+}

@@ -66,7 +66,7 @@ describe('Target Lists', () => {
                 done();
             })
             .catch(done);
-    });
+    }).timeout(10000);
     it('should be able to get targets in a list', (done) => {
         targetLists.getTargetsFromList({
             target_list_id: targetListID

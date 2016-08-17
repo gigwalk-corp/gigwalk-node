@@ -1,8 +1,7 @@
 import CustomerStatistics from '../src/api/customerStatistics/index';
 import axios from 'axios';
-import schema from '../src/api/organizationMetadata/organizationMetadata-schema.json';
 
-describe.only('Customer Statistics', () => {
+describe('Customer Statistics', () => {
     const client = axios.create({
         baseURL,
         headers: {
@@ -15,7 +14,7 @@ describe.only('Customer Statistics', () => {
     const customerEmail: string = 'platform_admin@gigwalk.com';
     const ticketID: number = 11696865;
 
-    it('should be able to ', (done) => {
+    it('should be able to get customer statistics by ID', (done) => {
         customerStatistics.getByID({
             customer_id: customerID
         })
@@ -25,7 +24,7 @@ describe.only('Customer Statistics', () => {
         })
         .catch(done);
     }).timeout(10000);
-    it('should be able to ', (done) => {
+    it('should be able to get customer statistics by email', (done) => {
         customerStatistics.getByEmail({
             email: customerEmail
         })
@@ -35,7 +34,7 @@ describe.only('Customer Statistics', () => {
         })
         .catch(done);
     }).timeout(10000);
-    it('should be able to ', (done) => {
+    it('should be able to get customer statistics', (done) => {
         customerStatistics.get()
         .then((res) => {
             expect(res.status).to.equal(200);
@@ -43,7 +42,7 @@ describe.only('Customer Statistics', () => {
         })
         .catch(done);
     }).timeout(10000);
-    it.skip('should be able to ', (done) => {
+    it.skip('should be able to get customer statistics by ticket', (done) => {
         customerStatistics.getByTicket({
             ticket_id: ticketID
         })
