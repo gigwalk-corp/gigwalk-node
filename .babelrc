@@ -5,13 +5,17 @@
   ],
   "plugins": [
       "transform-flow-comments",
-      "syntax-flow",
-      "transform-runtime"
+      "syntax-flow"
   ],
   "env": {
     "test": {
       "plugins": [
         "rewire"
+      ]
+    },
+    "production": {
+      "plugins": [
+        "transform-runtime"
       ]
     }
   }
