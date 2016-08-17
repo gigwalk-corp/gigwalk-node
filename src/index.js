@@ -1,17 +1,29 @@
 // @flow
 import GigwalkAxios from './client';
 import Authorization from './api/authorization';
+import CalendarEvents from './api/calendarEvents';
 import Certifications from './api/certifications';
 import Customers from './api/customers';
+import CustomerStatistics from './api/customerStatistics';
+import DataTypes from './api/dataTypes';
+import DoubleOptin from './api/doubleOptin';
+import FileJob from './api/fileJob';
+import Groups from './api/groups';
+import GroupSearch from './api/groupSearch';
 import LocationLists from './api/locationLists';
 import Locations from './api/locations';
+import OrganizationMetadata from './api/organizationMetadata';
 import Organizations from './api/organizations';
+import OrganizationSearch from './api/organizationSearch';
 import Search from './api/search';
 import Subscriptions from './api/subscriptions';
 import TargetLists from './api/targetLists';
 import Targets from './api/targets';
+import Templates from './api/templates';
 import TicketEvents from './api/ticketEvents';
+import TicketMetadata from './api/ticketMetadata';
 import Tickets from './api/tickets';
+import Versions from './api/versions';
 import cloneDeep from 'lodash.clonedeep';
 
 export type GigwalkAPIConfig = {
@@ -34,17 +46,29 @@ export default class GigwalkAPI {
 
     // API resources
     authorization: Authorization;
+    calendarEvents: CalendarEvents;
     certifications: Certifications;
     customers: Customers;
+    customerStatistics: CustomerStatistics;
+    dataTypes: DataTypes;
+    doubleOptin: DoubleOptin;
+    fileJob: FileJob;
+    groups: Groups;
+    groupSearch: GroupSearch;
     locationLists: LocationLists;
     locations: Locations;
+    organizationMetadata: OrganizationMetadata;
     organizations: Organizations;
+    organizationSearch: OrganizationSearch;
     search: Search;
     subscriptions: Subscriptions;
     targetLists: TargetLists;
     targets: Targets;
+    templates: Templates;
     ticketEvents: TicketEvents;
+    ticketMetadata: TicketMetadata;
     tickets: Tickets;
+    verions: Versions;
 
     constructor(config?: GigwalkAPIConfig = {}) {
         const client = new GigwalkAxios({ baseURL: `https://${config.hostname || 'api.app.gigwalk.com'}` });
@@ -56,17 +80,29 @@ export default class GigwalkAPI {
         client.defaults = cloneDeep(client.defaults);
 
         this.authorization = new Authorization(client);
+        this.calendarEvents = new CalendarEvents(client);
         this.certifications = new Certifications(client);
         this.customers = new Customers(client);
+        this.customerStatistics = new CustomerStatistics(client);
+        this.dataTypes = new DataTypes(client);
+        this.doubleOptin = new DoubleOptin(client);
+        this.fileJob = new FileJob(client);
+        this.groups = new Groups(client);
+        this.groupSearch = new GroupSearch(client);
         this.locationLists = new LocationLists(client);
         this.locations = new Locations(client);
+        this.organizationMetadata = new OrganizationMetadata(client);
         this.organizations = new Organizations(client);
+        this.organizationSearch = new OrganizationSearch(client);
         this.search = new Search(client);
         this.subscriptions = new Subscriptions(client);
         this.targetLists = new TargetLists(client);
         this.targets = new Targets(client);
+        this.templates = new Templates(client);
         this.ticketEvents = new TicketEvents(client);
+        this.ticketMetadata = new TicketMetadata(client);
         this.tickets = new Tickets(client);
+        this.versions = new Versions(client);
     }
 
     authenticate(auth: AuthToken | BasicAuth) {
