@@ -1,8 +1,6 @@
 import Certifications from '../src/api/certifications/index';
 import axios from 'axios';
 import schema from '../src/api/certifications/certifications-schema.json';
-import schemaEmpty from '../src/api/empty-schema.json';
-import schemaDelete from '../src/api/delete-schema.json';
 
 describe('Certifications', () => {
     const client = axios.create({
@@ -19,8 +17,8 @@ describe('Certifications', () => {
     const organizationID: number = 4;
     const customerID: number = 1;
 
-    it('should be able to create cerfitications', (done) => {
-        certifications.createCertifications({
+    it('should be able to create certifications', (done) => {
+        certifications.create({
             certifications: [
                 {
                     description: randString,
@@ -44,22 +42,18 @@ describe('Certifications', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    });
     it('should be able to get all certifications', (done) => {
-        certifications.getCertifications({
-            query: {
-                limit: 2
-            }
-        })
+        certifications.getAll()
             .then((res) => {
                 expect(res.status).to.equal(200);
                 expect(res.data).to.have.jsonSchema(schema);
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    });
     it('should be able to get a specific certifiation', (done) => {
-        certifications.getCertification({
+        certifications.get({
             certification_id: certificationID
         })
             .then((res) => {
@@ -68,9 +62,9 @@ describe('Certifications', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    });
     it('should be able to edit a specific certification', (done) => {
-        certifications.updateCertification({
+        certifications.update({
             certification_id: certificationID,
             certification: {
                 description: randString.substr(0, 8),
@@ -85,46 +79,41 @@ describe('Certifications', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
-    it('should be able to add a certification to a customer', (done) => {
-        certifications.updateCustomerCertifications({
-            organization_id: organizationID,
-            customer_id: customerID,
-            action: 'add',
-            certification_ids: [
-                certificationID
-            ]
-        })
-            .then((res) => {
-                expect(res.status).to.equal(200);
-                expect(res.data).to.have.jsonSchema(schemaEmpty);
-                done();
-            })
-            .catch(done);
-    }).timeout(10000);
+    });
     it('should be able to remove a certification from a customer', (done) => {
-        certifications.updateCustomerCertifications({
+        certifications.removeFromCustomer({
             organization_id: organizationID,
             customer_id: customerID,
-            action: 'remove',
             certification_ids: [
                 certificationID
             ]
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                expect(res.data).to.have.jsonSchema(schemaEmpty);
+                // expect(res.data).to.have.jsonSchema(schema);
                 done();
             })
             .catch(done);
-    }).timeout(10000);
-    it('should be able to get a customers certifications', (done) => {
-        certifications.getCustomerCertifications({
+    });
+    it('should be able to add a certification to a customer', (done) => {
+        certifications.addToCustomer({
             organization_id: organizationID,
             customer_id: customerID,
-            query: {
-                limit: 2
-            }
+            certification_ids: [
+                certificationID
+            ]
+        })
+            .then((res) => {
+                expect(res.status).to.equal(200);
+                // expect(res.data).to.have.jsonSchema(schema);
+                done();
+            })
+            .catch(done);
+    });
+    it('should be able to get a customers certifications', (done) => {
+        certifications.getForCustomer({
+            organization_id: organizationID,
+            customer_id: customerID
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
@@ -132,9 +121,9 @@ describe('Certifications', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    });
     it('should be create certifications for an organization', (done) => {
-        certifications.createOrganizationCertifications({
+        certifications.createForOrganization({
             organization_id: organizationID,
             certifications: [
                 {
@@ -151,9 +140,9 @@ describe('Certifications', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    });
     it('should be able to get all certifications for an organization', (done) => {
-        certifications.getOrganizationCertifications({
+        certifications.getForOrganization({
             organization_id: organizationID
         })
             .then((res) => {
@@ -162,9 +151,9 @@ describe('Certifications', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    });
     it('should be able to edit a certification for an organiztion', (done) => {
-        certifications.updateOrganizationCertifications({
+        certifications.updateForOrganization({
             organization_id: organizationID,
             certifications: [
                 {
@@ -178,13 +167,13 @@ describe('Certifications', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                expect(res.data).to.have.jsonSchema(schemaEmpty);
+                // expect(res.data).to.have.jsonSchema(schema);
                 done();
             })
             .catch(done);
-    }).timeout(10000);
-    it('should be able to create certifications for an organiztion from a file', (done) => {
-        certifications.createOrganizationCertificationsFromFile({
+    });
+    it('should be able to create certifications for an organization from a file', (done) => {
+        certifications.uploadForOrganization({
             organization_id: organizationID,
             s3_keys: [
                 'null'
@@ -192,13 +181,13 @@ describe('Certifications', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                expect(res.data).to.have.jsonSchema(schemaDelete);
+                // expect(res.data).to.have.jsonSchema(schema);
                 done();
             })
             .catch(done);
-    }).timeout(10000);
-    it.skip('should be able to delete a certification for an organization', (done) => { // SEEMS TO BE RETURNING 500 RIGHT NOW
-        certifications.deleteOrganizationCertifications({
+    });
+    it.skip('should be able to delete a certification for an organization', (done) => {
+        certifications.deleteForOrganization({
             organization_id: organizationID,
             certification_ids: [
                 certificationID
@@ -206,20 +195,20 @@ describe('Certifications', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                expect(res.data).to.have.jsonSchema(schemaDelete);
+                // expect(res.data).to.have.jsonSchema(schema);
                 done();
             })
             .catch(done);
     });
     it('should be able to delete a specific certification', (done) => {
-        certifications.deleteCertification({
+        certifications.delete({
             certification_id: certificationID2
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                expect(res.data).to.have.jsonSchema(schemaDelete);
+                // expect(res.data).to.have.jsonSchema(schema);
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    });
 });

@@ -1,374 +1,215 @@
 // @flow
 import Resource from '../resource';
-import type { APIPromise } from '../resource';
-
-type CustomerTemplate = {
-    customer_id?: number,
-    email?: string,
-    first_name?: string,
-    last_name?: string,
-    photo_url?: string,
-    address_line_1?: string,
-    address_line_2?: string,
-    phonenumber?: string,
-    customer_status?: string,
-    max_hours_week?: number,
-    ideal_hours_week?: number,
-    home_latitude?: number,
-    home_longitude?: number,
-    certifications?: Array<number>
-}
-
-type DeleteCustomerWithEmailParams = {
-    organization_id: number,
-    customer_email: string
-}
-
-type GetCustomerWithEmailQuery = {
-    customer_roles?: string
-}
-
-type GetCustomerWithEmailParams = {
-    organization_id: number,
-    customer_email: string,
-    require_cert_ids?: Array<number>,
-    exclude_cert_ids?: Array<number>,
-    query?: GetCustomerWithEmailQuery
-}
-
-type UpdateCustomerWithEmailParams = {
-    organization_id: number,
-    customer_email: string,
-    customer: CustomerTemplate
-}
-
-type DeleteCustomerWithIDParams = {
-    organization_id: number,
-    customer_id: number
-}
-
-type GetCustomerWithIDQuery = {
-    customer_roles?: string
-}
-
-type GetCustomerWithIDParams = {
-    organization_id: number,
-    customer_id: number,
-    query?: GetCustomerWithIDQuery
-}
-
-type UpdateCustomerWithIDParams = {
-    organization_id: number,
-    customer_id: number,
-    customer: CustomerTemplate
-}
-
-type GetOrganizationCustomersQuery = {
-    offset?: number,
-    limit?: number,
-    order_by?: string,
-    order_dir?: 'ASCENDING' | 'DESCENDING',
-    customer_roles?: string
-}
-
-type GetOrganizationCustomersParams = {
-    organization_id: number,
-    require_cert_ids?: Array<number>,
-    exclude_cert_ids?: Array<number>,
-    query?: GetOrganizationCustomersQuery
-}
-
-type UpdateOrganizationCustomersParams = {
-    organization_id: number,
-    action: string,
-    customers: Array<CustomerTemplate>
-}
-
-type UpdateCustomerParams = {
-    customer: CustomerTemplate
-}
-
-type SearchCustomersQuery = {
-    size?: number,
-    from?: number
-}
-
-type SearchCustomersParams = {
-    ticket_ids: Array<number>,
-    group_ids?: Array<number>,
-    required_certifications?: Array<number>,
-    q?: string,
-    query?: SearchCustomersQuery
-}
-
-type CustomerSchema = {
-    id: number,
-    email: string,
-    first_name: string,
-    last_name: string,
-    role: string,
-    phonenumber: string,
-    address_line_1: string,
-    address_line_2: string,
-    photo_url: string,
-    ideal_hours_week: number,
-    max_hours_week: number,
-    rating_score: number,
-    customer_status: string,
-    home_latitude: number,
-    home_longitude: number,
-    date_last_auth: string,
-    certifications: Array<{
-        id: number
-    }>,
-    group_memberships: Array<{
-        group: string,
-        role: string,
-        group_id: number
-    }>,
-    organization: Object,
-    metadata: Object
-}
-
-type searchResultsSchema = {
-    took: number,
-    timed_out: boolean,
-    _shards: {
-        successful: number,
-        failed: number,
-        total: number
-    },
-    hits: {
-        total: number,
-        max_score: number,
-        hits: Array<{
-            _score: number,
-            _id: number,
-            _type: string,
-            _index: string,
-            _source: Object
-        }>
-    }
-}
-
-type DeleteCustomerWithEmailData = [
-    number
-]
-
-type GetCustomerWithEmailData = [
-    CustomerSchema
-]
-
-type UpdateCustomerWithEmailData = [
-    CustomerSchema
-]
-
-type DeleteCustomerWithIDData = [
-    number
-]
-
-type GetCustomerWithIDData = [
-    CustomerSchema
-]
-
-type UpdateCustomerWithIDData = [
-    CustomerSchema
-]
-
-type GetOrganizationCustomersData = Array<CustomerSchema>
-
-type UpdateOrganizationCustomersData = Array<CustomerSchema> // NEED TO CHECK
-
-type GetCustomerData = [
-    CustomerSchema
-]
-
-type UpdateCustomerData = [ // NEED TO CHECK
-    CustomerSchema
-]
-
-type SearchCustomersData = [
-    searchResultsSchema
-]
+import type { APIPromise, ESPromise } from '../resource';
+import type {
+    Customer,
+    ESCustomer,
+    DeleteCustomerByEmailParams,
+    GetCustomerByEmailParams,
+    UpdateCustomerByEmailParams,
+    DeleteCustomerByIdParams,
+    GetCustomerByIdParams,
+    UpdateCustomerByIdParams,
+    GetAllCustomersForOrganizationParams,
+    UpdateCustomersForOrganizationParams,
+    DeleteCustomersForOrganizationParams,
+    UpdateCustomerParams,
+    SearchCustomersParams
+} from './types';
 
 export default class Customers extends Resource {
     /**
-     * @api {delete} /v1/organizations/{organization_id}/customers/{customer_email}
-     * @apiName deleteCustomerWithEmail
-     * @apiDescription The customers status is set to DELETED. The customers metadata is hard deleted.
+     * @api {delete} /v1/organizations/:organization_id/customers/:customer_email deleteByEmail
+     * @apiGroup Customers
+     * @apiName deleteByEmail
+     * @apiDescription The actual customers are not deleted but only their metadata is. The customer status is set to DELETED.
      * @apiParam {Number} organization_id
      * @apiParam {String} customer_email
      * @apiExample {js} Example:
-     *             gigwalk.customers.deleteCustomerWithEmail({...})
+     *             gigwalk.customers.deleteByEmail({...})
      */
-    deleteCustomerWithEmail(params: DeleteCustomerWithEmailParams): APIPromise<DeleteCustomerWithEmailData> {
-        return this.client.delete(`/v1/organizations/${params.organization_id}/customers/${params.customer_email}`);
+    deleteByEmail(params: DeleteCustomerByEmailParams): APIPromise<[number]> {
+        const url = `/v1/organizations/${params.organization_id}/customers/${params.customer_email}`;
+        return this.client.delete(url);
     }
 
     /**
-     * @api {get} /v1/organizations/{organization_id}/customers/{customer_email}
-     * @apiName getCustomerWithEmail
-     * @apiDescription Get customer.
+     * @api {get} /v1/organizations/:organization_id/customers/:customer_email getByEmail
+     * @apiGroup Customers
+     * @apiName getByEmail
+     * @apiDescription If the customer exists, then return info about the specified customer.
      * @apiParam {Number} organization_id
      * @apiParam {String} customer_email
-     * @apiParam {Array<Number>} require_cert_ids
-     * @apiParam {Array<Number>} exclude_cert_ids
-     * @apiParam {GetCustomerWithEmailQuery} query
      * @apiExample {js} Example:
-     *             gigwalk.customers.getCustomerWithEmail({...})
+     *             gigwalk.customers.getByEmail({...})
      */
-    getCustomerWithEmail(params: GetCustomerWithEmailParams): APIPromise<GetCustomerWithEmailData> {
-        const queryString = this.queryStringForSearchObject(params.query);
-        const data = {
-            require_cert_ids: (params.require_cert_ids) ? params.require_cert_ids : [],
-            exclude_cert_ids: (params.exclude_cert_ids) ? params.exclude_cert_ids : []
-        };
-
-        return this.client.get(`/v1/organizations/${params.organization_id}/customers/${params.customer_email}${queryString}`, data);
+    getByEmail(params: GetCustomerByEmailParams): APIPromise<[Customer]> {
+        const url = `/v1/organizations/${params.organization_id}/customers/${params.customer_email}`;
+        return this.client.get(url);
     }
 
     /**
-     * @api {put} /v1/organizations/{organization_id}/customers/{customer_email}
-     * @apiName updateCustomer
-     * @apiDescription Modifies customer information identified by customer_email.
+     * @api {put} /v1/organizations/:organization_id/customers/:customer_email updateByEmail
+     * @apiGroup Customers
+     * @apiName updateByEmail
+     * @apiDescription Modifies the info of the customer identified by customer_email.
      * @apiParam {Number} organization_id
      * @apiParam {String} customer_email
-     * @apiParam {CustomerTemplate} customer
+     * @apiParam {Object} customer
      * @apiExample {js} Example:
-     *             gigwalk.customers.updateCustomer({...})
+     *             gigwalk.customers.updateByEmail({...})
      */
-    updateCustomerWithEmail(params: UpdateCustomerWithEmailParams): APIPromise<UpdateCustomerWithEmailData> {
-        return this.client.put(`/v1/organizations/${params.organization_id}/customers/${params.customer_email}`, { ...params.customer });
+    updateByEmail(params: UpdateCustomerByEmailParams): APIPromise<[Customer]> {
+        const url = `/v1/organizations/${params.organization_id}/customers/${params.customer_email}`;
+        const data = params.customer;
+
+        return this.client.put(url, data);
     }
 
     /**
-     * @api {delete} /v1/organizations/{organization_id}/customers/{customer_id}
-     * @apiName deleteCustomerWithID
-     * @apiDescription The customers status is set to DELETED. The customers metadata is hard deleted.
+     * @api {delete} /v1/organizations/:organization_id/customers/:customer_id deleteById
+     * @apiGroup Customers
+     * @apiName deleteById
+     * @apiDescription The actual customers are not deleted but only their metadata is. The customer status is set to DELETED.
      * @apiParam {Number} organization_id
      * @apiParam {Number} customer_id
      * @apiExample {js} Example:
-     *             gigwalk.customers.deleteCustomerWithID({...})
+     *             gigwalk.customers.deleteById({...})
      */
-    deleteCustomerWithID(params: DeleteCustomerWithIDParams): APIPromise<DeleteCustomerWithIDData> {
-        return this.client.delete(`/v1/organizations/${params.organization_id}/customers/${params.customer_id}`);
+    deleteById(params: DeleteCustomerByIdParams): APIPromise<[number]> {
+        const url = `/v1/organizations/${params.organization_id}/customers/${params.customer_id}`;
+        return this.client.delete(url);
     }
 
     /**
-     * @api {get} /v1/organizations/{organization_id}/customers/{customer_id}
-     * @apiName getCustomerWithID
-     * @apiDescription Get customer.
+     * @api {get} /v1/organizations/:organization_id/customers/:customer_id getById
+     * @apiGroup Customers
+     * @apiName getById
+     * @apiDescription If the customer exists, then return info about the specified customer.
      * @apiParam {Number} organization_id
      * @apiParam {Number} customer_id
-     * @apiParam {GetCustomerWithIDQuery} query
      * @apiExample {js} Example:
-     *             gigwalk.customers.getCustomerWithID({...})
+     *             gigwalk.customers.getById({...})
      */
-    getCustomerWithID(params: GetCustomerWithIDParams): APIPromise<GetCustomerWithIDData> {
-        const queryString = this.queryStringForSearchObject(params.query);
-
-        return this.client.get(`/v1/organizations/${params.organization_id}/customers/${params.customer_id}${queryString}`);
+    getById(params: GetCustomerByIdParams): APIPromise<[Customer]> {
+        const url = `/v1/organizations/${params.organization_id}/customers/${params.customer_id}`;
+        return this.client.get(url);
     }
 
     /**
-     * @api {put} /v1/organizations/{organization_id}/customers/{customer_id}
-     * @apiName updateCustomerWithID
-     * @apiDescription Modifies customer information identified by customer_id.
+     * @api {put} /v1/organizations/:organization_id/customers/:customer_id updateById
+     * @apiGroup Customers
+     * @apiName updateById
+     * @apiDescription Modifies the info of the customer identified by customer_id
      * @apiParam {Number} organization_id
      * @apiParam {Number} customer_id
-     * @apiParam {CustomerTemplate} customer
+     * @apiParam {Object} customer
      * @apiExample {js} Example:
-     *             gigwalk.customers.updateCustomerWithID({...})
+     *             gigwalk.customers.updateById({...})
      */
-    updateCustomerWithID(params: UpdateCustomerWithIDParams): APIPromise<UpdateCustomerWithIDData> {
-        return this.client.put(`/v1/organizations/${params.organization_id}/customers/${params.customer_id}`, { ...params.customer });
+    updateById(params: UpdateCustomerByIdParams): APIPromise<[Customer]> {
+        const url = `/v1/organizations/${params.organization_id}/customers/${params.customer_id}`;
+        const data = params.customer;
+
+        return this.client.put(url, data);
     }
 
     /**
-     * @api {get} /v1/organizations/{organization_id}/customers
-     * @apiName getOrganizationCustomers
-     * @apiDescription Return information about all customers of an organization. Capable of returning paginated results.
+     * @api {get} /v1/organizations/:organization_id/customers getAllByOrganization
+     * @apiGroup Customers
+     * @apiName getAllByOrganization
+     * @apiDescription Return info about all customers of the organization
      * @apiParam {Number} organization_id
-     * @apiParam {Array<Number>} require_cert_ids
-     * @apiParam {Array<Number>} exclude_cert_ids
-     * @apiParam {GetOrganizationCustomersQuery} query
      * @apiExample {js} Example:
-     *             gigwalk.customers.getOrganizationCustomers({...})
+     *             gigwalk.customers.getByOrganization({...})
      */
-    getOrganizationCustomers(params: GetOrganizationCustomersParams): APIPromise<GetOrganizationCustomersData> {
-        const queryString = this.queryStringForSearchObject(params.query);
+    getForOrganization(params: GetAllCustomersForOrganizationParams): APIPromise<Array<Customer>> {
+        const url = `/v1/organizations/${params.organization_id}/customers`;
+        return this.client.get(url);
+    }
+
+    /**
+     * @api {put} /v1/organizations/:organization_id/customers bulkUpdate
+     * @apiGroup Customers
+     * @apiName updateForOrganization
+     * @apiDescription Modifies the info of multiple customers identified by customer_email.
+     * @apiParam {Number} organization_id
+     * @apiParam {Object[]} customers
+     * @apiExample {js} Example:
+     *             gigwalk.customers.updateForOrganization({...})
+     */
+    updateForOrganization(params: UpdateCustomersForOrganizationParams): APIPromise<Array<Customer>> {
+        const url = `/v1/organizations/${params.organization_id}/customers`;
         const data = {
-            require_cert_ids: (params.require_cert_ids) ? params.require_cert_ids : [],
-            exclude_cert_ids: (params.exclude_cert_ids) ? params.exclude_cert_ids : []
-        };
-
-        return this.client.get(`/v1/organizations/${params.organization_id}/customers${queryString}`, data);
-    }
-
-    /**
-     * @api {put} /v1/organizations/{organization_id}/customers
-     * @apiName updateOrganizationCustomers
-     * @apiDescription Modify information of customer(s) identified by customer_email. Soft delete multiple customers by setting DELETED status.
-     * @apiParam {Number} organization_id
-     * @apiParam {String} organization_id
-     * @apiParam {Array<CustomerTemplate>} customers
-     * @apiExample {js} Example:
-     *             gigwalk.customers.updateOrganizationCustomers({...})
-     */
-    updateOrganizationCustomers(params: UpdateOrganizationCustomersParams): APIPromise<UpdateOrganizationCustomersData> {
-        const data = {
-            action: params.action,
+            action: 'UPDATE',
             customers: params.customers
         };
 
-        return this.client.put(`/v1/organizations/${params.organization_id}/customers`, data);
+        return this.client.put(url, data);
     }
 
     /**
-     * @api {get} /v1/customer
-     * @apiName getCustomer
-     * @apiDescription Return current customer's information.
+     * @api {put} /v1/organizations/:organization_id/customers deleteForOrganization
+     * @apiGroup Customers
+     * @apiName deleteForOrganization
+     * @apiDescription Delete multiple customers (by setting DELETED status)
+     * @apiParam {Number} organization_id
+     * @apiParam {Object[]} customers
      * @apiExample {js} Example:
-     *             gigwalk.customers.getCustomer({...})
+     *             gigwalk.customers.deleteForOrganization({...})
      */
-    getCustomer(): APIPromise<GetCustomerData> {
+    deleteForOrganization(params: DeleteCustomersForOrganizationParams): APIPromise<Array<number>> {
+        const url = `/v1/organizations/${params.organization_id}/customers`;
+        const data = {
+            action: 'REMOVE',
+            customers: params.customers
+        };
+
+        return this.client.put(url, data);
+    }
+
+    /**
+     * @api {get} /v1/customer get
+     * @apiGroup Customers
+     * @apiName get
+     * @apiDescription Return the current customer's info.
+     * @apiExample {js} Example:
+     *             gigwalk.customers.get({...})
+     */
+    get(): APIPromise<Array<Customer>> {
         return this.client.get('/v1/customer');
     }
 
     /**
-     * @api {put} /v1/customer
-     * @apiName updateCustomer
-     * @apiDescription Modify current users information.
-     * @apiParam {CustomerTemplate} customer
+     * @api {put} /v1/customer update
+     * @apiGroup Customers
+     * @apiName update
+     * @apiDescription Modify the current customers's info.
+     * @apiParam {Object} customer
      * @apiExample {js} Example:
-     *             gigwalk.customers.updateCustomer({...})
+     *             gigwalk.customers.update({...})
      */
-    updateCustomer(params: UpdateCustomerParams): APIPromise<UpdateCustomerData> {
-        return this.client.put('/v1/customer', { ...params.customer });
+    update(params: UpdateCustomerParams): APIPromise<[Customer]> {
+        const data = params.customer;
+        return this.client.put('/v1/customer', data);
     }
 
     /**
-     * @api {post} /v1/tickets/search/customers
-     * @apiName searchCustomers
-     * @apiDescription Return all the customers related with the given group(s) or with the groups related with the ticket(s). Also checks if the customers
-                       have availability to execute given tickets. Capable of returning paginated results.
-     * @apiParam {Array<Number>} ticket_ids
-     * @apiParam {Array<Number>} group_ids
-     * @apiParam {Array<Number>} required_certifications
-     * @apiParam {String} q
-     * @apiParam {SearchCustomersQuery} query
+     * @api {post} /v1/tickets/search/customers search
+     * @apiGroup Customers
+     * @apiName search
+     * @apiDescription Return all the customers related with the given groups or with the groups related with the tickets. Also checks if the customers
+     have availability and capacity to execute the given tickets
+     * @apiParam {Number[]} ticket_ids
      * @apiExample {js} Example:
-     *             gigwalk.customers.searchCustomers({...})
+     *             gigwalk.customers.search({...})
      */
-    searchCustomers(params: SearchCustomersParams): APIPromise<SearchCustomersData> {
-        const queryString = this.queryStringForSearchObject(params.query);
+    // todo: Move to Search API? Returns ElasticSearch results
+    search(params: SearchCustomersParams): ESPromise<ESCustomer> {
         const data = {
-            ticket_ids: params.ticket_ids,
-            group_ids: (params.group_ids) ? params.group_ids : [],
-            required_certifications: (params.required_certifications) ? params.required_certifications : [],
-            q: (params.q) ? params.q : '',
+            ticket_ids: params.ticket_ids
         };
 
-        return this.client.post(`/v1/tickets/search/customers${queryString}`, data);
+        return this.client.post('/v1/tickets/search/customers', data);
     }
 }
