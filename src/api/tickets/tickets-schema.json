@@ -1,0 +1,171 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "id": "http://gigwalk.com/src/api/tickets/tickets-schema.json#",
+    "type": "object",
+    "properties": {
+        "allOf": [
+            { "$ref": "http://gigwalk.com/src/api/base-schema.json#" },
+            { "properties": {
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "description": {
+                                "type": "string"
+                            },
+                            "template_map": {
+                                "type": "object"
+                            },
+                            "location": {
+                                "type": "object"
+                            },
+                            "data_type_map": {
+                                "type": "object"
+                            },
+                            "assigned_customer_id": {
+                                "type": ["string", "number"]
+                            },
+                            "observation_target_metadata_map": {
+                                "type": "object"
+                            },
+                            "subscription": {
+                                "type": "object"
+                            },
+                            "wave_id": {
+                                "type": ["null", "string"]
+                            },
+                            "status": {
+                                "type": "string"
+                            },
+                            "start_date": {
+                                "type": "string"
+                            },
+                            "date_created": {
+                                "type": "string"
+                            },
+                            "ticket_metadata": {
+                                "type": "object"
+                            },
+                            "date_submitted": {
+                                "type": ["null", "string"]
+                            },
+                            "time_estimate": {
+                                "type": ["null", "integer"]
+                            },
+                            "subscription_metadata": {
+                                "type": "object"
+                            },
+                            "assigned_customer_name": {
+                                "type": "string"
+                            },
+                            "data_types": {
+                                "type": "array"
+                            },
+                            "assigned_customer_email": {
+                                "type": "string"
+                            },
+                            "observation_target_map": {
+                                "type": "object"
+                            },
+                            "subscription_id": {
+                                "type": "integer"
+                            },
+                            "title": {
+                                "type": "string"
+                            },
+                            "organization_subscription_version_id_ref": {
+                                "type": "integer"
+                            },
+                            "calendar_event": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "integer"
+                                    },
+                                    "end": {
+                                        "type": ["null", "string"]
+                                    },
+                                    "event_type": {
+                                        "type": ["null", "string"]
+                                    },
+                                    "start": {
+                                        "type": ["null", "string"]
+                                    }
+                                },
+                                "required": [
+                                    "id",
+                                    "end",
+                                    "event_type",
+                                    "start"
+                                ]
+                            },
+                            "data_items": {
+                                "type": "array"
+                            },
+                            "date_updated": {
+                                "type": "string"
+                            },
+                            "can_reschedule": {
+                                "type": "boolean"
+                            },
+                            "due_date": {
+                                "type": "string"
+                            },
+                            "organization_id": {
+                                "type": "integer"
+                            },
+                            "date_scheduled": {
+                                "type": "string"
+                            },
+                            "id": {
+                                "type": "integer"
+                            },
+                            "omni_date_updated": {
+                                "type": "string"
+                            },
+                            "execution_state": {
+                                "type": ["null", "string"]
+                            }
+                        },
+                        "required": [
+                            "description",
+                            "template_map",
+                            "location",
+                            "data_type_map",
+                            "assigned_customer_id",
+                            "observation_target_metadata_map",
+                            "subscription",
+                            "wave_id",
+                            "status",
+                            "start_date",
+                            "date_created",
+                            "ticket_metadata",
+                            "date_submitted",
+                            "subscription_metadata",
+                            "assigned_customer_name",
+                            "data_types",
+                            "assigned_customer_email",
+                            "observation_target_map",
+                            "subscription_id",
+                            "title",
+                            "organization_subscription_version_id_ref",
+                            "calendar_event",
+                            "data_items",
+                            "date_updated",
+                            "due_date",
+                            "organization_id",
+                            "date_scheduled",
+                            "id",
+                            "omni_date_updated",
+                            "execution_state"
+                        ]
+                    }
+                }
+            },
+            "required": [
+                "data"
+            ] }
+        ]
+    }
+}

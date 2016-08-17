@@ -1,0 +1,70 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "id": "http://gigwalk.com/src/api/templates/templates-schema.json#",
+    "type": "object",
+    "properties": {
+        "allOf": [
+            { "$ref": "http://gigwalk.com/src/api/base-schema.json#" },
+            { "properties": {
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "integer"
+                            },
+                            "self_directed": {
+                                "type": ["null", "boolean"]
+                            },
+                            "data_types": {
+                                "type": ["null", "array"],
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data_type_id": {
+                                            "type": "integer"
+                                        },
+                                        "children": {
+                                            "type": ["null", "array"]
+                                        }
+                                    },
+                                    "required": [
+                                        "data_type_id"
+                                    ]
+                                }
+                            },
+                            "title": {
+                                "type": "string"
+                            },
+                            "organization_id": {
+                                "type": "integer"
+                            },
+                            "required_args": {
+                                "type": ["null", "array"],
+                                "items": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": {
+                                "type": ["null", "string"]
+                            }
+                        },
+                        "required": [
+                            "id",
+                            "self_directed",
+                            "data_types",
+                            "title",
+                            "organization_id",
+                            "required_args",
+                            "type"
+                        ]
+                    }
+                }
+            },
+            "required": [
+                "data"
+            ] }
+        ]
+    }
+}

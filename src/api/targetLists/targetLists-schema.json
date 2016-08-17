@@ -1,0 +1,56 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "id": "http://gigwalk.com/src/api/targetLists/targetLists-schema.json#",
+    "type": "object",
+    "properties": {
+        "allOf": [
+            { "$ref": "http://gigwalk.com/src/api/base-schema.json#" },
+            { "properties": {
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "observation_target_type_id": {
+                                "type": "integer"
+                            },
+                            "id": {
+                                "type": "integer"
+                            },
+                            "oneOf": [
+                                {
+                                    "title": {
+                                        "type": "string"
+                                    },
+                                    "organization_id": {
+                                        "type": "integer"
+                                    }
+                                },
+                                {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "observation_target_count": {
+                                        "type": "integer"
+                                    },
+                                    "status": {
+                                        "type": "string"
+                                    }
+                                }
+                            ]
+                        },
+                        "required": [
+                            "title",
+                            "observation_target_type_id",
+                            "id",
+                            "organization_id"
+                        ]
+                    }
+                }
+            },
+            "required": [
+                "data"
+            ] }
+        ]
+    }
+}

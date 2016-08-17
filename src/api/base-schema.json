@@ -1,0 +1,33 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "id": "http://gigwalk.com/src/api/base-schema.json#",
+    "type": "object",
+    "properties": {
+        "code": {
+            "type": "integer"
+        },
+        "gw_api_response": {
+            "type": "array"
+        },
+        "warnings": {
+            "type": [ "null", "array" ]
+        },
+        "errors": {
+            "type": [ "null", "array" ]
+        },
+        "_meta": {
+            "type": "object"
+        },
+        "_metadat": {
+            "type": "object"
+        }
+    },
+    "required": [
+        "code",
+        "gw_api_response",
+        "warnings",
+        "errors",
+        "_meta",
+        "_metadat"
+    ]
+}
