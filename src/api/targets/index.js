@@ -8,23 +8,29 @@ type ObservationTargetBasicTemplate = {
 }
 
 type ObservationTargetTemplate = {
-    obs_target_id: number,
-    title: string,
-    status: string,
-    key_value_pairs: Array<{
+    obs_target_id?: number,
+    title?: string,
+    status?: string,
+    key_value_pairs?: Array<{
         key: string,
         value: string
     }>
 }
 
-type CreateOrganizationTargetsParams = {
+type CreateOrganizationTargetParams = {
     organization_id: number,
     observation_target: ObservationTargetBasicTemplate
 }
 
+type GetOrganizationTargetQuery = {
+    limit?: number,
+    offset?: number
+}
+
 type GetOrganizationTargetParams = {
     organization_id: number,
-    observation_target_id: number
+    observation_target_id: number,
+    query?: GetOrganizationTargetQuery
 }
 
 type UpdateOrganizationTargetParams = {
@@ -33,9 +39,16 @@ type UpdateOrganizationTargetParams = {
     observation_target: ObservationTargetTemplate
 }
 
+type SearchOrganizationTargetsQuery = {
+    q?: string,
+    limit?: number,
+    offset?: number
+}
+
 type SearchOrganizationTargetsParams = {
     organization_id: number,
-    query_string: string
+    query_string: string,
+    query?: SearchOrganizationTargetsQuery
 }
 
 type ObservationTargetSchema = {
@@ -46,7 +59,7 @@ type ObservationTargetSchema = {
     organization_data: Object
 }
 
-type CreateOrganizationTargetsData = [
+type CreateOrganizationTargetData = [
     ObservationTargetSchema
 ]
 
@@ -63,74 +76,62 @@ type SearchOrganizationTargetsData = Array<ObservationTargetSchema>
 export default class Targets extends Resource {
     /**
      * @api {post} /v1/organizations/{organization_id}/observation_targets
-     * @apiName createOrganizationTargets
-     * @apiDescription Create new obs_targets of the org using the JSON payload. Even though this is a POST method, it does update/deletion as well.
+     * @apiName createOrganizationTarget
+     * @apiDescription Create new obs_target(s). Endpoint also does update/deletion.
      * @apiParam {Number} organization_id
+     * @apiParam {ObservationTargetBasicTemplate} observation_target
      * @apiExample {js} Example:
-     *             gigwalk.customers.createOrganizationTargets({...})
+     *             gigwalk.customers.createOrganizationTarget({...})
      */
-    createOrganizationTargets(params: CreateOrganizationTargetsParams): APIPromise<CreateOrganizationTargetsData> {
-        const url = '/v1';
-        const data = {
-            params
-        };
-
-        return this.client.post(url, data);
+    createOrganizationTarget(params: CreateOrganizationTargetParams): APIPromise<CreateOrganizationTargetData> {
+        return this.client.post(`/v1/organizations/${params.organization_id}/observation_targets`, { ...params.observation_target });
     }
 
     /**
      * @api {get} /v1/organizations/{organization_id}/observation_targets/{observation_target_id}
      * @apiName getOrganizationTarget
-     * @apiDescription If target_id is specified, return org_observation_target_id info for the specified target_id or return the info for all targets
-                       of the org. Return data fields (id, title, status, org_data, obs_target_type_id)
+     * @apiDescription If target_id is specified, return org_observation_target_id information; else return the information for all targets of the org.
+                       Capable of returning paginated results.
      * @apiParam {Number} organization_id
      * @apiParam {Number} observation_target_id
+     * @apiParam {GetOrganizationTargetQuery} query
      * @apiExample {js} Example:
      *             gigwalk.customers.getOrganizationTarget({...})
      */
     getOrganizationTarget(params: GetOrganizationTargetParams): APIPromise<GetOrganizationTargetData> {
-        const url = '/v1';
-        const data = {
-            params
-        };
+        const queryString = this.queryStringForSearchObject(params.query);
 
-        return this.client.get(url, data);
+        return this.client.get(`/v1/organizations/${params.organization_id}/observation_targets/${params.observation_target_id}${queryString}`);
     }
 
     /**
      * @api {put} /v1/organizations/{organization_id}/observation_targets/{observation_target_id}
      * @apiName updateOrganizationTarget
-     * @apiDescription If target_id is specified, update a single org_observation_target. Else update all targets of the org using the JSON payload.
-                       Even though this is a PUT method, it does creation/deletion as well.
+     * @apiDescription If target_id is specified, update org_observation_target; else update all targets of the organization.
+                       Endpoint also does update/deletion.
      * @apiParam {Number} organization_id
      * @apiParam {Number} observation_target_id
+     * @apiParam {ObservationTargetTemplate} observation_target
      * @apiExample {js} Example:
      *             gigwalk.customers.updateOrganizationTarget({...})
      */
     updateOrganizationTarget(params: UpdateOrganizationTargetParams): APIPromise<UpdateOrganizationTargetData> {
-        const url = '/v1';
-        const data = {
-            params
-        };
-
-        return this.client.put(url, data);
+        return this.client.put(`/v1/organizations/${params.organization_id}/observation_targets/${params.observation_target_id}`,
+                               { ...params.observation_target });
     }
 
     /**
      * @api {get} /v1/organizations/{organization_id}/observation_targets/search
      * @apiName searchOrganizationTargets
-     * @apiDescription Find a match if the given string is found in the obs_target titles. If no search string is specified, return all obs targets of the org.
-                       Return data fields (id, title, status, org_data, obs_target_type_id)
+     * @apiDescription Search obs_target titles. Capable of returning paginated results.
      * @apiParam {Number} organization_id
+     * @apiParam {SearchOrganizationTargetsQuery} query
      * @apiExample {js} Example:
      *             gigwalk.customers.searchOrganizationTargets({...})
      */
     searchOrganizationTargets(params: SearchOrganizationTargetsParams): APIPromise<SearchOrganizationTargetsData> {
-        const url = '/v1';
-        const data = {
-            params
-        };
+        const queryString = this.queryStringForSearchObject(params.query);
 
-        return this.client.get(url, data);
+        return this.client.get(`/v1/organizations/${params.organization_id}/observation_targets/search${queryString}`);
     }
 }

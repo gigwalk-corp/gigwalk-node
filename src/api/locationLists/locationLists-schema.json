@@ -1,0 +1,46 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "id": "http://gigwalk.com/src/api/locationLists/locationLists-schema.json#",
+    "type": "object",
+    "properties": {
+        "allOf": [
+            { "$ref": "http://gigwalk.com/src/api/base-schema.json#" },
+            { "properties": {
+                "data": {
+                    "type": ["array", "object"],
+                    "properties": {
+                        "id": {
+                          "type": "integer"
+                        },
+                        "organization_id": {
+                          "type": "integer"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "status": {
+                          "type": "string"
+                        },
+                        "oneof": {
+                            "location_count": {
+                                "type": "integer"
+                            },
+                            "locations": {
+                                "type": "array"
+                            }
+                        }
+                    },
+                    "required": [
+                        "id",
+                        "organization_id",
+                        "name",
+                        "status"
+                    ]
+                }
+            },
+            "required": [
+                "data"
+            ] }
+        ]
+    }
+}

@@ -17,50 +17,85 @@ type DataItemTemplate = {
 
 type TicketSearchTemplate = {
   search_type: string,
-  latitude: number,
-  uom: number,
-  longitude: number,
-  radius: number,
-  status: string,
-  date_type: string,
-  start_date: string,
-  end_date: string,
-  timezone: string
+  latitude?: number,
+  uom?: number,
+  longitude?: number,
+  radius?: number,
+  status?: string,
+  date_type?: string,
+  start_date?: string,
+  end_date?: string,
+  timezone?: string
+}
+
+type QueryParamTemplate = {
+    field: string,
+    operator: string,
+    value: string
+}
+
+type BoundingBoxTemplate = {
+    top_left: {
+        lat: number,
+        lon: number
+    },
+    bottom_right: {
+        lat: number,
+        lon: number
+    }
+}
+
+type SearchGroupTicketsQuery = {
+    limit?: number,
+    offset?: number
 }
 
 type SearchGroupTicketsParams = {
     group_id: number,
-    query_params: Array<{
-        field: string,
-        operator: string,
-        value: string
-    }>,
-    bounding_box: {
-        top_left: {
-            lat: number,
-            lon: number
-        },
-        bottom_right: {
-            lat: number,
-            lon: number
-        }
-    },
-    timezone: string
+    query_params?: Array<QueryParamTemplate>,
+    bounding_box?: BoundingBoxTemplate,
+    timezone?: string,
+    query?: SearchGroupTicketsQuery
+}
+
+type GetCurrentCustomerTicketsQuery = {
+    show_customer_metadata?: boolean
+}
+
+type GetCurrentCustomerTicketsParams = {
+    query?: GetCurrentCustomerTicketsQuery
+}
+
+type GetCustomerTicketsQuery = {
+    show_customer_metadata?: boolean
 }
 
 type GetCustomerTicketsParams = {
-    customer_id: number
+    customer_id: number,
+    query: GetCustomerTicketsQuery
+}
+
+type SearchOrganizationTicketsQuery = {
+    limit?: number,
+    offset?: number
 }
 
 type SearchOrganizationTicketsParams = {
     organization_id: number,
-    query_string: string
+    query_string: string,
+    query?: SearchOrganizationTicketsQuery
+}
+
+type SearchOrganizationTicketsWithFieldQuery = {
+    limit?: number,
+    offset?: number
 }
 
 type SearchOrganizationTicketsWithFieldParams = {
     organization_id: number,
     search_field: string,
-    query_string: string
+    query_string: string,
+    query?: SearchOrganizationTicketsWithFieldQuery
 }
 
 type CreateTicketDataItemParams = {
@@ -70,7 +105,7 @@ type CreateTicketDataItemParams = {
 
 type DeleteTicketDataItemParams = {
     ticket_id: number,
-    data_type_id: number
+    data_item_id: number
 }
 
 type CreateClonedTicketParams = {
@@ -81,13 +116,25 @@ type SubmitTicketParams = {
     ticket_id: number
 }
 
+type GetTicketQuery = {
+    show_customer_metadata?: boolean
+}
+
 type GetTicketParams = {
-    ticket_id: number
+    ticket_id: number,
+    query?: GetTicketQuery
+}
+
+type SearchTicketsWithIDQuery = {
+    limit?: number,
+    offset?: number,
+    show_customer_metadata?: boolean
 }
 
 type SearchTicketsWithIDParams = {
     ticket_id: number,
-    query: TicketSearchTemplate
+    search: TicketSearchTemplate,
+    query?: SearchTicketsWithIDQuery
 }
 
 type UpdateTicketParams = {
@@ -97,8 +144,14 @@ type UpdateTicketParams = {
     customer_id: string
 }
 
+type SearchTicketsQuery = {
+    offset?: number,
+    limit?: number
+}
+
 type SearchTicketsParams = {
-    query: TicketSearchTemplate
+    search: TicketSearchTemplate,
+    query?: SearchTicketsQuery
 }
 
 type UpdateTicketWithStateParams = {
@@ -109,26 +162,59 @@ type UpdateTicketWithStateParams = {
     customer_id: string
 }
 
+type GetOrganizationTicketsQuery = {
+    limit?: number,
+    offset?: number,
+    show_customer_metadata?: boolean
+}
+
 type GetOrganizationTicketsParams = {
-    organization_id: number
+    organization_id: number,
+    query?: GetOrganizationTicketsQuery
+}
+
+type SearchOrganizationTicketsWithCriteriaQuery = {
+    limit?: number,
+    offset?: number,
+    show_customer_metadata?: boolean
 }
 
 type SearchOrganizationTicketsWithCriteriaParams = {
     organization_id: number,
-    query: TicketSearchTemplate
+    search: TicketSearchTemplate,
+    query?: SearchOrganizationTicketsWithCriteriaQuery
+}
+
+type GetSubscriptionTicketsQuery = {
+    offset?: number,
+    limit?: number
 }
 
 type GetSubscriptionTicketsParams = {
-    subscription_id: number
+    subscription_id: number,
+    query?: GetSubscriptionTicketsQuery
+}
+
+type SearchSubscriptionTicketsQuery = {
+    limit?: number,
+    offset?: number,
+    show_customer_metadata?: boolean
 }
 
 type SearchSubscriptionTicketsParams = {
     subscription_id: number,
-    query: TicketSearchTemplate
+    search: TicketSearchTemplate,
+    query?: SearchSubscriptionTicketsQuery
+}
+
+type GetTicketEventsQuery = {
+    limit?: number,
+    offset?: number
 }
 
 type GetTicketEventsParams = {
-    ticket_id: number
+    ticket_id: number,
+    query?: GetTicketEventsQuery
 }
 
 type GetTicketsInAreaParams = {
@@ -137,7 +223,23 @@ type GetTicketsInAreaParams = {
     radius: number
 }
 
-type TicketSchema = {
+type TicketMediumSchema = {
+    id: number,
+    start_date: string,
+    due_date: string,
+    time_estimate: number,
+    date_created: string,
+    date_updated: string,
+    date_scheduled: string,
+    date_submitted: string,
+    status: string,
+    customer: Object,
+    calendar_event: Object,
+    location: Object,
+    organization_subscription: Object
+}
+
+type TicketSummarySchema = {
     id: number,
     user_distance: number,
     map_distance: number,
@@ -147,28 +249,8 @@ type TicketSchema = {
     optin_type: string,
     is_double_optin: boolean,
     status: string,
-    location: {
-        title: string,
-        latitude: number,
-        longitude: number,
-        locality: string,
-        country: string,
-        formatted_address: string,
-        administrative_area_level_1: string,
-        administrative_area_level_2: string,
-        postal_code: number,
-        specificity: string,
-        status: string
-    },
-    organization_subscription: {
-        optin_type: string,
-        description: string,
-        id: number,
-        can_reschedule: boolean,
-        is_double_optin: boolean,
-        title: string,
-        needed_certs: Object
-    }
+    location: Object,
+    organization_subscription: Object
 }
 
 type TicketEventSchema = {
@@ -186,441 +268,464 @@ type TicketEventSchema = {
     }
 }
 
-type SearchGroupTicketsData = [
+type TicketSchema = {
+    title: string,
+    description: string,
+    id: number,
+    organization_id: number,
+    start_date: string,
+    due_date: string,
+    time_estimate: number,
+    date_created: string,
+    date_updated: string,
+    omni_date_updated: string,
+    date_scheduled: string,
+    can_reschedule: boolean,
+    date_submitted: string,
+    execution_state: string,
+    wave_id: string,
+    status: string,
+    assigned_customer_name: string,
+    assigned_customer_id: number,
+    assigned_customer_email: string,
+    template_map: Object,
+    data_items: Object,
+    data_types: Array<Object>,
+    data_type_map: Object,
+    observation_target_map: Object,
+    observation_target_metadata_map: Object,
+    location: Object,
+    calendar_event: Object,
+    subscription_id: number,
+    organization_subscription_version_id_ref: number,
+    subscription: Object,
+    subscription_metadata: Object,
+    ticket_metadata: Object
+}
 
+type TicketSearchSchema = {
+    total_records: number,
+    search_results: Array<{
+        score: number,
+        data: {
+            title: string,
+            ticket_id: number,
+            date_created: string,
+            date_updated: string,
+            start_date: string,
+            due_date: string,
+            time_estimate: number,
+            dashboard_visible: boolean,
+            optin_type: string,
+            is_double_optin: boolean,
+            ticket_status: string,
+            assigned_customer_id: number,
+            assigned_customer_name: string,
+            assigned_customer_email: string,
+            organization_id: number,
+            organization_subscription_id: number,
+            organization_subscription_description: string,
+            organization_subscription_can_reschedule: boolean,
+            organization_subscription_groups: Array<number>,
+            location_title: string,
+            location_id: number,
+            location_organization_id: number,
+            location_date_created: string,
+            location_date_updated: string,
+            location_country: string,
+            location_locality: string,
+            location_postal_code: number,
+            location_geopoint: string,
+            location_administrative_area_level_1: string,
+            location_administrative_area_level_2: string,
+            location_formatted_address: string,
+            location_specificity: string,
+            location_status: string,
+            group_id: Array<number>,
+            targets: Array<number>,
+        }
+    }>
+}
+
+type SearchGroupTicketsData = Array<TicketMediumSchema>
+
+type GetCurrentCustomerTicketsData = Array<TicketSchema>
+
+type GetCustomerTicketsData = Array<TicketSchema> // NEED TO CHECK
+
+type SearchOrganizationTicketsData = TicketSearchSchema
+
+type SearchOrganizationTicketsWithFieldData = TicketSearchSchema // NEED TO CHECK
+
+type CreateTicketDataItemData = [ // NEED TO CHECK
+    TicketSchema
 ]
 
-type GetCurrentCustomerTicketsData = [
-
-]
-
-type GetCustomerTicketsData = [
-
-]
-
-type SearchOrganizationTicketsData = [
-
-]
-
-type SearchOrganizationTicketsWithFieldData = [
-
-]
-
-type CreateTicketDataItemData = [
-
-]
-
-type DeleteTicketDataItemData = [
-
+type DeleteTicketDataItemData = [ // NEED TO CHECK
+    number
 ]
 
 type CreateClonedTicketData = [
-
+    TicketSchema
 ]
 
-type SubmitTicketData = [
-
+type SubmitTicketData = [ // NEED TO CHECK
+    TicketSchema
 ]
 
-type GetTicketData = [
-
+type GetTicketData = [ // NEED TO CHECK
+    TicketSchema
 ]
 
-type SearchTicketsWithIDData = [
+type SearchTicketsWithIDData = Array<TicketSchema>
 
-]
+type UpdateTicketData = Array<TicketSchema> // NEED TO CHECK
 
-type UpdateTicketData = [
+type GetTicketsData = Array<TicketSchema>
 
-]
+type SearchTicketsData = Array<TicketSchema> // NEED TO CHECK
 
-type GetTicketsData = [
+type UpdateTicketWithStateData = Array<number> // NEED TO CHECK
 
-]
+type GetOrganizationTicketsData = Array<TicketSchema> // NEED TO CHECK
 
-type SearchTicketsData = [
+type SearchOrganizationTicketsWithCriteriaData = Array<TicketSchema> // NEED TO CHECK
 
-]
+type GetSubscriptionTicketsData = Array<TicketSchema> // NEED TO CHECK
 
-type UpdateTicketWithStateData = [
-
-]
-
-type GetOrganizationTicketsData = [
-
-]
-
-type SearchOrganizationTicketsWithCriteriaData = [
-
-]
-
-type GetSubscriptionTicketsData = [
-
-]
-
-type SearchSubscriptionTicketsData = [
-
-]
+type SearchSubscriptionTicketsData = Array<TicketSchema> // NEED TO CHECK
 
 type GetTicketEventsData = Array<TicketEventSchema>
 
-type GetTicketsInAreaData = Array<TicketSchema>
+type GetTicketsInAreaData = Array<TicketSummarySchema>
 
 export default class Tickets extends Resource {
     /**
      * @api {post} /v1/groups/{group_id}/tickets/search
      * @apiName searchGroupTickets
      * @apiDescription Get all tickets from the specified group that satisfy the search criteria, now we support field bundle_autoassign with
-                       operator = and values true or false
+                       operator = and values true or false. Capable of returning paginated results.
      * @apiParam {Number} group_id
+     * @apiParam {Array<QueryParamTemplate>} query_params
+     * @apiParam {BoundingBoxTemplate} bounding_box
+     * @apiParam {String} timezone
+     * @apiParam {SearchGroupTicketsQuery} query
      * @apiExample {js} Example:
      *             gigwalk.customers.searchGroupTickets({...})
      */
     searchGroupTickets(params: SearchGroupTicketsParams): APIPromise<SearchGroupTicketsData> {
-        const url = '/v1';
+        const queryString = this.queryStringForSearchObject(params.query);
         const data = {
-            params
+            query_params: params.query_params,
+            bounding_box: params.bounding_box,
+            timezone: params.timezone
         };
 
-        return this.client.post(url, data);
+        return this.client.post(`/v1/groups/${params.group_id}/tickets/search${queryString}`, data);
     }
 
     /**
      * @api {get} /v1/tickets/my_list
      * @apiName getCurrentCustomerTickets
-     * @apiDescription Get all tickets that belong to current_user's id
+     * @apiDescription Get all tickets that belong to current user's id.
+     * @apiParam {GetCurrentCustomerTicketsQuery} query
      * @apiExample {js} Example:
      *             gigwalk.customers.getCurrentCustomerTickets({...})
      */
-    getCurrentCustomerTickets(): APIPromise<GetCurrentCustomerTicketsData> {
-        const url = '/v1';
-        const data = {
+    getCurrentCustomerTickets(params: GetCurrentCustomerTicketsParams): APIPromise<GetCurrentCustomerTicketsData> {
+        const queryString = (params) ? this.queryStringForSearchObject(params.query) : '';
 
-        };
-
-        return this.client.get(url, data);
+        return this.client.get(`/v1/tickets/my_list${queryString}`);
     }
 
     /**
      * @api {get} /v1/customers/{customer_id}/tickets
      * @apiName getCustomerTickets
-     * @apiDescription Get all tickets that belong to the given customer
+     * @apiDescription Get all tickets that belong to the given customer.
      * @apiParam {Number} customer_id
+     * @apiParam {GetCustomerTicketsQuery} query
      * @apiExample {js} Example:
      *             gigwalk.customers.getCustomerTickets({...})
      */
     getCustomerTickets(params: GetCustomerTicketsParams): APIPromise<GetCustomerTicketsData> {
-        const url = '/v1';
-        const data = {
-            params
-        };
+        const queryString = this.queryStringForSearchObject(params.query);
 
-        return this.client.get(url, data);
+        return this.client.get(`/v1/customers/${params.customer_id}/tickets${queryString}`);
     }
 
     /**
      * @api {post} /v2/organizations/{organization_id}/search/tickets
      * @apiName searchOrganizationTickets
-     * @apiDescription Search all tickets of the organization for the given string This searches all strings in the ES document and finds a match if any
-                       of these string contain the given string
+     * @apiDescription Search all tickets of an organization. Capable of returning paginated results.
      * @apiParam {Number} organization_id
+     * @apiParam {String} query_string
+     * @apiParam {SearchOrganizationTicketsQuery} query
      * @apiExample {js} Example:
      *             gigwalk.customers.searchOrganizationTickets({...})
      */
     searchOrganizationTickets(params: SearchOrganizationTicketsParams): APIPromise<SearchOrganizationTicketsData> {
-        const url = '/v1';
+        const queryString = this.queryStringForSearchObject(params.query);
         const data = {
-            params
+            query_string: params.query_string
         };
 
-        return this.client.post(url, data);
+        return this.client.post(`/v2/organizations/${params.organization_id}/search/tickets${queryString}`, data);
     }
 
     /**
      * @api {post} /v2/organizations/{organization_id}/search/tickets/filters
      * @apiName searchOrganizationTicketsWithField
-     * @apiDescription Search all tickets of the org for the given value This searches the specified search_field in the ES document and finds a match only
-                       if the search_field contains the given value
+     * @apiDescription Search all tickets of an organization in the specified search_field. Capable of returning paginated results.
      * @apiParam {Number} organization_id
+     * @apiParam {String} search_field
+     * @apiParam {String} query_string
+     * @apiParam {SearchOrganizationTicketsWithFieldQuery} query
      * @apiExample {js} Example:
      *             gigwalk.customers.searchOrganizationTicketsWithField({...})
      */
     searchOrganizationTicketsWithField(params: SearchOrganizationTicketsWithFieldParams): APIPromise<SearchOrganizationTicketsWithFieldData> {
-        const url = '/v1';
+        const queryString = this.queryStringForSearchObject(params.query);
         const data = {
-            params
+            search_field: params.search_field,
+            query_string: params.query_string
         };
 
-        return this.client.post(url, data);
+        return this.client.post(`/v2/organizations/${params.organization_id}/search/tickets/filters${queryString}`, data);
     }
 
     /**
      * @api {post} /v1/tickets/{ticket_id}/data_items
      * @apiName createTicketDataItem
-     * @apiDescription Create a new data_item for the ticket Create a new data_item using the values specified in the JSON payload
+     * @apiDescription Create a new data_item for the ticket.
      * @apiParam {Number} ticket_id
+     * @apiParam {DataItemTemplate} data_item
      * @apiExample {js} Example:
      *             gigwalk.customers.createTicketDataItem({...})
      */
     createTicketDataItem(params: CreateTicketDataItemParams): APIPromise<CreateTicketDataItemData> {
-        const url = '/v1';
-        const data = {
-            params
-        };
-
-        return this.client.post(url, data);
+        return this.client.post(`/v1/tickets/${params.ticket_id}/data_items`, { ...params.data_item });
     }
 
     /**
      * @api {delete} /v1/tickets/{ticket_id}/data_items/{data_item_id}
      * @apiName deleteTicketDataItem
-     * @apiDescription Delete the specified data_item from the specified ticket This is a hard delete. Data items are stored in mongo.
+     * @apiDescription Delete the specified data_item from the specified ticket. This is a hard delete.
      * @apiParam {Number} ticket_id
      * @apiParam {Number} data_item_id
      * @apiExample {js} Example:
      *             gigwalk.customers.deleteTicketDataItem({...})
      */
     deleteTicketDataItem(params: DeleteTicketDataItemParams): APIPromise<DeleteTicketDataItemData> {
-        const url = '/v1';
-        const data = {
-            params
-        };
-
-        return this.client.delete(url, data);
+        return this.client.delete(`/v1/tickets/${params.ticket_id}/data_items/${params.data_item_id}`);
     }
 
     /**
      * @api {post} /v1/tickets/{ticket_id}/clone
      * @apiName createClonedTicket
-     * @apiDescription Clone the given ticket Create a new ticket by cloning the given ticket. Deep copy, the ticket metadata is copied as well.
-                       The ticket status will always be UNASSIGNED.
+     * @apiDescription Create a new ticket by cloning the given ticket. This is a deep copy: metadata is copied as well. Ticket status will be UNASSIGNED.
      * @apiParam {Number} ticket_id
      * @apiExample {js} Example:
      *             gigwalk.customers.createClonedTicket({...})
      */
     createClonedTicket(params: CreateClonedTicketParams): APIPromise<CreateClonedTicketData> {
-        const url = '/v1';
-        const data = {
-            params
-        };
-
-        return this.client.post(url, data);
+        return this.client.post(`/v1/tickets/${params.ticket_id}/clone`);
     }
 
     /**
      * @api {post} /v1/tickets/{ticket_id}/submit
      * @apiName submitTicket
-     * @apiDescription Submit the given ticket This is a terminal state for the ticket
+     * @apiDescription Submit the given ticket. This is a terminal state for the ticket.
      * @apiParam {Number} ticket_id
      * @apiExample {js} Example:
      *             gigwalk.customers.submitTicket({...})
      */
     submitTicket(params: SubmitTicketParams): APIPromise<SubmitTicketData> {
-        const url = '/v1';
-        const data = {
-            params
-        };
-
-        return this.client.post(url, data);
+        return this.client.post(`/v1/tickets/${params.ticket_id}/submit`);
     }
 
     /**
      * @api {get} /v1/tickets/{ticket_id}
      * @apiName getTicket
-     * @apiDescription Get ticket info. it returns info about the specified ticket.
+     * @apiDescription Get ticket information. it returns information about the specified ticket.
      * @apiParam {Number} ticket_id
+     * @apiParam {GetTicketQuery} query
      * @apiExample {js} Example:
      *             gigwalk.customers.getTicket({...})
      */
     getTicket(params: GetTicketParams): APIPromise<GetTicketData> {
-        const url = '/v1';
-        const data = {
-            params
-        };
+        const queryString = this.queryStringForSearchObject(params.query);
 
-        return this.client.get(url, data);
+        return this.client.get(`/v1/tickets/${params.ticket_id}${queryString}`);
     }
 
     /**
      * @api {post} /v1/tickets/{ticket_id}
      * @apiName searchTicketsWithID
-     * @apiDescription Search tickets. This seems deprecated and the semantics do not look right either. Why would a ticket_id be passed to a search?
-                       You should use only API /v1/tickets/search. The other endpoints are also directed to the search method.
+     * @apiDescription You should use only /v1/tickets/search, other endpoints directed to the search method. Capable of returning paginated results.
      * @apiParam {Number} ticket_id
+     * @apiParam {TicketSearchTemplate} search
+     * @apiParam {SearchTicketsWithIDQuery} query
      * @apiExample {js} Example:
      *             gigwalk.customers.searchTicketsWithID({...})
      */
     searchTicketsWithID(params: SearchTicketsWithIDParams): APIPromise<SearchTicketsWithIDData> {
-        const url = '/v1';
-        const data = {
-            params
-        };
+        const queryString = this.queryStringForSearchObject(params.query);
 
-        return this.client.post(url, data);
+        return this.client.post(`/v1/tickets/${params.ticket_id}${queryString}`, { ...params.search });
     }
 
     /**
      * @api {put} /v1/tickets/{ticket_id}
      * @apiName updateTicket
-     * @apiDescription Edit tickets If the ticket_id is present assign the corresponding ticket. Otherwise perform action to multiple tickets identified
-                       by the data arguments.
+     * @apiDescription Edit ticket(s). If ticket_id is present, assign the corresponding ticket. Otherwise, perform action to multiple tickets.
      * @apiParam {Number} ticket_id
+     * @apiParam {String} action
+     * @apiParam {Array<number>} ticket_ids
+     * @apiParam {String} customer_id
      * @apiExample {js} Example:
      *             gigwalk.customers.updateTicket({...})
      */
     updateTicket(params: UpdateTicketParams): APIPromise<UpdateTicketData> {
-        const url = '/v1';
         const data = {
-            params
+            action: params.action,
+            force: true,
+            ticket_ids: params.ticket_ids,
+            customer_id: params.customer_id
         };
 
-        return this.client.put(url, data);
+        return this.client.put(`/v1/tickets/${params.ticket_id}`, data);
     }
 
     /**
      * @api {get} /v1/tickets
      * @apiName getTickets
-     * @apiDescription Get ticket info. it lists all tickets of the current user's organization.
+     * @apiDescription Gets all tickets of the current user's organization.
      * @apiExample {js} Example:
      *             gigwalk.customers.getTickets({...})
      */
     getTickets(): APIPromise<GetTicketsData> {
-        const url = '/v1';
-        const data = {
-
-        };
-
-        return this.client.get(url, data);
+        return this.client.get('/v1/tickets');
     }
 
     /**
      * @api {post} /v1/tickets
      * @apiName searchTickets
-     * @apiDescription Search tickets. You should use only API /v1/tickets/search. The other endpoints are also directed to the search method.
+     * @apiDescription You should use only /v1/tickets/search, other endpoints directed to the search method. Capable of returning paginated results.
+     * @apiParam {TicketSearchTemplate} search
+     * @apiParam {SearchTicketsQuery} query
      * @apiExample {js} Example:
      *             gigwalk.customers.searchTickets({...})
      */
     searchTickets(params: SearchTicketsParams): APIPromise<SearchTicketsData> {
-        const url = '/v1';
-        const data = {
-            params
-        };
+        const queryString = this.queryStringForSearchObject(params.query);
 
-        return this.client.post(url, data);
+        return this.client.post(`/v1/tickets${queryString}`, { ...params.search });
     }
 
     /**
      * @api {put} /v1/tickets/{ticket_id}/execution_state/{execution_state}
      * @apiName updateTicketWithState
-     * @apiDescription Edit tickets If the ticket_id is present assign the corresponding ticket. Otherwise perform action to multiple tickets identified
-                       by the data arguments.
+     * @apiDescription Edit ticket(s). If ticket_id is present, assign the corresponding ticket. Otherwise, perform action to multiple tickets.
      * @apiParam {Number} ticket_id
-     * @apiParam {Number} execution_state
+     * @apiParam {String} execution_state
+     * @apiParam {String} action
+     * @apiParam {Array<number>} ticket_ids
+     * @apiParam {String} customer_id
      * @apiExample {js} Example:
      *             gigwalk.customers.updateTicketWithState({...})
      */
     updateTicketWithState(params: UpdateTicketWithStateParams): APIPromise<UpdateTicketWithStateData> {
-        const url = '/v1';
         const data = {
-            params
+            action: params.action,
+            ticket_ids: params.ticket_ids,
+            customer_id: params.customer_id
         };
 
-        return this.client.put(url, data);
+        return this.client.put(`/v1/tickets/${params.ticket_id}/execution_state/${params.execution_state}`, data);
     }
 
     /**
      * @api {get} /v1/organizations/{organization_id}/tickets
      * @apiName getOrganizationTickets
-     * @apiDescription Get info about all tickets of the organization This is a paginated query
+     * @apiDescription Get information about all tickets of the organization. Capable of returning paginated results.
      * @apiParam {Number} organization_id
+     * @apiParam {GetOrganizationTicketsQuery} query
      * @apiExample {js} Example:
      *             gigwalk.customers.getOrganizationTickets({...})
      */
     getOrganizationTickets(params: GetOrganizationTicketsParams): APIPromise<GetOrganizationTicketsData> {
-        const url = '/v1';
-        const data = {
-            params
-        };
+        const queryString = this.queryStringForSearchObject(params.query);
 
-        return this.client.get(url, data);
+        return this.client.get(`/v1/organizations/${params.organization_id}/tickets${queryString}`);
     }
 
     /**
      * @api {post} /v1/organizations/{organization_id}/tickets/search
      * @apiName searchOrganizationTicketsWithCriteria
-     * @apiDescription Search tickets filtered by the organization This returns tickets of the specified organization that match the search criteria
-                       specified in JSON
+     * @apiDescription Search tickets filtered by organization. Capable of returning paginated results.
      * @apiParam {Number} organization_id
+     * @apiParam {TicketSearchTemplate} search
+     * @apiParam {SearchOrganizationTicketsWithCriteriaQuery} query
      * @apiExample {js} Example:
      *             gigwalk.customers.searchOrganizationTicketsWithCriteria({...})
      */
     searchOrganizationTicketsWithCriteria(params: SearchOrganizationTicketsWithCriteriaParams): APIPromise<SearchOrganizationTicketsWithCriteriaData> {
-        const url = '/v1';
-        const data = {
-            params
-        };
+        const queryString = this.queryStringForSearchObject(params.query);
 
-        return this.client.post(url, data);
+        return this.client.post(`/v1/organizations/${params.organization_id}/tickets/search${queryString}`, { ...params.search });
     }
 
     /**
      * @api {get} /v1/subscriptions/{subscription_id}/tickets
      * @apiName getSubscriptionTickets
-     * @apiDescription Get info about all tickets of the organization_subscription (project) This is a paginated query
+     * @apiDescription Get information of all tickets in organization_subscription (project). Capable of returning paginated results.
      * @apiParam {Number} subscription_id
+     * @apiParam {GetSubscriptionTicketsQuery} query
      * @apiExample {js} Example:
      *             gigwalk.customers.getSubscriptionTickets({...})
      */
     getSubscriptionTickets(params: GetSubscriptionTicketsParams): APIPromise<GetSubscriptionTicketsData> {
-        const url = '/v1';
-        const data = {
-            params
-        };
+        const queryString = this.queryStringForSearchObject(params.query);
 
-        return this.client.get(url, data);
+        return this.client.get(`/v1/subscriptions/${params.subscription_id}/tickets${queryString}`);
     }
 
     /**
      * @api {post} /v1/subscriptions/{subscription_id}/tickets/search
      * @apiName searchSubscriptionTickets
-     * @apiDescription Search tickets filtered by the organization_subscription (project) This returns tickets of the specified organization_subscription
-                       that match the search criteria specified in JSON
+     * @apiDescription Search tickets filtered by the organization_subscription (project). Capable of returning paginated results.
      * @apiParam {Number} subscription_id
+     * @apiParam {TicketSearchTemplate} search
+     * @apiParam {SearchSubscriptionTicketsQuery} query
      * @apiExample {js} Example:
      *             gigwalk.customers.searchSubscriptionTickets({...})
      */
     searchSubscriptionTickets(params: SearchSubscriptionTicketsParams): APIPromise<SearchSubscriptionTicketsData> {
-        const url = '/v1';
-        const data = {
-            params
-        };
+        const queryString = this.queryStringForSearchObject(params.query);
 
-        return this.client.post(url, data);
+        return this.client.post(`/v1/subscriptions/${params.subscription_id}/tickets/search${queryString}`, { ...params.search });
     }
 
     /**
      * @api {get} /v1/tickets/{ticket_id}/events
      * @apiName getTicketEvents
-     * @apiDescription Return the events of the given ticket
+     * @apiDescription Return events of ticket. Capable of returning paginated results.
      * @apiParam {Number} ticket_id
+     * @apiParam {GetTicketEventsQuery} query
      * @apiExample {js} Example:
      *             gigwalk.customers.getTicketEvents({...})
      */
     getTicketEvents(params: GetTicketEventsParams): APIPromise<GetTicketEventsData> {
-        const url = '/v1';
-        const data = {
-            params
-        };
+        const queryString = this.queryStringForSearchObject(params.query);
 
-        return this.client.get(url, data);
+        return this.client.get(`/v1/tickets/${params.ticket_id}/events${queryString}`);
     }
 
     /**
      * @api {get} /v1/ticket_map
      * @apiName getTicketsInArea
-     * @apiDescription Return all applicable tickets that are within the given radius of the specified location Geo-Search. Return the locations of all
-                       applicable tickets within 50 KM of the input location for a map display. Unassigned tickets that fit the certification criteria,
-                       and that are not due yet are returned
+     * @apiDescription Return all applicable tickets within a radius of the specified location for a map display. Only nassigned tickets that fit the
+                       certification criteria and are not yet due are returned.
      * @apiParam {Number} map_lat
      * @apiParam {Number} map_lon
      * @apiParam {Number} radius
@@ -628,11 +733,12 @@ export default class Tickets extends Resource {
      *             gigwalk.customers.getTicketsInArea({...})
      */
     getTicketsInArea(params: GetTicketsInAreaParams): APIPromise<GetTicketsInAreaData> {
-        const url = '/v1';
         const data = {
-            params
+            map_lat: params.map_lat,
+            map_lon: params.map_lon,
+            radius: params.radius,
         };
 
-        return this.client.get(url, data);
+        return this.client.get('/v1/ticket_map', data);
     }
 }

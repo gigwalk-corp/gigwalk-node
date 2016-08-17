@@ -11,8 +11,8 @@ type GetData = [{
 export default class Versions extends Resource {
     /**
      * @api {get} /v1/versions/current
-     * @apiName Get
-     * @apiDescription Get Version. Get the current API version, and the minimum mobile apps versions allowed
+     * @apiName get
+     * @apiDescription Get version. Get the current API version, and the minimum mobile apps versions allowed.
      * @apiExample {js} Example:
      *             gigwalk.versions.get({...})
      */

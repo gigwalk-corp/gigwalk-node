@@ -1,0 +1,66 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "id": "http://gigwalk.com/src/api/groups/groups-schema.json#",
+    "type": "object",
+    "properties": {
+        "allOf": [
+            { "$ref": "http://gigwalk.com/src/api/base-schema.json#" },
+            { "properties": {
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "parent": {
+                                "type": ["null", "object"]
+                            },
+                            "sub_group_count": {
+                                "type": "integer"
+                            },
+                            "name": {
+                                "type": "string"
+                            },
+                            "parent_id": {
+                                "type": "integer"
+                            },
+                            "member_count": {
+                                "type": "integer"
+                            },
+                            "organization_data": {
+                                "type": "array"
+                            },
+                            "organization_id": {
+                                "type": "integer"
+                            },
+                            "id": {
+                                "type": "integer"
+                            },
+                            "sub_groups": {
+                                "type": "array"
+                            },
+                            "owners": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object"
+                                }
+                            }
+                        },
+                        "required": [
+                            "parent",
+                            "sub_group_count",
+                            "name",
+                            "parent_id",
+                            "member_count",
+                            "organization_data",
+                            "organization_id",
+                            "id"
+                        ]
+                    }
+                }
+            },
+            "required": [
+                "data"
+                ] }
+            ]
+        }
+    }
