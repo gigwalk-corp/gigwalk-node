@@ -68,7 +68,7 @@ export default class GigwalkAPI {
     ticketEvents: TicketEvents;
     ticketMetadata: TicketMetadata;
     tickets: Tickets;
-    verions: Versions;
+    versions: Versions;
 
     constructor(config?: GigwalkAPIConfig = {}) {
         const client = new GigwalkAxios({ baseURL: `https://${config.hostname || 'api.app.gigwalk.com'}` });
