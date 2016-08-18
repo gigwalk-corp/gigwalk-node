@@ -2,7 +2,7 @@
 import Resource from '../resource';
 import type { APIPromise } from '../resource';
 import type {
-    searchOrganizationParams
+    SearchOrganizationParams
 } from './types';
 
 export default class OrganizationSearch extends Resource {
@@ -16,7 +16,7 @@ export default class OrganizationSearch extends Resource {
      * @apiExample {js} Example:
      *             gigwalk.organizationSearch.search({...})
      */
-    search(params: searchOrganizationParams): APIPromise<any> {
+    search(params: SearchOrganizationParams): APIPromise<any> {
         const queryString = (params) ? this.queryStringForSearchObject(params.query) : '';
 
         return this.client.get(`/v1/organizations/search${queryString}`);
