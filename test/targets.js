@@ -16,7 +16,7 @@ describe('Targets', () => {
     let targetID: number;
 
     it('should be able to create a target', (done) => {
-        targets.createOrganizationTarget({
+        targets.create({
             organization_id: organizationID,
             observation_target: {
                 observation_target_type_id: 1,
@@ -32,7 +32,7 @@ describe('Targets', () => {
             .catch(done);
     }).timeout(10000);
     it.skip('should be able to get a specific target', (done) => {
-        targets.getOrganizationTarget({
+        targets.get({
             organization_id: organizationID,
             observation_target_id: targetID
         })
@@ -44,7 +44,7 @@ describe('Targets', () => {
             .catch(done);
     });
     it('should be able to update a specific target', (done) => {
-        targets.updateOrganizationTarget({
+        targets.update({
             organization_id: organizationID,
             observation_target_id: targetID,
             observation_target: {
@@ -59,7 +59,7 @@ describe('Targets', () => {
             .catch(done);
     }).timeout(10000);
     it('should be able to search targets in an organization', (done) => {
-        targets.searchOrganizationTargets({
+        targets.search({
             organization_id: organizationID,
             query_string: randString
         })
@@ -71,7 +71,7 @@ describe('Targets', () => {
             .catch(done);
     }).timeout(10000);
     it('should be able to delete a specific target', (done) => {
-        targets.updateOrganizationTarget({
+        targets.update({
             organization_id: organizationID,
             observation_target_id: targetID,
             observation_target: {

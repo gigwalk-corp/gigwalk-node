@@ -1,70 +1,37 @@
 // @flow
 import Resource from '../resource';
 import type { APIPromise } from '../resource';
-
-type TicketEventTemplate = {
-    ticket_event_type: string,
-    ticket_event_date: string,
-    ticket_event_data: {}
-}
-
-type CreateTicketEventParams = {
-    ticket_id: number,
-    ticket_event: TicketEventTemplate
-}
-
-type DeleteTicketEventParams = {
-    ticket_event_id: number
-}
-
-type TicketEventSchema = {
-    id: string,
-    ticket_id: number,
-    ticket_event_type: string,
-    ticket_event_date: string,
-    ticket_event_data: Object,
-    created_customer: {
-        id: number,
-        first_name: string,
-        last_name: string,
-        email: string,
-        photo_url: string
-    }
-}
-
-type CreateTicketEventData = [
-    TicketEventSchema
-]
-
-type DeleteTicketEventData = [
-    number
-]
+import type {
+    TicketEvent,
+    CreateTicketEventParams,
+    DeleteTicketEventParams
+} from './types.js';
 
 export default class TicketEvents extends Resource {
     /**
-     * @api {post} /v1/tickets/{ticket_id}/events
+     * @api {post} /v1/tickets/:ticket_id/events create
      * @apiGroup TicketEvents
-     * @apiName createTicketEvent
+     * @apiName create
      * @apiDescription Create a new ticket event for ticket.
      * @apiParam {Number} ticket_id
      * @apiParam {Object} ticket_event
      * @apiExample {js} Example:
-     *             gigwalk.ticketEvents.createTicketEvent({...})
+     *             gigwalk.ticketEvents.create({...})
      */
-    createTicketEvent(params: CreateTicketEventParams): APIPromise<CreateTicketEventData> {
+    create(params: CreateTicketEventParams): APIPromise<[TicketEvent]> {
         return this.client.post(`/v1/tickets/${params.ticket_id}/events`, { ...params.ticket_event });
     }
 
     /**
-     * @api {delete} /v1/ticket_events/{ticket_event_id}
+     * @api {delete} /v1/ticket_events/:ticket_event_id delete
      * @apiGroup TicketEvents
-     * @apiName deleteTicketEvent
+     * @apiName delete
      * @apiDescription Delete the specified ticket event.
      * @apiParam {Number} ticket_event_id
      * @apiExample {js} Example:
-     *             gigwalk.ticketEvents.deleteTicketEvent({...})
+     *             gigwalk.ticketEvents.delete({...})
      */
-    deleteTicketEvent(params: DeleteTicketEventParams): APIPromise<DeleteTicketEventData> {
+    delete(params: DeleteTicketEventParams): APIPromise<[number]> {
         return this.client.delete(`/v1/ticket_events/${params.ticket_event_id}`);
     }
 }
