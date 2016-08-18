@@ -11,13 +11,13 @@ describe('Signup', () => {
     });
     const signup = new Signup(client);
 
-    const email: string = 'gig@gigwalk.com';
+    const customerEmail: string = 'gig@gigwalk.com';
     const organizationID: number = 4;
 
     it('should be able to create a user', (done) => {
         signup.create({
             user: {
-                email: email,
+                email: customerEmail,
                 organization_id: organizationID,
                 first_name: 'string',
                 last_name: 'string'
@@ -33,7 +33,7 @@ describe('Signup', () => {
     it('should be able to bulk create users', (done) => {
         signup.bulkCreate({
             users: [{
-                email: email,
+                email: customerEmail,
                 organization_id: organizationID,
                 first_name: 'string',
                 last_name: 'string'

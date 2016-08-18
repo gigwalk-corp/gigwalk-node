@@ -2,7 +2,7 @@ import RequestProjectReview from '../src/api/requestProjectReview/index';
 import axios from 'axios';
 import schema from '../src/api/requestProjectReview/requestProjectReview-schema.json';
 
-describe.only('Request Project Review', () => {
+describe('Request Project Review', () => {
     const client = axios.create({
         baseURL,
         headers: {
