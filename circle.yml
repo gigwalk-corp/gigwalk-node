@@ -2,6 +2,13 @@ machine:
   node:
     version: 6.3.1
 
+dependencies:
+  pre:
+    - npm set progress=false
+    - npm prune
+  override:
+    - npm install
+
 test:
   post:
     - npm run flow
@@ -12,4 +19,4 @@ deployment:
     branch: master
     owner: gigwalk-corp
     commands:
-        - npm run semantic-release || true
+      - npm run semantic-release || true
