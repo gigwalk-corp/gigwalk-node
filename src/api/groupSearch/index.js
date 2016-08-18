@@ -2,7 +2,9 @@
 import Resource from '../resource';
 import type { APIPromise } from '../resource';
 import type {
-
+    SearchGroupWithTypeParams,
+    SearchGroupParams,
+    SearchGroupTicketsParams
 } from './types';
 
 export default class GroupSearch extends Resource {
@@ -18,7 +20,7 @@ export default class GroupSearch extends Resource {
      * @apiExample {js} Example:
      *             gigwalk.groupSearch.searchWithType({...})
      */
-    searchWithType(params: any): APIPromise<any> {
+    searchWithType(params: SearchGroupWithTypeParams): APIPromise<any> {
         const queryString = this.queryStringForSearchObject(params.query);
 
         return this.client.get(`/v1/groups/${params.group_id}/search/${params.index_type}${queryString}`);
@@ -34,7 +36,7 @@ export default class GroupSearch extends Resource {
      * @apiExample {js} Example:
      *             gigwalk.groupSearch.search({...})
      */
-    search(params: any): APIPromise<any> {
+    search(params: SearchGroupParams): APIPromise<any> {
         const queryString = this.queryStringForSearchObject(params.query);
 
         return this.client.post(`/v2/groups/${params.group_id}/search/tickets${queryString}`);
@@ -50,7 +52,7 @@ export default class GroupSearch extends Resource {
      * @apiExample {js} Example:
      *             gigwalk.groupSearch.searchTickets({...})
      */
-    searchTickets(params: any): APIPromise<any> {
+    searchTickets(params: SearchGroupTicketsParams): APIPromise<any> {
         return this.client.post(`/v2/groups/${params.group_id}/search/tickets/filters`, { ...params.query });
     }
 }

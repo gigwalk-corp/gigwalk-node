@@ -18,7 +18,7 @@ describe('Loction Lists', () => {
     let fileUploadID: number;
 
     it('should be able to get all location lists in an organization', (done) => {
-        locationLists.getOrganizationLocationLists({
+        locationLists.getForOrganization({
             organization_id: organizationID,
             query: {
                 limit: 2
@@ -32,7 +32,7 @@ describe('Loction Lists', () => {
             .catch(done);
     }).timeout(10000);
     it('should be able to create a new location list', (done) => {
-        locationLists.createOrganizationLocationList({
+        locationLists.createForOrganization({
             organization_id: organizationID,
             location_list: {
                 name: 'string',
@@ -49,7 +49,7 @@ describe('Loction Lists', () => {
             .catch(done);
     }).timeout(10000);
     it('should be able to get a specific location list', (done) => {
-        locationLists.getLocationList({
+        locationLists.get({
             organization_location_list_id: locationListID
         })
             .then((res) => {
@@ -60,7 +60,7 @@ describe('Loction Lists', () => {
             .catch(done);
     }).timeout(10000);
     it('should be able to update a specific location list', (done) => {
-        locationLists.updateLocationList({
+        locationLists.update({
             organization_location_list_id: locationListID,
             location_list: {
                 name: 'string2'
@@ -74,7 +74,7 @@ describe('Loction Lists', () => {
             .catch(done);
     }).timeout(10000);
     it('should be able to add locations to a list', (done) => {
-        locationLists.addLocationsToList({
+        locationLists.addLocations({
             organization_location_list_id: locationListID,
             locations: [
                 locationIDs[0],
@@ -90,7 +90,7 @@ describe('Loction Lists', () => {
             .catch(done);
     }).timeout(10000);
     it('should be able to get locations in a list', (done) => {
-        locationLists.getLocationsInList({
+        locationLists.getLocations({
             organization_location_list_id: locationListID,
             locations: [
                 locationIDs[0]
@@ -104,7 +104,7 @@ describe('Loction Lists', () => {
             .catch(done);
     }).timeout(10000);
     it('should be able to search locations in a list', (done) => {
-        locationLists.searchLocationList({
+        locationLists.searchList({
             organization_location_list_id: locationListID,
             query_string: 'test'
         })
@@ -116,7 +116,7 @@ describe('Loction Lists', () => {
             .catch(done);
     }).timeout(10000);
     it('should be able to remove locations in a list', (done) => {
-        locationLists.removeLocationsFromList({
+        locationLists.removeLocations({
             organization_location_list_id: locationListID,
             locations: [
                 locationIDs[0]
@@ -131,7 +131,7 @@ describe('Loction Lists', () => {
             .catch(done);
     }).timeout(10000);
     it('should be able to delete a location from a list', (done) => {
-        locationLists.deleteLocationFromList({
+        locationLists.deleteLocation({
             organization_location_list_id: locationListID,
             location_id: locationIDs[1]
         })
@@ -143,7 +143,7 @@ describe('Loction Lists', () => {
             .catch(done);
     }).timeout(10000);
     it('should be able to delete a location from an organization list', (done) => {
-        locationLists.deleteLocationFromList({
+        locationLists.deleteLocationForOrganization({
             organization_location_list_id: locationListID,
             location_id: locationIDs[2]
         })
@@ -155,7 +155,7 @@ describe('Loction Lists', () => {
             .catch(done);
     }).timeout(10000);
     it('should be able to upload a location list from a file', (done) => {
-        locationLists.createOrganizationLocationListUsingFile({
+        locationLists.createForOrganizationWithFile({
             organization_id: organizationID,
             location_list_name: 'string',
             s3_keys: [
@@ -171,7 +171,7 @@ describe('Loction Lists', () => {
             .catch(done);
     }).timeout(10000);
     it('should be able to get info about a lists file upload', (done) => {
-        locationLists.getFileInfoForLocationList({
+        locationLists.getFileInfo({
             location_list_id: locationListID2
         })
             .then((res) => {
@@ -183,7 +183,7 @@ describe('Loction Lists', () => {
             .catch(done);
     }).timeout(10000);
     it('should be able to get info about an organization lists file upload', (done) => {
-        locationLists.getFileInfoForOrganizationLocationList({
+        locationLists.getFileInfoForOrganization({
             organization_id: organizationID,
             location_list_id: locationListID2
         })
@@ -195,7 +195,7 @@ describe('Loction Lists', () => {
             .catch(done);
     }).timeout(10000);
     it('should be able to get file upload unresolved locations', (done) => {
-        locationLists.getUnresolvedLocations({
+        locationLists.getUnresolved({
             file_upload_id: fileUploadID,
             location_list_id: locationListID2
         })
@@ -208,11 +208,13 @@ describe('Loction Lists', () => {
             })
             .catch(done);
     }).timeout(10000);
-    it('should be able to update location adresses via ID', (done) => {
-        locationLists.getFileInfoForOrganizationLocationList({
-            organization_id: organizationID,
-            location_list_id: locationListID2,
-            location_id: 0
+    it.skip('should be able to update location adresses via ID', (done) => {
+        locationLists.updateAddress({
+            file_upload_id: fileUploadID,
+            location_list_id: locationListID,
+            location_id: locationIDs[0],
+            csv: 1,
+            key: 'string'
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
@@ -220,9 +222,9 @@ describe('Loction Lists', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    });
     it('should be able to delete a specific location list', (done) => {
-        locationLists.deleteLocationList({
+        locationLists.delete({
             organization_location_list_id: locationListID
         })
             .then((res) => {
@@ -233,7 +235,7 @@ describe('Loction Lists', () => {
             .catch(done);
     }).timeout(10000);
     it.skip('should be able to delete a specific organization location list', (done) => {
-        locationLists.deleteOrganizationLocationLists({
+        locationLists.deleteForOrganization({
             organization_id: organizationID,
             location_list_ids: [
                 locationListID2
