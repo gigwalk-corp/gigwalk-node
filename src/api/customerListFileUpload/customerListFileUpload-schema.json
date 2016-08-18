@@ -1,0 +1,57 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "id": "http://gigwalk.com/src/api/customerListFileUpload/customerListFileUpload-schema.json#",
+    "type": "object",
+    "properties": {
+        "allOf": [
+            { "$ref": "http://gigwalk.com/src/api/base-schema.json#" },
+            { "properties": {
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "integer"
+                            },
+                            "customer_count": {
+                                "type": "integer"
+                            },
+                            "file_name": {
+                                "type": "string"
+                            },
+                            "status": {
+                                "type": "string"
+                            },
+                            "date_updated": {
+                                "type": "string"
+                            },
+                            "customer_row_count": {
+                                "type": "integer"
+                            },
+                            "organization_id": {
+                                "type": "integer"
+                            },
+                            "date_created": {
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "id",
+                            "customer_count",
+                            "file_name",
+                            "status",
+                            "date_updated",
+                            "customer_row_count",
+                            "organization_id",
+                            "date_created"
+                        ]
+                    }
+                }
+            },
+            "required": [
+                "data"
+                ] }
+            ]
+        }
+    }

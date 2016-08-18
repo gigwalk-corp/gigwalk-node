@@ -22,8 +22,7 @@ export default class DataTypeAttachment extends Resource {
         const data = {
             url: params.url
         };
-
-        return this.client.delete(`/v1/data_types/${params.data_type_id}/attachments`, { data });
+        return this.client.delete(`/v1/data_types/${params.data_type_id}/attachments`, data);
     }
 
     /**
