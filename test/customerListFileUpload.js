@@ -14,7 +14,7 @@ describe('Customer List File Upload', () => {
     const organizationID: number = 4;
     let customerListFile: number;
 
-    it('should be able to ', (done) => {
+    it('should be able to upload a customer list file', (done) => {
         customerListFileUpload.upload({
             organization_id: organizationID,
             customer_list_file: {
@@ -30,7 +30,7 @@ describe('Customer List File Upload', () => {
             })
             .catch(done);
     }).timeout(10000);
-    it('should be able to ', (done) => {
+    it('should be able to get a customer list file', (done) => {
         customerListFileUpload.get({
             customer_file_id: customerListFile
         })
@@ -41,7 +41,7 @@ describe('Customer List File Upload', () => {
             })
             .catch(done);
     }).timeout(10000);
-    it('should be able to ', (done) => {
+    it('should be able to get an organization customer list file', (done) => {
         customerListFileUpload.getForOrganization({
             organization_id: organizationID,
             customer_file_id: customerListFile
