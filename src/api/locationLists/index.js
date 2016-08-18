@@ -28,6 +28,7 @@ import type {
 export default class LocationLists extends Resource {
     /**
      * @api {delete} /v1/organization_location_lists/:organization_location_list_id delete
+     * @apiGroup LocationLists
      * @apiName delete
      * @apiDescription Delete the specified location list only if location list is associated with an active organization_subscription. This is a soft delete.
      * @apiParam {Number} organization_location_list_id
@@ -40,6 +41,7 @@ export default class LocationLists extends Resource {
 
     /**
      * @api {get} /v1/organization_location_lists/:organization_location_list_id get
+     * @apiGroup LocationLists
      * @apiName get
      * @apiDescription Get location list.
      * @apiParam {Number} organization_location_list_id
@@ -52,13 +54,14 @@ export default class LocationLists extends Resource {
 
     /**
      * @api {put} /v1/organization_location_lists/:organization_location_list_id update
+     * @apiGroup LocationLists
      * @apiName update
      * @apiDescription Modify location list. Updates can be done in three ways:
                        1. Specified in JSON format - ('name': location_list_name, 'status': ACTIVE/INACTIVE/ARCHIVE/DELETED, 'locations': array of locations).
                        2. Addresses can be uploaded from a csv file.
                        3. Location_ids can be uploaded from a spreadsheet.
      * @apiParam {Number} organization_location_list_id
-     * @apiParam {LocationListTemplate} location_list
+     * @apiParam {Object} location_list
      * @apiExample {js} Example:
      *             gigwalk.locationLists.update({...})
      */
@@ -68,6 +71,7 @@ export default class LocationLists extends Resource {
 
     /**
      * @api {delete} /v1/organizations/:organization_id/location_lists deleteForOrganization
+     * @apiGroup LocationLists
      * @apiName deleteForOrganization
      * @apiDescription Delete the specified location list only if location list is associated with an active organization_subscription. This is a soft delete.
      * @apiParam {Number} organization_id
@@ -85,10 +89,11 @@ export default class LocationLists extends Resource {
 
     /**
      * @api {get} /v1/organizations/:organization_id/location_lists getForOrganization
+     * @apiGroup LocationLists
      * @apiName getForOrganization
      * @apiDescription Get all location lists that belong to the given organization. Capable of returning paginated results.
      * @apiParam {Number} organization_id
-     * @apiParam {GetOrganizationLocationListsQuery} query
+     * @apiParam {Object} query
      * @apiExample {js} Example:
      *             gigwalk.locationLists.getForOrganization({...})
      */
@@ -100,13 +105,14 @@ export default class LocationLists extends Resource {
 
     /**
      * @api {post} /v1/organizations/:organization_id/location_lists createForOrganization
+     * @apiGroup LocationLists
      * @apiName createForOrganization
      * @apiDescription Create a location list for the organization. Creation can be done in three ways:
                        1. Specified in JSON format - ('name': location_list_name, 'status': ACTIVE/INACTIVE/ARCHIVE/DELETED, 'locations': array of locations).
                        2. Addresses can be uploaded from a csv file.
                        3. Location_ids can be uploaded from a spreadsheet.
      * @apiParam {Number} organization_id
-     * @apiParam {LocationListTemplate} location_list
+     * @apiParam {Object} location_list
      * @apiExample {js} Example:
      *             gigwalk.locationLists.createForOrganization({...})
      */
@@ -116,6 +122,7 @@ export default class LocationLists extends Resource {
 
     /**
      * @api {delete} /v1/organization_location_lists/:organization_location_list_id/locations/:location_id deleteLocationForOrganization
+     * @apiGroup LocationLists
      * @apiName deleteLocationForOrganization
      * @apiDescription Delete location from the specified location list. The location is removed from the location list.
      * @apiParam {Number} organization_location_list_id
@@ -129,6 +136,7 @@ export default class LocationLists extends Resource {
 
     /**
      * @api {delete} /v1/location_lists/:organization_location_list_id/locations/:location_id deleteLocation
+     * @apiGroup LocationLists
      * @apiName deleteLocation
      * @apiDescription Delete location from the specified location list. The location is removed from the location list.
      * @apiParam {Number} organization_location_list_id
@@ -142,10 +150,11 @@ export default class LocationLists extends Resource {
 
     /**
      * @api {get} /v1/location_lists/:organization_location_list_id/locations getLocations
+     * @apiGroup LocationLists
      * @apiName getLocations
      * @apiDescription Get all locations of the given location list. Capable of returning paginated results.
      * @apiParam {Number} organization_location_list_id
-     * @apiParam {GetLocationsInListQuery} query
+     * @apiParam {Object} query
      * @apiExample {js} Example:
      *             gigwalk.locationLists.getLocations({...})
      */
@@ -157,6 +166,7 @@ export default class LocationLists extends Resource {
 
     /**
      * @api {post} /v1/location_lists/:organization_location_list_id/locations addLocations
+     * @apiGroup LocationLists
      * @apiName addLocations
      * @apiDescription Add location ids specified in JSON payload to location list.
      * @apiParam {Number} organization_location_list_id
@@ -179,6 +189,7 @@ export default class LocationLists extends Resource {
 
     /**
      * @api {put} /v1/location_lists/:organization_location_list_id/locations removeLocations
+     * @apiGroup LocationLists
      * @apiName removeLocations
      * @apiDescription Remove location ids specified in JSON payload from location list.
      * @apiParam {Number} organization_location_list_id
@@ -197,10 +208,11 @@ export default class LocationLists extends Resource {
 
     /**
      * @api {post} /v1/location_lists/:organization_location_list_id/search/locations searchList
+     * @apiGroup LocationLists
      * @apiName searchList
      * @apiDescription Search locations in a location list. Can search for in title, address, administrative area level 1/2 or country
      * @apiParam {Number} organization_location_list_id
-     * @apiParam {SearchLocationListQuery} query
+     * @apiParam {Object} query
      * @apiExample {js} Example:
      *             gigwalk.locationLists.searchList({...})
      */
@@ -212,6 +224,7 @@ export default class LocationLists extends Resource {
 
     /**
      * @api {get} /v1/location_lists/:location_list_id/upload getFileInfo
+     * @apiGroup LocationLists
      * @apiName getFileInfoForLocationList
      * @apiDescription Get information about the file that was used to upload the location list.
      * @apiParam {Number} location_list_id
@@ -224,6 +237,7 @@ export default class LocationLists extends Resource {
 
     /**
      * @api {get} /v1/organizations/:organization_id/location_lists/:location_list_id/upload getFileInfoForOrganization
+     * @apiGroup LocationLists
      * @apiName getFileInfoForOrganizationLocationList
      * @apiDescription Get information about the file that was used to upload the location list.
      * @apiParam {Number} organization_id
@@ -237,6 +251,7 @@ export default class LocationLists extends Resource {
 
     /**
      * @api {post} /v1/organizations/:organization_id/location_lists/upload createForOrganizationWithFile
+     * @apiGroup LocationLists
      * @apiName createOrganizationLocationListUsingFile
      * @apiDescription Create location list using an Amazon s3 uploaded file.
      * @apiParam {Number} organization_id
@@ -256,6 +271,7 @@ export default class LocationLists extends Resource {
 
     /**
      * @api {get} /v1/location_lists/:location_list_id/upload/:file_upload_id/unresolved_locations getUnresolved
+     * @apiGroup LocationLists
      * @apiName getUnresolved
      * @apiDescription Update location address. Either a JSON payloa or file upload may be used as input.
      * @apiParam {Number} file_upload_id
@@ -269,6 +285,7 @@ export default class LocationLists extends Resource {
 
     /**
      * @api {put} /v1/location_lists/:location_list_id/upload/:file_upload_id/unresolved_locations/:location_id updateAddress
+     * @apiGroup LocationLists
      * @apiName updateAddress
      * @apiDescription Update location address. Either a JSON payload or file upload may be used as input.
      * @apiParam {Number} file_upload_id
@@ -276,7 +293,7 @@ export default class LocationLists extends Resource {
      * @apiParam {Number} location_id
      * @apiParam {Number} csv
      * @apiParam {String} key
-     * @apiParam {Array<AltSimpleLocationTemplate>} location_data_array
+     * @apiParam {Array<Object>} location_data_array
      * @apiExample {js} Example:
      *             gigwalk.locationLists.updateAddress({...})
      */

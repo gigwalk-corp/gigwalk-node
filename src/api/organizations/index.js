@@ -142,11 +142,12 @@ type CreateOrganizationData = [ // NEED TO CHECK
 export default class Organzations extends Resource {
     /**
      * @api {delete} /v1/organizations/{organization_id}
+     * @apiGroup Organizations
      * @apiName deleteOrganization
      * @apiDescription Delete organization.
      * @apiParam {Number} organization_id
      * @apiExample {js} Example:
-     *             gigwalk.customers.deleteOrganization({...})
+     *             gigwalk.organizations.deleteOrganization({...})
      */
     deleteOrganization(params: DeleteOrganizationParams): APIPromise<DeleteOrganizationData> {
         return this.client.delete(`/v1/organizations/${params.organization_id}`);
@@ -154,11 +155,12 @@ export default class Organzations extends Resource {
 
     /**
      * @api {get} /v1/organizations/{organization_id}
+     * @apiGroup Organizations
      * @apiName getOrganization
      * @apiDescription Get organization.
      * @apiParam {Number} organization_id
      * @apiExample {js} Example:
-     *             gigwalk.customers.getOrganization({...})
+     *             gigwalk.organizations.getOrganization({...})
      */
     getOrganization(params: GetOrganizationParams): APIPromise<GetOrganizationData> {
         return this.client.get(`/v1/organizations/${params.organization_id}`);
@@ -166,14 +168,15 @@ export default class Organzations extends Resource {
 
     /**
      * @api {put} /v1/organizations/{organization_id}
+     * @apiGroup Organizations
      * @apiName updateOrganization
      * @apiDescription Update organization information. The endpoint can also be used to update the company logo. A file with
                        name 'logo' has to be added in a multipart form in order to do that. For example, the following curl:
                        - curl -X PUT http://stage-api.apps.gigwalk.com/v1/organizations/7 -F logo=@path/to/file.png --user user:password
      * @apiParam {Number} organization_id
-     * @apiParam {OrganizationTemplate} organization
+     * @apiParam {Object} organization
      * @apiExample {js} Example:
-     *             gigwalk.customers.updateOrganization({...})
+     *             gigwalk.organizations.updateOrganization({...})
      */
     updateOrganization(params: UpdateOrganizationParams): APIPromise<UpdateOrganizationData> {
         return this.client.put(`/v1/organizations/${params.organization_id}`, { ...params.organization });
@@ -181,11 +184,12 @@ export default class Organzations extends Resource {
 
     /**
      * @api {get} /v1/organizations
+     * @apiGroup Organizations
      * @apiName getOrganizations
      * @apiDescription Get all organizations. Capable of returning paginated results.
-     * @apiParam {GetOrganizationsQuery} query
+     * @apiParam {Object} query
      * @apiExample {js} Example:
-     *             gigwalk.customers.getOrganizations({...})
+     *             gigwalk.organizations.getOrganizations({...})
      */
     getOrganizations(params: GetOrganizationsParams): APIPromise<GetOrganizationsData> {
         const queryString = (params) ? this.queryStringForSearchObject(params.query) : '';
@@ -195,11 +199,12 @@ export default class Organzations extends Resource {
 
     /**
      * @api {post} /v1/organizations
+     * @apiGroup Organizations
      * @apiName createOrganization
      * @apiDescription Crete organization. Only super-admins and above can create or update organization information.
-     * @apiParam {OrganizationTemplate} organization
+     * @apiParam {Object} organization
      * @apiExample {js} Example:
-     *             gigwalk.customers.createOrganization({...})
+     *             gigwalk.organizations.createOrganization({...})
      */
     createOrganization(params: CreateOrganizationParams): APIPromise<CreateOrganizationData> {
         return this.client.post('/v1/organizations', { ...params.organization });

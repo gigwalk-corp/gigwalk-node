@@ -1,172 +1,47 @@
 // @flow
 import Resource from '../resource';
 import type { APIPromise } from '../resource';
-
-type LocationTemplate = {
-    title: string,
-    locality: string,
-    administrative_area_level_1: string,
-    administrative_area_level_2?: string,
-    status?: string,
-    tzid?: string,
-    country: string,
-    postal_code: string,
-    latitude: number,
-    longitude: number,
-    formatted_address: string
-}
-
-type GetLocationsQuery = {
-    limit?: number,
-    offset?: number
-}
-
-type GetLocationsParams = {
-    query?: GetLocationsQuery
-}
-
-type CreateLocationsParams = {
-    locations: Array<LocationTemplate>
-}
-
-type GetLocationQuery = {
-    limit?: number,
-    offset?: number
-}
-
-type GetLocationParams = {
-    location_id: number,
-    query?: GetLocationQuery
-}
-
-type GetOrganizationLocationsQuery = {
-    limit?: number,
-    offset?: number
-}
-
-type GetOrganizationLocationsParams = {
-    organization_id: number,
-    query?: GetOrganizationLocationsQuery
-}
-
-type CreateOrganizationLocationsParams = {
-    organization_id: number,
-    locations: Array<LocationTemplate>
-}
-
-type UpdateOrganizationLocationsParams = {
-    organization_id: number,
-    locations: Array<LocationTemplate>
-}
-
-type DeleteOrganizationLocationParams = {
-    organization_id: number,
-    location_id: number
-}
-
-type GetOrganizationLocationParams = {
-    organization_id: number,
-    location_id: number
-}
-
-type CreateOrganizationLocationParams = {
-    organization_id: number,
-    title: string,
-    address: string,
-    organization_data: Object
-}
-
-type UpdateOrganizationLocationParams = {
-    organization_id: number,
-    location_id: number,
-    title: string,
-    address: string,
-    organization_data: Object
-}
-
-type CreateOrganizationLocationListParams = {
-    organization_id: number,
-    subscription_id: number
-}
-
-type LocationSchema = {
-    title: string,
-    locality: string,
-    id: number,
-    country: string,
-    formatted_address: string,
-    postal_code: number,
-    administrative_area_level_1: string,
-    administrative_area_level_2: string,
-    specificity: string,
-    latitude: string,
-    longitude: string,
-    tzid: string,
-    organization_id: number,
-    source_location_id: number,
-    status: string,
-    state: string,
-    organization_data: Object
-}
-
-type GetLocationsData = Array<LocationSchema>
-
-type CreateLocationsData = Array<LocationSchema>
-
-type GetLocationData = [
-    LocationSchema
-]
-
-type GetOrganizationLocationsData = Array<LocationSchema>
-
-type CreateOrganizationLocationsData = Array<LocationSchema>
-
-type UpdateOrganizaionLocationsData = Array<LocationSchema>
-
-type DeleteOrganizationLocationData = [
-    number
-]
-
-type GetOrganizationLocationData = [
-    LocationSchema
-]
-
-type CreateOrganizationLocationData = [
-    LocationSchema
-]
-
-type UpdateOrganizationLocationData = [
-    LocationSchema
-]
-
-type CreateOrganizationLocationListData = [ // NEED TO CHECK
-    number
-]
+import type {
+    Location,
+    GetLocationsParams,
+    CreateLocationsParams,
+    GetLocationParams,
+    GetOrganizationLocationsParams,
+    CreateOrganizationLocationsParams,
+    UpdateOrganizationLocationsParams,
+    DeleteOrganizationLocationParams,
+    GetOrganizationLocationParams,
+    CreateOrganizationLocationParams,
+    UpdateOrganizationLocationParams,
+    CreateOrganizationLocationListParams
+} from './types';
 
 export default class Locations extends Resource {
     /**
-     * @api {get} /v1/locations
-     * @apiName getLocations
+     * @api {get} /v1/locations getAll
+     * @apiGroup Locations
+     * @apiName getAll
      * @apiDescription Return all locations of the current customer's organization. Capable of returning paginated results.
-     * @apiParam {GetLocationsQuery} query
+     * @apiParam {Object} query
      * @apiExample {js} Example:
-     *             gigwalk.customers.getLocations({...})
+     *             gigwalk.locations.getAll({...})
      */
-    getLocations(params: GetLocationsParams): APIPromise<GetLocationsData> {
+    getAll(params: GetLocationsParams): APIPromise<Array<Location>> {
         const queryString = (params) ? this.queryStringForSearchObject(params.query) : '';
 
         return this.client.get(`/v1/locations${queryString}`);
     }
 
     /**
-     * @api {post} /v1/locations
-     * @apiName createLocations
+     * @api {post} /v1/locations bulkCreate
+     * @apiGroup Locations
+     * @apiName bulkCreate
      * @apiDescription Create new locations with the current_user's organization. Currently does not check permissions.
-     * @apiParam {Array<LocationTemplate>} locations
+     * @apiParam {Array<Object>} locations
      * @apiExample {js} Example:
-     *             gigwalk.customers.createLocations({...})
+     *             gigwalk.locations.bulkCreate({...})
      */
-    createLocations(params: CreateLocationsParams): APIPromise<CreateLocationsData> {
+    bulkCreate(params: CreateLocationsParams): APIPromise<Array<Location>> {
         const data = {
             locations: params.locations
         };
@@ -175,45 +50,48 @@ export default class Locations extends Resource {
     }
 
     /**
-     * @api {get} /v1/locations/{location_id}
-     * @apiName getLocation
+     * @api {get} /v1/locations/:location_id get
+     * @apiGroup Locations
+     * @apiName get
      * @apiDescription Return information about specified location. Capable of returning paginated results.
      * @apiParam {Number} location_id
-     * @apiParam {GetLocationQuery} query
+     * @apiParam {Object} query
      * @apiExample {js} Example:
-     *             gigwalk.customers.getLocation({...})
+     *             gigwalk.locations.get({...})
      */
-    getLocation(params: GetLocationParams): APIPromise<GetLocationData> {
+    get(params: GetLocationParams): APIPromise<[Location]> {
         const queryString = this.queryStringForSearchObject(params.query);
 
         return this.client.get(`/v1/locations/${params.location_id}${queryString}`);
     }
 
     /**
-     * @api {get} /v1/organizations/{organization_id}/locations
-     * @apiName getOrganizationLocations
+     * @api {get} /v1/organizations/:organization_id/locations getAllForOrganization
+     * @apiGroup Locations
+     * @apiName getAllForOrganization
      * @apiDescription Return all locations of the specified organization. Capable of returning paginated results.
      * @apiParam {Number} organization_id
-     * @apiParam {GetOrganizationLocationsQuery} query
+     * @apiParam {Object} query
      * @apiExample {js} Example:
-     *             gigwalk.customers.getOrganizationLocations({...})
+     *             gigwalk.locations.getAllForOrganization({...})
      */
-    getOrganizationLocations(params: GetOrganizationLocationsParams): APIPromise<GetOrganizationLocationsData> {
+    getAllForOrganization(params: GetOrganizationLocationsParams): APIPromise<Array<Location>> {
         const queryString = this.queryStringForSearchObject(params.query);
 
         return this.client.get(`/v1/organizations/${params.organization_id}/locations${queryString}`);
     }
 
     /**
-     * @api {post} /v1/organizations/{organization_id}/locations
-     * @apiName createOrganizationLocations
+     * @api {post} /v1/organizations/:organization_id/locations bulkCreateForOrganization
+     * @apiGroup Locations
+     * @apiName bulkCreateForOrganization
      * @apiDescription Create new location(s) in organization. Currently does not check permissions.
      * @apiParam {Number} organization_id
-     * @apiParam {Array<LocationTemplate>} locations
+     * @apiParam {Array<Object>} locations
      * @apiExample {js} Example:
-     *             gigwalk.customers.createOrganizationLocations({...})
+     *             gigwalk.locations.bulkCreateForOrganization({...})
      */
-    createOrganizationLocations(params: CreateOrganizationLocationsParams): APIPromise<CreateOrganizationLocationsData> {
+    bulkCreateForOrganization(params: CreateOrganizationLocationsParams): APIPromise<Array<Location>> {
         const data = {
             locations: params.locations
         };
@@ -222,15 +100,16 @@ export default class Locations extends Resource {
     }
 
     /**
-     * @api {put} /v1/organizations/{organization_id}/locations
-     * @apiName updateOrganizaionLocations
+     * @api {put} /v1/organizations/:organization_id/locations bulkUpdateForOrganization
+     * @apiGroup Locations
+     * @apiName bulkUpdateForOrganization
      * @apiDescription Update locations of the specified organization. Currently does not check permissions.
      * @apiParam {Number} organization_id
-     * @apiParam {Array<LocationTemplate>} locations
+     * @apiParam {Array<Object>} locations
      * @apiExample {js} Example:
-     *             gigwalk.customers.updateOrganizaionLocations({...})
+     *             gigwalk.locations.bulkUpdateForOrganization({...})
      */
-    updateOrganizaionLocations(params: UpdateOrganizationLocationsParams): APIPromise<UpdateOrganizaionLocationsData> {
+    bulkUpdateForOrganization(params: UpdateOrganizationLocationsParams): APIPromise<Array<Location>> {
         const data = {
             locations: params.locations
         };
@@ -239,43 +118,46 @@ export default class Locations extends Resource {
     }
 
     /**
-     * @api {delete} /v1/organizations/{organization_id}/locations/{location_id}
-     * @apiName deleteOrganizationLocation
+     * @api {delete} /v1/organizations/:organization_id/locations/:location_id deleteForOrganization
+     * @apiGroup Locations
+     * @apiName deleteForOrganization
      * @apiDescription Delete location. Only metadata is deleted. Currently does not check permissions.
      * @apiParam {Number} organization_id
      * @apiParam {Number} location_id
      * @apiExample {js} Example:
-     *             gigwalk.customers.deleteOrganizationLocation({...})
+     *             gigwalk.locations.deleteForOrganization({...})
      */
-    deleteOrganizationLocation(params: DeleteOrganizationLocationParams): APIPromise<DeleteOrganizationLocationData> {
+    deleteForOrganization(params: DeleteOrganizationLocationParams): APIPromise<[number]> {
         return this.client.delete(`/v1/organizations/${params.organization_id}/locations/${params.location_id}`);
     }
 
     /**
-     * @api {get} /v1/organizations/{organization_id}/locations/{location_id}
-     * @apiName getOrganizationLocation
+     * @api {get} /v1/organizations/:organization_id/locations/:location_id getForOrganization
+     * @apiGroup Locations
+     * @apiName getForOrganization
      * @apiDescription Return information about the given location. Location should belong to the organization.
     * @apiParam {Number} organization_id
     * @apiParam {Number} location_id
      * @apiExample {js} Example:
-     *             gigwalk.customers.getOrganizationLocation({...})
+     *             gigwalk.locations.getForOrganization({...})
      */
-    getOrganizationLocation(params: GetOrganizationLocationParams): APIPromise<GetOrganizationLocationData> {
+    getForOrganization(params: GetOrganizationLocationParams): APIPromise<[Location]> {
         return this.client.get(`/v1/organizations/${params.organization_id}/locations/${params.location_id}`);
     }
 
     /**
-     * @api {post} /v1/organizations/{organization_id}/locations/geocode
-     * @apiName createOrganizationLocation
+     * @api {post} /v1/organizations/:organization_id/locations/geocode createForOrganization
+     * @apiGroup Locations
+     * @apiName createForOrganization
      * @apiDescription Adds metadata items to organization location metadata, as well as creates a new location with address and title.
      * @apiParam {Number} organization_id
      * @apiParam {String} title
      * @apiParam {String} address
      * @apiParam {Object} organization_data
      * @apiExample {js} Example:
-     *             gigwalk.customers.createOrganizationLocation({...})
+     *             gigwalk.locations.createForOrganization({...})
      */
-    createOrganizationLocation(params: CreateOrganizationLocationParams): APIPromise<CreateOrganizationLocationData> {
+    createForOrganization(params: CreateOrganizationLocationParams): APIPromise<[Location]> {
         const data = {
             address: params.address,
             title: params.title,
@@ -286,8 +168,9 @@ export default class Locations extends Resource {
     }
 
     /**
-     * @api {put} /v1/organizations/{organization_id}/locations/geocode/{location_id}
-     * @apiName updateOrganizationLocation
+     * @api {put} /v1/organizations/:organization_id/locations/geocode/:location_id updateForOrganization
+     * @apiGroup Locations
+     * @apiName updateForOrganization
      * @apiDescription Adds metadata items to organization location metadata, as well as creates a new location with address and title.
      * @apiParam {Number} organization_id
      * @apiParam {Number} location_id
@@ -295,9 +178,9 @@ export default class Locations extends Resource {
      * @apiParam {String} address
      * @apiParam {Object} organization_data
      * @apiExample {js} Example:
-     *             gigwalk.customers.updateOrganizationLocation({...})
+     *             gigwalk.locations.updateForOrganization({...})
      */
-    updateOrganizationLocation(params: UpdateOrganizationLocationParams): APIPromise<UpdateOrganizationLocationData> {
+    updateForOrganization(params: UpdateOrganizationLocationParams): APIPromise<[Location]> {
         const data = {
             address: params.address,
             title: params.title,
@@ -308,16 +191,17 @@ export default class Locations extends Resource {
     }
 
     /**
-     * @api {post} /v1/organizations/{organization_id}/subscriptions/{subscription_id}/locations
-     * @apiName createOrganizationLocationList
+     * @api {post} /v1/organizations/:organization_id/subscriptions/:subscription_id/locations createListForOrganization
+     * @apiGroup Locations
+     * @apiName createListForOrganization
      * @apiDescription If a project doesn't have an ad-hoc location list, a new list is created and assigned to the project.
                        The new location is then added to the list.
      * @apiParam {Number} organization_id
      * @apiParam {Number} subscription_id
      * @apiExample {js} Example:
-     *             gigwalk.customers.createOrganizationLocationList({...})
+     *             gigwalk.locations.createListForOrganization({...})
      */
-    createOrganizationLocationList(params: CreateOrganizationLocationListParams): APIPromise<CreateOrganizationLocationListData> {
+    createListForOrganization(params: CreateOrganizationLocationListParams): APIPromise<[number]> {
         return this.client.post(`/v1/organizations/${params.organization_id}/subscriptions/${params.subscription_id}/locations`);
     }
 }

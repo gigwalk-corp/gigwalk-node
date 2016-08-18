@@ -194,11 +194,12 @@ type SearchSubscriptionsData = {
 export default class Subscriptions extends Resource {
     /**
      * @api {delete} /v1/organization_subscriptions/{organization_subscription_id}
+     * @apiGroup Subscriptions
      * @apiName deleteSubscription
      * @apiDescription Delete the organization_subscription. This is a hard delete.
      * @apiParam {Number} organization_subscription_id
      * @apiExample {js} Example:
-     *             gigwalk.customers.deleteSubscription({...})
+     *             gigwalk.subscriptions.deleteSubscription({...})
      */
     deleteSubscription(params: DeleteSubscriptionParams): APIPromise<DeleteSubscriptionData> {
         return this.client.delete(`/v1/organization_subscriptions/${params.organization_subscription_id}`);
@@ -206,12 +207,13 @@ export default class Subscriptions extends Resource {
 
     /**
      * @api {get} /v1/organization_subscriptions/{organization_subscription_id}
+     * @apiGroup Subscriptions
      * @apiName getSubscription
      * @apiDescription If specified, return information about the organization_subscription. Otherwise, list all organization_subscriptions of the organization.
                        Defaults to the current_user's organization if no organization_id is specified.
      * @apiParam {Number} organization_subscription_id
      * @apiExample {js} Example:
-     *             gigwalk.customers.getSubscription({...})
+     *             gigwalk.subscriptions.getSubscription({...})
      */
     getSubscription(params: GetSubscriptionParams): APIPromise<GetSubscriptionData> {
         return this.client.get(`/v1/organization_subscriptions/${params.organization_subscription_id}`);
@@ -219,12 +221,13 @@ export default class Subscriptions extends Resource {
 
     /**
      * @api {post} /v1/organization_subscriptions/{organization_subscription_id}
+     * @apiGroup Subscriptions
      * @apiName createClonedSubscription
      * @apiDescription Create a new subscription by cloning the given org_subscription or schedule autoassignment for the subscription.
      * @apiParam {Number} organization_subscription_id
      * @apiParam {String} action
      * @apiExample {js} Example:
-     *             gigwalk.customers.createClonedSubscription({...})
+     *             gigwalk.subscriptions.createClonedSubscription({...})
      */
     createClonedSubscription(params: CreateClonedSubscriptionParams): APIPromise<CreateClonedSubscriptionData> {
         const data = {
@@ -236,13 +239,14 @@ export default class Subscriptions extends Resource {
 
     /**
      * @api {put} /v1/organization_subscriptions/{organization_subscription_id}
+     * @apiGroup Subscriptions
      * @apiName updateSubscription
      * @apiDescription Update organization_subscription.
      * @apiParam {Number} organization_subscription_id
      * @apiParam {Number} version_id
-     * @apiParam {SubscriptionTemplate} subscription
+     * @apiParam {Object} subscription
      * @apiExample {js} Example:
-     *             gigwalk.customers.updateSubscription({...})
+     *             gigwalk.subscriptions.updateSubscription({...})
      */
     updateSubscription(params: UpdateSubscriptionParams): APIPromise<UpdateSubscriptionData> {
         return this.client.put(`/v1/organization_subscriptions/${params.organization_subscription_id}`, { ...params.subscription });
@@ -250,12 +254,13 @@ export default class Subscriptions extends Resource {
 
     /**
      * @api {post} /v1/organizations/{organization_id}/subscriptions
+     * @apiGroup Subscriptions
      * @apiName createSubscriptions
      * @apiDescription Create new organization_subscription(s). Maximum of five new subscriptions.
      * @apiParam {Number} organization_id
      * @apiParam {Array<SubscriptionTemplate>} subscriptions
      * @apiExample {js} Example:
-     *             gigwalk.customers.createSubscriptions({...})
+     *             gigwalk.subscriptions.createSubscriptions({...})
      */
     createSubscriptions(params: CreateSubscriptionsParams): APIPromise<CreateSubscriptionsData> {
         const data = {
@@ -267,12 +272,13 @@ export default class Subscriptions extends Resource {
 
     /**
      * @api {post} /v1/organizations/{organization_id}/subscriptions/search
+     * @apiGroup Subscriptions
      * @apiName searchSubscriptionsWithParams
      * @apiDescription Search organization_subscriptions. search_parameters should be in key op value (e.g. date_created > now; title = 'project_name').
      * @apiParam {Number} organization_id
      * @apiParam {String} query_string
      * @apiExample {js} Example:
-     *             gigwalk.customers.searchSubscriptionsWithParams({...})
+     *             gigwalk.subscriptions.searchSubscriptionsWithParams({...})
      */
     searchSubscriptionsWithParams(params: SearchSubscriptionsWithParamsParams): APIPromise<SearchSubscriptionsWithParamsData> {
         const data = {
@@ -284,12 +290,13 @@ export default class Subscriptions extends Resource {
 
     /**
      * @api {delete} /v1/organizations/{organization_id}/subscriptions/{organization_subscription_id}
+     * @apiGroup Subscriptions
      * @apiName deleteOrganizationSubscription
      * @apiDescription Delete the specified project. Only DRAFT projects may be deleted.
      * @apiParam {Number} organization_id
      * @apiParam {Number} organization_subscription_id
      * @apiExample {js} Example:
-     *             gigwalk.customers.deleteOrganizationSubscription({...})
+     *             gigwalk.subscriptions.deleteOrganizationSubscription({...})
      */
     deleteOrganizationSubscription(params: DeleteOrganizationSubscriptionParams): APIPromise<DeleteOrganizationSubscriptionData> {
         return this.client.delete(`/v1/organizations/${params.organization_id}/subscriptions/${params.organization_subscription_id}`);
@@ -297,14 +304,15 @@ export default class Subscriptions extends Resource {
 
     /**
      * @api {put} /v1/organizations/{organization_id}/subscriptions/{organization_subscription_id}
+     * @apiGroup Subscriptions
      * @apiName updateOrganizationSubscription
      * @apiDescription Modify project.
      * @apiParam {Number} organization_id
      * @apiParam {Number} organization_subscription_id
      * @apiParam {Number} version_id
-     * @apiParam {SubscriptionTemplate} subscription
+     * @apiParam {Object} subscription
      * @apiExample {js} Example:
-     *             gigwalk.customers.updateOrganizationSubscription({...})
+     *             gigwalk.subscriptions.updateOrganizationSubscription({...})
      */
     updateOrganizationSubscription(params: UpdateOrganizationSubscriptionParams): APIPromise<UpdateOrganizationSubscriptionData> {
         return this.client.put(`/v1/organizations/${params.organization_id}/subscriptions/${params.organization_subscription_id}`, { ...params.subscription });
@@ -312,13 +320,14 @@ export default class Subscriptions extends Resource {
 
     /**
      * @api {post} /v2/organizations/{organization_id}/search/subscriptions/filters
+     * @apiGroup Subscriptions
      * @apiName searchSubscriptionsWithField
      * @apiDescription Searches ES documents using search_field.
      * @apiParam {Number} organization_id
      * @apiParam {String} search_field
      * @apiParam {String} query_string
      * @apiExample {js} Example:
-     *             gigwalk.customers.searchSubscriptionsWithField({...})
+     *             gigwalk.subscriptions.searchSubscriptionsWithField({...})
      */
     searchSubscriptionsWithField(params: SearchSubscriptionsWithFieldParams): APIPromise<SearchSubscriptionsWithFieldData> {
         const data = {
@@ -331,12 +340,13 @@ export default class Subscriptions extends Resource {
 
     /**
      * @api {post} /v2/organizations/{organization_id}/search/subscriptions
+     * @apiGroup Subscriptions
      * @apiName searchSubscriptions
      * @apiDescription Searches all strings in ES documents.
      * @apiParam {Number} organization_id
      * @apiParam {String} query_string
      * @apiExample {js} Example:
-     *             gigwalk.customers.searchSubscriptions({...})
+     *             gigwalk.subscriptions.searchSubscriptions({...})
      */
     searchSubscriptions(params: SearchSubscriptionsParams): APIPromise<SearchSubscriptionsData> {
         const data = {

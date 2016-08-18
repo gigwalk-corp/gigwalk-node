@@ -60,9 +60,10 @@ type SearchOrganizationData = [
 export default class Search extends Resource {
     /**
      * @api {get} /v1/search
+     * @apiGroup Search
      * @apiName searchDocuments
      * @apiDescription Search all ES docs for the given query_string. Returns results in ES idiom.
-     * @apiParam {SearchDocumentsQuery} query
+     * @apiParam {Object} query
      * @apiExample {js} Example:
      *             gigwalk.customers.searchDocuments({...})
      */
@@ -74,10 +75,11 @@ export default class Search extends Resource {
 
     /**
      * @api {post} /v1/search
+     * @apiGroup Search
      * @apiName createSearch
      * @apiDescription Not implemented.
      * @apiExample {js} Example:
-     *             gigwalk.customers.createSearch({...})
+     *             gigwalk.search.createSearch({...})
      */
     createSearch(): APIPromise<CreateSearchData> {
         return this.client.post('/v1/search');
@@ -85,14 +87,15 @@ export default class Search extends Resource {
 
     /**
      * @api {get} /v1/organizations/{organization_id}/search/{index_type}
+     * @apiGroup Search
      * @apiName searchOrganization
      * @apiDescription Search in an organization within groups, members, location_lists, target_lists, tickets or subscriptions.
                        Capable of returning paginated results.
      * @apiParam {Number} organization_id
      * @apiParam {String} index_type
-     * @apiParam {SearchOrganizationQuery} query
+     * @apiParam {Object} query
      * @apiExample {js} Example:
-     *             gigwalk.customers.searchOrganization({...})
+     *             gigwalk.search.searchOrganization({...})
      */
     searchOrganization(params: SearchOrganizationParams): APIPromise<SearchOrganizationData> {
         const queryString = this.queryStringForSearchObject(params.query);

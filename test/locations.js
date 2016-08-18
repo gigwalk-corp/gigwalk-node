@@ -17,7 +17,7 @@ describe('Loctions', () => {
     let locationID: number;
 
     it('should be able to get all locations in an organization', (done) => {
-        locations.getLocations({
+        locations.getAll({
             query: {
                 limit: 2
             }
@@ -30,7 +30,7 @@ describe('Loctions', () => {
             .catch(done);
     }).timeout(10000);
     it('should be able to get all organization locations in an organization', (done) => {
-        locations.getOrganizationLocations({
+        locations.getAllForOrganization({
             organization_id: organizationID,
             query: {
                 limit: 2
@@ -44,7 +44,7 @@ describe('Loctions', () => {
             .catch(done);
     }).timeout(10000);
     it('should be able to create a new location', (done) => {
-        locations.createLocations({
+        locations.bulkCreate({
             locations: [{
                 title: 'string',
                 locality: null,
@@ -65,7 +65,7 @@ describe('Loctions', () => {
             .catch(done);
     }).timeout(10000);
     it('should be able to get a specific location', (done) => {
-        locations.getLocation({
+        locations.get({
             location_id: locationID
         })
             .then((res) => {
@@ -76,7 +76,7 @@ describe('Loctions', () => {
             .catch(done);
     }).timeout(10000);
     it('should be able to get a specific organization location', (done) => {
-        locations.getOrganizationLocation({
+        locations.getForOrganization({
             organization_id: organizationID,
             location_id: locationID
         })
@@ -88,7 +88,7 @@ describe('Loctions', () => {
             .catch(done);
     }).timeout(10000);
     it('should be able to create new organization locations', (done) => {
-        locations.createOrganizationLocations({
+        locations.bulkCreateForOrganization({
             organization_id: organizationID,
             locations: [{
                 title: 'string',
@@ -109,7 +109,7 @@ describe('Loctions', () => {
             .catch(done);
     }).timeout(10000);
     it('should be able to update organization locations', (done) => {
-        locations.updateOrganizaionLocations({
+        locations.bulkUpdateForOrganization({
             organization_id: organizationID,
             locations: [{
                 id: locationID,
@@ -124,7 +124,7 @@ describe('Loctions', () => {
             .catch(done);
     }).timeout(10000);
     it('should be able to create organization location', (done) => {
-        locations.createOrganizationLocation({
+        locations.createForOrganization({
             organization_id: organizationID,
             title: randString,
             address: '600 Bryant'
@@ -137,7 +137,7 @@ describe('Loctions', () => {
             .catch(done);
     }).timeout(10000);
     it('should be able to update organization location', (done) => {
-        locations.updateOrganizationLocation({
+        locations.updateForOrganization({
             organization_id: organizationID,
             location_id: locationID,
             address: '600 Bryant',
@@ -151,7 +151,7 @@ describe('Loctions', () => {
             .catch(done);
     }).timeout(10000);
     it('should be able to delete a specific location', (done) => {
-        locations.deleteOrganizationLocation({
+        locations.deleteForOrganization({
             organization_id: organizationID,
             location_id: locationID,
         })
@@ -163,7 +163,7 @@ describe('Loctions', () => {
             .catch(done);
     }).timeout(10000);
     it.skip('should be able to create a location list', (done) => {
-        locations.createOrganizationLocationList({
+        locations.createListForOrganization({
             organization_id: organizationID,
             subscription_id: 1,
         })

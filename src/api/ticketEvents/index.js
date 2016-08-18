@@ -43,12 +43,13 @@ type DeleteTicketEventData = [
 export default class TicketEvents extends Resource {
     /**
      * @api {post} /v1/tickets/{ticket_id}/events
+     * @apiGroup TicketEvents
      * @apiName createTicketEvent
      * @apiDescription Create a new ticket event for ticket.
      * @apiParam {Number} ticket_id
-     * @apiParam {TicketEventTemplate} ticket_event
+     * @apiParam {Object} ticket_event
      * @apiExample {js} Example:
-     *             gigwalk.customers.createTicketEvent({...})
+     *             gigwalk.ticketEvents.createTicketEvent({...})
      */
     createTicketEvent(params: CreateTicketEventParams): APIPromise<CreateTicketEventData> {
         return this.client.post(`/v1/tickets/${params.ticket_id}/events`, { ...params.ticket_event });
@@ -56,11 +57,12 @@ export default class TicketEvents extends Resource {
 
     /**
      * @api {delete} /v1/ticket_events/{ticket_event_id}
+     * @apiGroup TicketEvents
      * @apiName deleteTicketEvent
      * @apiDescription Delete the specified ticket event.
      * @apiParam {Number} ticket_event_id
      * @apiExample {js} Example:
-     *             gigwalk.customers.deleteTicketEvent({...})
+     *             gigwalk.ticketEvents.deleteTicketEvent({...})
      */
     deleteTicketEvent(params: DeleteTicketEventParams): APIPromise<DeleteTicketEventData> {
         return this.client.delete(`/v1/ticket_events/${params.ticket_event_id}`);

@@ -76,12 +76,13 @@ type SearchOrganizationTargetsData = Array<ObservationTargetSchema>
 export default class Targets extends Resource {
     /**
      * @api {post} /v1/organizations/{organization_id}/observation_targets
+     * @apiGroup Targets
      * @apiName createOrganizationTarget
      * @apiDescription Create new obs_target(s). Endpoint also does update/deletion.
      * @apiParam {Number} organization_id
-     * @apiParam {ObservationTargetBasicTemplate} observation_target
+     * @apiParam {Object} observation_target
      * @apiExample {js} Example:
-     *             gigwalk.customers.createOrganizationTarget({...})
+     *             gigwalk.targets.createOrganizationTarget({...})
      */
     createOrganizationTarget(params: CreateOrganizationTargetParams): APIPromise<CreateOrganizationTargetData> {
         return this.client.post(`/v1/organizations/${params.organization_id}/observation_targets`, { ...params.observation_target });
@@ -89,14 +90,15 @@ export default class Targets extends Resource {
 
     /**
      * @api {get} /v1/organizations/{organization_id}/observation_targets/{observation_target_id}
+     * @apiGroup Targets
      * @apiName getOrganizationTarget
      * @apiDescription If target_id is specified, return org_observation_target_id information; else return the information for all targets of the org.
                        Capable of returning paginated results.
      * @apiParam {Number} organization_id
      * @apiParam {Number} observation_target_id
-     * @apiParam {GetOrganizationTargetQuery} query
+     * @apiParam {Object} query
      * @apiExample {js} Example:
-     *             gigwalk.customers.getOrganizationTarget({...})
+     *             gigwalk.targets.getOrganizationTarget({...})
      */
     getOrganizationTarget(params: GetOrganizationTargetParams): APIPromise<GetOrganizationTargetData> {
         const queryString = this.queryStringForSearchObject(params.query);
@@ -106,14 +108,15 @@ export default class Targets extends Resource {
 
     /**
      * @api {put} /v1/organizations/{organization_id}/observation_targets/{observation_target_id}
+     * @apiGroup Targets
      * @apiName updateOrganizationTarget
      * @apiDescription If target_id is specified, update org_observation_target; else update all targets of the organization.
                        Endpoint also does update/deletion.
      * @apiParam {Number} organization_id
      * @apiParam {Number} observation_target_id
-     * @apiParam {ObservationTargetTemplate} observation_target
+     * @apiParam {Object} observation_target
      * @apiExample {js} Example:
-     *             gigwalk.customers.updateOrganizationTarget({...})
+     *             gigwalk.targets.updateOrganizationTarget({...})
      */
     updateOrganizationTarget(params: UpdateOrganizationTargetParams): APIPromise<UpdateOrganizationTargetData> {
         return this.client.put(`/v1/organizations/${params.organization_id}/observation_targets/${params.observation_target_id}`,
@@ -122,12 +125,13 @@ export default class Targets extends Resource {
 
     /**
      * @api {get} /v1/organizations/{organization_id}/observation_targets/search
+     * @apiGroup Targets
      * @apiName searchOrganizationTargets
      * @apiDescription Search obs_target titles. Capable of returning paginated results.
      * @apiParam {Number} organization_id
-     * @apiParam {SearchOrganizationTargetsQuery} query
+     * @apiParam {Object} query
      * @apiExample {js} Example:
-     *             gigwalk.customers.searchOrganizationTargets({...})
+     *             gigwalk.targets.searchOrganizationTargets({...})
      */
     searchOrganizationTargets(params: SearchOrganizationTargetsParams): APIPromise<SearchOrganizationTargetsData> {
         const queryString = this.queryStringForSearchObject(params.query);

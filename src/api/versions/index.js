@@ -11,6 +11,7 @@ type GetData = [{
 export default class Versions extends Resource {
     /**
      * @api {get} /v1/versions/current
+     * @apiGroup Versions
      * @apiName get
      * @apiDescription Get version. Get the current API version, and the minimum mobile apps versions allowed.
      * @apiExample {js} Example:
