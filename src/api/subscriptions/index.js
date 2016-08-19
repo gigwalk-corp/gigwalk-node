@@ -1,235 +1,60 @@
 // @flow
 import Resource from '../resource';
 import type { APIPromise } from '../resource';
-
-type SubscriptionTemplate = {
-    title: string,
-    description: string,
-    start_date: string, // format yyyy-m-d
-    end_date: string, // format yyyy-m-d
-    version_id?: string,
-    group_ids?: Array<number>,
-    frequency_amount?: number,
-    frequency_byweekday?: string,
-    frequency_weekly?: string,
-    frequency_window?: number,
-    autoassign?: boolean,
-    bundle_autoassign?: boolean,
-    can_reschedule?: boolean,
-    recurrence?: boolean,
-    organization_data?: Object,
-    optin_type?: string,
-    dashboard_visible?: boolean,
-    location_override?: boolean,
-    two_way_rating_enabled?: boolean,
-    rating_email?: string,
-    is_multi_day?: boolean,
-    multi_day_template_id?: number,
-    state?: string
-}
-
-type DeleteSubscriptionParams = {
-    organization_subscription_id: number
-}
-
-type GetSubscriptionParams = {
-    organization_subscription_id: number
-}
-
-type CreateClonedSubscriptionParams = {
-    organization_subscription_id: number,
-    action: string
-}
-
-type UpdateSubscriptionParams = {
-    organization_subscription_id: number,
-    version_id: number,
-    subscription: SubscriptionTemplate
-}
-
-type CreateSubscriptionsParams = {
-    organization_id: number,
-    subscriptions: Array<SubscriptionTemplate>
-}
-
-type SearchSubscriptionsWithParamsParams = {
-    organization_id: number,
-    query_string: string
-}
-
-type DeleteOrganizationSubscriptionParams = {
-    organization_id: number,
-    organization_subscription_id: number
-}
-
-type UpdateOrganizationSubscriptionParams = {
-    organization_id: number,
-    organization_subscription_id: number,
-    version_id: number,
-    subscription: SubscriptionTemplate
-}
-
-type SearchSubscriptionsWithFieldParams = {
-    organization_id: number,
-    search_field: string,
-    query_string: string
-}
-
-type SearchSubscriptionsParams = {
-    organization_id: number,
-    query_string: string
-}
-
-type SubscriptionSchema = {
-    title: string,
-    description: string,
-    id: number,
-    start_date: string,
-    end_date: string,
-    can_reschedule: boolean,
-    worker_count: number,
-    ticket_time_estimate: number,
-    frequency_type: string,
-    frequency_window: string,
-    frequency_amount: number,
-    frequency_byweekday: number,
-    recurrence: string,
-    optin_type: string,
-    is_double_optin: boolean,
-    location_override: boolean,
-    two_way_rating_enabled: boolean,
-    rating_email: string,
-    schedule_type: string,
-    autoassign: boolean,
-    bundle_autoassign: boolean,
-    dashboard_visible: boolean,
-    version_id: number,
-    state: string,
-    date_created: string,
-    date_updated: string,
-    needs_core: boolean,
-    groups: Array<number>,
-    wave: {
-        id: string,
-        start_date: string,
-        end_date: string,
-        execution: number,
-        total_locations: number
-    },
-    created_customer_id: number,
-    created_customer: {
-        id: number,
-        first_name: string,
-        last_name: string
-    },
-    organization_observation_target_lists: Array<{
-        observation_target_list_id: number,
-        data_types: Array<{
-            data_type_id: number
-        }>
-    }>,
-    organization_location_lists: Array<number>,
-    organization_data: {
-        hasMaterial: boolean,
-        certifications: Object
-    }
-}
-
-type DeleteSubscriptionData = [ // NEED TO CHECK
-    number
-]
-
-type GetSubscriptionData = [
-    SubscriptionSchema
-]
-
-type CreateClonedSubscriptionData = [ // NEED TO CHECK
-    SubscriptionSchema
-]
-
-type UpdateSubscriptionData = [ // NEED TO CHECK
-    SubscriptionSchema
-]
-
-type CreateSubscriptionsData = Array<SubscriptionSchema> // NEED TO CHECK
-
-type SearchSubscriptionsWithParamsData = [ // NEED TO CHECK
-
-]
-
-type DeleteOrganizationSubscriptionData = [
-    number
-]
-
-type UpdateOrganizationSubscriptionData = [
-    SubscriptionSchema
-]
-
-type SearchSubscriptionsWithFieldData = { // NEED TO FINISH
-    search_field: string,
-    search_results: Object
-}
-
-type SearchSubscriptionsData = {
-    total_records: number,
-    search_results: Array<{
-        score: number,
-        data: {
-            title: string,
-            description: string,
-            id: number,
-            organization_id: number,
-            start_date: string,
-            end_date: string,
-            total_locations: number,
-            execution: number,
-            state: string,
-            created_customer: string,
-            group_id: Array<number>,
-            metadata: Object
-        }
-    }>
-  }
+import type {
+    Subscription,
+    ESSubcriptionSearch,
+    DeleteSubscriptionParams,
+    GetSubscriptionParams,
+    CreateClonedSubscriptionParams,
+    UpdateSubscriptionParams,
+    CreateSubscriptionsParams,
+    SearchSubscriptionsWithParamsParams,
+    DeleteOrganizationSubscriptionParams,
+    UpdateOrganizationSubscriptionParams,
+    SearchSubscriptionsWithFieldParams,
+    SearchSubscriptionsParams
+} from './types';
 
 export default class Subscriptions extends Resource {
     /**
-     * @api {delete} /v1/organization_subscriptions/{organization_subscription_id}
+     * @api {delete} /v1/organization_subscriptions/:organization_subscription_id delete
      * @apiGroup Subscriptions
-     * @apiName deleteSubscription
+     * @apiName delete
      * @apiDescription Delete the organization_subscription. This is a hard delete.
      * @apiParam {Number} organization_subscription_id
      * @apiExample {js} Example:
-     *             gigwalk.subscriptions.deleteSubscription({...})
+     *             gigwalk.subscriptions.delete({...})
      */
-    deleteSubscription(params: DeleteSubscriptionParams): APIPromise<DeleteSubscriptionData> {
+    delete(params: DeleteSubscriptionParams): APIPromise<[number]> {
         return this.client.delete(`/v1/organization_subscriptions/${params.organization_subscription_id}`);
     }
 
     /**
-     * @api {get} /v1/organization_subscriptions/{organization_subscription_id}
+     * @api {get} /v1/organization_subscriptions/:organization_subscription_id get
      * @apiGroup Subscriptions
-     * @apiName getSubscription
+     * @apiName get
      * @apiDescription If specified, return information about the organization_subscription. Otherwise, list all organization_subscriptions of the organization.
                        Defaults to the current_user's organization if no organization_id is specified.
      * @apiParam {Number} organization_subscription_id
      * @apiExample {js} Example:
-     *             gigwalk.subscriptions.getSubscription({...})
+     *             gigwalk.subscriptions.get({...})
      */
-    getSubscription(params: GetSubscriptionParams): APIPromise<GetSubscriptionData> {
+    get(params: GetSubscriptionParams): APIPromise<[Subscription]> {
         return this.client.get(`/v1/organization_subscriptions/${params.organization_subscription_id}`);
     }
 
     /**
-     * @api {post} /v1/organization_subscriptions/{organization_subscription_id}
+     * @api {post} /v1/organization_subscriptions/:organization_subscription_id clone
      * @apiGroup Subscriptions
-     * @apiName createClonedSubscription
+     * @apiName clone
      * @apiDescription Create a new subscription by cloning the given org_subscription or schedule autoassignment for the subscription.
      * @apiParam {Number} organization_subscription_id
      * @apiParam {String} action
      * @apiExample {js} Example:
-     *             gigwalk.subscriptions.createClonedSubscription({...})
+     *             gigwalk.subscriptions.clone({...})
      */
-    createClonedSubscription(params: CreateClonedSubscriptionParams): APIPromise<CreateClonedSubscriptionData> {
+    clone(params: CreateClonedSubscriptionParams): APIPromise<[Subscription]> {
         const data = {
             action: params.action
         };
@@ -238,31 +63,31 @@ export default class Subscriptions extends Resource {
     }
 
     /**
-     * @api {put} /v1/organization_subscriptions/{organization_subscription_id}
+     * @api {put} /v1/organization_subscriptions/:organization_subscription_id update
      * @apiGroup Subscriptions
-     * @apiName updateSubscription
+     * @apiName update
      * @apiDescription Update organization_subscription.
      * @apiParam {Number} organization_subscription_id
      * @apiParam {Number} version_id
      * @apiParam {Object} subscription
      * @apiExample {js} Example:
-     *             gigwalk.subscriptions.updateSubscription({...})
+     *             gigwalk.subscriptions.update({...})
      */
-    updateSubscription(params: UpdateSubscriptionParams): APIPromise<UpdateSubscriptionData> {
+    update(params: UpdateSubscriptionParams): APIPromise<[Subscription]> {
         return this.client.put(`/v1/organization_subscriptions/${params.organization_subscription_id}`, { ...params.subscription });
     }
 
     /**
-     * @api {post} /v1/organizations/{organization_id}/subscriptions
+     * @api {post} /v1/organizations/:organization_id/subscriptions bulkCreate
      * @apiGroup Subscriptions
-     * @apiName createSubscriptions
+     * @apiName bulkCreate
      * @apiDescription Create new organization_subscription(s). Maximum of five new subscriptions.
      * @apiParam {Number} organization_id
      * @apiParam {Array<SubscriptionTemplate>} subscriptions
      * @apiExample {js} Example:
-     *             gigwalk.subscriptions.createSubscriptions({...})
+     *             gigwalk.subscriptions.bulkCreate({...})
      */
-    createSubscriptions(params: CreateSubscriptionsParams): APIPromise<CreateSubscriptionsData> {
+    bulkCreate(params: CreateSubscriptionsParams): APIPromise<Array<Subscription>> {
         const data = {
             projects: params.subscriptions
         };
@@ -271,16 +96,16 @@ export default class Subscriptions extends Resource {
     }
 
     /**
-     * @api {post} /v1/organizations/{organization_id}/subscriptions/search
+     * @api {post} /v1/organizations/:organization_id/subscriptions/search searchWithParams
      * @apiGroup Subscriptions
-     * @apiName searchSubscriptionsWithParams
+     * @apiName searchWithParams
      * @apiDescription Search organization_subscriptions. search_parameters should be in key op value (e.g. date_created > now; title = 'project_name').
      * @apiParam {Number} organization_id
      * @apiParam {String} query_string
      * @apiExample {js} Example:
-     *             gigwalk.subscriptions.searchSubscriptionsWithParams({...})
+     *             gigwalk.subscriptions.searchWithParams({...})
      */
-    searchSubscriptionsWithParams(params: SearchSubscriptionsWithParamsParams): APIPromise<SearchSubscriptionsWithParamsData> {
+    searchWithParams(params: SearchSubscriptionsWithParamsParams): APIPromise<[]> {
         const data = {
             query_string: params.query_string
         };
@@ -289,47 +114,47 @@ export default class Subscriptions extends Resource {
     }
 
     /**
-     * @api {delete} /v1/organizations/{organization_id}/subscriptions/{organization_subscription_id}
+     * @api {delete} /v1/organizations/:organization_id/subscriptions/:organization_subscription_id deleteForOrganization
      * @apiGroup Subscriptions
-     * @apiName deleteOrganizationSubscription
+     * @apiName deleteForOrganization
      * @apiDescription Delete the specified project. Only DRAFT projects may be deleted.
      * @apiParam {Number} organization_id
      * @apiParam {Number} organization_subscription_id
      * @apiExample {js} Example:
-     *             gigwalk.subscriptions.deleteOrganizationSubscription({...})
+     *             gigwalk.subscriptions.deleteForOrganization({...})
      */
-    deleteOrganizationSubscription(params: DeleteOrganizationSubscriptionParams): APIPromise<DeleteOrganizationSubscriptionData> {
+    deleteForOrganization(params: DeleteOrganizationSubscriptionParams): APIPromise<[number]> {
         return this.client.delete(`/v1/organizations/${params.organization_id}/subscriptions/${params.organization_subscription_id}`);
     }
 
     /**
-     * @api {put} /v1/organizations/{organization_id}/subscriptions/{organization_subscription_id}
+     * @api {put} /v1/organizations/:organization_id/subscriptions/:organization_subscription_id updateForOrganization
      * @apiGroup Subscriptions
-     * @apiName updateOrganizationSubscription
+     * @apiName updateForOrganization
      * @apiDescription Modify project.
      * @apiParam {Number} organization_id
      * @apiParam {Number} organization_subscription_id
      * @apiParam {Number} version_id
      * @apiParam {Object} subscription
      * @apiExample {js} Example:
-     *             gigwalk.subscriptions.updateOrganizationSubscription({...})
+     *             gigwalk.subscriptions.updateForOrganization({...})
      */
-    updateOrganizationSubscription(params: UpdateOrganizationSubscriptionParams): APIPromise<UpdateOrganizationSubscriptionData> {
+    updateForOrganization(params: UpdateOrganizationSubscriptionParams): APIPromise<[Subscription]> {
         return this.client.put(`/v1/organizations/${params.organization_id}/subscriptions/${params.organization_subscription_id}`, { ...params.subscription });
     }
 
     /**
-     * @api {post} /v2/organizations/{organization_id}/search/subscriptions/filters
+     * @api {post} /v2/organizations/:organization_id/search/subscriptions/filters searchWithField
      * @apiGroup Subscriptions
-     * @apiName searchSubscriptionsWithField
+     * @apiName searchWithField
      * @apiDescription Searches ES documents using search_field.
      * @apiParam {Number} organization_id
      * @apiParam {String} search_field
      * @apiParam {String} query_string
      * @apiExample {js} Example:
-     *             gigwalk.subscriptions.searchSubscriptionsWithField({...})
+     *             gigwalk.subscriptions.searchWithField({...})
      */
-    searchSubscriptionsWithField(params: SearchSubscriptionsWithFieldParams): APIPromise<SearchSubscriptionsWithFieldData> {
+    searchWithField(params: SearchSubscriptionsWithFieldParams): APIPromise<{search_field: string, search_results: Object}> {
         const data = {
             search_field: params.search_field,
             query_string: params.query_string
@@ -339,16 +164,16 @@ export default class Subscriptions extends Resource {
     }
 
     /**
-     * @api {post} /v2/organizations/{organization_id}/search/subscriptions
+     * @api {post} /v2/organizations/:organization_id/search/subscriptions search
      * @apiGroup Subscriptions
-     * @apiName searchSubscriptions
+     * @apiName search
      * @apiDescription Searches all strings in ES documents.
      * @apiParam {Number} organization_id
      * @apiParam {String} query_string
      * @apiExample {js} Example:
-     *             gigwalk.subscriptions.searchSubscriptions({...})
+     *             gigwalk.subscriptions.search({...})
      */
-    searchSubscriptions(params: SearchSubscriptionsParams): APIPromise<SearchSubscriptionsData> {
+    search(params: SearchSubscriptionsParams): APIPromise<ESSubcriptionSearch> {
         const data = {
             query_string: params.query_string
         };

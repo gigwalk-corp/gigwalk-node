@@ -25,7 +25,7 @@ describe('Search', () => {
             .catch(done);
     }).timeout(10000);
     it('should be able to create a search', (done) => {
-        search.createSearch()
+        search.create()
             .then((res) => {
                 expect(res.status).to.equal(200);
                 expect(res.data).to.be.a('string');
