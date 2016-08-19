@@ -1,212 +1,83 @@
 // @flow
 import Resource from '../resource';
 import type { APIPromise } from '../resource';
-
-type OrganizationTemplate = {
-    organization_name: string,
-    type: string,
-    email: string,
-    needs_core?: boolean,
-    core_customer_account?: string,
-    core_private_workforce?: string,
-    config?: {
-        logo_uri: string,
-        hours_after_due: number
-    },
-    cloud9urls?: Array<{
-        name: string,
-        url: string,
-        customer_id: number
-    }>
-}
-
-type DeleteOrganizationParams = {
-    organization_id: number
-}
-
-type GetOrganizationParams = {
-    organization_id: number
-}
-
-type UpdateOrganizationParams = {
-    organization_id: number,
-    organization: OrganizationTemplate
-}
-
-type GetOrganizationsQuery = {
-    limit?: number,
-    offset?: number,
-    order_by?: string,
-    order_dir?: 'ASCENDING' | 'DESCENDING'
-}
-
-type GetOrganizationsParams = {
-    query?: GetOrganizationsQuery
-}
-
-type CreateOrganizationParams = {
-    organization: OrganizationTemplate
-}
-
-type OrganizationSchema = {
-    organization_name: string,
-    id: number,
-    type: string,
-    date_updated: string,
-    user_count: number,
-    status: string,
-    vertical_type: string,
-    core_customer_account: boolean,
-    core_private_workforce: boolean,
-    needs_core: boolean,
-    cloud9urls: Object,
-    created_user: {
-        email: string,
-        first_name: string,
-        last_name: string
-    },
-    stats: {
-        projects: {
-            draft_count: number,
-            active_count: number,
-            completed_count: number,
-            archived_count: number,
-            canceled_count: number
-        },
-        resources: {
-            certification_count: number,
-            location_count: number,
-            target_count: number
-        },
-        team: {
-            group_count: number,
-            user_count: number
-        },
-        tickets: {
-            scheduled_count: number,
-            assigned_count: number,
-            unassigned_count: number,
-            started_count: number,
-            submitted_count: number
-        }
-    },
-    config: {
-        logo_uri: string,
-        is_crossmark_org: boolean,
-        invitation_ttl: number,
-        locale: string,
-        targets_enabled: boolean,
-        force_timing_template: boolean,
-        week_start_day: number,
-        hours_after_due: number,
-        max_weekly_hours: number,
-        cannot_opt_out: boolean,
-        autoassign: {
-            enabled: boolean,
-            use_work_history: boolean,
-            ft_priority: boolean,
-            groups_required: boolean,
-            radius_km: number,
-            bundling_days: Object,
-        },
-        push_notifications: {
-            enabled: boolean
-        },
-        two_way_rating: {
-            enabled: boolean,
-            rating_email_template: string,
-            max_creator_response_days: number,
-            max_worker_response_days: number,
-            max_comment_length: number,
-            max_rating_emails: number
-        }
-    }
-}
-
-type DeleteOrganizationData = null
-
-type GetOrganizationData = [
-    OrganizationSchema
-]
-
-type UpdateOrganizationData = [
-    OrganizationSchema
-]
-
-type GetOrganizationsData = Array<OrganizationSchema>
-
-type CreateOrganizationData = [ // NEED TO CHECK
-    OrganizationSchema
-]
+import type {
+    Organization,
+    DeleteOrganizationParams,
+    GetOrganizationParams,
+    UpdateOrganizationParams,
+    GetOrganizationsParams,
+    CreateOrganizationParams
+} from './types';
 
 export default class Organzations extends Resource {
     /**
-     * @api {delete} /v1/organizations/{organization_id}
+     * @api {delete} /v1/organizations/:organization_id delete
      * @apiGroup Organizations
-     * @apiName deleteOrganization
+     * @apiName delete
      * @apiDescription Delete organization.
      * @apiParam {Number} organization_id
      * @apiExample {js} Example:
-     *             gigwalk.organizations.deleteOrganization({...})
+     *             gigwalk.organizations.delete({...})
      */
-    deleteOrganization(params: DeleteOrganizationParams): APIPromise<DeleteOrganizationData> {
+    delete(params: DeleteOrganizationParams): APIPromise<null> {
         return this.client.delete(`/v1/organizations/${params.organization_id}`);
     }
 
     /**
-     * @api {get} /v1/organizations/{organization_id}
+     * @api {get} /v1/organizations/:organization_id get
      * @apiGroup Organizations
-     * @apiName getOrganization
+     * @apiName get
      * @apiDescription Get organization.
      * @apiParam {Number} organization_id
      * @apiExample {js} Example:
-     *             gigwalk.organizations.getOrganization({...})
+     *             gigwalk.organizations.get({...})
      */
-    getOrganization(params: GetOrganizationParams): APIPromise<GetOrganizationData> {
+    get(params: GetOrganizationParams): APIPromise<[Organization]> {
         return this.client.get(`/v1/organizations/${params.organization_id}`);
     }
 
     /**
-     * @api {put} /v1/organizations/{organization_id}
+     * @api {put} /v1/organizations/:organization_id update
      * @apiGroup Organizations
-     * @apiName updateOrganization
+     * @apiName update
      * @apiDescription Update organization information. The endpoint can also be used to update the company logo. A file with
                        name 'logo' has to be added in a multipart form in order to do that. For example, the following curl:
                        - curl -X PUT http://stage-api.apps.gigwalk.com/v1/organizations/7 -F logo=@path/to/file.png --user user:password
      * @apiParam {Number} organization_id
      * @apiParam {Object} organization
      * @apiExample {js} Example:
-     *             gigwalk.organizations.updateOrganization({...})
+     *             gigwalk.organizations.update({...})
      */
-    updateOrganization(params: UpdateOrganizationParams): APIPromise<UpdateOrganizationData> {
+    update(params: UpdateOrganizationParams): APIPromise<[Organization]> {
         return this.client.put(`/v1/organizations/${params.organization_id}`, { ...params.organization });
     }
 
     /**
-     * @api {get} /v1/organizations
+     * @api {get} /v1/organizations getAll
      * @apiGroup Organizations
-     * @apiName getOrganizations
+     * @apiName getAll
      * @apiDescription Get all organizations. Capable of returning paginated results.
      * @apiParam {Object} query
      * @apiExample {js} Example:
-     *             gigwalk.organizations.getOrganizations({...})
+     *             gigwalk.organizations.getAll({...})
      */
-    getOrganizations(params: GetOrganizationsParams): APIPromise<GetOrganizationsData> {
+    getAll(params: GetOrganizationsParams): APIPromise<Array<Organization>> {
         const queryString = (params) ? this.queryStringForSearchObject(params.query) : '';
 
         return this.client.get(`/v1/organizations${queryString}`);
     }
 
     /**
-     * @api {post} /v1/organizations
+     * @api {post} /v1/organizations create
      * @apiGroup Organizations
-     * @apiName createOrganization
+     * @apiName create
      * @apiDescription Crete organization. Only super-admins and above can create or update organization information.
      * @apiParam {Object} organization
      * @apiExample {js} Example:
-     *             gigwalk.organizations.createOrganization({...})
+     *             gigwalk.organizations.create({...})
      */
-    createOrganization(params: CreateOrganizationParams): APIPromise<CreateOrganizationData> {
+    create(params: CreateOrganizationParams): APIPromise<[Organization]> {
         return this.client.post('/v1/organizations', { ...params.organization });
     }
 }
