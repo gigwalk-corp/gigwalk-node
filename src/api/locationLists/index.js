@@ -98,9 +98,9 @@ export default class LocationLists extends Resource {
      *             gigwalk.locationLists.getForOrganization({...})
      */
     getForOrganization(params: GetOrganizationLocationListsParams): APIPromise<Array<ESLocationList>> {
-        const queryString = this.queryStringForSearchObject(params.query);
+        const query = this.stringForQueryObject(params.query);
 
-        return this.client.get(`/v1/organizations/${params.organization_id}/location_lists${queryString}`);
+        return this.client.get(`/v1/organizations/${params.organization_id}/location_lists${query}`);
     }
 
     /**
@@ -159,9 +159,9 @@ export default class LocationLists extends Resource {
      *             gigwalk.locationLists.getLocations({...})
      */
     getLocations(params: GetLocationsInListParams): APIPromise<Array<Location>> {
-        const queryString = this.queryStringForSearchObject(params.query);
+        const query = this.stringForQueryObject(params.query);
 
-        return this.client.get(`/v1/location_lists/${params.organization_location_list_id}/locations${queryString}`);
+        return this.client.get(`/v1/location_lists/${params.organization_location_list_id}/locations${query}`);
     }
 
     /**
@@ -217,9 +217,9 @@ export default class LocationLists extends Resource {
      *             gigwalk.locationLists.searchList({...})
      */
     searchList(params: SearchLocationListParams): APIPromise<Array<Location>> {
-        const queryString = this.queryStringForSearchObject(params.query);
+        const query = this.stringForQueryObject(params.query);
 
-        return this.client.post(`/v1/location_lists/${params.organization_location_list_id}/search/locations${queryString}`);
+        return this.client.post(`/v1/location_lists/${params.organization_location_list_id}/search/locations${query}`);
     }
 
     /**

@@ -22,9 +22,9 @@ export default class CustomerStatistics extends Resource {
      *             gigwalk.customerStatistics.getByID({...})
      */
     getByID(params: GetStatisticsByIDParams): APIPromise<any> {
-        const queryString = this.queryStringForSearchObject(params.query);
+        const query = this.stringForQueryObject(params.query);
 
-        return this.client.get(`/v1/admin/customerstats/${params.customer_id}${queryString}`);
+        return this.client.get(`/v1/admin/customerstats/${params.customer_id}${query}`);
     }
 
     /**
@@ -39,9 +39,9 @@ export default class CustomerStatistics extends Resource {
      *             gigwalk.customerStatistics.getByEmail({...})
      */
     getByEmail(params: GetStatisticsByEmailParams): APIPromise<any> {
-        const queryString = this.queryStringForSearchObject(params.query);
+        const query = this.stringForQueryObject(params.query);
 
-        return this.client.get(`/v1/admin/customerstats/${params.email}${queryString}`);
+        return this.client.get(`/v1/admin/customerstats/${params.email}${query}`);
     }
 
     /**
@@ -55,9 +55,9 @@ export default class CustomerStatistics extends Resource {
      *             gigwalk.customerStatistics.get({...})
      */
     get(params: GetStatisticsParams): APIPromise<any> {
-        const queryString = (params) ? this.queryStringForSearchObject(params.query) : '';
+        const query = (params) ? this.stringForQueryObject(params.query) : '';
 
-        return this.client.get(`/v1/admin/customers_tickets/${queryString}`);
+        return this.client.get(`/v1/admin/customers_tickets/${query}`);
     }
 
     /**
@@ -71,8 +71,8 @@ export default class CustomerStatistics extends Resource {
      *             gigwalk.customerStatistics.getByTicket({...})
      */
     getByTicket(params: GetStatisticsByTicketParams): APIPromise<any> {
-        const queryString = this.queryStringForSearchObject(params.query);
+        const query = this.stringForQueryObject(params.query);
 
-        return this.client.get(`/v1/tickets/${params.ticket_id}/customers/location_search${queryString}`);
+        return this.client.get(`/v1/tickets/${params.ticket_id}/customers/location_search${query}`);
     }
 }

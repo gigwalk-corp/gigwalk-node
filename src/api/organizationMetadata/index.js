@@ -23,9 +23,9 @@ export default class OrganizationMetadata extends Resource {
      *             gigwalk.organizationMetadata.get({...})
      */
     get(params: GetMetadataParams): APIPromise<Array<MetadataField>> {
-        const queryString = this.queryStringForSearchObject(params.query);
+        const query = this.stringForQueryObject(params.query);
 
-        return this.client.get(`/v1/organizations/${params.organization_id}/subscription_metadata_fields${queryString}`);
+        return this.client.get(`/v1/organizations/${params.organization_id}/subscription_metadata_fields${query}`);
     }
 
     /**
@@ -59,13 +59,13 @@ export default class OrganizationMetadata extends Resource {
      *             gigwalk.organizationMetadata.update({...})
      */
     update(params: UpdateMetadataParams): APIPromise<[MetadataField]> {
-        const queryString = this.queryStringForSearchObject(params.query);
+        const query = this.stringForQueryObject(params.query);
         const data = {
             name: params.name
         };
 
         return this.client.put(
-                    `/v1/organizations/${params.organization_id}/subscription_metadata_fields/${params.organization_metadata_field_id}${queryString}`, data);
+                    `/v1/organizations/${params.organization_id}/subscription_metadata_fields/${params.organization_metadata_field_id}${query}`, data);
     }
 
     /**
@@ -80,10 +80,10 @@ export default class OrganizationMetadata extends Resource {
      *             gigwalk.organizationMetadata.getField({...})
      */
     getField(params: GetMetadataFieldParams): APIPromise<[Object]> {
-        const queryString = this.queryStringForSearchObject(params.query);
+        const query = this.stringForQueryObject(params.query);
 
         return this.client.get(
-                    `/v1/organizations/${params.organization_id}/subscription_metadata_fields/${params.organization_metadata_field_id}/values${queryString}`);
+                    `/v1/organizations/${params.organization_id}/subscription_metadata_fields/${params.organization_metadata_field_id}/values${query}`);
     }
 
     /**

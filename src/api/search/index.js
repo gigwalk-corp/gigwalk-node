@@ -18,9 +18,9 @@ export default class Search extends Resource {
      *             gigwalk.customers.searchDocuments({...})
      */
     searchDocuments(params: SearchDocumentsParams): APIPromise<[ESSearch]> {
-        const queryString = this.queryStringForSearchObject(params.query);
+        const query = this.stringForQueryObject(params.query);
 
-        return this.client.get(`/v1/search${queryString}`);
+        return this.client.get(`/v1/search${query}`);
     }
 
     /**
@@ -47,8 +47,8 @@ export default class Search extends Resource {
      *             gigwalk.search.searchOrganization({...})
      */
     searchOrganization(params: SearchOrganizationParams): APIPromise<[ESSearch]> {
-        const queryString = this.queryStringForSearchObject(params.query);
+        const query = this.stringForQueryObject(params.query);
 
-        return this.client.get(`/v1/organizations/${params.organization_id}/search/${params.index_type}${queryString}`);
+        return this.client.get(`/v1/organizations/${params.organization_id}/search/${params.index_type}${query}`);
     }
 }

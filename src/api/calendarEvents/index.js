@@ -81,8 +81,8 @@ export default class CalendarEvents extends Resource {
      *             gigwalk.calendarEvents.getForCustomer({...})
      */
     getForCustomer(params: GetCalendarEventsForCustomerParams): APIPromise<Array<CalendarEvent>> {
-        const queryString = this.queryStringForSearchObject(params.query);
+        const query = this.stringForQueryObject(params.query);
 
-        return this.client.get(`/v1/customers/${params.customer_id}/calendar_events${queryString}`);
+        return this.client.get(`/v1/customers/${params.customer_id}/calendar_events${query}`);
     }
 }

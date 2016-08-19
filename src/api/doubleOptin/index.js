@@ -23,9 +23,9 @@ export default class DoubleOptin extends Resource {
      *             gigwalk.doubleOptin.getForCurrentCustomer({...})
      */
     getForCurrentCustomer(params: GetApplicationsForCurrentCustomerParams): APIPromise<any> {
-        const queryString = (params) ? this.queryStringForSearchObject(params.query) : '';
+        const query = (params) ? this.stringForQueryObject(params.query) : '';
 
-        return this.client.get(`/v1/ticket_applications${queryString}`);
+        return this.client.get(`/v1/ticket_applications${query}`);
     }
 
     /**
@@ -39,9 +39,9 @@ export default class DoubleOptin extends Resource {
      *             gigwalk.doubleOptin.getForCustomer({...})
      */
     getForCustomer(params: GetApplicationsForCustomerParams): APIPromise<any> {
-        const queryString = this.queryStringForSearchObject(params.query);
+        const query = this.stringForQueryObject(params.query);
 
-        return this.client.get(`/v1/customers/${params.customer_id}/applications${queryString}`);
+        return this.client.get(`/v1/customers/${params.customer_id}/applications${query}`);
     }
 
     /**

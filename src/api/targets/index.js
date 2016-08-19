@@ -37,9 +37,9 @@ export default class Targets extends Resource {
      *             gigwalk.targets.get({...})
      */
     get(params: GetOrganizationTargetParams): APIPromise<[ObservationTarget]> {
-        const queryString = this.queryStringForSearchObject(params.query);
+        const query = this.stringForQueryObject(params.query);
 
-        return this.client.get(`/v1/organizations/${params.organization_id}/observation_targets/${params.observation_target_id}${queryString}`);
+        return this.client.get(`/v1/organizations/${params.organization_id}/observation_targets/${params.observation_target_id}${query}`);
     }
 
     /**
@@ -70,8 +70,8 @@ export default class Targets extends Resource {
      *             gigwalk.targets.search({...})
      */
     search(params: SearchOrganizationTargetsParams): APIPromise<Array<ObservationTarget>> {
-        const queryString = this.queryStringForSearchObject(params.query);
+        const query = this.stringForQueryObject(params.query);
 
-        return this.client.get(`/v1/organizations/${params.organization_id}/observation_targets/search${queryString}`);
+        return this.client.get(`/v1/organizations/${params.organization_id}/observation_targets/search${query}`);
     }
 }

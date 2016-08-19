@@ -63,9 +63,9 @@ export default class Organzations extends Resource {
      *             gigwalk.organizations.getAll({...})
      */
     getAll(params: GetOrganizationsParams): APIPromise<Array<Organization>> {
-        const queryString = (params) ? this.queryStringForSearchObject(params.query) : '';
+        const query = (params) ? this.stringForQueryObject(params.query) : '';
 
-        return this.client.get(`/v1/organizations${queryString}`);
+        return this.client.get(`/v1/organizations${query}`);
     }
 
     /**

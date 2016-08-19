@@ -29,9 +29,9 @@ export default class TargetLists extends Resource {
      *             gigwalk.targetLists.getAll({...})
      */
     getAll(params: GetTargetListsParams): APIPromise<Array<TargetList>> {
-        const queryString = (params) ? this.queryStringForSearchObject(params.query) : '';
+        const query = (params) ? this.stringForQueryObject(params.query) : '';
 
-        return this.client.get(`/v1/organization_observation_target_lists${queryString}`);
+        return this.client.get(`/v1/organization_observation_target_lists${query}`);
     }
 
     /**
@@ -58,9 +58,9 @@ export default class TargetLists extends Resource {
      *             gigwalk.targetLists.getAllForOrganization({...})
      */
     getAllForOrganization(params: GetOrganizationTargetListsParams): APIPromise<Array<TargetList>> {
-        const queryString = this.queryStringForSearchObject(params.query);
+        const query = this.stringForQueryObject(params.query);
 
-        return this.client.get(`/v1/organizations/${params.organization_id}/target_lists${queryString}`);
+        return this.client.get(`/v1/organizations/${params.organization_id}/target_lists${query}`);
     }
 
     /**
@@ -129,9 +129,9 @@ export default class TargetLists extends Resource {
      *             gigwalk.targetLists.searchObservationList({...})
      */
     searchObservationList(params: SearchTargetsInObservationListParams): APIPromise<[]> {
-        const queryString = this.queryStringForSearchObject(params.query);
+        const query = this.stringForQueryObject(params.query);
 
-        return this.client.post(`/v1/organization_observation_target_lists/${params.target_list_id}/search/observation_targets${queryString}`);
+        return this.client.post(`/v1/organization_observation_target_lists/${params.target_list_id}/search/observation_targets${query}`);
     }
 
     /**
@@ -145,9 +145,9 @@ export default class TargetLists extends Resource {
      *             gigwalk.targetLists.searchList({...})
      */
     searchList(params: SearchTargetsInListParams): APIPromise<[]> {
-        const queryString = this.queryStringForSearchObject(params.query);
+        const query = this.stringForQueryObject(params.query);
 
-        return this.client.post(`/v1/target_lists/${params.target_list_id}/search/targets${queryString}`);
+        return this.client.post(`/v1/target_lists/${params.target_list_id}/search/targets${query}`);
     }
 
     /**

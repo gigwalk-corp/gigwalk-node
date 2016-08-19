@@ -27,9 +27,9 @@ export default class Locations extends Resource {
      *             gigwalk.locations.getAll({...})
      */
     getAll(params: GetLocationsParams): APIPromise<Array<Location>> {
-        const queryString = (params) ? this.queryStringForSearchObject(params.query) : '';
+        const query = (params) ? this.stringForQueryObject(params.query) : '';
 
-        return this.client.get(`/v1/locations${queryString}`);
+        return this.client.get(`/v1/locations${query}`);
     }
 
     /**
@@ -60,9 +60,9 @@ export default class Locations extends Resource {
      *             gigwalk.locations.get({...})
      */
     get(params: GetLocationParams): APIPromise<[Location]> {
-        const queryString = this.queryStringForSearchObject(params.query);
+        const query = this.stringForQueryObject(params.query);
 
-        return this.client.get(`/v1/locations/${params.location_id}${queryString}`);
+        return this.client.get(`/v1/locations/${params.location_id}${query}`);
     }
 
     /**
@@ -76,9 +76,9 @@ export default class Locations extends Resource {
      *             gigwalk.locations.getAllForOrganization({...})
      */
     getAllForOrganization(params: GetOrganizationLocationsParams): APIPromise<Array<Location>> {
-        const queryString = this.queryStringForSearchObject(params.query);
+        const query = this.stringForQueryObject(params.query);
 
-        return this.client.get(`/v1/organizations/${params.organization_id}/locations${queryString}`);
+        return this.client.get(`/v1/organizations/${params.organization_id}/locations${query}`);
     }
 
     /**

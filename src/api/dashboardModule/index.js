@@ -20,9 +20,9 @@ export default class DashboardModule extends Resource {
      *             gigwalk.dashboardModule.getForOrganization({...})
      */
     getForOrganization(params: GetModuleForOrganizationParams): APIPromise<any> {
-        const queryString = this.queryStringForSearchObject(params.query);
+        const query = this.stringForQueryObject(params.query);
 
-        return this.client.get(`/v1/organizations/${params.organization_id}/dashboard_modules/${params.module_id}${queryString}`);
+        return this.client.get(`/v1/organizations/${params.organization_id}/dashboard_modules/${params.module_id}${query}`);
     }
 
     /**
@@ -36,8 +36,8 @@ export default class DashboardModule extends Resource {
      *             gigwalk.dashboardModule.get({...})
      */
     get(params: GetModuleParams): APIPromise<any> {
-        const queryString = this.queryStringForSearchObject(params.query);
+        const query = this.stringForQueryObject(params.query);
 
-        return this.client.get(`/v1/dashboard_modules/${params.module_id}${queryString}`);
+        return this.client.get(`/v1/dashboard_modules/${params.module_id}${query}`);
     }
 }

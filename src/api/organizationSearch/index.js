@@ -17,8 +17,8 @@ export default class OrganizationSearch extends Resource {
      *             gigwalk.organizationSearch.search({...})
      */
     search(params: SearchOrganizationParams): APIPromise<any> {
-        const queryString = (params) ? this.queryStringForSearchObject(params.query) : '';
+        const query = (params) ? this.stringForQueryObject(params.query) : '';
 
-        return this.client.get(`/v1/organizations/search${queryString}`);
+        return this.client.get(`/v1/organizations/search${query}`);
     }
 }

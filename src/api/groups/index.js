@@ -107,9 +107,9 @@ export default class Groups extends Resource {
      *             gigwalk.groups.getForOrganization({...})
      */
     getForOrganization(params: GetGroupForOrganizationParams): APIPromise<Array<Group>> {
-        const queryString = this.queryStringForSearchObject(params.query);
+        const query = this.stringForQueryObject(params.query);
 
-        return this.client.get(`/v1/organizations/${params.organization_id}/groups${queryString}`);
+        return this.client.get(`/v1/organizations/${params.organization_id}/groups${query}`);
     }
 
     /**
@@ -137,12 +137,12 @@ export default class Groups extends Resource {
      *             gigwalk.groups.getMembers({...})
      */
     getMembers(params: GetGroupMembersParams): APIPromise<Array<Member>> {
-        const queryString = this.queryStringForSearchObject(params.query);
+        const query = this.stringForQueryObject(params.query);
         const data = {
             subgroup_members: params.subgroup_members
         };
 
-        return this.client.get(`/v1/groups/${params.group_id}/customers${queryString}`, data);
+        return this.client.get(`/v1/groups/${params.group_id}/customers${query}`, data);
     }
 
     /**

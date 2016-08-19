@@ -44,14 +44,14 @@ export default class Tickets extends Resource {
      *             gigwalk.tickets.searchForGroup({...})
      */
     searchForGroup(params: SearchGroupTicketsParams): APIPromise<Array<ESTicket>> {
-        const queryString = this.queryStringForSearchObject(params.query);
+        const query = this.stringForQueryObject(params.query);
         const data = {
             query_params: params.query_params,
             bounding_box: params.bounding_box,
             timezone: params.timezone
         };
 
-        return this.client.post(`/v1/groups/${params.group_id}/tickets/search${queryString}`, data);
+        return this.client.post(`/v1/groups/${params.group_id}/tickets/search${query}`, data);
     }
 
     /**
@@ -64,9 +64,9 @@ export default class Tickets extends Resource {
      *             gigwalk.tickets.getAllForCurrentCustomer({...})
      */
     getAllForCurrentCustomer(params: GetCurrentCustomerTicketsParams): APIPromise<Array<Ticket>> {
-        const queryString = (params) ? this.queryStringForSearchObject(params.query) : '';
+        const query = (params) ? this.stringForQueryObject(params.query) : '';
 
-        return this.client.get(`/v1/tickets/my_list${queryString}`);
+        return this.client.get(`/v1/tickets/my_list${query}`);
     }
 
     /**
@@ -80,9 +80,9 @@ export default class Tickets extends Resource {
      *             gigwalk.tickets.getAllForCustomer({...})
      */
     getAllForCustomer(params: GetCustomerTicketsParams): APIPromise<Array<Ticket>> {
-        const queryString = this.queryStringForSearchObject(params.query);
+        const query = this.stringForQueryObject(params.query);
 
-        return this.client.get(`/v1/customers/${params.customer_id}/tickets${queryString}`);
+        return this.client.get(`/v1/customers/${params.customer_id}/tickets${query}`);
     }
 
     /**
@@ -97,12 +97,12 @@ export default class Tickets extends Resource {
      *             gigwalk.tickets.searchForOrganization({...})
      */
     searchForOrganization(params: SearchOrganizationTicketsParams): APIPromise<ESTicketSearch> {
-        const queryString = this.queryStringForSearchObject(params.query);
+        const query = this.stringForQueryObject(params.query);
         const data = {
             query_string: params.query_string
         };
 
-        return this.client.post(`/v2/organizations/${params.organization_id}/search/tickets${queryString}`, data);
+        return this.client.post(`/v2/organizations/${params.organization_id}/search/tickets${query}`, data);
     }
 
     /**
@@ -118,13 +118,13 @@ export default class Tickets extends Resource {
      *             gigwalk.tickets.searchWithFieldForOrganization({...})
      */
     searchWithFieldForOrganization(params: SearchOrganizationTicketsWithFieldParams): APIPromise<ESTicketSearch> {
-        const queryString = this.queryStringForSearchObject(params.query);
+        const query = this.stringForQueryObject(params.query);
         const data = {
             search_field: params.search_field,
             query_string: params.query_string
         };
 
-        return this.client.post(`/v2/organizations/${params.organization_id}/search/tickets/filters${queryString}`, data);
+        return this.client.post(`/v2/organizations/${params.organization_id}/search/tickets/filters${query}`, data);
     }
 
     /**
@@ -192,9 +192,9 @@ export default class Tickets extends Resource {
      *             gigwalk.tickets.get({...})
      */
     get(params: GetTicketParams): APIPromise<[Ticket]> {
-        const queryString = this.queryStringForSearchObject(params.query);
+        const query = this.stringForQueryObject(params.query);
 
-        return this.client.get(`/v1/tickets/${params.ticket_id}${queryString}`);
+        return this.client.get(`/v1/tickets/${params.ticket_id}${query}`);
     }
 
     /**
@@ -209,9 +209,9 @@ export default class Tickets extends Resource {
      *             gigwalk.tickets.searchWithID({...})
      */
     searchWithID(params: SearchTicketsWithIDParams): APIPromise<Array<Ticket>> {
-        const queryString = this.queryStringForSearchObject(params.query);
+        const query = this.stringForQueryObject(params.query);
 
-        return this.client.post(`/v1/tickets/${params.ticket_id}${queryString}`, { ...params.search });
+        return this.client.post(`/v1/tickets/${params.ticket_id}${query}`, { ...params.search });
     }
 
     /**
@@ -260,9 +260,9 @@ export default class Tickets extends Resource {
      *             gigwalk.tickets.search({...})
      */
     search(params: SearchTicketsParams): APIPromise<Array<Ticket>> {
-        const queryString = this.queryStringForSearchObject(params.query);
+        const query = this.stringForQueryObject(params.query);
 
-        return this.client.post(`/v1/tickets${queryString}`, { ...params.search });
+        return this.client.post(`/v1/tickets${query}`, { ...params.search });
     }
 
     /**
@@ -299,9 +299,9 @@ export default class Tickets extends Resource {
      *             gigwalk.tickets.getAllForOrganization({...})
      */
     getAllForOrganization(params: GetOrganizationTicketsParams): APIPromise<Array<Ticket>> {
-        const queryString = this.queryStringForSearchObject(params.query);
+        const query = this.stringForQueryObject(params.query);
 
-        return this.client.get(`/v1/organizations/${params.organization_id}/tickets${queryString}`);
+        return this.client.get(`/v1/organizations/${params.organization_id}/tickets${query}`);
     }
 
     /**
@@ -316,9 +316,9 @@ export default class Tickets extends Resource {
      *             gigwalk.tickets.searchWithCriteriaForOrganization({...})
      */
     searchWithCriteriaForOrganization(params: SearchOrganizationTicketsWithCriteriaParams): APIPromise<Array<Ticket>> {
-        const queryString = this.queryStringForSearchObject(params.query);
+        const query = this.stringForQueryObject(params.query);
 
-        return this.client.post(`/v1/organizations/${params.organization_id}/tickets/search${queryString}`, { ...params.search });
+        return this.client.post(`/v1/organizations/${params.organization_id}/tickets/search${query}`, { ...params.search });
     }
 
     /**
@@ -332,9 +332,9 @@ export default class Tickets extends Resource {
      *             gigwalk.tickets.getAllForSubscription({...})
      */
     getAllForSubscription(params: GetSubscriptionTicketsParams): APIPromise<Array<Ticket>> {
-        const queryString = this.queryStringForSearchObject(params.query);
+        const query = this.stringForQueryObject(params.query);
 
-        return this.client.get(`/v1/subscriptions/${params.subscription_id}/tickets${queryString}`);
+        return this.client.get(`/v1/subscriptions/${params.subscription_id}/tickets${query}`);
     }
 
     /**
@@ -349,9 +349,9 @@ export default class Tickets extends Resource {
      *             gigwalk.tickets.searchForSubscription({...})
      */
     searchForSubscription(params: SearchSubscriptionTicketsParams): APIPromise<Array<Ticket>> {
-        const queryString = this.queryStringForSearchObject(params.query);
+        const query = this.stringForQueryObject(params.query);
 
-        return this.client.post(`/v1/subscriptions/${params.subscription_id}/tickets/search${queryString}`, { ...params.search });
+        return this.client.post(`/v1/subscriptions/${params.subscription_id}/tickets/search${query}`, { ...params.search });
     }
 
     /**
@@ -365,9 +365,9 @@ export default class Tickets extends Resource {
      *             gigwalk.tickets.getEvents({...})
      */
     getEvents(params: GetTicketEventsParams): APIPromise<Array<TicketEvent>> {
-        const queryString = this.queryStringForSearchObject(params.query);
+        const query = this.stringForQueryObject(params.query);
 
-        return this.client.get(`/v1/tickets/${params.ticket_id}/events${queryString}`);
+        return this.client.get(`/v1/tickets/${params.ticket_id}/events${query}`);
     }
 
     /**

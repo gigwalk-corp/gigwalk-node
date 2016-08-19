@@ -26,13 +26,13 @@ export default class DataTypes extends Resource {
      *             gigwalk.dataTypes.searchWithField({...})
      */
     searchWithField(params: SearchDataTypesWithFieldParams): APIPromise<Array<DataType>> {
-        const queryString = this.queryStringForSearchObject(params.query);
+        const query = this.stringForQueryObject(params.query);
         const data = {
             search_field: params.search_field,
             query_string: params.query_string
         };
 
-        return this.client.post(`/v2/organizations/${params.organization_id}/search/data_types/filters${queryString}`, data);
+        return this.client.post(`/v2/organizations/${params.organization_id}/search/data_types/filters${query}`, data);
     }
 
     /**
@@ -47,12 +47,12 @@ export default class DataTypes extends Resource {
      *             gigwalk.dataTypes.search({...})
      */
     search(params: SearchDataTypesParams): APIPromise<Array<DataType>> {
-        const queryString = this.queryStringForSearchObject(params.query);
+        const query = this.stringForQueryObject(params.query);
         const data = {
             query_string: params.query_string
         };
 
-        return this.client.post(`/v2/organizations/${params.organization_id}/search/data_types${queryString}`, data);
+        return this.client.post(`/v2/organizations/${params.organization_id}/search/data_types${query}`, data);
     }
 
     /**
@@ -67,13 +67,13 @@ export default class DataTypes extends Resource {
      *             gigwalk.dataTypes.getAll({...})
      */
     getAll(params: GetAllDataTypesParams): APIPromise<Array<DataType>> {
-        const queryString = this.queryStringForSearchObject(params.query);
+        const query = this.stringForQueryObject(params.query);
         const data = {
             observation_target_type_id: params.observation_target_type_id,
             dashboard_visible: params.dashboard_visible
         };
 
-        return this.client.get(`/v1/data_types${queryString}`, data);
+        return this.client.get(`/v1/data_types${query}`, data);
     }
 
     /**
@@ -102,13 +102,13 @@ export default class DataTypes extends Resource {
      *             gigwalk.dataTypes.get({...})
      */
     get(params: GetDataTypeParams): APIPromise<[DataType]> {
-        const queryString = this.queryStringForSearchObject(params.query);
+        const query = this.stringForQueryObject(params.query);
         const data = {
             observation_target_type_id: params.observation_target_type_id,
             dashboard_visible: params.dashboard_visible
         };
 
-        return this.client.get(`/v1/data_types/${params.data_type_id}${queryString}`, data);
+        return this.client.get(`/v1/data_types/${params.data_type_id}${query}`, data);
     }
 
     /**

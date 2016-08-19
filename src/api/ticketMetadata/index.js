@@ -21,9 +21,9 @@ export default class TicketMetadata extends Resource {
      *             gigwalk.ticketMetadata.get({...})
      */
     get(params: GetMetadataParams): APIPromise<Object> {
-        const queryString = this.queryStringForSearchObject(params.query);
+        const query = this.stringForQueryObject(params.query);
 
-        return this.client.get(`/v1/tickets/${params.ticket_id}/metadata${queryString}`);
+        return this.client.get(`/v1/tickets/${params.ticket_id}/metadata${query}`);
     }
 
     /**
@@ -52,9 +52,9 @@ export default class TicketMetadata extends Resource {
      *             gigwalk.ticketMetadata.update({...})
      */
     update(params: UpdateMetadataParams): APIPromise<Object> {
-        const queryString = this.queryStringForSearchObject(params.query);
+        const query = this.stringForQueryObject(params.query);
 
-        return this.client.put(`/v1/tickets/${params.ticket_id}/metadata${queryString}`, { ...params.metadata });
+        return this.client.put(`/v1/tickets/${params.ticket_id}/metadata${query}`, { ...params.metadata });
     }
 
     /**
@@ -70,8 +70,8 @@ export default class TicketMetadata extends Resource {
      *             gigwalk.ticketMetadata.updateForOrganization({...})
      */
     updateForOrganization(params: UpdateMetadataForOrganizationParams): APIPromise<Object> {
-        const queryString = this.queryStringForSearchObject(params.query);
+        const query = this.stringForQueryObject(params.query);
 
-        return this.client.put(`/v1/organizations/${params.organization_id}/tickets/${params.ticket_id}${queryString}`, { ...params.metadata });
+        return this.client.put(`/v1/organizations/${params.organization_id}/tickets/${params.ticket_id}${query}`, { ...params.metadata });
     }
 }

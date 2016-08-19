@@ -22,9 +22,9 @@ export default class Templates extends Resource {
      *             gigwalk.templates.getAll({...})
      */
     getAll(params: GetAllTemplatesParams): APIPromise<Array<Template>> {
-        const queryString = this.queryStringForSearchObject(params.query);
+        const query = this.stringForQueryObject(params.query);
 
-        return this.client.get(`/v1/templates${queryString}`);
+        return this.client.get(`/v1/templates${query}`);
     }
 
     /**
@@ -68,9 +68,9 @@ export default class Templates extends Resource {
      *             gigwalk.templates.get({...})
      */
     get(params: GetTemplateParams): APIPromise<[Template]> {
-        const queryString = this.queryStringForSearchObject(params.query);
+        const query = this.stringForQueryObject(params.query);
 
-        return this.client.get(`/v1/templates/${params.template_id}${queryString}`);
+        return this.client.get(`/v1/templates/${params.template_id}${query}`);
     }
 
     /**

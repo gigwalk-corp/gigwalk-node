@@ -22,9 +22,9 @@ export default class Waves extends Resource {
      *             gigwalk.waves.getSubCollection({...})
      */
     getSubCollection(params: GetWaveSubCollectionParams): APIPromise<any> {
-        const queryString = this.queryStringForSearchObject(params.query);
+        const query = this.stringForQueryObject(params.query);
 
-        return this.client.get(`/v1/waves/${params.organization_subscription_wave_id}/${params.sub_collection}/${params.sub_sub_collection}${queryString}`);
+        return this.client.get(`/v1/waves/${params.organization_subscription_wave_id}/${params.sub_collection}/${params.sub_sub_collection}${query}`);
     }
 
     /**
@@ -38,9 +38,9 @@ export default class Waves extends Resource {
      *             gigwalk.waves.get({...})
      */
     get(params: GetWaveParams): APIPromise<any> {
-        const queryString = this.queryStringForSearchObject(params.query);
+        const query = this.stringForQueryObject(params.query);
 
-        return this.client.get(`/v1/organization_subscription_waves/${params.organization_subscription_wave_id}${queryString}`);
+        return this.client.get(`/v1/organization_subscription_waves/${params.organization_subscription_wave_id}${query}`);
     }
 
     /**

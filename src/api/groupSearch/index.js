@@ -21,9 +21,9 @@ export default class GroupSearch extends Resource {
      *             gigwalk.groupSearch.searchWithType({...})
      */
     searchWithType(params: SearchGroupWithTypeParams): APIPromise<any> {
-        const queryString = this.queryStringForSearchObject(params.query);
+        const query = this.stringForQueryObject(params.query);
 
-        return this.client.get(`/v1/groups/${params.group_id}/search/${params.index_type}${queryString}`);
+        return this.client.get(`/v1/groups/${params.group_id}/search/${params.index_type}${query}`);
     }
 
     /**
@@ -37,9 +37,9 @@ export default class GroupSearch extends Resource {
      *             gigwalk.groupSearch.search({...})
      */
     search(params: SearchGroupParams): APIPromise<any> {
-        const queryString = this.queryStringForSearchObject(params.query);
+        const query = this.stringForQueryObject(params.query);
 
-        return this.client.post(`/v2/groups/${params.group_id}/search/tickets${queryString}`);
+        return this.client.post(`/v2/groups/${params.group_id}/search/tickets${query}`);
     }
 
     /**

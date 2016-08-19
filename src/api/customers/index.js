@@ -46,13 +46,13 @@ export default class Customers extends Resource {
      *             gigwalk.customers.getByEmail({...})
      */
     getByEmail(params: GetCustomerByEmailParams): APIPromise<[Customer]> {
-        const queryString = this.queryStringForSearchObject(params.query);
+        const query = this.stringForQueryObject(params.query);
         const data = {
             require_cert_ids: (params.require_cert_ids) ? params.require_cert_ids : [],
             exclude_cert_ids: (params.exclude_cert_ids) ? params.exclude_cert_ids : []
         };
 
-        return this.client.get(`/v1/organizations/${params.organization_id}/customers/${params.customer_email}${queryString}`, data);
+        return this.client.get(`/v1/organizations/${params.organization_id}/customers/${params.customer_email}${query}`, data);
     }
 
     /**
@@ -96,9 +96,9 @@ export default class Customers extends Resource {
      *             gigwalk.customers.getById({...})
      */
     getById(params: GetCustomerByIdParams): APIPromise<[Customer]> {
-        const queryString = this.queryStringForSearchObject(params.query);
+        const query = this.stringForQueryObject(params.query);
 
-        return this.client.get(`/v1/organizations/${params.organization_id}/customers/${params.customer_id}${queryString}`);
+        return this.client.get(`/v1/organizations/${params.organization_id}/customers/${params.customer_id}${query}`);
     }
 
     /**
@@ -129,13 +129,13 @@ export default class Customers extends Resource {
      *             gigwalk.customers.getAllForOrganization({...})
      */
     getAllForOrganization(params: GetAllCustomersForOrganizationParams): APIPromise<Array<Customer>> {
-        const queryString = this.queryStringForSearchObject(params.query);
+        const query = this.stringForQueryObject(params.query);
         const data = {
             require_cert_ids: (params.require_cert_ids) ? params.require_cert_ids : [],
             exclude_cert_ids: (params.exclude_cert_ids) ? params.exclude_cert_ids : []
         };
 
-        return this.client.get(`/v1/organizations/${params.organization_id}/customers${queryString}`, data);
+        return this.client.get(`/v1/organizations/${params.organization_id}/customers${query}`, data);
     }
 
     /**
@@ -216,7 +216,7 @@ export default class Customers extends Resource {
      *             gigwalk.customers.search({...})
      */
     search(params: SearchCustomersParams): ESPromise<ESCustomer> {
-        const queryString = this.queryStringForSearchObject(params.query);
+        const query = this.stringForQueryObject(params.query);
         const data = {
             ticket_ids: params.ticket_ids,
             group_ids: (params.group_ids) ? params.group_ids : [],
@@ -224,6 +224,6 @@ export default class Customers extends Resource {
             q: (params.q) ? params.q : '',
         };
 
-        return this.client.post(`/v1/tickets/search/customers${queryString}`, data);
+        return this.client.post(`/v1/tickets/search/customers${query}`, data);
     }
 }

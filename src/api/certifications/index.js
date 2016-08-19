@@ -71,9 +71,9 @@ export default class Certifications extends Resource {
      *             gigwalk.certifications.getAll({...})
      */
     getAll(params: GetCertificationsParams): APIPromise<Array<Certification>> {
-        const queryString = (params) ? this.queryStringForSearchObject(params.query) : '';
+        const query = (params) ? this.stringForQueryObject(params.query) : '';
 
-        return this.client.get(`/v1/certifications${queryString}`);
+        return this.client.get(`/v1/certifications${query}`);
     }
 
     /**
@@ -106,9 +106,9 @@ export default class Certifications extends Resource {
      *             gigwalk.certifications.getAllForCustomer({...})
      */
     getAllForCustomer(params: GetAllCertificationsForCustomerParams): APIPromise<CustomerCertification> {
-        const queryString = this.queryStringForSearchObject(params.query);
+        const query = this.stringForQueryObject(params.query);
 
-        return this.client.get(`/v1/organizations/${params.organization_id}/customer/${params.customer_id}/certifications${queryString}`);
+        return this.client.get(`/v1/organizations/${params.organization_id}/customer/${params.customer_id}/certifications${query}`);
     }
 
     /**
@@ -164,9 +164,9 @@ export default class Certifications extends Resource {
      *             gigwalk.certifications.getAllForOrganization({...})
      */
     getAllForOrganization(params: GetAllCertificationsForOrganizationParams): APIPromise<Array<Certification>> {
-        const queryString = this.queryStringForSearchObject(params.query);
+        const query = this.stringForQueryObject(params.query);
 
-        return this.client.get(`/v1/organizations/${params.organization_id}/certifications${queryString}`);
+        return this.client.get(`/v1/organizations/${params.organization_id}/certifications${query}`);
     }
 
     /**
