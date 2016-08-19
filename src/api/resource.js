@@ -36,22 +36,6 @@ export type ESResults<T> = {
 
 export type ESPromise<T> = Promise<$AxiosXHR<ESResults<T>>>
 
-export type ESParams = {
-    from?: number,
-    size?: number,
-    sort_field?: string,
-    sort_order?: string,
-    q?: string
-}
-
-export type PaginationParams = {
-    limit?: number,
-    offset?: number,
-    sort_field?: string,
-    sort_order?: string,
-    query_string?: string
-}
-
 export default class Resource {
     client: Axios;
 

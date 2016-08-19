@@ -7,6 +7,7 @@ import type {
     DeleteCertificationParams,
     GetCertificationParams,
     UpdateCertificationParams,
+    GetCertificationsParams,
     CreateCertificationsParams,
     GetAllCertificationsForCustomerParams,
     AddRemoveCertificationsForCustomerParams,
@@ -20,9 +21,10 @@ import type {
 
 export default class Certifications extends Resource {
     /**
-     * @api {delete} /v1/certifications/{certification_id}
-     * @apiName DeleteCertification
-     * @apiDescription Delete given cert This is a hard delete
+     * @api {delete} /v1/certifications/:certification_id delete
+     * @apiGroup Certifications
+     * @apiName delete
+     * @apiDescription Delete the given certification. This is a hard delete.
      * @apiParam {Number} certification_id
      * @apiExample {js} Example:
      *             gigwalk.certifications.delete({...})
@@ -32,9 +34,10 @@ export default class Certifications extends Resource {
     }
 
     /**
-     * @api {get} /v1/certifications/{certification_id}
-     * @apiName GetCertification
-     * @apiDescription Get Certification info. Return data fields (id, org_id, description, title, type, state).
+     * @api {get} /v1/certifications/:certification_id get
+     * @apiGroup Certifications
+     * @apiName get
+     * @apiDescription Get certification information.
      * @apiParam {Number} certification_id
      * @apiExample {js} Example:
      *             gigwalk.certifications.get({...})
@@ -44,37 +47,41 @@ export default class Certifications extends Resource {
     }
 
     /**
-     * @api {put} /v1/certifications/{certification_id}
-     * @apiName UpdateCertification
-     * @apiDescription Update Certification(s) JSON payload can have (description, title, type, state).
+     * @api {put} /v1/certifications/:certification_id update
+     * @apiGroup Certifications
+     * @apiName update
+     * @apiDescription Update certification(s).
      * @apiParam {Number} certification_id
-     * @apiParam {CertificationTemplate} certification
+     * @apiParam {Object} certification
      * @apiExample {js} Example:
      *             gigwalk.certifications.update({...})
      */
     update(params: UpdateCertificationParams): APIPromise<[Certification]> {
-        const url = `/v1/certifications/${params.certification_id}`;
-        return this.client.put(url, { ...params.certification });
+        return this.client.put(`/v1/certifications/${params.certification_id}`, { ...params.certification });
     }
 
     /**
-     * @api {get} /v1/certifications
-     * @apiName GetCertifications
-     * @apiDescription Get all certifications available to the current user Return data fields (id, org_id, description, title, type, state).
-                       Including the current user organization certificates and public certificates It could return paginated results and also
-                       sorted by given parameters
+     * @api {get} /v1/certifications getAll
+     * @apiGroup Certifications
+     * @apiName getAll
+     * @apiDescription Get all certifications available to the current user. Returns the current user organization's certificates and public certificates.
+                       Capable of returning paginated results.
+     * @apiParam {Object} query
      * @apiExample {js} Example:
      *             gigwalk.certifications.getAll({...})
      */
-    getAll(): APIPromise<Array<Certification>> {
-        return this.client.get('/v1/certifications');
+    getAll(params: GetCertificationsParams): APIPromise<Array<Certification>> {
+        const queryString = (params) ? this.queryStringForSearchObject(params.query) : '';
+
+        return this.client.get(`/v1/certifications${queryString}`);
     }
 
     /**
-     * @api {post} /v1/certifications
-     * @apiName CreateCertifications
-     * @apiDescription Create Certification(s) JSON payload can have (description, title, type, state).
-                       If the cert already exists (check by title), then we return existing cert(s)
+     * @api {post} /v1/certifications create
+     * @apiGroup Certifications
+     * @apiName create
+     * @apiDescription Create certification(s). If the certification already exists (checked by title), then existing certification(s) returned.
+     * @apiParam {Array<CertificationTemplate>} certifications.
      * @apiParam {Array<CertificationTemplate>} certifications
      * @apiExample {js} Example:
      *             gigwalk.certifications.create({...})
@@ -83,29 +90,32 @@ export default class Certifications extends Resource {
         const data = {
             certifications: params.certifications
         };
+
         return this.client.post('/v1/certifications', data);
     }
 
     /**
-     * @api {get} /v1/organizations/{organization_id}/customer/{customer_id}/certifications
-     * @apiName GetCustomerCertifications
-     * @apiDescription Get Certification info for a given customer Return data fields (id, org_id, description, title, type, state).
-                       It could return paginated results and also sorted by given parameters
+     * @api {get} /v1/organizations/:organization_id/customer/:customer_id/certifications getAllForCustomer
+     * @apiGroup Certifications
+     * @apiName getAllForCustomer
+     * @apiDescription Get certification information for a given customer. Capable of returning paginated results.
      * @apiParam {Number} organization_id
      * @apiParam {Number} customer_id
+     * @apiParam {Object} query
      * @apiExample {js} Example:
-     *             gigwalk.certifications.getForCustomer({...})
+     *             gigwalk.certifications.getAllForCustomer({...})
      */
-    getForCustomer(params: GetAllCertificationsForCustomerParams): APIPromise<CustomerCertification> {
-        const url = `/v1/organizations/${params.organization_id}/customer/${params.customer_id}/certifications`;
-        return this.client.get(url);
+    getAllForCustomer(params: GetAllCertificationsForCustomerParams): APIPromise<CustomerCertification> {
+        const queryString = this.queryStringForSearchObject(params.query);
+
+        return this.client.get(`/v1/organizations/${params.organization_id}/customer/${params.customer_id}/certifications${queryString}`);
     }
 
     /**
-     * @api {put} /v1/organizations/{organization_id}/customer/{customer_id}/certifications
-     * @apiName UpdateCustomerCertifications
-     * @apiDescription Add certifications to a customer. A customer WORKER can use this
-     *                 endpoint only to add SELF_CERTS certifications to himself
+     * @api {put} /v1/organizations/:organization_id/customer/:customer_id/certifications addToCustomer
+     * @apiGroup Certifications
+     * @apiName addToCustomer
+     * @apiDescription Add certifications to a customer. A WORKER can use this endpoint only to add/remove SELF_CERTS certifications to themselves.
      * @apiParam {Number} organization_id
      * @apiParam {Number} customer_id
      * @apiParam {String} action
@@ -114,20 +124,19 @@ export default class Certifications extends Resource {
      *             gigwalk.certifications.addToCustomer({...})
      */
     addToCustomer(params: AddRemoveCertificationsForCustomerParams): APIPromise<Array<[number, number]>> {
-        const url = `/v1/organizations/${params.organization_id}/customer/${params.customer_id}/certifications`;
         const data = {
             action: 'add',
             certification_ids: params.certification_ids
         };
 
-        return this.client.put(url, data);
+        return this.client.put(`/v1/organizations/${params.organization_id}/customer/${params.customer_id}/certifications`, data);
     }
 
     /**
-     * @api {put} /v1/organizations/{organization_id}/customer/{customer_id}/certifications
-     * @apiName UpdateCustomerCertifications
-     * @apiDescription Remove certifications for a customer. A customer WORKER can use this
-     *                 endpoint only to remove SELF_CERTS certifications from himself
+     * @api {put} /v1/organizations/:organization_id/customer/:customer_id/certifications removeFromCustomer
+     * @apiGroup Certifications
+     * @apiName removeFromCustomer
+     * @apiDescription Remove certifications from a customer. A WORKER can use this endpoint only to add/remove SELF_CERTS certifications to themselves.
      * @apiParam {Number} organization_id
      * @apiParam {Number} customer_id
      * @apiParam {String} action
@@ -136,87 +145,91 @@ export default class Certifications extends Resource {
      *             gigwalk.certifications.removeFromCustomer({...})
      */
     removeFromCustomer(params: AddRemoveCertificationsForCustomerParams): APIPromise<Array<[number, number]>> {
-        const url = `/v1/organizations/${params.organization_id}/customer/${params.customer_id}/certifications`;
         const data = {
             action: 'remove',
             certification_ids: params.certification_ids
         };
 
-        return this.client.put(url, data);
+        return this.client.put(`/v1/organizations/${params.organization_id}/customer/${params.customer_id}/certifications`, data);
     }
 
     /**
-     * @api {get} /v1/organizations/{organization_id}/certifications
-     * @apiName GetOrganizationCertifications
-     * @apiDescription Get Certifications information for a given organization Return data fields (id, org_id, description, title, type, state).
-                       It could return paginated results and also sorted by given parameters
+     * @api {get} /v1/organizations/:organization_id/certifications getAllForOrganization
+     * @apiGroup Certifications
+     * @apiName getAllForOrganization
+     * @apiDescription Get certifications information for a given organization. Capable of returning paginated results.
      * @apiParam {Number} organization_id
+     * @apiParam {Object} query
      * @apiExample {js} Example:
-     *             gigwalk.certifications.getForOrganization({...})
+     *             gigwalk.certifications.getAllForOrganization({...})
      */
-    getForOrganization(params: GetAllCertificationsForOrganizationParams): APIPromise<Array<Certification>> {
-        return this.client.get(`/v1/organizations/${params.organization_id}/certifications`);
+    getAllForOrganization(params: GetAllCertificationsForOrganizationParams): APIPromise<Array<Certification>> {
+        const queryString = this.queryStringForSearchObject(params.query);
+
+        return this.client.get(`/v1/organizations/${params.organization_id}/certifications${queryString}`);
     }
 
     /**
-     * @api {post} /v1/organizations/{organization_id}/certifications
-     * @apiName CreateOrganizationCertifications
-     * @apiDescription Create Certification(s) for a given organization JSON payload can have (description, title).
-                       If the cert already exists (check by title), then we return existing cert(s)
+     * @api {post} /v1/organizations/:organization_id/certifications createForOrganization
+     * @apiGroup Certifications
+     * @apiName createForOrganization
+     * @apiDescription Create certification(s) for a given organization. If the certification already exists (checked by title), then existing
+                       certification(s) returned.
      * @apiParam {Number} organization_id
-     * @apiParam {Array<CertificationTemplate>} certifications
+     * @apiParam {Array<Object>} certifications
      * @apiExample {js} Example:
      *             gigwalk.certifications.createForOrganization({...})
      */
     createForOrganization(params: CreateCertificationsForOrganizationParams): APIPromise<Array<Certification>> {
-        const url = `/v1/organizations/${params.organization_id}/certifications`;
         const data = {
             certifications: params.certifications
         };
 
-        return this.client.post(url, data);
+        return this.client.post(`/v1/organizations/${params.organization_id}/certifications`, data);
     }
 
     /**
-     * @api {put} /v1/organizations/{organization_id}/certifications
-     * @apiName UpdateOrganizationCertifications
-     * @apiDescription Update Certification(s) for a given organization
+     * @api {put} /v1/organizations/:organization_id/certifications updateForOrganization
+     * @apiGroup Certifications
+     * @apiName updateForOrganization
+     * @apiDescription Create certification(s) for a given organization. If the certification already exists (checked by title), then existing
+                       certification(s) returned.
      * @apiParam {Number} organization_id
-     * @apiParam {Array<CertificationTemplate>} certifications
+     * @apiParam {Array<Object>} certifications
      * @apiExample {js} Example:
      *             gigwalk.certifications.updateForOrganization({...})
      */
     updateForOrganization(params: UpdateCertificationsForOrganizationParams): APIPromise<null> {
-        const url = `/v1/organizations/${params.organization_id}/certifications`;
         const data = {
             certifications: params.certifications
         };
 
-        return this.client.put(url, data);
+        return this.client.put(`/v1/organizations/${params.organization_id}/certifications`, data);
     }
 
     /**
-     * @api {post} /v1/organizations/{organization_id}/certifications/delete
-     * @apiName DeleteOrganizationCertifications
-     * @apiDescription Mark the certifications with the passed ids as deleted.
+     * @api {post} /v1/organizations/:organization_id/certifications/delete deleteForOrganization
+     * @apiGroup Certifications
+     * @apiName deleteForOrganization
+     * @apiDescription Mark the certification(s) with the passed ids as deleted.
      * @apiParam {Number} organization_id
      * @apiParam {Array<number>} certification_ids
      * @apiExample {js} Example:
      *             gigwalk.certifications.deleteForOrganization({...})
      */
     deleteForOrganization(params: DeleteCertificationsForOrganizationParams): APIPromise<null> {
-        const url = `/v1/organizations/${params.organization_id}/certifications/delete`;
         const data = {
             certification_ids: params.certification_ids
         };
 
-        return this.client.post(url, data);
+        return this.client.post(`/v1/organizations/${params.organization_id}/certifications/delete`, data);
     }
 
     /**
-     * @api {post} /v1/organizations/{organization_id}/certifications/upload
-     * @apiName CreateOrganizationCertificationsFromFile
-     * @apiDescription Create Certifications from a file that has been uploaded to S3.
+     * @api {post} /v1/organizations/:organization_id/certifications/upload uploadForOrganization
+     * @apiGroup Certifications
+     * @apiName uploadForOrganization
+     * @apiDescription Create certifications from a file that has been uploaded to S3.
                        See https://docs.google.com/document/d/1Q14OKBva_2VhWdSQCbrwjq2Q8dVH6TwXgZ83jTGxHRc/ for more info about our file upload api.
      * @apiParam {Number} organization_id
      * @apiParam {Array<string>} s3_keys
@@ -224,11 +237,10 @@ export default class Certifications extends Resource {
      *             gigwalk.certifications.uploadForOrganization({...})
      */
     uploadForOrganization(params: UploadCertificationsForOrganizationParams): APIPromise<Array<number>> {
-        const url = `/v1/organizations/${params.organization_id}/certifications/upload`;
         const data = {
             s3_keys: params.s3_keys
         };
 
-        return this.client.post(url, data);
+        return this.client.post(`/v1/organizations/${params.organization_id}/certifications/upload`, data);
     }
 }

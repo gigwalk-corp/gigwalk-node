@@ -1,5 +1,4 @@
 // @flow
-import type { ESParams } from '../resource';
 
 export type Customer = {
     id: number,
@@ -18,28 +17,10 @@ export type Customer = {
     home_latitude: number,
     home_longitude: number,
     date_last_auth: string,
-    certifications: Array<{
-        id: number
-    }>,
-    group_memberships: Array<{
-        group: string,
-        role: string,
-        group_id: number
-    }>,
-    organization: {
-        vertical_type: string,
-        core_private_workforce: boolean | null,
-        core_customer_account: string | null,
-        organization_name: string,
-        cannot_opt_out: boolean,
-        id: number,
-        needs_core: boolean
-    },
-    metadata: Array<{
-        id: number,
-        key: string,
-        value: number | string,
-    }>
+    certifications: Array<Object>,
+    group_memberships: Array<Object>,
+    organization: Object,
+    metadata: Array<Object>
 }
 
 export type ESCustomer = {
@@ -82,9 +63,16 @@ export type DeleteCustomerByEmailParams = {
     customer_email: string
 }
 
+type GetCustomerWithEmailQuery = {
+    customer_roles?: string
+}
+
 export type GetCustomerByEmailParams = {
     organization_id: number,
-    customer_email: string
+    customer_email: string,
+    require_cert_ids: Array<Number>,
+    exclude_cert_ids: Array<Number>,
+    query?: GetCustomerWithEmailQuery
 }
 
 export type UpdateCustomerByEmailParams = {
@@ -98,9 +86,14 @@ export type DeleteCustomerByIdParams = {
     customer_id: number
 }
 
+type GetCustomerByIdQuery = {
+    customer_roles?: string
+}
+
 export type GetCustomerByIdParams = {
     organization_id: number,
-    customer_id: number
+    customer_id: number,
+    query?: GetCustomerByIdQuery
 }
 
 export type UpdateCustomerByIdParams = {
@@ -109,8 +102,17 @@ export type UpdateCustomerByIdParams = {
     customer: CustomerFields
 }
 
+type GetAllCustomersForOrganizationQuery = {
+    offset?: number,
+    limit?: number,
+    order_by?: string,
+    order_dir?: string,
+    customer_roles?: string
+}
+
 export type GetAllCustomersForOrganizationParams = {
-    organization_id: number
+    organization_id: number,
+    query?: GetAllCustomersForOrganizationQuery
 }
 
 export type UpdateCustomersForOrganizationParams = {
@@ -127,9 +129,15 @@ export type UpdateCustomerParams = {
     customer: CustomerFields & { password?: string }
 }
 
-export type SearchCustomersParams = ESParams & {
-    ticket_ids: Array<number>,
-    group_ids?: Array<number>,
-    required_certifications: Array<number>
+type SearchCustomersQuery = {
+    size?: number,
+    from?: number
 }
 
+export type SearchCustomersParams = {
+    ticket_ids: Array<number>,
+    group_ids?: Array<number>,
+    required_certifications?: Array<number>,
+    q?: string,
+    query?: SearchCustomersQuery
+}
