@@ -75,7 +75,7 @@ export default class LocationLists extends Resource {
      * @apiName deleteForOrganization
      * @apiDescription Delete the specified location list only if location list is associated with an active organization_subscription. This is a soft delete.
      * @apiParam {Number} organization_id
-     * @apiParam {Array<Number>} location_list_ids
+     * @apiParam {Number[]} location_list_ids
      * @apiExample {js} Example:
      *             gigwalk.locationLists.deleteForOrganization({...})
      */
@@ -93,7 +93,7 @@ export default class LocationLists extends Resource {
      * @apiName getForOrganization
      * @apiDescription Get all location lists that belong to the given organization. Capable of returning paginated results.
      * @apiParam {Number} organization_id
-     * @apiParam {Object} query
+     * @apiParam {Object} [query]
      * @apiExample {js} Example:
      *             gigwalk.locationLists.getForOrganization({...})
      */
@@ -154,7 +154,7 @@ export default class LocationLists extends Resource {
      * @apiName getLocations
      * @apiDescription Get all locations of the given location list. Capable of returning paginated results.
      * @apiParam {Number} organization_location_list_id
-     * @apiParam {Object} query
+     * @apiParam {Object} [query]
      * @apiExample {js} Example:
      *             gigwalk.locationLists.getLocations({...})
      */
@@ -170,7 +170,7 @@ export default class LocationLists extends Resource {
      * @apiName addLocations
      * @apiDescription Add location ids specified in JSON payload to location list.
      * @apiParam {Number} organization_location_list_id
-     * @apiParam {Array<Number>} locations
+     * @apiParam {Number[]} locations
      * @apiExample {js} Example:
      *             gigwalk.locationLists.addLocations({...})
      */
@@ -193,7 +193,7 @@ export default class LocationLists extends Resource {
      * @apiName removeLocations
      * @apiDescription Remove location ids specified in JSON payload from location list.
      * @apiParam {Number} organization_location_list_id
-     * @apiParam {Array<Number>} locations
+     * @apiParam {Number[]} locations
      * @apiExample {js} Example:
      *             gigwalk.locationLists.removeLocations({...})
      */
@@ -212,7 +212,7 @@ export default class LocationLists extends Resource {
      * @apiName searchList
      * @apiDescription Search locations in a location list. Can search for in title, address, administrative area level 1/2 or country
      * @apiParam {Number} organization_location_list_id
-     * @apiParam {Object} query
+     * @apiParam {Object} [query]
      * @apiExample {js} Example:
      *             gigwalk.locationLists.searchList({...})
      */
@@ -256,7 +256,7 @@ export default class LocationLists extends Resource {
      * @apiDescription Create location list using an Amazon s3 uploaded file.
      * @apiParam {Number} organization_id
      * @apiParam {String} location_list_name
-     * @apiParam {Array<String>} s3_keys
+     * @apiParam {String[]} s3_keys
      * @apiExample {js} Example:
      *             gigwalk.locationLists.createForOrganizationWithFile({...})
      */
@@ -291,17 +291,17 @@ export default class LocationLists extends Resource {
      * @apiParam {Number} file_upload_id
      * @apiParam {Number} location_list_id
      * @apiParam {Number} location_id
-     * @apiParam {Number} csv
-     * @apiParam {String} key
-     * @apiParam {Array<Object>} location_data_array
+     * @apiParam {Number} [csv]
+     * @apiParam {String} [key]
+     * @apiParam {Object[]} [location_data_array]
      * @apiExample {js} Example:
      *             gigwalk.locationLists.updateAddress({...})
      */
     updateAddress(params: UpdateLocationAddressByIDParams): APIPromise<any> {
         const data = {
-            csv: params.csv,
-            key: params.key,
-            location_data_array: params.location_data_array
+            csv: (params.csv) ? params.csv : null,
+            key: (params.key) ? params.key : null,
+            location_data_array: (params.location_data_array) ? params.location_data_array : []
         };
 
         return this.client.put(`/v1/location_lists/${params.location_list_id}/upload/${params.file_upload_id}/unresolved_locations/${params.location_id}`,

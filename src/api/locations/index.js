@@ -22,7 +22,7 @@ export default class Locations extends Resource {
      * @apiGroup Locations
      * @apiName getAll
      * @apiDescription Return all locations of the current customer's organization. Capable of returning paginated results.
-     * @apiParam {Object} query
+     * @apiParam {Object} [query]
      * @apiExample {js} Example:
      *             gigwalk.locations.getAll({...})
      */
@@ -37,7 +37,7 @@ export default class Locations extends Resource {
      * @apiGroup Locations
      * @apiName bulkCreate
      * @apiDescription Create new locations with the current_user's organization. Currently does not check permissions.
-     * @apiParam {Array<Object>} locations
+     * @apiParam {Object[]} locations
      * @apiExample {js} Example:
      *             gigwalk.locations.bulkCreate({...})
      */
@@ -55,7 +55,7 @@ export default class Locations extends Resource {
      * @apiName get
      * @apiDescription Return information about specified location. Capable of returning paginated results.
      * @apiParam {Number} location_id
-     * @apiParam {Object} query
+     * @apiParam {Object} [query]
      * @apiExample {js} Example:
      *             gigwalk.locations.get({...})
      */
@@ -71,7 +71,7 @@ export default class Locations extends Resource {
      * @apiName getAllForOrganization
      * @apiDescription Return all locations of the specified organization. Capable of returning paginated results.
      * @apiParam {Number} organization_id
-     * @apiParam {Object} query
+     * @apiParam {Object} [query]
      * @apiExample {js} Example:
      *             gigwalk.locations.getAllForOrganization({...})
      */
@@ -87,7 +87,7 @@ export default class Locations extends Resource {
      * @apiName bulkCreateForOrganization
      * @apiDescription Create new location(s) in organization. Currently does not check permissions.
      * @apiParam {Number} organization_id
-     * @apiParam {Array<Object>} locations
+     * @apiParam {Object[]} locations
      * @apiExample {js} Example:
      *             gigwalk.locations.bulkCreateForOrganization({...})
      */
@@ -105,7 +105,7 @@ export default class Locations extends Resource {
      * @apiName bulkUpdateForOrganization
      * @apiDescription Update locations of the specified organization. Currently does not check permissions.
      * @apiParam {Number} organization_id
-     * @apiParam {Array<Object>} locations
+     * @apiParam {Object[]} locations
      * @apiExample {js} Example:
      *             gigwalk.locations.bulkUpdateForOrganization({...})
      */
@@ -153,7 +153,7 @@ export default class Locations extends Resource {
      * @apiParam {Number} organization_id
      * @apiParam {String} title
      * @apiParam {String} address
-     * @apiParam {Object} organization_data
+     * @apiParam {Object} [organization_data]
      * @apiExample {js} Example:
      *             gigwalk.locations.createForOrganization({...})
      */
@@ -176,7 +176,7 @@ export default class Locations extends Resource {
      * @apiParam {Number} location_id
      * @apiParam {String} title
      * @apiParam {String} address
-     * @apiParam {Object} organization_data
+     * @apiParam {Object} [organization_data]
      * @apiExample {js} Example:
      *             gigwalk.locations.updateForOrganization({...})
      */
@@ -184,7 +184,7 @@ export default class Locations extends Resource {
         const data = {
             address: params.address,
             title: params.title,
-            organization_data: params.organization_data
+            organization_data: (params.organization_data) ? params.organization_data : []
         };
 
         return this.client.put(`/v1/organizations/${params.organization_id}/locations/geocode/${params.location_id}`, data);

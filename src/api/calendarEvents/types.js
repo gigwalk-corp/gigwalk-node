@@ -27,7 +27,7 @@ export type DeleteCalendarEventParams = {
 
 export type GetCalendarEventParams = {
     calendar_event_id: number,
-    time_zone: string
+    time_zone?: string
 }
 
 export type UpdateCalendarEventParams = {
@@ -50,5 +50,5 @@ type GetCalendarEventsForCustomerQuery = {
 
 export type GetCalendarEventsForCustomerParams = {
     customer_id: number,
-    query: GetCalendarEventsForCustomerQuery
+    query?: GetCalendarEventsForCustomerQuery
 }

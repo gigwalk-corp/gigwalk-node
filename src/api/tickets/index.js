@@ -36,10 +36,10 @@ export default class Tickets extends Resource {
      * @apiDescription Get all tickets from the specified group that satisfy the search criteria, now we support field bundle_autoassign with
                        operator = and values true or false. Capable of returning paginated results.
      * @apiParam {Number} group_id
-     * @apiParam {Array<Object>} query_params
+     * @apiParam {Object[]} query_params
      * @apiParam {Object} bounding_box
      * @apiParam {String} timezone
-     * @apiParam {Object} query
+     * @apiParam {Object} [query]
      * @apiExample {js} Example:
      *             gigwalk.tickets.searchForGroup({...})
      */
@@ -59,7 +59,7 @@ export default class Tickets extends Resource {
      * @apiGroup Tickets
      * @apiName getAllForCurrentCustomer
      * @apiDescription Get all tickets that belong to current user's id.
-     * @apiParam {Object} query
+     * @apiParam {Object} [query]
      * @apiExample {js} Example:
      *             gigwalk.tickets.getAllForCurrentCustomer({...})
      */
@@ -75,7 +75,7 @@ export default class Tickets extends Resource {
      * @apiName getAllForCustomer
      * @apiDescription Get all tickets that belong to the given customer.
      * @apiParam {Number} customer_id
-     * @apiParam {Object} query
+     * @apiParam {Object} [query]
      * @apiExample {js} Example:
      *             gigwalk.tickets.getAllForCustomer({...})
      */
@@ -92,7 +92,7 @@ export default class Tickets extends Resource {
      * @apiDescription Search all tickets of an organization. Capable of returning paginated results.
      * @apiParam {Number} organization_id
      * @apiParam {String} query_string
-     * @apiParam {Object} query
+     * @apiParam {Object} [query]
      * @apiExample {js} Example:
      *             gigwalk.tickets.searchForOrganization({...})
      */
@@ -113,7 +113,7 @@ export default class Tickets extends Resource {
      * @apiParam {Number} organization_id
      * @apiParam {String} search_field
      * @apiParam {String} query_string
-     * @apiParam {Object} query
+     * @apiParam {Object} [query]
      * @apiExample {js} Example:
      *             gigwalk.tickets.searchWithFieldForOrganization({...})
      */
@@ -187,7 +187,7 @@ export default class Tickets extends Resource {
      * @apiName get
      * @apiDescription Get ticket information. it returns information about the specified ticket.
      * @apiParam {Number} ticket_id
-     * @apiParam {Object} query
+     * @apiParam {Object} [query]
      * @apiExample {js} Example:
      *             gigwalk.tickets.get({...})
      */
@@ -204,7 +204,7 @@ export default class Tickets extends Resource {
      * @apiDescription You should use only /v1/tickets/search, other endpoints directed to the search method. Capable of returning paginated results.
      * @apiParam {Number} ticket_id
      * @apiParam {Object} search
-     * @apiParam {Object} query
+     * @apiParam {Object} [query]
      * @apiExample {js} Example:
      *             gigwalk.tickets.searchWithID({...})
      */
@@ -220,15 +220,15 @@ export default class Tickets extends Resource {
      * @apiName update
      * @apiDescription Edit ticket(s). If ticket_id is present, assign the corresponding ticket. Otherwise, perform action to multiple tickets.
      * @apiParam {Number} ticket_id
-     * @apiParam {String} action
-     * @apiParam {Array<number>} ticket_ids
+     * @apiParam {String} [action='schedule']
+     * @apiParam {Number[]} ticket_ids
      * @apiParam {String} customer_id
      * @apiExample {js} Example:
      *             gigwalk.tickets.update({...})
      */
     update(params: UpdateTicketParams): APIPromise<Array<Ticket>> {
         const data = {
-            action: params.action,
+            action: (params.action) ? params.action : 'schedule',
             force: true,
             ticket_ids: params.ticket_ids,
             customer_id: params.customer_id
@@ -255,7 +255,7 @@ export default class Tickets extends Resource {
      * @apiName search
      * @apiDescription You should use only /v1/tickets/search, other endpoints directed to the search method. Capable of returning paginated results.
      * @apiParam {Object} search
-     * @apiParam {Object} query
+     * @apiParam {Object} [query]
      * @apiExample {js} Example:
      *             gigwalk.tickets.search({...})
      */
@@ -272,15 +272,15 @@ export default class Tickets extends Resource {
      * @apiDescription Edit ticket(s). If ticket_id is present, assign the corresponding ticket. Otherwise, perform action to multiple tickets.
      * @apiParam {Number} ticket_id
      * @apiParam {String} execution_state
-     * @apiParam {String} action
-     * @apiParam {Array<number>} ticket_ids
+     * @apiParam {String} [action='schedule']
+     * @apiParam {Number[]} ticket_ids
      * @apiParam {String} customer_id
      * @apiExample {js} Example:
      *             gigwalk.tickets.updateWithState({...})
      */
     updateWithState(params: UpdateTicketWithStateParams): APIPromise<Array<number>> {
         const data = {
-            action: params.action,
+            action: (params.action) ? params.action : 'schedule',
             ticket_ids: params.ticket_ids,
             customer_id: params.customer_id
         };
@@ -294,7 +294,7 @@ export default class Tickets extends Resource {
      * @apiName getAllForOrganization
      * @apiDescription Get information about all tickets of the organization. Capable of returning paginated results.
      * @apiParam {Number} organization_id
-     * @apiParam {Object} query
+     * @apiParam {Object} [query]
      * @apiExample {js} Example:
      *             gigwalk.tickets.getAllForOrganization({...})
      */
@@ -311,7 +311,7 @@ export default class Tickets extends Resource {
      * @apiDescription Search tickets filtered by organization. Capable of returning paginated results.
      * @apiParam {Number} organization_id
      * @apiParam {Object} search
-     * @apiParam {Object} query
+     * @apiParam {Object} [query]
      * @apiExample {js} Example:
      *             gigwalk.tickets.searchWithCriteriaForOrganization({...})
      */
@@ -327,7 +327,7 @@ export default class Tickets extends Resource {
      * @apiName getAllForSubscription
      * @apiDescription Get information of all tickets in organization_subscription (project). Capable of returning paginated results.
      * @apiParam {Number} subscription_id
-     * @apiParam {Object} query
+     * @apiParam {Object} [query]
      * @apiExample {js} Example:
      *             gigwalk.tickets.getAllForSubscription({...})
      */
@@ -344,7 +344,7 @@ export default class Tickets extends Resource {
      * @apiDescription Search tickets filtered by the organization_subscription (project). Capable of returning paginated results.
      * @apiParam {Number} subscription_id
      * @apiParam {Object} search
-     * @apiParam {Object} query
+     * @apiParam {Object} [query]
      * @apiExample {js} Example:
      *             gigwalk.tickets.searchForSubscription({...})
      */
@@ -360,7 +360,7 @@ export default class Tickets extends Resource {
      * @apiName getEvents
      * @apiDescription Return events of ticket. Capable of returning paginated results.
      * @apiParam {Number} ticket_id
-     * @apiParam {Object} query
+     * @apiParam {Object} [query]
      * @apiExample {js} Example:
      *             gigwalk.tickets.getEvents({...})
      */

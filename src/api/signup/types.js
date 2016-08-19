@@ -24,5 +24,5 @@ export type AcceptUserParams = {
     last_name: string,
     password: string,
     invite_hash: string,
-    check_expired: boolean
+    check_expired?: boolean
 }

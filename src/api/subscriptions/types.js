@@ -94,7 +94,7 @@ export type GetSubscriptionParams = {
 
 export type CreateClonedSubscriptionParams = {
     organization_subscription_id: number,
-    action: string
+    action: 'clone' | 'autoassgin'
 }
 
 export type UpdateSubscriptionParams = {

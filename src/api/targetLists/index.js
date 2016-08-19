@@ -24,7 +24,7 @@ export default class TargetLists extends Resource {
      * @apiGroup TargetLists
      * @apiName getAll
      * @apiDescription Return all target lists. This can only be invoked by the platform admin. Capable of returning paginated results.
-     * @apiParam {Object} query
+     * @apiParam {Object} [query]
      * @apiExample {js} Example:
      *             gigwalk.targetLists.getAll({...})
      */
@@ -53,7 +53,7 @@ export default class TargetLists extends Resource {
      * @apiName getAllForOrganization
      * @apiDescription Get all organization_observation_target_lists in organiation. Capable of returning paginated results.
      * @apiParam {Number} organization_id
-     * @apiParam {Object} query
+     * @apiParam {Object} [query]
      * @apiExample {js} Example:
      *             gigwalk.targetLists.getAllForOrganization({...})
      */
@@ -124,7 +124,7 @@ export default class TargetLists extends Resource {
      * @apiName searchObservationList
      * @apiDescription Search all targets of an org_obs_target_list for the specified query_string. Capable of returning paginated results.
      * @apiParam {Number} target_list_id
-     * @apiParam {Object} query
+     * @apiParam {Object} [query]
      * @apiExample {js} Example:
      *             gigwalk.targetLists.searchObservationList({...})
      */
@@ -140,7 +140,7 @@ export default class TargetLists extends Resource {
      * @apiName searchList
      * @apiDescription Search all targets of an org_obs_target_list for the specified query_string. Capable of returning paginated results.
      * @apiParam {Number} target_list_id
-     * @apiParam {Object} query
+     * @apiParam {Object} [query]
      * @apiExample {js} Example:
      *             gigwalk.targetLists.searchList({...})
      */
@@ -169,14 +169,14 @@ export default class TargetLists extends Resource {
      * @apiName updateTargets
      * @apiDescription ADD or REMOVE targets from the specified org_obs_target_list.
      * @apiParam {Number} target_list_id
-     * @apiParam {String} action
-     * @apiParam {Array<Number>} target_ids
+     * @apiParam {String} [action='add']
+     * @apiParam {Number[]} target_ids
      * @apiExample {js} Example:
      *             gigwalk.targetLists.updateTargets({...})
      */
     updateTargets(params: UpdateTargetsInListParams): APIPromise<Array<ObservationTarget>> {
         const data = {
-            action: params.action,
+            action: (params.action) ? params.action : 'ADD',
             target_ids: params.target_ids
         };
 

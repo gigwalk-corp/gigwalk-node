@@ -7,7 +7,7 @@ type GetModuleForOrganizationQuery = {
 
 export type GetModuleForOrganizationParams = {
     organization_id: number,
-    module_id: 'comment' | 'activity',
+    module_id?: 'comment' | 'activity',
     query?: GetModuleForOrganizationQuery
 }
 
@@ -17,6 +17,6 @@ type GetModuleQuery = {
 }
 
 export type GetModuleParams = {
-    module_id: 'comment' | 'activity',
+    module_id?: 'comment' | 'activity',
     query?: GetModuleQuery
 }

@@ -21,7 +21,7 @@ export default class DataTypes extends Resource {
      * @apiParam {Number} organization_id
      * @apiParam {String} search_field
      * @apiParam {String} query_string
-     * @apiParam {Object} query
+     * @apiParam {Object} [query]
      * @apiExample {js} Example:
      *             gigwalk.dataTypes.searchWithField({...})
      */
@@ -42,7 +42,7 @@ export default class DataTypes extends Resource {
      * @apiDescription Search all dataTypes for the given string.
      * @apiParam {Number} organization_id
      * @apiParam {String} query_string
-     * @apiParam {Object} query
+     * @apiParam {Object} [query]
      * @apiExample {js} Example:
      *             gigwalk.dataTypes.search({...})
      */
@@ -60,17 +60,17 @@ export default class DataTypes extends Resource {
      * @apiGroup DataTypes
      * @apiName getAll
      * @apiDescription Get dataType. Lists all dataTypes of an organization.
-     * @apiParam {Number} observation_target_type_id
-     * @apiParam {Number} dashboard_visible
-     * @apiParam {Object} query
+     * @apiParam {Number} [observation_target_type_id=0]
+     * @apiParam {Number} [dashboard_visible=1]
+     * @apiParam {Object} [query]
      * @apiExample {js} Example:
      *             gigwalk.dataTypes.getAll({...})
      */
     getAll(params: GetAllDataTypesParams): APIPromise<Array<DataType>> {
         const query = this.stringForQueryObject(params.query);
         const data = {
-            observation_target_type_id: params.observation_target_type_id,
-            dashboard_visible: params.dashboard_visible
+            observation_target_type_id: (params.observation_target_type_id) ? params.observation_target_type_id : 0,
+            dashboard_visible: (params.dashboard_visible) ? params.dashboard_visible : 1
         };
 
         return this.client.get(`/v1/data_types${query}`, data);
@@ -95,17 +95,17 @@ export default class DataTypes extends Resource {
      * @apiName get
      * @apiDescription Get dataType. Returns info about the specified dataType.
      * @apiParam {Number} data_type_id
-     * @apiParam {Number} observation_target_type_id
-     * @apiParam {Number} dashboard_visible
-     * @apiParam {Object} query
+     * @apiParam {Number} [observation_target_type_id=0]
+     * @apiParam {Number} [dashboard_visible=1]
+     * @apiParam {Object} [query]
      * @apiExample {js} Example:
      *             gigwalk.dataTypes.get({...})
      */
     get(params: GetDataTypeParams): APIPromise<[DataType]> {
         const query = this.stringForQueryObject(params.query);
         const data = {
-            observation_target_type_id: params.observation_target_type_id,
-            dashboard_visible: params.dashboard_visible
+            observation_target_type_id: (params.observation_target_type_id) ? params.observation_target_type_id : 0,
+            dashboard_visible: (params.dashboard_visible) ? params.dashboard_visible : 1
         };
 
         return this.client.get(`/v1/data_types/${params.data_type_id}${query}`, data);

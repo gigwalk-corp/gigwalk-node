@@ -17,7 +17,7 @@ export default class CustomerStatistics extends Resource {
      * @apiDescription Get information about the work history of a customer and prospective tickets. Platform admin access only.
                        Returns rendered HTML using jinja templates.
      * @apiParam {Number} customer_id
-     * @apiParam {Object} query
+     * @apiParam {Object} [query]
      * @apiExample {js} Example:
      *             gigwalk.customerStatistics.getByID({...})
      */
@@ -34,7 +34,7 @@ export default class CustomerStatistics extends Resource {
      * @apiDescription Get information about the work history of a customer and prospective tickets. Platform admin access only.
                        Returns rendered HTML using jinja templates.
      * @apiParam {String} email
-     * @apiParam {Object} query
+     * @apiParam {Object} [query]
      * @apiExample {js} Example:
      *             gigwalk.customerStatistics.getByEmail({...})
      */
@@ -50,7 +50,7 @@ export default class CustomerStatistics extends Resource {
      * @apiName get
      * @apiDescription Get information about the work history of a customer and prospective tickets. Platform admin access only.
                        Returns rendered HTML using jinja templates.
-     * @apiParam {Object} query
+     * @apiParam {Object} [query]
      * @apiExample {js} Example:
      *             gigwalk.customerStatistics.get({...})
      */
@@ -66,7 +66,7 @@ export default class CustomerStatistics extends Resource {
      * @apiName getByTicket
      * @apiDescription Get info about tickets' owners.
      * @apiParam {Number} ticket_id
-     * @apiParam {Object} query
+     * @apiParam {Object} [query]
      * @apiExample {js} Example:
      *             gigwalk.customerStatistics.getByTicket({...})
      */

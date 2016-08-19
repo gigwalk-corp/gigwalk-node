@@ -58,7 +58,7 @@ export default class Organzations extends Resource {
      * @apiGroup Organizations
      * @apiName getAll
      * @apiDescription Get all organizations. Capable of returning paginated results.
-     * @apiParam {Object} query
+     * @apiParam {Object} [query]
      * @apiExample {js} Example:
      *             gigwalk.organizations.getAll({...})
      */

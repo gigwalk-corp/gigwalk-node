@@ -15,15 +15,15 @@ export default class GroupSearch extends Resource {
      * @apiName searchWithType
      * @apiDescription Search for the given query_string in either groups tickets or members.
      * @apiParam {Number} group_id
-     * @apiParam {String} index_type
-     * @apiParam {Object} query
+     * @apiParam {String} [index_type='tickets']
+     * @apiParam {Object} [query]
      * @apiExample {js} Example:
      *             gigwalk.groupSearch.searchWithType({...})
      */
     searchWithType(params: SearchGroupWithTypeParams): APIPromise<any> {
         const query = this.stringForQueryObject(params.query);
 
-        return this.client.get(`/v1/groups/${params.group_id}/search/${params.index_type}${query}`);
+        return this.client.get(`/v1/groups/${params.group_id}/search/${(params.index_type) ? params.index_type : 'tickets'}${query}`);
     }
 
     /**
@@ -32,7 +32,7 @@ export default class GroupSearch extends Resource {
      * @apiName search
      * @apiDescription Search for the given query_string in tickets within the group. This will search in all strings in the group doc.
      * @apiParam {Number} group_id
-     * @apiParam {Object} query
+     * @apiParam {Object} [query]
      * @apiExample {js} Example:
      *             gigwalk.groupSearch.search({...})
      */
@@ -48,7 +48,7 @@ export default class GroupSearch extends Resource {
      * @apiName searchTickets
      * @apiDescription Filter tickets of the group (e.g. TICKET_STATUS = SUBMITTED).
      * @apiParam {Number} group_id
-     * @apiParam {Object} query
+     * @apiParam {Object} [query]
      * @apiExample {js} Example:
      *             gigwalk.groupSearch.searchTickets({...})
      */

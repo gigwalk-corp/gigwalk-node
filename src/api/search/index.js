@@ -13,12 +13,12 @@ export default class Search extends Resource {
      * @apiGroup Search
      * @apiName searchDocuments
      * @apiDescription Search all ES docs for the given query_string. Returns results in ES idiom.
-     * @apiParam {Object} query
+     * @apiParam {Object} [query]
      * @apiExample {js} Example:
      *             gigwalk.customers.searchDocuments({...})
      */
     searchDocuments(params: SearchDocumentsParams): APIPromise<[ESSearch]> {
-        const query = this.stringForQueryObject(params.query);
+        const query = (params) ? this.stringForQueryObject(params.query) : '';
 
         return this.client.get(`/v1/search${query}`);
     }
@@ -41,14 +41,14 @@ export default class Search extends Resource {
      * @apiName searchOrganization
      * @apiDescription Search in an organization. Capable of returning paginated results.
      * @apiParam {Number} organization_id
-     * @apiParam {String} index_type
-     * @apiParam {Object} query
+     * @apiParam {String} [index_type='tickets']
+     * @apiParam {Object} [query]
      * @apiExample {js} Example:
      *             gigwalk.search.searchOrganization({...})
      */
     searchOrganization(params: SearchOrganizationParams): APIPromise<[ESSearch]> {
         const query = this.stringForQueryObject(params.query);
 
-        return this.client.get(`/v1/organizations/${params.organization_id}/search/${params.index_type}${query}`);
+        return this.client.get(`/v1/organizations/${params.organization_id}/search/${(params.index_type) ? params.index_type : 'tickets'}${query}`);
     }
 }

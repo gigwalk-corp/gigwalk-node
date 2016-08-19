@@ -12,7 +12,7 @@ export default class OrganizationSearch extends Resource {
      * @apiGroup OrganizationSearch
      * @apiName search
      * @apiDescription Returns matching organizations. Requires platform admin permissions.
-     * @apiParam {Object} query
+     * @apiParam {Object} [query]
      * @apiExample {js} Example:
      *             gigwalk.organizationSearch.search({...})
      */

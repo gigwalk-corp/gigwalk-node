@@ -18,7 +18,7 @@ export default class OrganizationMetadata extends Resource {
      * @apiName get
      * @apiDescription Get all metadata for an organization.
      * @apiParam {Number} organization_id
-     * @apiParam {Object} query
+     * @apiParam {Object} [query]
      * @apiExample {js} Example:
      *             gigwalk.organizationMetadata.get({...})
      */
@@ -75,7 +75,7 @@ export default class OrganizationMetadata extends Resource {
      * @apiDescription Get organization metadata field.
      * @apiParam {Number} organization_id
      * @apiParam {Number} organization_metadata_field_id
-     * @apiParam {Object} query
+     * @apiParam {Object} [query]
      * @apiExample {js} Example:
      *             gigwalk.organizationMetadata.getField({...})
      */

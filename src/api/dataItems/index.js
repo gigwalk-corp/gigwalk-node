@@ -57,7 +57,7 @@ export default class DataItems extends Resource {
      * @apiName searchForSubscription
      * @apiDescription Search for dataItems. No permissions check.
      * @apiParam {Number} subscription_id
-     * @apiParam {Object} query
+     * @apiParam {Object} [query]
      * @apiExample {js} Example:
      *             gigwalk.dataItems.searchForSubscription({...})
      */

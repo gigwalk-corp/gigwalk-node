@@ -17,7 +17,7 @@ export default class Templates extends Resource {
      * @apiGroup Templates
      * @apiName getAll
      * @apiDescription Get all templates. If platform admin, view all active templates. Otherwise, view an organizations active templates.
-     * @apiParam {Object} query
+     * @apiParam {Object} [query]
      * @apiExample {js} Example:
      *             gigwalk.templates.getAll({...})
      */
@@ -63,7 +63,7 @@ export default class Templates extends Resource {
      * @apiName get
      * @apiDescription Get information about the specified template.
      * @apiParam {Number} template_id
-     * @apiParam {Object} query
+     * @apiParam {Object} [query]
      * @apiExample {js} Example:
      *             gigwalk.templates.get({...})
      */

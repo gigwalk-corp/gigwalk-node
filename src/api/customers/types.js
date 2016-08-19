@@ -70,8 +70,8 @@ type GetCustomerWithEmailQuery = {
 export type GetCustomerByEmailParams = {
     organization_id: number,
     customer_email: string,
-    require_cert_ids: Array<Number>,
-    exclude_cert_ids: Array<Number>,
+    require_cert_ids: Array<number>,
+    exclude_cert_ids: Array<number>,
     query?: GetCustomerWithEmailQuery
 }
 

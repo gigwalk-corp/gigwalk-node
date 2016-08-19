@@ -114,7 +114,7 @@ export type GetTargetsFromListParams = {
 
 export type UpdateTargetsInListParams = {
     target_list_id: number,
-    action: string,
+    action: 'ADD' | 'REMOVE',
     target_ids: Array<number>
 }
 

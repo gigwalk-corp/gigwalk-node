@@ -32,7 +32,7 @@ export default class Targets extends Resource {
                        Capable of returning paginated results.
      * @apiParam {Number} organization_id
      * @apiParam {Number} observation_target_id
-     * @apiParam {Object} query
+     * @apiParam {Object} [query]
      * @apiExample {js} Example:
      *             gigwalk.targets.get({...})
      */
@@ -65,7 +65,7 @@ export default class Targets extends Resource {
      * @apiName search
      * @apiDescription Search obs_target titles. Capable of returning paginated results.
      * @apiParam {Number} organization_id
-     * @apiParam {Object} query
+     * @apiParam {Object} [query]
      * @apiExample {js} Example:
      *             gigwalk.targets.search({...})
      */

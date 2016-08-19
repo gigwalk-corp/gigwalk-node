@@ -27,7 +27,7 @@ export default class Signup extends Resource {
      * @apiGroup Signup
      * @apiName bulkCreate
      * @apiDescription Add a list of Gigwalk users.
-     * @apiParam {Array<Object>} users
+     * @apiParam {Object[]} users
      * @apiExample {js} Example:
      *             gigwalk.signup.bulkCreate({...})
      */
@@ -48,7 +48,7 @@ export default class Signup extends Resource {
      * @apiParam {String} last_name
      * @apiParam {String} password
      * @apiParam {String} invite_hash
-     * @apiParam {Boolean} check_expired
+     * @apiParam {Boolean} [check_expired]
      * @apiExample {js} Example:
      *             gigwalk.signup.accept({...})
      */

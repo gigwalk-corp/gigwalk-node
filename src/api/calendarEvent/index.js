@@ -31,13 +31,13 @@ export default class CalendarEvents extends Resource {
      * @apiName get
      * @apiDescription Get calendarEvent.
      * @apiParam {Number} calendar_event_id
-     * @apiParam {String} time_zone
+     * @apiParam {String} [time_zone='UTC']
      * @apiExample {js} Example:
      *             gigwalk.calendarEvents.get({...})
      */
     get(params: GetCalendarEventParams): APIPromise<[CalendarEvent]> {
         const data = {
-            time_zone: params.time_zone
+            time_zone: (params.time_zone) ? params.time_zone : 'UTC'
         };
 
         return this.client.get(`/v1/calendar_events/${params.calendar_event_id}`, data);
@@ -76,7 +76,7 @@ export default class CalendarEvents extends Resource {
      * @apiName getForCustomer
      * @apiDescription Get all calendarEvents belonging to the customer.
      * @apiParam {Number} customer_id
-     * @apiParam {Object} query
+     * @apiParam {Object} [query]
      * @apiExample {js} Example:
      *             gigwalk.calendarEvents.getForCustomer({...})
      */

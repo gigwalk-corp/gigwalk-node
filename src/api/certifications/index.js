@@ -66,7 +66,7 @@ export default class Certifications extends Resource {
      * @apiName getAll
      * @apiDescription Get all certifications available to the current user. Returns the current user organization's certificates and public certificates.
                        Capable of returning paginated results.
-     * @apiParam {Object} query
+     * @apiParam {Object} [query]
      * @apiExample {js} Example:
      *             gigwalk.certifications.getAll({...})
      */
@@ -81,8 +81,7 @@ export default class Certifications extends Resource {
      * @apiGroup Certifications
      * @apiName create
      * @apiDescription Create certification(s). If the certification already exists (checked by title), then existing certification(s) returned.
-     * @apiParam {Array<CertificationTemplate>} certifications.
-     * @apiParam {Array<CertificationTemplate>} certifications
+     * @apiParam {Object[]} certifications
      * @apiExample {js} Example:
      *             gigwalk.certifications.create({...})
      */
@@ -101,7 +100,7 @@ export default class Certifications extends Resource {
      * @apiDescription Get certification information for a given customer. Capable of returning paginated results.
      * @apiParam {Number} organization_id
      * @apiParam {Number} customer_id
-     * @apiParam {Object} query
+     * @apiParam {Object} [query]
      * @apiExample {js} Example:
      *             gigwalk.certifications.getAllForCustomer({...})
      */
@@ -119,7 +118,7 @@ export default class Certifications extends Resource {
      * @apiParam {Number} organization_id
      * @apiParam {Number} customer_id
      * @apiParam {String} action
-     * @apiParam {Array<number>} certification_ids
+     * @apiParam {Number[]} certification_ids
      * @apiExample {js} Example:
      *             gigwalk.certifications.addToCustomer({...})
      */
@@ -140,7 +139,7 @@ export default class Certifications extends Resource {
      * @apiParam {Number} organization_id
      * @apiParam {Number} customer_id
      * @apiParam {String} action
-     * @apiParam {Array<number>} certification_ids
+     * @apiParam {Number[]} certification_ids
      * @apiExample {js} Example:
      *             gigwalk.certifications.removeFromCustomer({...})
      */
@@ -159,7 +158,7 @@ export default class Certifications extends Resource {
      * @apiName getAllForOrganization
      * @apiDescription Get certifications information for a given organization. Capable of returning paginated results.
      * @apiParam {Number} organization_id
-     * @apiParam {Object} query
+     * @apiParam {Object} [query]
      * @apiExample {js} Example:
      *             gigwalk.certifications.getAllForOrganization({...})
      */
@@ -176,7 +175,7 @@ export default class Certifications extends Resource {
      * @apiDescription Create certification(s) for a given organization. If the certification already exists (checked by title), then existing
                        certification(s) returned.
      * @apiParam {Number} organization_id
-     * @apiParam {Array<Object>} certifications
+     * @apiParam {Object[]} certifications
      * @apiExample {js} Example:
      *             gigwalk.certifications.createForOrganization({...})
      */
@@ -195,7 +194,7 @@ export default class Certifications extends Resource {
      * @apiDescription Create certification(s) for a given organization. If the certification already exists (checked by title), then existing
                        certification(s) returned.
      * @apiParam {Number} organization_id
-     * @apiParam {Array<Object>} certifications
+     * @apiParam {Object[]} certifications
      * @apiExample {js} Example:
      *             gigwalk.certifications.updateForOrganization({...})
      */
@@ -213,7 +212,7 @@ export default class Certifications extends Resource {
      * @apiName deleteForOrganization
      * @apiDescription Mark the certification(s) with the passed ids as deleted.
      * @apiParam {Number} organization_id
-     * @apiParam {Array<number>} certification_ids
+     * @apiParam {Number[]} certification_ids
      * @apiExample {js} Example:
      *             gigwalk.certifications.deleteForOrganization({...})
      */
@@ -232,7 +231,7 @@ export default class Certifications extends Resource {
      * @apiDescription Create certifications from a file that has been uploaded to S3.
                        See https://docs.google.com/document/d/1Q14OKBva_2VhWdSQCbrwjq2Q8dVH6TwXgZ83jTGxHRc/ for more info about our file upload api.
      * @apiParam {Number} organization_id
-     * @apiParam {Array<string>} s3_keys
+     * @apiParam {String[]} s3_keys
      * @apiExample {js} Example:
      *             gigwalk.certifications.uploadForOrganization({...})
      */

@@ -27,13 +27,13 @@ export default class Groups extends Resource {
      * @apiDescription Delete group. By default, child groups will be moved one level up. Optional parameter organization_id is ignored.
      * @apiParam {Number} organization_id
      * @apiParam {Number} group_id
-     * @apiParam {Number} cascade
+     * @apiParam {Number} [cascade=0]
      * @apiExample {js} Example:
      *             gigwalk.groups.delete({...})
      */
     delete(params: DeleteGroupParams): APIPromise<[number]> {
         const data = {
-            cascade: params.cascade
+            cascade: (params.cascade) ? params.cascade : 0
         };
 
         return this.client.delete(`/v1/organizations/${params.organization_id}/groups/${params.group_id}`, data);
@@ -102,7 +102,7 @@ export default class Groups extends Resource {
      * @apiName getForOrganization
      * @apiDescription Platform admins get all groups, Admins get all groups of the organization, Workers get info about the groups they belong to.
      * @apiParam {Number} organization_id
-     * @apiParam {Object} query
+     * @apiParam {Object} [query]
      * @apiExample {js} Example:
      *             gigwalk.groups.getForOrganization({...})
      */
@@ -131,15 +131,15 @@ export default class Groups extends Resource {
      * @apiName getMembers
      * @apiDescription Return info about the customers belonging to this group. Customers of descendant groups will also be returned.
      * @apiParam {Number} group_id
-     * @apiParam {Number} subgroup_members
-     * @apiParam {Object} query
+     * @apiParam {Number} [subgroup_members]
+     * @apiParam {Object} [query]
      * @apiExample {js} Example:
      *             gigwalk.groups.getMembers({...})
      */
     getMembers(params: GetGroupMembersParams): APIPromise<Array<Member>> {
         const query = this.stringForQueryObject(params.query);
         const data = {
-            subgroup_members: params.subgroup_members
+            subgroup_members: (params.subgroup_members) ? params.subgroup_members : 0
         };
 
         return this.client.get(`/v1/groups/${params.group_id}/customers${query}`, data);
@@ -165,15 +165,15 @@ export default class Groups extends Resource {
      * @apiName updateMembers
      * @apiDescription Used for bulk updates or bulk removes.
      * @apiParam {Number} group_id
-     * @apiParam {string} action
-     * @apiParam {Array<Object>} members
+     * @apiParam {string} [action='remove']
+     * @apiParam {Object[]} members
      * @apiExample {js} Example:
      *             gigwalk.groups.updateMembers({...})
      */
     updateMembers(params: UpdateGroupMembersParams): APIPromise<Array<number>> {
         const data = {
             memberships: params.members,
-            action: params.action
+            action: (params.action) ? params.action : 'remove'
         };
 
         return this.client.put(`/v1/groups/${params.group_id}/customers`, data);
@@ -199,15 +199,15 @@ export default class Groups extends Resource {
      * @apiName clone
      * @apiDescription Clone a group and its subgroups.
      * @apiParam {Number} group_id
-     * @apiParam {Number} parent_id
-     * @apiParam {String} suffix
+     * @apiParam {Number} [parent_id]
+     * @apiParam {String} [suffix]
      * @apiExample {js} Example:
      *             gigwalk.groups.clone({...})
      */
     clone(params: CloneGroupParams): APIPromise<[Group]> {
         const data = {
-            parent_id: params.parent_id,
-            suffix: params.suffix
+            parent_id: (params.parent_id) ? params.parent_id : 0,
+            suffix: (params.suffix) ? params.suffix : ''
         };
 
         return this.client.post(`/v1/groups/${params.group_id}/clone`, data);

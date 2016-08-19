@@ -18,7 +18,7 @@ export default class DoubleOptin extends Resource {
      * @apiGroup DoubleOptin
      * @apiName getForCurrentCustomer
      * @apiDescription Get all ticket applications that belong to current user.
-     * @apiParam {Object} query
+     * @apiParam {Object} [query]
      * @apiExample {js} Example:
      *             gigwalk.doubleOptin.getForCurrentCustomer({...})
      */
@@ -34,7 +34,7 @@ export default class DoubleOptin extends Resource {
      * @apiName getForCustomer
      * @apiDescription Get all ticket applications that belong to the querying customer_id. Requires platform admin permssions.
      * @apiParam {Number} customer_id
-     * @apiParam {Object} query
+     * @apiParam {Object} [query]
      * @apiExample {js} Example:
      *             gigwalk.doubleOptin.getForCustomer({...})
      */
@@ -103,7 +103,7 @@ export default class DoubleOptin extends Resource {
      * @apiName bulkRemove
      * @apiDescription Bulk remove double_optin applications for a ticket. Admin and above can withdraw others applications.
      * @apiParam {Number} ticket_id
-     * @apiParam {Array<Number>} customer_ids
+     * @apiParam {Number[]} customer_ids
      * @apiExample {js} Example:
      *             gigwalk.doubleOptin.bulkRemove({...})
      */

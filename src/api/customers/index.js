@@ -39,9 +39,9 @@ export default class Customers extends Resource {
      * @apiDescription If the customer exists, return info about the specified customer.
      * @apiParam {Number} organization_id
      * @apiParam {String} customer_email
-     * @apiParam {Array<Number>} require_cert_ids
-     * @apiParam {Array<Number>} exclude_cert_ids
-     * @apiParam {Object} query
+     * @apiParam {Number[]} require_cert_ids
+     * @apiParam {Number[]} exclude_cert_ids
+     * @apiParam {Object} [query]
      * @apiExample {js} Example:
      *             gigwalk.customers.getByEmail({...})
      */
@@ -91,7 +91,7 @@ export default class Customers extends Resource {
      * @apiDescription If the customer exists, return info about the specified customer.
      * @apiParam {Number} organization_id
      * @apiParam {Number} customer_id
-     * @apiParam {Object} query
+     * @apiParam {Object} [query]
      * @apiExample {js} Example:
      *             gigwalk.customers.getById({...})
      */
@@ -122,9 +122,9 @@ export default class Customers extends Resource {
      * @apiName getAllForOrganization
      * @apiDescription Return information about all customers of an organization. Capable of returning paginated results.
      * @apiParam {Number} organization_id
-     * @apiParam {Array<Number>} require_cert_ids
-     * @apiParam {Array<Number>} exclude_cert_ids
-     * @apiParam {Object} query
+     * @apiParam {Number[]} require_cert_ids
+     * @apiParam {Number[]} exclude_cert_ids
+     * @apiParam {Object} [query]
      * @apiExample {js} Example:
      *             gigwalk.customers.getAllForOrganization({...})
      */
@@ -144,7 +144,7 @@ export default class Customers extends Resource {
      * @apiName updateForOrganization
      * @apiDescription Modify information of customer(s) identified by customer_email. Soft delete multiple customers by setting DELETED status.
      * @apiParam {Number} organization_id
-     * @apiParam {Array<Object>} customers
+     * @apiParam {Object[]} customers
      * @apiExample {js} Example:
      *             gigwalk.customers.updateForOrganization({...})
      */
@@ -163,7 +163,7 @@ export default class Customers extends Resource {
      * @apiName bulkDeleteForOrganization
      * @apiDescription Delete customer(s).
      * @apiParam {Number} organization_id
-     * @apiParam {Array<Object>} customers
+     * @apiParam {Object[]} customers
      * @apiExample {js} Example:
      *             gigwalk.customers.bulkDeleteForOrganization({...})
      */
@@ -207,11 +207,11 @@ export default class Customers extends Resource {
      * @apiName search
      * @apiDescription Return all the customers related with the given group(s) or with the groups related with the ticket(s). Also checks if the customers
                        have availability to execute given tickets. Capable of returning paginated results.
-     * @apiParam {Array<Number>} ticket_ids
-     * @apiParam {Array<Number>} group_ids
-     * @apiParam {Array<Number>} required_certifications
-     * @apiParam {String} q
-     * @apiParam {Object} query
+     * @apiParam {Number[]} ticket_ids
+     * @apiParam {Number[]} [group_ids]
+     * @apiParam {Number[]} [required_certifications]
+     * @apiParam {String} [q]
+     * @apiParam {Object} [query]
      * @apiExample {js} Example:
      *             gigwalk.customers.search({...})
      */

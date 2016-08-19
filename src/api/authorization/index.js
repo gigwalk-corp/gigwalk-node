@@ -53,7 +53,7 @@ export default class Authorization extends Resource {
      * @apiParam {String} email
      * @apiParam {String} password
      * @apiParam {String} token
-     * @apiParam {Boolean} check_expired
+     * @apiParam {Boolean} [check_expired]
      * @apiExample {js} Example:
      *             gigwalk.authorization.resetPassword({ ... })
      */

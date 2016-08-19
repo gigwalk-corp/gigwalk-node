@@ -17,7 +17,7 @@ export default class Waves extends Resource {
      * @apiParam {Number} organization_subscription_wave_id
      * @apiParam {String} sub_collection
      * @apiParam {String} sub_sub_collection
-     * @apiParam {Object} query
+     * @apiParam {Object} [query]
      * @apiExample {js} Example:
      *             gigwalk.waves.getSubCollection({...})
      */
@@ -33,7 +33,7 @@ export default class Waves extends Resource {
      * @apiName get
      * @apiDescription Get information regarding the specified wave.
      * @apiParam {Number} organization_subscription_wave_id
-     * @apiParam {Object} query
+     * @apiParam {Object} [query]
      * @apiExample {js} Example:
      *             gigwalk.waves.get({...})
      */

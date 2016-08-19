@@ -16,7 +16,7 @@ export default class TicketMetadata extends Resource {
      * @apiName get
      * @apiDescription Given a ticket_id, fetch its metadata.
      * @apiParam {Number} ticket_id
-     * @apiParam {Object} query
+     * @apiParam {Object} [query]
      * @apiExample {js} Example:
      *             gigwalk.ticketMetadata.get({...})
      */
@@ -47,7 +47,7 @@ export default class TicketMetadata extends Resource {
      * @apiDescription Update metadata for the given ticket. Use an array of key-value pairs to update ticket metadata.
      * @apiParam {Number} ticket_id
      * @apiParam {Object} metadata
-     * @apiParam {Object} query
+     * @apiParam {Object} [query]
      * @apiExample {js} Example:
      *             gigwalk.ticketMetadata.update({...})
      */
@@ -65,7 +65,7 @@ export default class TicketMetadata extends Resource {
      * @apiParam {Number} organization_id
      * @apiParam {Number} ticket_id
      * @apiParam {Object} metadata
-     * @apiParam {Object} query
+     * @apiParam {Object} [query]
      * @apiExample {js} Example:
      *             gigwalk.ticketMetadata.updateForOrganization({...})
      */

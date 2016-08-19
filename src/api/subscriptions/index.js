@@ -50,13 +50,13 @@ export default class Subscriptions extends Resource {
      * @apiName clone
      * @apiDescription Create a new subscription by cloning the given org_subscription or schedule autoassignment for the subscription.
      * @apiParam {Number} organization_subscription_id
-     * @apiParam {String} action
+     * @apiParam {String} [action='clone']
      * @apiExample {js} Example:
      *             gigwalk.subscriptions.clone({...})
      */
     clone(params: CreateClonedSubscriptionParams): APIPromise<[Subscription]> {
         const data = {
-            action: params.action
+            action: (params.action) ? params.action : 'clone'
         };
 
         return this.client.post(`/v1/organization_subscriptions/${params.organization_subscription_id}`, data);
@@ -83,7 +83,7 @@ export default class Subscriptions extends Resource {
      * @apiName bulkCreate
      * @apiDescription Create new organization_subscription(s). Maximum of five new subscriptions.
      * @apiParam {Number} organization_id
-     * @apiParam {Array<SubscriptionTemplate>} subscriptions
+     * @apiParam {Object[]} subscriptions
      * @apiExample {js} Example:
      *             gigwalk.subscriptions.bulkCreate({...})
      */

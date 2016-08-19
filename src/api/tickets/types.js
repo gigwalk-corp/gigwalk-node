@@ -247,7 +247,7 @@ export type SearchTicketsWithIDParams = {
 
 export type UpdateTicketParams = {
     ticket_id: number,
-    action: string,
+    action: 'assign' | 'extend' | 'schedule' | 'edit' | 'optin',
     ticket_ids: Array<number>,
     customer_id: string
 }
@@ -265,7 +265,7 @@ export type SearchTicketsParams = {
 export type UpdateTicketWithStateParams = {
     ticket_id: number,
     execution_state: string,
-    action: string,
+    action: 'assign' | 'extend' | 'schedule' | 'edit' | 'optin',
     ticket_ids: Array<number>,
     customer_id: string
 }
