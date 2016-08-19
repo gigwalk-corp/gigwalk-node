@@ -71,7 +71,7 @@ type GetGroupForOrganizationQuery = {
 
 export type GetGroupForOrganizationParams = {
     organization_id: number,
-    query: GetGroupForOrganizationQuery
+    query?: GetGroupForOrganizationQuery
 }
 
 export type CreateGroupParams = {

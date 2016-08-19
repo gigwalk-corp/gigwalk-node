@@ -47,7 +47,7 @@ export default class CalendarEvents extends Resource {
      * @api {put} /v1/calendar_events/:calendar_event_id update
      * @apiGroup CalendarEvents
      * @apiName update
-     * @apiDescription Modify calendarEvent info.
+     * @apiDescription Modify calendarEvent information.
      * @apiParam {Number} calendar_event_id
      * @apiParam {Object} calendar_event
      * @apiExample {js} Example:

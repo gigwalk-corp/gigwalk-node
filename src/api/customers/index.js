@@ -36,7 +36,7 @@ export default class Customers extends Resource {
      * @api {get} /v1/organizations/:organization_id/customers/:customer_email getByEmail
      * @apiGroup Customers
      * @apiName getByEmail
-     * @apiDescription If the customer exists, return info about the specified customer.
+     * @apiDescription If the customer exists, return information about the specified customer.
      * @apiParam {Number} organization_id
      * @apiParam {String} customer_email
      * @apiParam {Number[]} require_cert_ids
@@ -59,7 +59,7 @@ export default class Customers extends Resource {
      * @api {put} /v1/organizations/:organization_id/customers/:customer_email updateByEmail
      * @apiGroup Customers
      * @apiName updateByEmail
-     * @apiDescription Modifies customer info identified by customer_email.
+     * @apiDescription Modifies customer information identified by customer_email.
      * @apiParam {Number} organization_id
      * @apiParam {String} customer_email
      * @apiParam {Object} customer
@@ -88,7 +88,7 @@ export default class Customers extends Resource {
      * @api {get} /v1/organizations/:organization_id/customers/:customer_id getById
      * @apiGroup Customers
      * @apiName getById
-     * @apiDescription If the customer exists, return info about the specified customer.
+     * @apiDescription If the customer exists, return information about the specified customer.
      * @apiParam {Number} organization_id
      * @apiParam {Number} customer_id
      * @apiParam {Object} [query]

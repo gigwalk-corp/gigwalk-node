@@ -170,7 +170,7 @@ describe('Loction Lists', () => {
             })
             .catch(done);
     }).timeout(10000);
-    it('should be able to get info about a lists file upload', (done) => {
+    it('should be able to get information about a lists file upload', (done) => {
         locationLists.getFileInfo({
             location_list_id: locationListID2
         })
@@ -182,7 +182,7 @@ describe('Loction Lists', () => {
             })
             .catch(done);
     }).timeout(10000);
-    it('should be able to get info about an organization lists file upload', (done) => {
+    it('should be able to get information about an organization lists file upload', (done) => {
         locationLists.getFileInfoForOrganization({
             organization_id: organizationID,
             location_list_id: locationListID2

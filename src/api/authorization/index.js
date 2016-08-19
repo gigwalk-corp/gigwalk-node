@@ -12,7 +12,7 @@ export default class Authorization extends Resource {
      * @api {get} /v1/auth get
      * @apiGroup Authorization
      * @apiName get
-     * @apiDescription Generate or regenerate authorization info for the current user.
+     * @apiDescription Generate or regenerate authorization information for the current user.
      * @apiExample {js} Example:
      *             gigwalk.authorization.get({ ... })
      */
@@ -24,7 +24,7 @@ export default class Authorization extends Resource {
      * @api {post} /v1/auth create
      * @apiGroup Authorization
      * @apiName create
-     * @apiDescription Generate or regenerate authorization info for the current user.
+     * @apiDescription Generate or regenerate authorization information for the current user.
      * @apiExample {js} Example:
      *             gigwalk.authorization.create({ ... })
      */

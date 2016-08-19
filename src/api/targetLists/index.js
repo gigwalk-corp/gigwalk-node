@@ -38,7 +38,7 @@ export default class TargetLists extends Resource {
      * @api {get} /v1/organization_observation_target_lists/:observation_target_list_id get
      * @apiGroup TargetLists
      * @apiName get
-     * @apiDescription Get org_observation_target_list.
+     * @apiDescription Get organizationObservationTargetList.
      * @apiParam {Number} observation_target_list_id
      * @apiExample {js} Example:
      *             gigwalk.targetLists.get({...})
@@ -51,7 +51,7 @@ export default class TargetLists extends Resource {
      * @api {get} /v1/organizations/:organization_id/target_lists getAllForOrganization
      * @apiGroup TargetLists
      * @apiName getAllForOrganization
-     * @apiDescription Get all organization_observation_target_lists in organiation. Capable of returning paginated results.
+     * @apiDescription Get all organizationObservationTargetLists in organiation. Capable of returning paginated results.
      * @apiParam {Number} organization_id
      * @apiParam {Object} [query]
      * @apiExample {js} Example:
@@ -67,7 +67,7 @@ export default class TargetLists extends Resource {
      * @api {post} /v1/organizations/:organization_id/target_lists createForOrganization
      * @apiGroup TargetLists
      * @apiName createForOrganization
-     * @apiDescription Create a new org_observation_target_list. Currently, there are no permissions checks.
+     * @apiDescription Create a new orgObservationTargetList. Currently, there are no permissions checks.
      * @apiParam {Number} organization_id
      * @apiParam {Object} target_list
      * @apiExample {js} Example:
@@ -81,7 +81,7 @@ export default class TargetLists extends Resource {
      * @api {get} /v1/organizations/:organization_id/target_lists/:observation_target_list_id getForOrganization
      * @apiGroup TargetLists
      * @apiName getForOrganization
-     * @apiDescription Get organization_observation_target_list.
+     * @apiDescription Get organizationObservationTargetList.
      * @apiParam {Number} organization_id
      * @apiParam {Number} observation_target_list_id
      * @apiExample {js} Example:
@@ -95,7 +95,7 @@ export default class TargetLists extends Resource {
      * @api {delete} /v1/organization_observation_target_lists/:observation_target_list_id delete
      * @apiGroup TargetLists
      * @apiName delete
-     * @apiDescription Delete org_obs_target_list_id. This is a soft delete; org_obs_target_list marked as DELETED.
+     * @apiDescription Delete organizationObservationTargetListID. This is a soft delete; organizationObservationTargetList marked as DELETED.
      * @apiParam {Number} observation_target_list_id
      * @apiExample {js} Example:
      *             gigwalk.targetLists.delete({...})
@@ -108,7 +108,7 @@ export default class TargetLists extends Resource {
      * @api {put} /v1/organization_observation_target_lists/:observation_target_list_id update
      * @apiGroup TargetLists
      * @apiName update
-     * @apiDescription Modify the specified org_obs_target_list.
+     * @apiDescription Modify the specified organizationObservationTargetList.
      * @apiParam {Number} observation_target_list_id
      * @apiParam {Object} target_list
      * @apiExample {js} Example:
@@ -122,7 +122,7 @@ export default class TargetLists extends Resource {
      * @api {post} /v1/organization_observation_target_lists/:target_list_id/search/observation_targets searchObservationList
      * @apiGroup TargetLists
      * @apiName searchObservationList
-     * @apiDescription Search all targets of an org_obs_target_list for the specified query_string. Capable of returning paginated results.
+     * @apiDescription Search all targets of an organizationObservationTargetList for the specified queryString. Capable of returning paginated results.
      * @apiParam {Number} target_list_id
      * @apiParam {Object} [query]
      * @apiExample {js} Example:
@@ -138,7 +138,7 @@ export default class TargetLists extends Resource {
      * @api {post} /v1/target_lists/:target_list_id/search/targets searchList
      * @apiGroup TargetLists
      * @apiName searchList
-     * @apiDescription Search all targets of an org_obs_target_list for the specified query_string. Capable of returning paginated results.
+     * @apiDescription Search all targets of an organizationObservationTargetList for the specified queryString. Capable of returning paginated results.
      * @apiParam {Number} target_list_id
      * @apiParam {Object} [query]
      * @apiExample {js} Example:
@@ -154,7 +154,7 @@ export default class TargetLists extends Resource {
      * @api {get} /v1/organization_observation_target_lists/:target_list_id/observation_targets getTargets
      * @apiGroup TargetLists
      * @apiName getTargets
-     * @apiDescription Return all targets of the specified org_obs_target_list.
+     * @apiDescription Return all targets of the specified organizationObservationTargetList.
      * @apiParam {Number} target_list_id
      * @apiExample {js} Example:
      *             gigwalk.targetLists.getTargets({...})
@@ -167,7 +167,7 @@ export default class TargetLists extends Resource {
      * @api {put} /v1/organization_observation_target_lists/:target_list_id/observation_targets updateTargets
      * @apiGroup TargetLists
      * @apiName updateTargets
-     * @apiDescription ADD or REMOVE targets from the specified org_obs_target_list.
+     * @apiDescription ADD or REMOVE targets from the specified organizationObservationTargetList.
      * @apiParam {Number} target_list_id
      * @apiParam {String} [action='add']
      * @apiParam {Number[]} target_ids
@@ -187,8 +187,8 @@ export default class TargetLists extends Resource {
      * @api {post} /v1/target_lists/target_history searchDataItems
      * @apiGroup TargetLists
      * @apiName searchDataItems
-     * @apiDescription Search all the data_items for the specified obs_target_id and location_id. Results sorted by data_item_timestamp.
-                       Photo data_items will be excluded from returned data.
+     * @apiDescription Search all the dataItems for the specified organizationObservationID and locationID. Results sorted by dataItemTimestamp.
+                       Photo dataItems will be excluded from returned data.
      * @apiParam {Number} observation_target_id
      * @apiParam {Number} location_id
      * @apiParam {Number} item_count

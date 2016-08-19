@@ -11,7 +11,7 @@ export default class PushNotifications extends Resource {
      * @api {post} /v1/push_notifications create
      * @apiGroup PushNotifications
      * @apiName create
-     * @apiDescription Sends a push notification to a list of user emails/ids as well as any users in the list of group_ids.
+     * @apiDescription Sends a push notification to a list of user emails/ids as well as any users in the list of groupIDs.
      * @apiParam {Object} push_notification
      * @apiExample {js} Example:
      *             gigwalk.pushNotifications.create({...})

@@ -12,7 +12,7 @@ export default class Search extends Resource {
      * @api {get} /v1/search searchDocuments
      * @apiGroup Search
      * @apiName searchDocuments
-     * @apiDescription Search all ES docs for the given query_string. Returns results in ES idiom.
+     * @apiDescription Search all ES docs for the given queryString. Returns results in ES idiom.
      * @apiParam {Object} [query]
      * @apiExample {js} Example:
      *             gigwalk.customers.searchDocuments({...})

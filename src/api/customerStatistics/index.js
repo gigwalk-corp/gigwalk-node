@@ -64,7 +64,7 @@ export default class CustomerStatistics extends Resource {
      * @api {get} /v1/tickets/:ticket_id/customers/location_search getByTicket
      * @apiGroup CustomerStatistics
      * @apiName getByTicket
-     * @apiDescription Get info about tickets' owners.
+     * @apiDescription Get information about tickets' owners.
      * @apiParam {Number} ticket_id
      * @apiParam {Object} [query]
      * @apiExample {js} Example:

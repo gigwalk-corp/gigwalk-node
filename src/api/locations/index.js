@@ -36,7 +36,7 @@ export default class Locations extends Resource {
      * @api {post} /v1/locations bulkCreate
      * @apiGroup Locations
      * @apiName bulkCreate
-     * @apiDescription Create new locations with the current_user's organization. Currently does not check permissions.
+     * @apiDescription Create new locations with the current user's organization. Currently does not check permissions.
      * @apiParam {Object[]} locations
      * @apiExample {js} Example:
      *             gigwalk.locations.bulkCreate({...})

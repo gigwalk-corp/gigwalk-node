@@ -21,7 +21,7 @@ export default class Subscriptions extends Resource {
      * @api {delete} /v1/organization_subscriptions/:organization_subscription_id delete
      * @apiGroup Subscriptions
      * @apiName delete
-     * @apiDescription Delete the organization_subscription. This is a hard delete.
+     * @apiDescription Delete the organizationSubscription. This is a hard delete.
      * @apiParam {Number} organization_subscription_id
      * @apiExample {js} Example:
      *             gigwalk.subscriptions.delete({...})
@@ -34,8 +34,8 @@ export default class Subscriptions extends Resource {
      * @api {get} /v1/organization_subscriptions/:organization_subscription_id get
      * @apiGroup Subscriptions
      * @apiName get
-     * @apiDescription If specified, return information about the organization_subscription. Otherwise, list all organization_subscriptions of the organization.
-                       Defaults to the current_user's organization if no organization_id is specified.
+     * @apiDescription If specified, return information about the organizationSubscription. Otherwise, list all organizationSubscriptions of the organization.
+                       Defaults to the current user's organization if no organizationID is specified.
      * @apiParam {Number} organization_subscription_id
      * @apiExample {js} Example:
      *             gigwalk.subscriptions.get({...})
@@ -48,7 +48,7 @@ export default class Subscriptions extends Resource {
      * @api {post} /v1/organization_subscriptions/:organization_subscription_id clone
      * @apiGroup Subscriptions
      * @apiName clone
-     * @apiDescription Create a new subscription by cloning the given org_subscription or schedule autoassignment for the subscription.
+     * @apiDescription Create a new subscription by cloning the given organizationSubscription or schedule autoassignment for the subscription.
      * @apiParam {Number} organization_subscription_id
      * @apiParam {String} [action='clone']
      * @apiExample {js} Example:
@@ -66,7 +66,7 @@ export default class Subscriptions extends Resource {
      * @api {put} /v1/organization_subscriptions/:organization_subscription_id update
      * @apiGroup Subscriptions
      * @apiName update
-     * @apiDescription Update organization_subscription.
+     * @apiDescription Update organizationSubscription.
      * @apiParam {Number} organization_subscription_id
      * @apiParam {Number} version_id
      * @apiParam {Object} subscription
@@ -81,7 +81,7 @@ export default class Subscriptions extends Resource {
      * @api {post} /v1/organizations/:organization_id/subscriptions bulkCreate
      * @apiGroup Subscriptions
      * @apiName bulkCreate
-     * @apiDescription Create new organization_subscription(s). Maximum of five new subscriptions.
+     * @apiDescription Create new organizationSubscription(s). Maximum of five new subscriptions.
      * @apiParam {Number} organization_id
      * @apiParam {Object[]} subscriptions
      * @apiExample {js} Example:
@@ -99,7 +99,7 @@ export default class Subscriptions extends Resource {
      * @api {post} /v1/organizations/:organization_id/subscriptions/search searchWithParams
      * @apiGroup Subscriptions
      * @apiName searchWithParams
-     * @apiDescription Search organization_subscriptions. search_parameters should be in key op value (e.g. date_created > now; title = 'project_name').
+     * @apiDescription Search organizationSubscriptions. searchParameters should be in key op value (e.g. date_created > now; title = 'project_name').
      * @apiParam {Number} organization_id
      * @apiParam {String} query_string
      * @apiExample {js} Example:
@@ -147,7 +147,7 @@ export default class Subscriptions extends Resource {
      * @api {post} /v2/organizations/:organization_id/search/subscriptions/filters searchWithField
      * @apiGroup Subscriptions
      * @apiName searchWithField
-     * @apiDescription Searches ES documents using search_field.
+     * @apiDescription Searches ES documents using searchField.
      * @apiParam {Number} organization_id
      * @apiParam {String} search_field
      * @apiParam {String} query_string

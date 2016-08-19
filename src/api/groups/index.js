@@ -100,7 +100,7 @@ export default class Groups extends Resource {
      * @api {get} /v1/organizations/:organization_id/groups getForOrganization
      * @apiGroup Groups
      * @apiName getForOrganization
-     * @apiDescription Platform admins get all groups, Admins get all groups of the organization, Workers get info about the groups they belong to.
+     * @apiDescription Platform admins get all groups, Admins get all groups of the organization, Workers get information about the groups they belong to.
      * @apiParam {Number} organization_id
      * @apiParam {Object} [query]
      * @apiExample {js} Example:
@@ -129,7 +129,7 @@ export default class Groups extends Resource {
      * @api {get} /v1/groups/:group_id/customers getMembers
      * @apiGroup Groups
      * @apiName getMembers
-     * @apiDescription Return info about the customers belonging to this group. Customers of descendant groups will also be returned.
+     * @apiDescription Return information about the customers belonging to this group. Customers of descendant groups will also be returned.
      * @apiParam {Number} group_id
      * @apiParam {Number} [subgroup_members]
      * @apiParam {Object} [query]

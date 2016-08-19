@@ -13,7 +13,7 @@ export default class GroupSearch extends Resource {
      * @api {get} /v1/groups/:group_id/search/:index_type searchWithType
      * @apiGroup GroupSearch
      * @apiName searchWithType
-     * @apiDescription Search for the given query_string in either groups tickets or members.
+     * @apiDescription Search for the given queryString in either groups tickets or members.
      * @apiParam {Number} group_id
      * @apiParam {String} [index_type='tickets']
      * @apiParam {Object} [query]
@@ -30,7 +30,7 @@ export default class GroupSearch extends Resource {
      * @api {post} /v2/groups/:group_id/search/tickets search
      * @apiGroup GroupSearch
      * @apiName search
-     * @apiDescription Search for the given query_string in tickets within the group. This will search in all strings in the group doc.
+     * @apiDescription Search for the given queryString in tickets within the group. This will search in all strings in the group doc.
      * @apiParam {Number} group_id
      * @apiParam {Object} [query]
      * @apiExample {js} Example:

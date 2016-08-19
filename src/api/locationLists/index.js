@@ -30,7 +30,7 @@ export default class LocationLists extends Resource {
      * @api {delete} /v1/organization_location_lists/:organization_location_list_id delete
      * @apiGroup LocationLists
      * @apiName delete
-     * @apiDescription Delete the specified location list only if location list is associated with an active organization_subscription. This is a soft delete.
+     * @apiDescription Delete the specified location list only if location list is associated with an active organizationSubscription. This is a soft delete.
      * @apiParam {Number} organization_location_list_id
      * @apiExample {js} Example:
      *             gigwalk.locationLists.delete({...})
@@ -73,7 +73,7 @@ export default class LocationLists extends Resource {
      * @api {delete} /v1/organizations/:organization_id/location_lists deleteForOrganization
      * @apiGroup LocationLists
      * @apiName deleteForOrganization
-     * @apiDescription Delete the specified location list only if location list is associated with an active organization_subscription. This is a soft delete.
+     * @apiDescription Delete the specified location list only if location list is associated with an active organizationSubscription. This is a soft delete.
      * @apiParam {Number} organization_id
      * @apiParam {Number[]} location_list_ids
      * @apiExample {js} Example:

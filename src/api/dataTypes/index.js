@@ -17,7 +17,7 @@ export default class DataTypes extends Resource {
      * @api {post} /v2/organizations/:organization_id/search/data_types/filters searchWithField
      * @apiGroup DataTypes
      * @apiName searchWithField
-     * @apiDescription Search all dataTypes for the given value being present in the given search_field.
+     * @apiDescription Search all dataTypes for the given value being present in the given searchField.
      * @apiParam {Number} organization_id
      * @apiParam {String} search_field
      * @apiParam {String} query_string
@@ -93,7 +93,7 @@ export default class DataTypes extends Resource {
      * @api {get} /v1/data_types/:data_type_id get
      * @apiGroup DataTypes
      * @apiName get
-     * @apiDescription Get dataType. Returns info about the specified dataType.
+     * @apiDescription Get dataType. Returns information about the specified dataType.
      * @apiParam {Number} data_type_id
      * @apiParam {Number} [observation_target_type_id=0]
      * @apiParam {Number} [dashboard_visible=1]

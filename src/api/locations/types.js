@@ -91,7 +91,7 @@ export type CreateOrganizationLocationParams = {
     organization_id: number,
     title: string,
     address: string,
-    organization_data: Object
+    organization_data?: Object
 }
 
 export type UpdateOrganizationLocationParams = {
@@ -99,7 +99,7 @@ export type UpdateOrganizationLocationParams = {
     location_id: number,
     title: string,
     address: string,
-    organization_data: Object
+    organization_data?: Object
 }
 
 export type CreateOrganizationLocationListParams = {

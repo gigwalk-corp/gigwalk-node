@@ -28,8 +28,8 @@ export default class Targets extends Resource {
      * @api {get} /v1/organizations/:organization_id/observation_targets/:observation_target_id get
      * @apiGroup Targets
      * @apiName get
-     * @apiDescription If target_id is specified, return org_observation_target_id information; else return the information for all targets of the org.
-                       Capable of returning paginated results.
+     * @apiDescription If target_id is specified, return organizationObservationTargetID information; else return the information for all targets of
+                       the organization. Capable of returning paginated results.
      * @apiParam {Number} organization_id
      * @apiParam {Number} observation_target_id
      * @apiParam {Object} [query]
@@ -46,7 +46,7 @@ export default class Targets extends Resource {
      * @api {put} /v1/organizations/:organization_id/observation_targets/:observation_target_id update
      * @apiGroup Targets
      * @apiName update
-     * @apiDescription If target_id is specified, update org_observation_target; else update all targets of the organization.
+     * @apiDescription If targetID is specified, update organizationObservationTarget; else update all targets of the organization.
                        Endpoint also does update/deletion.
      * @apiParam {Number} organization_id
      * @apiParam {Number} observation_target_id

@@ -32,7 +32,7 @@ export default class DoubleOptin extends Resource {
      * @api {get} /v1/customers/:customer_id/applications getForCustomer
      * @apiGroup DoubleOptin
      * @apiName getForCustomer
-     * @apiDescription Get all ticket applications that belong to the querying customer_id. Requires platform admin permssions.
+     * @apiDescription Get all ticket applications that belong to the querying customerID. Requires platform admin permssions.
      * @apiParam {Number} customer_id
      * @apiParam {Object} [query]
      * @apiExample {js} Example:
@@ -101,7 +101,7 @@ export default class DoubleOptin extends Resource {
      * @api {put} /v1/tickets/:ticket_id/applicants bulkRemove
      * @apiGroup DoubleOptin
      * @apiName bulkRemove
-     * @apiDescription Bulk remove double_optin applications for a ticket. Admin and above can withdraw others applications.
+     * @apiDescription Bulk remove doubleOptin applications for a ticket. Admin and above can withdraw others applications.
      * @apiParam {Number} ticket_id
      * @apiParam {Number[]} customer_ids
      * @apiExample {js} Example:

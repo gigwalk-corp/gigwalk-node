@@ -117,7 +117,6 @@ export default class Certifications extends Resource {
      * @apiDescription Add certifications to a customer. A WORKER can use this endpoint only to add/remove SELF_CERTS certifications to themselves.
      * @apiParam {Number} organization_id
      * @apiParam {Number} customer_id
-     * @apiParam {String} action
      * @apiParam {Number[]} certification_ids
      * @apiExample {js} Example:
      *             gigwalk.certifications.addToCustomer({...})
@@ -138,7 +137,6 @@ export default class Certifications extends Resource {
      * @apiDescription Remove certifications from a customer. A WORKER can use this endpoint only to add/remove SELF_CERTS certifications to themselves.
      * @apiParam {Number} organization_id
      * @apiParam {Number} customer_id
-     * @apiParam {String} action
      * @apiParam {Number[]} certification_ids
      * @apiExample {js} Example:
      *             gigwalk.certifications.removeFromCustomer({...})
@@ -229,7 +227,7 @@ export default class Certifications extends Resource {
      * @apiGroup Certifications
      * @apiName uploadForOrganization
      * @apiDescription Create certifications from a file that has been uploaded to S3.
-                       See https://docs.google.com/document/d/1Q14OKBva_2VhWdSQCbrwjq2Q8dVH6TwXgZ83jTGxHRc/ for more info about our file upload api.
+                       See https://docs.google.com/document/d/1Q14OKBva_2VhWdSQCbrwjq2Q8dVH6TwXgZ83jTGxHRc/ for more information about our file upload api.
      * @apiParam {Number} organization_id
      * @apiParam {String[]} s3_keys
      * @apiExample {js} Example:

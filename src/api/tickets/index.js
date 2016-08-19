@@ -33,7 +33,7 @@ export default class Tickets extends Resource {
      * @api {post} /v1/groups/:group_id/tickets/search searchForGroup
      * @apiGroup Tickets
      * @apiName searchForGroup
-     * @apiDescription Get all tickets from the specified group that satisfy the search criteria, now we support field bundle_autoassign with
+     * @apiDescription Get all tickets from the specified group that satisfy the search criteria, now we support field bundleAutoassign with
                        operator = and values true or false. Capable of returning paginated results.
      * @apiParam {Number} group_id
      * @apiParam {Object[]} query_params
@@ -109,7 +109,7 @@ export default class Tickets extends Resource {
      * @api {post} /v2/organizations/:organization_id/search/tickets/filters searchWithFieldForOrganization
      * @apiGroup Tickets
      * @apiName searchWithFieldForOrganization
-     * @apiDescription Search all tickets of an organization in the specified search_field. Capable of returning paginated results.
+     * @apiDescription Search all tickets of an organization in the specified searchField. Capable of returning paginated results.
      * @apiParam {Number} organization_id
      * @apiParam {String} search_field
      * @apiParam {String} query_string
@@ -325,7 +325,7 @@ export default class Tickets extends Resource {
      * @api {get} /v1/subscriptions/:subscription_id/tickets getAllForSubscription
      * @apiGroup Tickets
      * @apiName getAllForSubscription
-     * @apiDescription Get information of all tickets in organization_subscription (project). Capable of returning paginated results.
+     * @apiDescription Get information of all tickets in organizationSubscription (project). Capable of returning paginated results.
      * @apiParam {Number} subscription_id
      * @apiParam {Object} [query]
      * @apiExample {js} Example:
@@ -341,7 +341,7 @@ export default class Tickets extends Resource {
      * @api {post} /v1/subscriptions/:subscription_id/tickets/search searchForSubscription
      * @apiGroup Tickets
      * @apiName searchForSubscription
-     * @apiDescription Search tickets filtered by the organization_subscription (project). Capable of returning paginated results.
+     * @apiDescription Search tickets filtered by the organizationSubscription (project). Capable of returning paginated results.
      * @apiParam {Number} subscription_id
      * @apiParam {Object} search
      * @apiParam {Object} [query]
