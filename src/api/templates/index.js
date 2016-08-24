@@ -17,14 +17,14 @@ export default class Templates extends Resource {
      * @apiGroup Templates
      * @apiName getAll
      * @apiDescription Get all templates. If platform admin, view all active templates. Otherwise, view an organizations active templates.
-     * @apiParam {Object} query
+     * @apiParam {Object} [query]
      * @apiExample {js} Example:
      *             gigwalk.templates.getAll({...})
      */
     getAll(params: GetAllTemplatesParams): APIPromise<Array<Template>> {
-        const queryString = this.queryStringForSearchObject(params.query);
+        const query = this.stringForQueryObject(params.query);
 
-        return this.client.get(`/v1/templates${queryString}`);
+        return this.client.get(`/v1/templates${query}`);
     }
 
     /**
@@ -63,14 +63,14 @@ export default class Templates extends Resource {
      * @apiName get
      * @apiDescription Get information about the specified template.
      * @apiParam {Number} template_id
-     * @apiParam {Object} query
+     * @apiParam {Object} [query]
      * @apiExample {js} Example:
      *             gigwalk.templates.get({...})
      */
     get(params: GetTemplateParams): APIPromise<[Template]> {
-        const queryString = this.queryStringForSearchObject(params.query);
+        const query = this.stringForQueryObject(params.query);
 
-        return this.client.get(`/v1/templates/${params.template_id}${queryString}`);
+        return this.client.get(`/v1/templates/${params.template_id}${query}`);
     }
 
     /**

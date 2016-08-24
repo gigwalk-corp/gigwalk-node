@@ -16,14 +16,14 @@ export default class TicketMetadata extends Resource {
      * @apiName get
      * @apiDescription Given a ticket_id, fetch its metadata.
      * @apiParam {Number} ticket_id
-     * @apiParam {Object} query
+     * @apiParam {Object} [query]
      * @apiExample {js} Example:
      *             gigwalk.ticketMetadata.get({...})
      */
     get(params: GetMetadataParams): APIPromise<Object> {
-        const queryString = this.queryStringForSearchObject(params.query);
+        const query = this.stringForQueryObject(params.query);
 
-        return this.client.get(`/v1/tickets/${params.ticket_id}/metadata${queryString}`);
+        return this.client.get(`/v1/tickets/${params.ticket_id}/metadata${query}`);
     }
 
     /**
@@ -47,14 +47,14 @@ export default class TicketMetadata extends Resource {
      * @apiDescription Update metadata for the given ticket. Use an array of key-value pairs to update ticket metadata.
      * @apiParam {Number} ticket_id
      * @apiParam {Object} metadata
-     * @apiParam {Object} query
+     * @apiParam {Object} [query]
      * @apiExample {js} Example:
      *             gigwalk.ticketMetadata.update({...})
      */
     update(params: UpdateMetadataParams): APIPromise<Object> {
-        const queryString = this.queryStringForSearchObject(params.query);
+        const query = this.stringForQueryObject(params.query);
 
-        return this.client.put(`/v1/tickets/${params.ticket_id}/metadata${queryString}`, { ...params.metadata });
+        return this.client.put(`/v1/tickets/${params.ticket_id}/metadata${query}`, { ...params.metadata });
     }
 
     /**
@@ -65,13 +65,13 @@ export default class TicketMetadata extends Resource {
      * @apiParam {Number} organization_id
      * @apiParam {Number} ticket_id
      * @apiParam {Object} metadata
-     * @apiParam {Object} query
+     * @apiParam {Object} [query]
      * @apiExample {js} Example:
      *             gigwalk.ticketMetadata.updateForOrganization({...})
      */
     updateForOrganization(params: UpdateMetadataForOrganizationParams): APIPromise<Object> {
-        const queryString = this.queryStringForSearchObject(params.query);
+        const query = this.stringForQueryObject(params.query);
 
-        return this.client.put(`/v1/organizations/${params.organization_id}/tickets/${params.ticket_id}${queryString}`, { ...params.metadata });
+        return this.client.put(`/v1/organizations/${params.organization_id}/tickets/${params.ticket_id}${query}`, { ...params.metadata });
     }
 }

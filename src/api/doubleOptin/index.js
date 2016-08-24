@@ -18,30 +18,30 @@ export default class DoubleOptin extends Resource {
      * @apiGroup DoubleOptin
      * @apiName getForCurrentCustomer
      * @apiDescription Get all ticket applications that belong to current user.
-     * @apiParam {Object} query
+     * @apiParam {Object} [query]
      * @apiExample {js} Example:
      *             gigwalk.doubleOptin.getForCurrentCustomer({...})
      */
     getForCurrentCustomer(params: GetApplicationsForCurrentCustomerParams): APIPromise<any> {
-        const queryString = (params) ? this.queryStringForSearchObject(params.query) : '';
+        const query = (params) ? this.stringForQueryObject(params.query) : '';
 
-        return this.client.get(`/v1/ticket_applications${queryString}`);
+        return this.client.get(`/v1/ticket_applications${query}`);
     }
 
     /**
      * @api {get} /v1/customers/:customer_id/applications getForCustomer
      * @apiGroup DoubleOptin
      * @apiName getForCustomer
-     * @apiDescription Get all ticket applications that belong to the querying customer_id. Requires platform admin permssions.
+     * @apiDescription Get all ticket applications that belong to the querying customerID. Requires platform admin permssions.
      * @apiParam {Number} customer_id
-     * @apiParam {Object} query
+     * @apiParam {Object} [query]
      * @apiExample {js} Example:
      *             gigwalk.doubleOptin.getForCustomer({...})
      */
     getForCustomer(params: GetApplicationsForCustomerParams): APIPromise<any> {
-        const queryString = this.queryStringForSearchObject(params.query);
+        const query = this.stringForQueryObject(params.query);
 
-        return this.client.get(`/v1/customers/${params.customer_id}/applications${queryString}`);
+        return this.client.get(`/v1/customers/${params.customer_id}/applications${query}`);
     }
 
     /**
@@ -101,9 +101,9 @@ export default class DoubleOptin extends Resource {
      * @api {put} /v1/tickets/:ticket_id/applicants bulkRemove
      * @apiGroup DoubleOptin
      * @apiName bulkRemove
-     * @apiDescription Bulk remove double_optin applications for a ticket. Admin and above can withdraw others applications.
+     * @apiDescription Bulk remove doubleOptin applications for a ticket. Admin and above can withdraw others applications.
      * @apiParam {Number} ticket_id
-     * @apiParam {Array<Number>} customer_ids
+     * @apiParam {Number[]} customer_ids
      * @apiExample {js} Example:
      *             gigwalk.doubleOptin.bulkRemove({...})
      */

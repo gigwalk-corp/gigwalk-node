@@ -19,7 +19,7 @@ describe('Tickets', () => {
     let ticketID: number;
 
     it('should be able to get current customer\'s tickets', (done) => {
-        tickets.getCurrentCustomerTickets()
+        tickets.getAllForCurrentCustomer()
             .then((res) => {
                 expect(res.status).to.equal(200);
                 expect(res.data).to.have.jsonSchema(schema);
@@ -28,7 +28,7 @@ describe('Tickets', () => {
             .catch(done);
     }).timeout(10000);
     it('should be able to get all tickets for a specific customer', (done) => {
-        tickets.getCustomerTickets({
+        tickets.getAllForCustomer({
             customer_id: customerID
         })
             .then((res) => {
@@ -39,7 +39,7 @@ describe('Tickets', () => {
             .catch(done);
     }).timeout(20000);
     it('should be able to get all tickets available to customer', (done) => {
-        tickets.getTickets({
+        tickets.getAll({
             query: {
                 limit: 2
             }
@@ -53,7 +53,7 @@ describe('Tickets', () => {
             .catch(done);
     }).timeout(10000);
     it('should be able to get a specific ticket', (done) => {
-        tickets.getTicket({
+        tickets.get({
             ticket_id: ticketID
         })
             .then((res) => {
@@ -64,7 +64,7 @@ describe('Tickets', () => {
             .catch(done);
     }).timeout(10000);
     it('should be able to get a specific tickets events', (done) => {
-        tickets.getTicketEvents({
+        tickets.getEvents({
             ticket_id: ticketID
         })
             .then((res) => {
@@ -75,7 +75,7 @@ describe('Tickets', () => {
             .catch(done);
     }).timeout(10000);
     it('should be able to get all tickets in an organizaiton', (done) => {
-        tickets.getOrganizationTickets({
+        tickets.getAllForOrganization({
             organization_id: organizationID
         })
             .then((res) => {
@@ -86,7 +86,7 @@ describe('Tickets', () => {
             .catch(done);
     }).timeout(10000);
     it('should be able to get all tickets in a subscription', (done) => {
-        tickets.getSubscriptionTickets({
+        tickets.getAllForSubscription({
             subscription_id: subscriptionID
         })
             .then((res) => {
@@ -97,7 +97,7 @@ describe('Tickets', () => {
             .catch(done);
     }).timeout(10000);
     it.skip('should be able to get all tickets in an area', (done) => { // CANT DO WITH PLATFORM ADMIN
-        tickets.getTicketsInArea({
+        tickets.getAllInArea({
             map_lat: 0,
             map_lon: 0,
             radius: 100,
@@ -110,7 +110,7 @@ describe('Tickets', () => {
             .catch(done);
     });
     it('should be able to update a ticket\'s execution state', (done) => {
-        tickets.updateTicketWithState({
+        tickets.updateWithState({
             ticket_id: ticketID,
             execution_state: 'NO_ISSUES'
         })
@@ -122,7 +122,7 @@ describe('Tickets', () => {
             .catch(done);
     }).timeout(10000);
     it('should be able to get edit a specific ticket', (done) => {
-        tickets.updateTicket({
+        tickets.update({
             ticket_id: ticketID,
             action: 'edit',
             time_estimate: 60
@@ -135,7 +135,7 @@ describe('Tickets', () => {
             .catch(done);
     }).timeout(10000);
     it('should be able to get assign a specific ticket', (done) => {
-        tickets.updateTicket({
+        tickets.update({
             ticket_id: ticketID,
             action: 'assign',
             ticket_ids: [
@@ -151,7 +151,7 @@ describe('Tickets', () => {
             .catch(done);
     }).timeout(10000);
     it.skip('should be able to create a new ticket data item', (done) => { // CANT DO WITH PLATFORM ADMIN
-        tickets.createTicketDataItem({
+        tickets.createDataItem({
             ticket_id: ticketID,
             data_item: {
                 data_type_id: 0,
@@ -174,7 +174,7 @@ describe('Tickets', () => {
             .catch(done);
     });
     it.skip('should be able to delete a data item', (done) => { // CANT DO WITH PLATFORM ADMIN
-        tickets.deleteTicketDataItem({
+        tickets.deleteDataItem({
 
         })
             .then((res) => {
@@ -185,7 +185,7 @@ describe('Tickets', () => {
             .catch(done);
     });
     it('should be able to clone a specific ticket', (done) => {
-        tickets.createClonedTicket({
+        tickets.clone({
             ticket_id: ticketID
         })
             .then((res) => {
@@ -196,7 +196,7 @@ describe('Tickets', () => {
             .catch(done);
     }).timeout(10000);
     it.skip('should be able to submit a ticket', (done) => { // CANT DO WITH PLATFORM ADMIN
-        tickets.submitTicket({
+        tickets.submit({
             ticket_id: ticketID
         })
             .then((res) => {
@@ -207,7 +207,7 @@ describe('Tickets', () => {
             .catch(done);
     });
     it('should be able to search tickets by group', (done) => {
-        tickets.searchGroupTickets({
+        tickets.searchForGroup({
             group_id: groupID
         })
             .then((res) => {
@@ -218,7 +218,7 @@ describe('Tickets', () => {
             .catch(done);
     }).timeout(10000);
     it('should be able to search organization tickets', (done) => {
-        tickets.searchOrganizationTickets({
+        tickets.searchForOrganization({
             organization_id: organizationID,
             query_string: 'string'
         })
@@ -231,7 +231,7 @@ describe('Tickets', () => {
             .catch(done);
     }).timeout(10000);
     it('should be able to search organiation tickets with field', (done) => {
-        tickets.searchOrganizationTicketsWithField({
+        tickets.searchWithFieldForOrganization({
             organization_id: organizationID,
             search_field: 'title',
             query_string: 'string'
@@ -244,7 +244,7 @@ describe('Tickets', () => {
             .catch(done);
     }).timeout(10000);
     it('should be able to search tickets with ID', (done) => {
-        tickets.searchTicketsWithID({
+        tickets.searchWithID({
             ticket_id: ticketID,
             search: {
                 search_type: 'status',
@@ -259,7 +259,7 @@ describe('Tickets', () => {
             .catch(done);
     }).timeout(10000);
     it('should be able to search tickets', (done) => {
-        tickets.searchTickets({
+        tickets.search({
             search: {
                 search_type: 'status',
                 status: 'ASSIGNED'
@@ -273,7 +273,7 @@ describe('Tickets', () => {
             .catch(done);
     }).timeout(10000);
     it('should be able to search tickets matching criteria', (done) => {
-        tickets.searchOrganizationTicketsWithCriteria({
+        tickets.searchWithCriteriaForOrganization({
             organization_id: organizationID,
             search: {
                 search_type: 'status',
@@ -288,7 +288,7 @@ describe('Tickets', () => {
             .catch(done);
     }).timeout(10000);
     it('should be able to search tickets in subscription', (done) => {
-        tickets.searchSubscriptionTickets({
+        tickets.searchForSubscription({
             subscription_id: subscriptionID,
             search: {
                 search_type: 'status',

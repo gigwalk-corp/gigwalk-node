@@ -1,6 +1,8 @@
 import Customers from '../src/api/customers/index';
 import axios from 'axios';
-// import schema from '../src/api/certifications/certifications-schema.json';
+import schema from '../src/api/customers/customers-schema.json';
+import schemaSearch from '../src/api/search/search-schema.json';
+import schemaDelete from '../src/api/delete-schema.json';
 
 describe('Customers', () => {
     const client = axios.create({
@@ -25,11 +27,11 @@ describe('Customers', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                // expect(res.data).to.have.jsonSchema(schema);
+                expect(res.data).to.have.jsonSchema(schema);
                 done();
             })
             .catch(done);
-    });
+    }).timeout(5000);
     it('should be able to get a customer by ID', (done) => {
         customers.getById({
             organization_id: organizationID,
@@ -37,7 +39,7 @@ describe('Customers', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                // expect(res.data).to.have.jsonSchema(schema);
+                expect(res.data).to.have.jsonSchema(schema);
                 done();
             })
             .catch(done);
@@ -52,11 +54,11 @@ describe('Customers', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                // expect(res.data).to.have.jsonSchema(schema);
+                expect(res.data).to.have.jsonSchema(schema);
                 done();
             })
             .catch(done);
-    });
+    }).timeout(5000);
     it('should be able to update a customer by ID', (done) => {
         customers.updateById({
             organization_id: organizationID,
@@ -67,20 +69,20 @@ describe('Customers', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                // expect(res.data).to.have.jsonSchema(schema);
+                expect(res.data).to.have.jsonSchema(schema);
                 done();
             })
             .catch(done);
-    });
+    }).timeout(5000);
     it('should be able to get the current customer', (done) => {
         customers.get()
             .then((res) => {
                 expect(res.status).to.equal(200);
-                // expect(res.data).to.have.jsonSchema(schema);
+                expect(res.data).to.have.jsonSchema(schema);
                 done();
             })
             .catch(done);
-    });
+    }).timeout(5000);
     it('should be able to update the current customer', (done) => {
         customers.update({
             customer: {
@@ -89,25 +91,29 @@ describe('Customers', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                // expect(res.data).to.have.jsonSchema(schema);
+                expect(res.data).to.have.jsonSchema(schema);
                 done();
             })
             .catch(done);
     });
     it('should be able to get all customers from an organization', (done) => {
-        customers.getForOrganization({
-            organization_id: organizationID
+        customers.getAllForOrganization({
+            organization_id: organizationID,
+            query: {
+                limit: 2
+            }
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                // expect(res.data).to.have.jsonSchema(schema);
+                expect(res.data).to.have.jsonSchema(schema);
                 done();
             })
             .catch(done);
-    });
+    }).timeout(5000);
     it('should be able to update customers in an organization', (done) => {
         customers.updateForOrganization({
             organization_id: 4,
+            action: 'UPDATE',
             customers: [{
                 customer_id: deleteCustomerID,
                 ideal_hours_week: 20
@@ -115,7 +121,7 @@ describe('Customers', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                // expect(res.data).to.have.jsonSchema(schema);
+                expect(res.data).to.have.jsonSchema(schema);
                 done();
             })
             .catch(done);
@@ -128,11 +134,11 @@ describe('Customers', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                // expect(res.data).to.have.jsonSchema(schema);
+                expect(res.data).to.have.jsonSchema(schemaSearch);
                 done();
             })
             .catch(done);
-    }).timeout(5000);
+    }).timeout(10000);
     it('should be able to delete a customer by email', (done) => {
         customers.deleteByEmail({
             organization_id: organizationID,
@@ -140,11 +146,11 @@ describe('Customers', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                // expect(res.data).to.have.jsonSchema(schema);
+                expect(res.data).to.have.jsonSchema(schemaDelete);
                 done();
             })
             .catch(done);
-    });
+    }).timeout(5000);
     it('should be able to delete a customer by ID', (done) => {
         customers.deleteById({
             organization_id: organizationID,
@@ -152,9 +158,9 @@ describe('Customers', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                // expect(res.data).to.have.jsonSchema(schema);
+                expect(res.data).to.have.jsonSchema(schemaDelete);
                 done();
             })
             .catch(done);
-    });
+    }).timeout(5000);
 });

@@ -16,7 +16,7 @@ describe('Organizations', () => {
     let organizationID: number;
 
     it('should be able to get all organizations', (done) => {
-        organizations.getOrganizations({
+        organizations.getAll({
             query: {
                 limit: 2
             }
@@ -29,7 +29,7 @@ describe('Organizations', () => {
             .catch(done);
     }).timeout(10000);
     it('should be able create an organization', (done) => {
-        organizations.createOrganization({
+        organizations.create({
             organization: {
                 organization_name: 'string',
                 type: 'CLIENT',
@@ -45,7 +45,7 @@ describe('Organizations', () => {
             .catch(done);
     }).timeout(10000);
     it('should be able update a specific organization', (done) => {
-        organizations.updateOrganization({
+        organizations.update({
             organization_id: organizationID,
             organization: {
                 organization_name: 'string 2'
@@ -59,7 +59,7 @@ describe('Organizations', () => {
             .catch(done);
     }).timeout(10000);
     it('should be able get a specific organization', (done) => {
-        organizations.getOrganization({
+        organizations.get({
             organization_id: organizationID
         })
             .then((res) => {
@@ -70,7 +70,7 @@ describe('Organizations', () => {
             .catch(done);
     }).timeout(10000);
     it('should be able delete a specific organization', (done) => {
-        organizations.deleteOrganization({
+        organizations.delete({
             organization_id: organizationID
         })
             .then((res) => {

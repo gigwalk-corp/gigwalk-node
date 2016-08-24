@@ -18,14 +18,14 @@ export default class OrganizationMetadata extends Resource {
      * @apiName get
      * @apiDescription Get all metadata for an organization.
      * @apiParam {Number} organization_id
-     * @apiParam {Object} query
+     * @apiParam {Object} [query]
      * @apiExample {js} Example:
      *             gigwalk.organizationMetadata.get({...})
      */
     get(params: GetMetadataParams): APIPromise<Array<MetadataField>> {
-        const queryString = this.queryStringForSearchObject(params.query);
+        const query = this.stringForQueryObject(params.query);
 
-        return this.client.get(`/v1/organizations/${params.organization_id}/subscription_metadata_fields${queryString}`);
+        return this.client.get(`/v1/organizations/${params.organization_id}/subscription_metadata_fields${query}`);
     }
 
     /**
@@ -59,13 +59,13 @@ export default class OrganizationMetadata extends Resource {
      *             gigwalk.organizationMetadata.update({...})
      */
     update(params: UpdateMetadataParams): APIPromise<[MetadataField]> {
-        const queryString = this.queryStringForSearchObject(params.query);
+        const query = this.stringForQueryObject(params.query);
         const data = {
             name: params.name
         };
 
         return this.client.put(
-                    `/v1/organizations/${params.organization_id}/subscription_metadata_fields/${params.organization_metadata_field_id}${queryString}`, data);
+                    `/v1/organizations/${params.organization_id}/subscription_metadata_fields/${params.organization_metadata_field_id}${query}`, data);
     }
 
     /**
@@ -75,15 +75,15 @@ export default class OrganizationMetadata extends Resource {
      * @apiDescription Get organization metadata field.
      * @apiParam {Number} organization_id
      * @apiParam {Number} organization_metadata_field_id
-     * @apiParam {Object} query
+     * @apiParam {Object} [query]
      * @apiExample {js} Example:
      *             gigwalk.organizationMetadata.getField({...})
      */
     getField(params: GetMetadataFieldParams): APIPromise<[Object]> {
-        const queryString = this.queryStringForSearchObject(params.query);
+        const query = this.stringForQueryObject(params.query);
 
         return this.client.get(
-                    `/v1/organizations/${params.organization_id}/subscription_metadata_fields/${params.organization_metadata_field_id}/values${queryString}`);
+                    `/v1/organizations/${params.organization_id}/subscription_metadata_fields/${params.organization_metadata_field_id}/values${query}`);
     }
 
     /**

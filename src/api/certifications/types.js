@@ -37,13 +37,34 @@ export type UpdateCertificationParams = {
     certification: CertificationFields
 }
 
+type GetCertificationsQuery = {
+    limit?: number,
+    offset?: number,
+    sort_field?: string,
+    sort_order?: string,
+    filter_type?: string,
+    query_string?: string
+}
+
+export type GetCertificationsParams = {
+    query?: GetCertificationsQuery
+}
+
 export type CreateCertificationsParams = {
     certifications: Array<CertificationFields>
 }
 
+type GetAllCertificationsForCustomerQuery = {
+    limit?: number,
+    offset?: number,
+    sort_field?: string,
+    sort_order?: string
+}
+
 export type GetAllCertificationsForCustomerParams = {
     organization_id: number,
-    customer_id: number
+    customer_id: number,
+    query?: GetAllCertificationsForCustomerQuery
 }
 
 export type AddRemoveCertificationsForCustomerParams = {
@@ -52,8 +73,17 @@ export type AddRemoveCertificationsForCustomerParams = {
     certification_ids: Array<number>
 }
 
+type GetAllCertificationsForOrganizationQuery = {
+    limit?: number,
+    offset?: number,
+    sort_field?: string,
+    sort_order?: string,
+    filter_type?: string
+}
+
 export type GetAllCertificationsForOrganizationParams = {
-    organization_id: number
+    organization_id: number,
+    query?: GetAllCertificationsForOrganizationQuery
 }
 
 export type CreateCertificationsForOrganizationParams = {
