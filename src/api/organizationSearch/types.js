@@ -4,12 +4,12 @@ export type OrganizationSearch = {
 
 }
 
-type searchOrganizationQuery = {
+type SearchOrganizationQuery = {
     q?: string,
     size?: number,
     from?: number
 }
 
-export type searchOrganizationParams = {
-    query?: searchOrganizationQuery
+export type SearchOrganizationParams = {
+    query?: SearchOrganizationQuery
 }

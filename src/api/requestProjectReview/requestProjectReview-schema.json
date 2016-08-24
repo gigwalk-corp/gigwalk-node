@@ -1,0 +1,17 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "id": "http://gigwalk.com/src/api/requestProjectReview/requestProjectReview-schema.json#",
+    "type": "object",
+    "properties": {
+        "message": {
+            "type": "string"
+        },
+        "status": {
+            "type": "integer"
+        }
+    },
+    "required": [
+        "message",
+        "status"
+    ]
+}

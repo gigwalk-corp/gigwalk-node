@@ -36,22 +36,6 @@ export type ESResults<T> = {
 
 export type ESPromise<T> = Promise<$AxiosXHR<ESResults<T>>>
 
-export type ESParams = {
-    from?: number,
-    size?: number,
-    sort_field?: string,
-    sort_order?: string,
-    q?: string
-}
-
-export type PaginationParams = {
-    limit?: number,
-    offset?: number,
-    sort_field?: string,
-    sort_order?: string,
-    query_string?: string
-}
-
 export default class Resource {
     client: Axios;
 
@@ -59,13 +43,13 @@ export default class Resource {
         this.client = client;
     }
 
-    queryStringForSearchObject(queryObject: any): string {
+    stringForQueryObject(queryObject: any): string {
         if (!queryObject) return '';
-        let queryString: string = '';
+        let qString: string = '';
         for (let i = 0; i < Object.keys(queryObject).length; i++) {
             const key: string = Object.keys(queryObject)[i];
-            queryString += (queryString.length === 0) ? `?${key}=${queryObject[key]}` : `&${key}=${queryObject[key]}`;
+            qString += (qString.length === 0) ? `?${key}=${queryObject[key]}` : `&${key}=${queryObject[key]}`;
         }
-        return queryString;
+        return qString;
     }
 }

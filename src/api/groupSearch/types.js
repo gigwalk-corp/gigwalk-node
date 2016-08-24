@@ -38,5 +38,5 @@ type SearchGroupTicketsQuery = {
 
 export type SearchGroupTicketsParams = {
     group_id: number,
-    query: SearchGroupTicketsQuery
+    query?: SearchGroupTicketsQuery
 }

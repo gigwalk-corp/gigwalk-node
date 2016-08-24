@@ -44,7 +44,11 @@ describe('Certifications', () => {
             .catch(done);
     });
     it('should be able to get all certifications', (done) => {
-        certifications.getAll()
+        certifications.getAll({
+            query: {
+                limit: 2
+            }
+        })
             .then((res) => {
                 expect(res.status).to.equal(200);
                 expect(res.data).to.have.jsonSchema(schema);
@@ -111,9 +115,12 @@ describe('Certifications', () => {
             .catch(done);
     });
     it('should be able to get a customers certifications', (done) => {
-        certifications.getForCustomer({
+        certifications.getAllForCustomer({
             organization_id: organizationID,
-            customer_id: customerID
+            customer_id: customerID,
+            query: {
+                limit: 2
+            }
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
@@ -142,8 +149,11 @@ describe('Certifications', () => {
             .catch(done);
     });
     it('should be able to get all certifications for an organization', (done) => {
-        certifications.getForOrganization({
-            organization_id: organizationID
+        certifications.getAllForOrganization({
+            organization_id: organizationID,
+            query: {
+                limit: 2
+            }
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
@@ -187,7 +197,7 @@ describe('Certifications', () => {
             .catch(done);
     });
     it.skip('should be able to delete a certification for an organization', (done) => {
-        certifications.deleteForOrganization({
+        certifications.bulkDeleteForOrganization({
             organization_id: organizationID,
             certification_ids: [
                 certificationID

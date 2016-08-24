@@ -18,7 +18,7 @@ describe('Subscriptions', () => {
     let subscriptionID2: number;
 
     it('should be able to create a subscription', (done) => {
-        subscriptions.createSubscriptions({
+        subscriptions.bulkCreate({
             organization_id: organizationID,
             subscriptions: [{
                 title: 'string',
@@ -43,7 +43,7 @@ describe('Subscriptions', () => {
             .catch(done);
     }).timeout(10000);
     it.skip('should be able to clone a specific subscription', (done) => {
-        subscriptions.createClonedSubscription({
+        subscriptions.clone({
             organization_subscription_id: subscriptionID,
             action: 'CLONE'
         })
@@ -55,7 +55,7 @@ describe('Subscriptions', () => {
             .catch(done);
     });
     it.skip('should be able to update a specific subscription', (done) => {
-        subscriptions.updateSubscription({
+        subscriptions.update({
             organization_subscription_id: subscriptionID,
             version_id: 2,
             subscription: {
@@ -70,7 +70,7 @@ describe('Subscriptions', () => {
             .catch(done);
     });
     it('should be able to update a specific organization subscription', (done) => {
-        subscriptions.updateOrganizationSubscription({
+        subscriptions.updateForOrganization({
             organization_id: organizationID,
             organization_subscription_id: subscriptionID,
             version_id: 2,
@@ -86,7 +86,7 @@ describe('Subscriptions', () => {
             .catch(done);
     }).timeout(10000);
     it('should be able to get a specific subscription', (done) => {
-        subscriptions.getSubscription({
+        subscriptions.get({
             organization_subscription_id: subscriptionID
         })
             .then((res) => {
@@ -97,7 +97,7 @@ describe('Subscriptions', () => {
             .catch(done);
     }).timeout(10000);
     it.skip('should be able to search subscriptions with params', (done) => {
-        subscriptions.searchSubscriptionsWithParams({
+        subscriptions.searchWithParams({
             organization_id: organizationID,
             query_string: 'string',
         })
@@ -109,7 +109,7 @@ describe('Subscriptions', () => {
             .catch(done);
     });
     it('should be able to search subscriptions with a field', (done) => {
-        subscriptions.searchSubscriptionsWithField({
+        subscriptions.searchWithField({
             organization_id: organizationID,
             search_field: 'title',
             query_string: 'string',
@@ -122,7 +122,7 @@ describe('Subscriptions', () => {
             .catch(done);
     }).timeout(10000);
     it('should be able to search subscriptions', (done) => {
-        subscriptions.searchSubscriptions({
+        subscriptions.search({
             organization_id: organizationID,
             query_string: 'string',
         })
@@ -134,7 +134,7 @@ describe('Subscriptions', () => {
             .catch(done);
     }).timeout(10000);
     it.skip('should be able to delete a specific subscription', (done) => {
-        subscriptions.deleteSubscription({
+        subscriptions.delete({
             organization_subscription_id: subscriptionID
         })
             .then((res) => {
@@ -145,7 +145,7 @@ describe('Subscriptions', () => {
             .catch(done);
     });
     it('should be able to delete a specific organization subscription', (done) => {
-        subscriptions.deleteOrganizationSubscription({
+        subscriptions.deleteForOrganization({
             organization_id: organizationID,
             organization_subscription_id: subscriptionID2
         })

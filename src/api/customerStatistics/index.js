@@ -17,14 +17,14 @@ export default class CustomerStatistics extends Resource {
      * @apiDescription Get information about the work history of a customer and prospective tickets. Platform admin access only.
                        Returns rendered HTML using jinja templates.
      * @apiParam {Number} customer_id
-     * @apiParam {Object} query
+     * @apiParam {Object} [query]
      * @apiExample {js} Example:
      *             gigwalk.customerStatistics.getByID({...})
      */
     getByID(params: GetStatisticsByIDParams): APIPromise<any> {
-        const queryString = this.queryStringForSearchObject(params.query);
+        const query = this.stringForQueryObject(params.query);
 
-        return this.client.get(`/v1/admin/customerstats/${params.customer_id}${queryString}`);
+        return this.client.get(`/v1/admin/customerstats/${params.customer_id}${query}`);
     }
 
     /**
@@ -34,14 +34,14 @@ export default class CustomerStatistics extends Resource {
      * @apiDescription Get information about the work history of a customer and prospective tickets. Platform admin access only.
                        Returns rendered HTML using jinja templates.
      * @apiParam {String} email
-     * @apiParam {Object} query
+     * @apiParam {Object} [query]
      * @apiExample {js} Example:
      *             gigwalk.customerStatistics.getByEmail({...})
      */
     getByEmail(params: GetStatisticsByEmailParams): APIPromise<any> {
-        const queryString = this.queryStringForSearchObject(params.query);
+        const query = this.stringForQueryObject(params.query);
 
-        return this.client.get(`/v1/admin/customerstats/${params.email}${queryString}`);
+        return this.client.get(`/v1/admin/customerstats/${params.email}${query}`);
     }
 
     /**
@@ -50,29 +50,29 @@ export default class CustomerStatistics extends Resource {
      * @apiName get
      * @apiDescription Get information about the work history of a customer and prospective tickets. Platform admin access only.
                        Returns rendered HTML using jinja templates.
-     * @apiParam {Object} query
+     * @apiParam {Object} [query]
      * @apiExample {js} Example:
      *             gigwalk.customerStatistics.get({...})
      */
     get(params: GetStatisticsParams): APIPromise<any> {
-        const queryString = (params) ? this.queryStringForSearchObject(params.query) : '';
+        const query = (params) ? this.stringForQueryObject(params.query) : '';
 
-        return this.client.get(`/v1/admin/customers_tickets/${queryString}`);
+        return this.client.get(`/v1/admin/customers_tickets/${query}`);
     }
 
     /**
      * @api {get} /v1/tickets/:ticket_id/customers/location_search getByTicket
      * @apiGroup CustomerStatistics
      * @apiName getByTicket
-     * @apiDescription Get info about tickets' owners.
+     * @apiDescription Get information about tickets' owners.
      * @apiParam {Number} ticket_id
-     * @apiParam {Object} query
+     * @apiParam {Object} [query]
      * @apiExample {js} Example:
      *             gigwalk.customerStatistics.getByTicket({...})
      */
     getByTicket(params: GetStatisticsByTicketParams): APIPromise<any> {
-        const queryString = this.queryStringForSearchObject(params.query);
+        const query = this.stringForQueryObject(params.query);
 
-        return this.client.get(`/v1/tickets/${params.ticket_id}/customers/location_search${queryString}`);
+        return this.client.get(`/v1/tickets/${params.ticket_id}/customers/location_search${query}`);
     }
 }

@@ -1,0 +1,65 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "id": "http://gigwalk.com/src/api/calendarEvent/calendarEvent-schema.json#",
+    "type": "object",
+    "properties": {
+        "allOf": [
+            { "$ref": "http://gigwalk.com/src/api/base-schema.json#" },
+            { "properties": {
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                          "properties": {
+                            "summary": {
+                              "type": "string"
+                            },
+                            "id": {
+                              "type": "integer"
+                            },
+                            "end": {
+                              "type": "string"
+                            },
+                            "customer_id": {
+                              "type": "integer"
+                            },
+                            "ticket": {
+                              "type": "null"
+                            },
+                            "recurrence": {
+                              "type": "null"
+                            },
+                            "event_type": {
+                              "type": "string"
+                            },
+                            "description": {
+                              "type": "string"
+                            },
+                            "start": {
+                              "type": "string"
+                            },
+                            "generated": {
+                              "type": "boolean"
+                            }
+                          },
+                          "required": [
+                            "summary",
+                            "id",
+                            "end",
+                            "customer_id",
+                            "ticket",
+                            "recurrence",
+                            "event_type",
+                            "description",
+                            "start",
+                            "generated"
+                          ]
+                    }
+                }
+            },
+            "required": [
+                "data"
+            ] }
+        ]
+    }
+}

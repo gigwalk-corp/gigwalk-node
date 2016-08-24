@@ -1,48 +1,63 @@
 // @flow
 import Resource from '../resource';
 import type { APIPromise } from '../resource';
-
-type ForgotPasswordParams = {
-    email: string
-}
-
-type ResetPasswordParams = {
-    email: string,
-    password: string,
-    token: string,
-    check_expired?: boolean
-}
-
-type ForgotPasswordData = null
-
-type ResetPasswordData = null
+import type {
+    ForgotPasswordParams,
+    ResetPasswordParams
+} from './types';
 
 export default class Authorization extends Resource {
 
     /**
-     * @api {post} /v1/forgot_password
+     * @api {get} /v1/auth get
+     * @apiGroup Authorization
+     * @apiName get
+     * @apiDescription Generate or regenerate authorization information for the current user.
+     * @apiExample {js} Example:
+     *             gigwalk.authorization.get({ ... })
+     */
+    get(): APIPromise<any> {
+        return this.client.get('/v1/auth');
+    }
+
+    /**
+     * @api {post} /v1/auth create
+     * @apiGroup Authorization
+     * @apiName create
+     * @apiDescription Generate or regenerate authorization information for the current user.
+     * @apiExample {js} Example:
+     *             gigwalk.authorization.create({ ... })
+     */
+    create(): APIPromise<any> {
+        return this.client.post('/v1/auth');
+    }
+
+    /**
+     * @api {post} /v1/forgot_password forgotPassword
+     * @apiGroup Authorization
      * @apiName forgotPassword
      * @apiDescription Sends an email to the customer to reset their password. Authorization is not required.
      * @apiParam {String} email
      * @apiExample {js} Example:
      *             gigwalk.authorization.forgotPassword({ ... })
      */
-    forgotPassword(params: ForgotPasswordParams): APIPromise<ForgotPasswordData> {
+    forgotPassword(params: ForgotPasswordParams): APIPromise<null> {
         return this.client.post('/v1/forgot_password', { ...params });
     }
 
     /**
-     * @api {post} /v1/reset_password
+     * @api {post} /v1/reset_password resetPassword
+     * @apiGroup Authorization
      * @apiName resetPassword
      * @apiDescription Reset the customer's password. Returns the customer's information.
      * @apiParam {String} email
      * @apiParam {String} password
      * @apiParam {String} token
-     * @apiParam {Boolean} check_expired
+     * @apiParam {Boolean} [check_expired]
      * @apiExample {js} Example:
      *             gigwalk.authorization.resetPassword({ ... })
      */
-    resetPassword(params: ResetPasswordParams): APIPromise<ResetPasswordData> {
+    resetPassword(params: ResetPasswordParams): APIPromise<null> {
         return this.client.post('/v1/reset_password', { ...params });
     }
 }

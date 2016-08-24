@@ -17,7 +17,7 @@ describe('Ticket Events', () => {
     let ticketEventID: number;
 
     it('should be able to create a ticket event', (done) => {
-        ticketEvents.createTicketEvent({
+        ticketEvents.create({
             ticket_id: ticketID,
             ticket_event: {
                 ticket_event_type: 'COMMENT',
@@ -35,7 +35,7 @@ describe('Ticket Events', () => {
             .catch(done);
     }).timeout(10000);
     it('should be able to delete a ticket event', (done) => {
-        ticketEvents.deleteTicketEvent({
+        ticketEvents.delete({
             ticket_event_id: ticketEventID
         })
             .then((res) => {

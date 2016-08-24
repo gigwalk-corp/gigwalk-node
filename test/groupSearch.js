@@ -13,7 +13,7 @@ describe('Group Search', () => {
 
     const groupId: number = 100;
 
-    it('should be able to ', (done) => {
+    it('should be able to search for groups', (done) => {
         groupSearch.search({
             group_id: groupId,
             index_type: 'members',
@@ -28,7 +28,7 @@ describe('Group Search', () => {
             })
             .catch(done);
     }).timeout(10000);
-    it.skip('should be able to ', (done) => {
+    it.skip('should be able to search for groups with type', (done) => {
         groupSearch.searchWithType({
             group_id: groupId,
             query: {
@@ -42,7 +42,7 @@ describe('Group Search', () => {
             })
             .catch(done);
     });
-    it.skip('should be able to ', (done) => {
+    it.skip('should be able to search for groups with ticket', (done) => {
         groupSearch.searchTickets({
             group_id: groupId,
             query: {
