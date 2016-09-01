@@ -1,14 +1,14 @@
 import Versions from '../src/api/versions';
-import axios from 'axios';
 import schema from '../src/api/versions/versions-schema.json';
+import createClient from './support/client';
 
 describe('versions', () => {
-    const client = axios.create({
+    const client = createClient({
         baseURL,
         headers: {
             Authorization: token
         }
-    });
+    }, 'versions');
     const version = new Versions(client);
 
     it('should be able to return current versions for the api', (done) => {
@@ -23,9 +23,9 @@ describe('versions', () => {
 
     it('should fail if there is no auth token set', (done) => {
         // create a new Versions instance with a new client that doesn't have the headers set.
-        const other = axios.create({
+        const other = createClient({
             baseURL
-        });
+        }, 'versions');
         const otherVersion = new Versions(other);
         otherVersion.get()
             .then(done)

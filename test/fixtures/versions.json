@@ -1,0 +1,53 @@
+{
+  "8c9c919b0aea3cb3a753695b48d25804": {
+    "meta": {
+      "url": "https://stage-api.apps.gigwalk.com/v1/versions/current",
+      "method": "get",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+        "User-Agent": "axios-vcr"
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "connection": "close",
+        "server": "gunicorn/19.1.1",
+        "date": "Thu, 01 Sep 2016 17:21:17 GMT",
+        "content-type": "application/json",
+        "content-length": "201",
+        "access-control-allow-origin": "*",
+        "access-control-allow-methods": "GET, POST, PUT, DELETE",
+        "access-control-allow-headers": "authorization, Content-Type",
+        "via": "1.1 vegur"
+      },
+      "data": {
+        "data": [
+          {
+            "minimum_ios_version": "1.0",
+            "minimum_android_version": "1.0",
+            "version": "v3.6-alpha"
+          }
+        ],
+        "errors": null,
+        "code": 200,
+        "_meta": {},
+        "gw_api_response": [],
+        "warnings": null,
+        "_metadata": {}
+      },
+      "config": {
+        "url": "https://stage-api.apps.gigwalk.com/v1/versions/current",
+        "method": "get",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+          "User-Agent": "axios-vcr"
+        }
+      }
+    }
+  }
+}

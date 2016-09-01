@@ -39,6 +39,7 @@
   },
   "devDependencies": {
     "axios-mock-adapter": "^1.6.1",
+    "axios-vcr": "^0.1.0",
     "babel-cli": "^6.11.4",
     "babel-eslint": "^6.1.2",
     "babel-plugin-rewire": "^1.0.0-rc-4",
