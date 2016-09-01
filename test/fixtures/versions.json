@@ -16,28 +16,28 @@
       "headers": {
         "connection": "close",
         "server": "gunicorn/19.1.1",
-        "date": "Thu, 01 Sep 2016 17:21:17 GMT",
+        "date": "Thu, 01 Sep 2016 17:28:05 GMT",
         "content-type": "application/json",
         "content-length": "201",
-        "access-control-allow-origin": "*",
         "access-control-allow-methods": "GET, POST, PUT, DELETE",
+        "access-control-allow-origin": "*",
         "access-control-allow-headers": "authorization, Content-Type",
         "via": "1.1 vegur"
       },
       "data": {
+        "warnings": null,
+        "_metadata": {},
+        "gw_api_response": [],
+        "code": 200,
+        "_meta": {},
         "data": [
           {
             "minimum_ios_version": "1.0",
-            "minimum_android_version": "1.0",
-            "version": "v3.6-alpha"
+            "version": "v3.6-alpha",
+            "minimum_android_version": "1.0"
           }
         ],
-        "errors": null,
-        "code": 200,
-        "_meta": {},
-        "gw_api_response": [],
-        "warnings": null,
-        "_metadata": {}
+        "errors": null
       },
       "config": {
         "url": "https://stage-api.apps.gigwalk.com/v1/versions/current",

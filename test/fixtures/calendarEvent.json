@@ -1,0 +1,2696 @@
+{
+  "e8454f2548aa9849f1e1c88d7803292c": {
+    "meta": {
+      "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events",
+      "method": "post",
+      "data": "{\"summary\":\"string\",\"start\":\"2220-1-1\",\"end\":\"2220-1-2\",\"time_zone\":\"UTC\",\"event_type\":\"TICKET_SCHEDULE\"}",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json;charset=utf-8",
+        "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+        "User-Agent": "axios-vcr",
+        "Content-Length": 105
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "connection": "close",
+        "server": "gunicorn/19.1.1",
+        "date": "Thu, 01 Sep 2016 18:07:47 GMT",
+        "content-type": "application/json",
+        "content-length": "352",
+        "access-control-allow-methods": "GET, POST, PUT, DELETE",
+        "access-control-allow-origin": "*",
+        "access-control-allow-headers": "authorization, Content-Type",
+        "via": "1.1 vegur"
+      },
+      "data": {
+        "warnings": null,
+        "_metadata": {},
+        "gw_api_response": [],
+        "code": 200,
+        "_meta": {},
+        "data": [
+          {
+            "id": 3268647,
+            "event_type": "TICKET_SCHEDULE",
+            "recurrence": null,
+            "description": null,
+            "end": "2220-01-02T00:00:00+00:00",
+            "customer_id": 100,
+            "ticket": null,
+            "start": "2220-01-01T00:00:00+00:00",
+            "summary": "string",
+            "generated": false
+          }
+        ],
+        "errors": null
+      },
+      "config": {
+        "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events",
+        "method": "post",
+        "data": "{\"summary\":\"string\",\"start\":\"2220-1-1\",\"end\":\"2220-1-2\",\"time_zone\":\"UTC\",\"event_type\":\"TICKET_SCHEDULE\"}",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Content-Type": "application/json;charset=utf-8",
+          "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+          "User-Agent": "axios-vcr",
+          "Content-Length": 105
+        }
+      }
+    }
+  },
+  "1989def00c79bbecb0ba599b17e3030e": {
+    "meta": {
+      "url": "https://stage-api.apps.gigwalk.com/v1/customers/100/calendar_events?limit=2&time_zone=UTC",
+      "method": "get",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+        "User-Agent": "axios-vcr"
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "connection": "close",
+        "server": "gunicorn/19.1.1",
+        "date": "Thu, 01 Sep 2016 18:10:56 GMT",
+        "content-type": "application/json",
+        "content-length": "652",
+        "access-control-allow-origin": "*",
+        "access-control-allow-methods": "GET, POST, PUT, DELETE",
+        "access-control-allow-headers": "authorization, Content-Type",
+        "via": "1.1 vegur"
+      },
+      "data": {
+        "data": [
+          {
+            "customer_id": 100,
+            "ticket": null,
+            "start": "2220-01-01T00:00:00+00:00",
+            "generated": false,
+            "id": 3268648,
+            "end": "2220-01-02T00:00:00+00:00",
+            "recurrence": null,
+            "event_type": "TICKET_SCHEDULE",
+            "description": null,
+            "summary": "string"
+          },
+          {
+            "customer_id": 100,
+            "ticket": null,
+            "start": "2220-01-01T00:00:00+00:00",
+            "generated": false,
+            "id": 3268641,
+            "end": "2220-01-02T00:00:00+00:00",
+            "recurrence": null,
+            "event_type": "TICKET_SCHEDULE",
+            "description": null,
+            "summary": "string"
+          }
+        ],
+        "errors": null,
+        "code": 200,
+        "_meta": {
+          "offset": 0,
+          "page_count": 26
+        },
+        "gw_api_response": [],
+        "warnings": null,
+        "_metadata": {
+          "offset": 0,
+          "page_count": 26
+        }
+      },
+      "config": {
+        "url": "https://stage-api.apps.gigwalk.com/v1/customers/100/calendar_events?limit=2&time_zone=UTC",
+        "method": "get",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+          "User-Agent": "axios-vcr"
+        }
+      }
+    }
+  },
+  "99f9ae36ee7498974720024f5ac62162": {
+    "meta": {
+      "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268628",
+      "method": "get",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+        "User-Agent": "axios-vcr"
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "connection": "close",
+        "server": "gunicorn/19.1.1",
+        "date": "Thu, 01 Sep 2016 17:28:24 GMT",
+        "content-type": "application/json",
+        "content-length": "352",
+        "access-control-allow-methods": "GET, POST, PUT, DELETE",
+        "access-control-allow-origin": "*",
+        "access-control-allow-headers": "authorization, Content-Type",
+        "via": "1.1 vegur"
+      },
+      "data": {
+        "warnings": null,
+        "_metadata": {},
+        "gw_api_response": [],
+        "code": 200,
+        "_meta": {},
+        "data": [
+          {
+            "id": 3268628,
+            "event_type": "TICKET_SCHEDULE",
+            "recurrence": null,
+            "description": null,
+            "end": "2220-01-02T00:00:00+00:00",
+            "customer_id": 100,
+            "ticket": null,
+            "start": "2220-01-01T00:00:00+00:00",
+            "summary": "string!!",
+            "generated": false
+          }
+        ],
+        "errors": null
+      },
+      "config": {
+        "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268628",
+        "method": "get",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+          "User-Agent": "axios-vcr"
+        }
+      }
+    }
+  },
+  "6c68c7d5cbde09752937e582fc566834": {
+    "meta": {
+      "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268628",
+      "method": "put",
+      "data": "{\"summary\":\"string 2\",\"start\":\"2220-1-1\",\"end\":\"2220-1-2\",\"time_zone\":\"UTC\",\"event_type\":\"TICKET_SCHEDULE\"}",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json;charset=utf-8",
+        "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+        "User-Agent": "axios-vcr",
+        "Content-Length": 107
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "connection": "close",
+        "server": "gunicorn/19.1.1",
+        "date": "Thu, 01 Sep 2016 17:28:25 GMT",
+        "content-type": "application/json",
+        "content-length": "354",
+        "access-control-allow-methods": "GET, POST, PUT, DELETE",
+        "access-control-allow-origin": "*",
+        "access-control-allow-headers": "authorization, Content-Type",
+        "via": "1.1 vegur"
+      },
+      "data": {
+        "errors": null,
+        "data": [
+          {
+            "description": null,
+            "recurrence": null,
+            "event_type": "TICKET_SCHEDULE",
+            "generated": false,
+            "ticket": null,
+            "start": "2220-01-01T00:00:00+00:00",
+            "customer_id": 100,
+            "end": "2220-01-02T00:00:00+00:00",
+            "summary": "string 2",
+            "id": 3268628
+          }
+        ],
+        "code": 200,
+        "_metadata": {},
+        "_meta": {},
+        "gw_api_response": [],
+        "warnings": null
+      },
+      "config": {
+        "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268628",
+        "method": "put",
+        "data": "{\"summary\":\"string 2\",\"start\":\"2220-1-1\",\"end\":\"2220-1-2\",\"time_zone\":\"UTC\",\"event_type\":\"TICKET_SCHEDULE\"}",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Content-Type": "application/json;charset=utf-8",
+          "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+          "User-Agent": "axios-vcr",
+          "Content-Length": 107
+        }
+      }
+    }
+  },
+  "32266a4b1b39bc58bb5bfa5df8f5ca5f": {
+    "meta": {
+      "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268628",
+      "method": "delete",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+        "User-Agent": "axios-vcr"
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "connection": "close",
+        "server": "gunicorn/19.1.1",
+        "date": "Thu, 01 Sep 2016 17:28:26 GMT",
+        "content-type": "application/json",
+        "content-length": "115",
+        "via": "1.1 vegur"
+      },
+      "data": {
+        "errors": null,
+        "data": [
+          200
+        ],
+        "code": 200,
+        "_metadata": {},
+        "_meta": {},
+        "gw_api_response": [],
+        "warnings": null
+      },
+      "config": {
+        "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268628",
+        "method": "delete",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+          "User-Agent": "axios-vcr"
+        }
+      }
+    }
+  },
+  "f8de960c724615b166a0a750beba8e0c": {
+    "meta": {
+      "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268630",
+      "method": "get",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+        "User-Agent": "axios-vcr"
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "connection": "close",
+        "server": "gunicorn/19.1.1",
+        "date": "Thu, 01 Sep 2016 17:36:00 GMT",
+        "content-type": "application/json",
+        "content-length": "352",
+        "access-control-allow-methods": "GET, POST, PUT, DELETE",
+        "access-control-allow-origin": "*",
+        "access-control-allow-headers": "authorization, Content-Type",
+        "via": "1.1 vegur"
+      },
+      "data": {
+        "errors": null,
+        "data": [
+          {
+            "description": null,
+            "recurrence": null,
+            "event_type": "TICKET_SCHEDULE",
+            "generated": false,
+            "ticket": null,
+            "start": "2220-01-01T00:00:00+00:00",
+            "customer_id": 100,
+            "end": "2220-01-02T00:00:00+00:00",
+            "summary": "string!!",
+            "id": 3268630
+          }
+        ],
+        "code": 200,
+        "_metadata": {},
+        "_meta": {},
+        "gw_api_response": [],
+        "warnings": null
+      },
+      "config": {
+        "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268630",
+        "method": "get",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+          "User-Agent": "axios-vcr"
+        }
+      }
+    }
+  },
+  "7f401585358ca49a1faf043148b6b3af": {
+    "meta": {
+      "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268630",
+      "method": "put",
+      "data": "{\"summary\":\"string 2\",\"start\":\"2220-1-1\",\"end\":\"2220-1-2\",\"time_zone\":\"UTC\",\"event_type\":\"TICKET_SCHEDULE\"}",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json;charset=utf-8",
+        "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+        "User-Agent": "axios-vcr",
+        "Content-Length": 107
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "connection": "close",
+        "server": "gunicorn/19.1.1",
+        "date": "Thu, 01 Sep 2016 17:36:01 GMT",
+        "content-type": "application/json",
+        "content-length": "354",
+        "access-control-allow-origin": "*",
+        "access-control-allow-methods": "GET, POST, PUT, DELETE",
+        "access-control-allow-headers": "authorization, Content-Type",
+        "via": "1.1 vegur"
+      },
+      "data": {
+        "data": [
+          {
+            "customer_id": 100,
+            "ticket": null,
+            "start": "2220-01-01T00:00:00+00:00",
+            "generated": false,
+            "id": 3268630,
+            "end": "2220-01-02T00:00:00+00:00",
+            "recurrence": null,
+            "event_type": "TICKET_SCHEDULE",
+            "description": null,
+            "summary": "string 2"
+          }
+        ],
+        "errors": null,
+        "code": 200,
+        "_meta": {},
+        "gw_api_response": [],
+        "warnings": null,
+        "_metadata": {}
+      },
+      "config": {
+        "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268630",
+        "method": "put",
+        "data": "{\"summary\":\"string 2\",\"start\":\"2220-1-1\",\"end\":\"2220-1-2\",\"time_zone\":\"UTC\",\"event_type\":\"TICKET_SCHEDULE\"}",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Content-Type": "application/json;charset=utf-8",
+          "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+          "User-Agent": "axios-vcr",
+          "Content-Length": 107
+        }
+      }
+    }
+  },
+  "fdb7bbcf7c47713adb590177dfcd3bf0": {
+    "meta": {
+      "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268630",
+      "method": "delete",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+        "User-Agent": "axios-vcr"
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "connection": "close",
+        "server": "gunicorn/19.1.1",
+        "date": "Thu, 01 Sep 2016 17:36:01 GMT",
+        "content-type": "application/json",
+        "content-length": "115",
+        "via": "1.1 vegur"
+      },
+      "data": {
+        "data": [
+          200
+        ],
+        "errors": null,
+        "code": 200,
+        "_meta": {},
+        "gw_api_response": [],
+        "warnings": null,
+        "_metadata": {}
+      },
+      "config": {
+        "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268630",
+        "method": "delete",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+          "User-Agent": "axios-vcr"
+        }
+      }
+    }
+  },
+  "e7fce40f2a3494597ca2d4c19bd2c2e9": {
+    "meta": {
+      "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268632",
+      "method": "get",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+        "User-Agent": "axios-vcr"
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "connection": "close",
+        "server": "gunicorn/19.1.1",
+        "date": "Thu, 01 Sep 2016 17:38:03 GMT",
+        "content-type": "application/json",
+        "content-length": "352",
+        "access-control-allow-methods": "GET, POST, PUT, DELETE",
+        "access-control-allow-origin": "*",
+        "access-control-allow-headers": "authorization, Content-Type",
+        "via": "1.1 vegur"
+      },
+      "data": {
+        "errors": null,
+        "data": [
+          {
+            "description": null,
+            "recurrence": null,
+            "event_type": "TICKET_SCHEDULE",
+            "generated": false,
+            "ticket": null,
+            "start": "2220-01-01T00:00:00+00:00",
+            "customer_id": 100,
+            "end": "2220-01-02T00:00:00+00:00",
+            "summary": "string!!",
+            "id": 3268632
+          }
+        ],
+        "code": 200,
+        "_metadata": {},
+        "_meta": {},
+        "gw_api_response": [],
+        "warnings": null
+      },
+      "config": {
+        "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268632",
+        "method": "get",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+          "User-Agent": "axios-vcr"
+        }
+      }
+    }
+  },
+  "9fe46729afbc7801bebbdc9e5eddc5ae": {
+    "meta": {
+      "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268632",
+      "method": "put",
+      "data": "{\"summary\":\"string 2\",\"start\":\"2220-1-1\",\"end\":\"2220-1-2\",\"time_zone\":\"UTC\",\"event_type\":\"TICKET_SCHEDULE\"}",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json;charset=utf-8",
+        "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+        "User-Agent": "axios-vcr",
+        "Content-Length": 107
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "connection": "close",
+        "server": "gunicorn/19.1.1",
+        "date": "Thu, 01 Sep 2016 17:38:04 GMT",
+        "content-type": "application/json",
+        "content-length": "354",
+        "access-control-allow-origin": "*",
+        "access-control-allow-methods": "GET, POST, PUT, DELETE",
+        "access-control-allow-headers": "authorization, Content-Type",
+        "via": "1.1 vegur"
+      },
+      "data": {
+        "data": [
+          {
+            "customer_id": 100,
+            "ticket": null,
+            "start": "2220-01-01T00:00:00+00:00",
+            "generated": false,
+            "id": 3268632,
+            "end": "2220-01-02T00:00:00+00:00",
+            "recurrence": null,
+            "event_type": "TICKET_SCHEDULE",
+            "description": null,
+            "summary": "string 2"
+          }
+        ],
+        "errors": null,
+        "code": 200,
+        "_meta": {},
+        "gw_api_response": [],
+        "warnings": null,
+        "_metadata": {}
+      },
+      "config": {
+        "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268632",
+        "method": "put",
+        "data": "{\"summary\":\"string 2\",\"start\":\"2220-1-1\",\"end\":\"2220-1-2\",\"time_zone\":\"UTC\",\"event_type\":\"TICKET_SCHEDULE\"}",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Content-Type": "application/json;charset=utf-8",
+          "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+          "User-Agent": "axios-vcr",
+          "Content-Length": 107
+        }
+      }
+    }
+  },
+  "6b5afa8675eac9b6e87053b0390fc18a": {
+    "meta": {
+      "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268632",
+      "method": "delete",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+        "User-Agent": "axios-vcr"
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "connection": "close",
+        "server": "gunicorn/19.1.1",
+        "date": "Thu, 01 Sep 2016 17:38:04 GMT",
+        "content-type": "application/json",
+        "content-length": "115",
+        "via": "1.1 vegur"
+      },
+      "data": {
+        "data": [
+          200
+        ],
+        "errors": null,
+        "code": 200,
+        "_meta": {},
+        "gw_api_response": [],
+        "warnings": null,
+        "_metadata": {}
+      },
+      "config": {
+        "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268632",
+        "method": "delete",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+          "User-Agent": "axios-vcr"
+        }
+      }
+    }
+  },
+  "e30be6d89b6860223414c458efb55a40": {
+    "meta": {
+      "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268633",
+      "method": "get",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+        "User-Agent": "axios-vcr"
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "connection": "close",
+        "server": "gunicorn/19.1.1",
+        "date": "Thu, 01 Sep 2016 17:39:08 GMT",
+        "content-type": "application/json",
+        "content-length": "352",
+        "access-control-allow-methods": "GET, POST, PUT, DELETE",
+        "access-control-allow-origin": "*",
+        "access-control-allow-headers": "authorization, Content-Type",
+        "via": "1.1 vegur"
+      },
+      "data": {
+        "warnings": null,
+        "_metadata": {},
+        "gw_api_response": [],
+        "code": 200,
+        "_meta": {},
+        "data": [
+          {
+            "id": 3268633,
+            "event_type": "TICKET_SCHEDULE",
+            "recurrence": null,
+            "description": null,
+            "end": "2220-01-02T00:00:00+00:00",
+            "customer_id": 100,
+            "ticket": null,
+            "start": "2220-01-01T00:00:00+00:00",
+            "summary": "string!!",
+            "generated": false
+          }
+        ],
+        "errors": null
+      },
+      "config": {
+        "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268633",
+        "method": "get",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+          "User-Agent": "axios-vcr"
+        }
+      }
+    }
+  },
+  "b09aa6918a9ce610e6199f49b326a4da": {
+    "meta": {
+      "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268633",
+      "method": "put",
+      "data": "{\"summary\":\"string 2\",\"start\":\"2220-1-1\",\"end\":\"2220-1-2\",\"time_zone\":\"UTC\",\"event_type\":\"TICKET_SCHEDULE\"}",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json;charset=utf-8",
+        "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+        "User-Agent": "axios-vcr",
+        "Content-Length": 107
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "connection": "close",
+        "server": "gunicorn/19.1.1",
+        "date": "Thu, 01 Sep 2016 17:39:09 GMT",
+        "content-type": "application/json",
+        "content-length": "354",
+        "access-control-allow-origin": "*",
+        "access-control-allow-methods": "GET, POST, PUT, DELETE",
+        "access-control-allow-headers": "authorization, Content-Type",
+        "via": "1.1 vegur"
+      },
+      "data": {
+        "data": [
+          {
+            "customer_id": 100,
+            "ticket": null,
+            "start": "2220-01-01T00:00:00+00:00",
+            "generated": false,
+            "id": 3268633,
+            "end": "2220-01-02T00:00:00+00:00",
+            "recurrence": null,
+            "event_type": "TICKET_SCHEDULE",
+            "description": null,
+            "summary": "string 2"
+          }
+        ],
+        "errors": null,
+        "code": 200,
+        "_meta": {},
+        "gw_api_response": [],
+        "warnings": null,
+        "_metadata": {}
+      },
+      "config": {
+        "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268633",
+        "method": "put",
+        "data": "{\"summary\":\"string 2\",\"start\":\"2220-1-1\",\"end\":\"2220-1-2\",\"time_zone\":\"UTC\",\"event_type\":\"TICKET_SCHEDULE\"}",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Content-Type": "application/json;charset=utf-8",
+          "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+          "User-Agent": "axios-vcr",
+          "Content-Length": 107
+        }
+      }
+    }
+  },
+  "32583705c7f4969f6565432857e60f5a": {
+    "meta": {
+      "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268633",
+      "method": "delete",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+        "User-Agent": "axios-vcr"
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "connection": "close",
+        "server": "gunicorn/19.1.1",
+        "date": "Thu, 01 Sep 2016 17:39:10 GMT",
+        "content-type": "application/json",
+        "content-length": "115",
+        "via": "1.1 vegur"
+      },
+      "data": {
+        "warnings": null,
+        "_metadata": {},
+        "gw_api_response": [],
+        "code": 200,
+        "_meta": {},
+        "data": [
+          200
+        ],
+        "errors": null
+      },
+      "config": {
+        "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268633",
+        "method": "delete",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+          "User-Agent": "axios-vcr"
+        }
+      }
+    }
+  },
+  "c4ceb9cc9daba49b036c6cb1fc5154b8": {
+    "meta": {
+      "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268635",
+      "method": "get",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+        "User-Agent": "axios-vcr"
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "connection": "close",
+        "server": "gunicorn/19.1.1",
+        "date": "Thu, 01 Sep 2016 17:39:37 GMT",
+        "content-type": "application/json",
+        "content-length": "352",
+        "access-control-allow-methods": "GET, POST, PUT, DELETE",
+        "access-control-allow-origin": "*",
+        "access-control-allow-headers": "authorization, Content-Type",
+        "via": "1.1 vegur"
+      },
+      "data": {
+        "errors": null,
+        "data": [
+          {
+            "description": null,
+            "recurrence": null,
+            "event_type": "TICKET_SCHEDULE",
+            "generated": false,
+            "ticket": null,
+            "start": "2220-01-01T00:00:00+00:00",
+            "customer_id": 100,
+            "end": "2220-01-02T00:00:00+00:00",
+            "summary": "string!!",
+            "id": 3268635
+          }
+        ],
+        "code": 200,
+        "_metadata": {},
+        "_meta": {},
+        "gw_api_response": [],
+        "warnings": null
+      },
+      "config": {
+        "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268635",
+        "method": "get",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+          "User-Agent": "axios-vcr"
+        }
+      }
+    }
+  },
+  "123e1412dae6df5b7f3077b494960b57": {
+    "meta": {
+      "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268635",
+      "method": "put",
+      "data": "{\"summary\":\"string 2\",\"start\":\"2220-1-1\",\"end\":\"2220-1-2\",\"time_zone\":\"UTC\",\"event_type\":\"TICKET_SCHEDULE\"}",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json;charset=utf-8",
+        "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+        "User-Agent": "axios-vcr",
+        "Content-Length": 107
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "connection": "close",
+        "server": "gunicorn/19.1.1",
+        "date": "Thu, 01 Sep 2016 17:39:38 GMT",
+        "content-type": "application/json",
+        "content-length": "354",
+        "access-control-allow-origin": "*",
+        "access-control-allow-methods": "GET, POST, PUT, DELETE",
+        "access-control-allow-headers": "authorization, Content-Type",
+        "via": "1.1 vegur"
+      },
+      "data": {
+        "data": [
+          {
+            "customer_id": 100,
+            "ticket": null,
+            "start": "2220-01-01T00:00:00+00:00",
+            "generated": false,
+            "id": 3268635,
+            "end": "2220-01-02T00:00:00+00:00",
+            "recurrence": null,
+            "event_type": "TICKET_SCHEDULE",
+            "description": null,
+            "summary": "string 2"
+          }
+        ],
+        "errors": null,
+        "code": 200,
+        "_meta": {},
+        "gw_api_response": [],
+        "warnings": null,
+        "_metadata": {}
+      },
+      "config": {
+        "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268635",
+        "method": "put",
+        "data": "{\"summary\":\"string 2\",\"start\":\"2220-1-1\",\"end\":\"2220-1-2\",\"time_zone\":\"UTC\",\"event_type\":\"TICKET_SCHEDULE\"}",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Content-Type": "application/json;charset=utf-8",
+          "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+          "User-Agent": "axios-vcr",
+          "Content-Length": 107
+        }
+      }
+    }
+  },
+  "3e5719c1a72dd5130facb9bdc1702353": {
+    "meta": {
+      "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268635",
+      "method": "delete",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+        "User-Agent": "axios-vcr"
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "connection": "close",
+        "server": "gunicorn/19.1.1",
+        "date": "Thu, 01 Sep 2016 17:39:39 GMT",
+        "content-type": "application/json",
+        "content-length": "115",
+        "via": "1.1 vegur"
+      },
+      "data": {
+        "warnings": null,
+        "_metadata": {},
+        "gw_api_response": [],
+        "code": 200,
+        "_meta": {},
+        "data": [
+          200
+        ],
+        "errors": null
+      },
+      "config": {
+        "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268635",
+        "method": "delete",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+          "User-Agent": "axios-vcr"
+        }
+      }
+    }
+  },
+  "5251df3d71f60ece2e6c5dc42eca65ea": {
+    "meta": {
+      "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268636",
+      "method": "get",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+        "User-Agent": "axios-vcr"
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "connection": "close",
+        "server": "gunicorn/19.1.1",
+        "date": "Thu, 01 Sep 2016 17:40:25 GMT",
+        "content-type": "application/json",
+        "content-length": "352",
+        "access-control-allow-methods": "GET, POST, PUT, DELETE",
+        "access-control-allow-origin": "*",
+        "access-control-allow-headers": "authorization, Content-Type",
+        "via": "1.1 vegur"
+      },
+      "data": {
+        "warnings": null,
+        "_metadata": {},
+        "gw_api_response": [],
+        "code": 200,
+        "_meta": {},
+        "data": [
+          {
+            "id": 3268636,
+            "event_type": "TICKET_SCHEDULE",
+            "recurrence": null,
+            "description": null,
+            "end": "2220-01-02T00:00:00+00:00",
+            "customer_id": 100,
+            "ticket": null,
+            "start": "2220-01-01T00:00:00+00:00",
+            "summary": "string",
+            "generated": false
+          }
+        ],
+        "errors": null
+      },
+      "config": {
+        "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268636",
+        "method": "get",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+          "User-Agent": "axios-vcr"
+        }
+      }
+    }
+  },
+  "c02f515a9ca13667a55021410031f976": {
+    "meta": {
+      "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268636",
+      "method": "put",
+      "data": "{\"summary\":\"string 2\",\"start\":\"2220-1-1\",\"end\":\"2220-1-2\",\"time_zone\":\"UTC\",\"event_type\":\"TICKET_SCHEDULE\"}",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json;charset=utf-8",
+        "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+        "User-Agent": "axios-vcr",
+        "Content-Length": 107
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "connection": "close",
+        "server": "gunicorn/19.1.1",
+        "date": "Thu, 01 Sep 2016 17:40:26 GMT",
+        "content-type": "application/json",
+        "content-length": "354",
+        "access-control-allow-methods": "GET, POST, PUT, DELETE",
+        "access-control-allow-origin": "*",
+        "access-control-allow-headers": "authorization, Content-Type",
+        "via": "1.1 vegur"
+      },
+      "data": {
+        "warnings": null,
+        "_metadata": {},
+        "gw_api_response": [],
+        "code": 200,
+        "_meta": {},
+        "data": [
+          {
+            "id": 3268636,
+            "event_type": "TICKET_SCHEDULE",
+            "recurrence": null,
+            "description": null,
+            "end": "2220-01-02T00:00:00+00:00",
+            "customer_id": 100,
+            "ticket": null,
+            "start": "2220-01-01T00:00:00+00:00",
+            "summary": "string 2",
+            "generated": false
+          }
+        ],
+        "errors": null
+      },
+      "config": {
+        "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268636",
+        "method": "put",
+        "data": "{\"summary\":\"string 2\",\"start\":\"2220-1-1\",\"end\":\"2220-1-2\",\"time_zone\":\"UTC\",\"event_type\":\"TICKET_SCHEDULE\"}",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Content-Type": "application/json;charset=utf-8",
+          "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+          "User-Agent": "axios-vcr",
+          "Content-Length": 107
+        }
+      }
+    }
+  },
+  "e03bac86066a402719958e30801ff7e1": {
+    "meta": {
+      "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268636",
+      "method": "delete",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+        "User-Agent": "axios-vcr"
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "connection": "close",
+        "server": "gunicorn/19.1.1",
+        "date": "Thu, 01 Sep 2016 17:40:27 GMT",
+        "content-type": "application/json",
+        "content-length": "115",
+        "via": "1.1 vegur"
+      },
+      "data": {
+        "data": [
+          200
+        ],
+        "errors": null,
+        "code": 200,
+        "_meta": {},
+        "gw_api_response": [],
+        "warnings": null,
+        "_metadata": {}
+      },
+      "config": {
+        "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268636",
+        "method": "delete",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+          "User-Agent": "axios-vcr"
+        }
+      }
+    }
+  },
+  "6cacdaa264d2544b1ccce706123451cf": {
+    "meta": {
+      "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268638",
+      "method": "get",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+        "User-Agent": "axios-vcr"
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "connection": "close",
+        "server": "gunicorn/19.1.1",
+        "date": "Thu, 01 Sep 2016 17:41:22 GMT",
+        "content-type": "application/json",
+        "content-length": "352",
+        "access-control-allow-methods": "GET, POST, PUT, DELETE",
+        "access-control-allow-origin": "*",
+        "access-control-allow-headers": "authorization, Content-Type",
+        "via": "1.1 vegur"
+      },
+      "data": {
+        "errors": null,
+        "data": [
+          {
+            "description": null,
+            "recurrence": null,
+            "event_type": "TICKET_SCHEDULE",
+            "generated": false,
+            "ticket": null,
+            "start": "2220-01-01T00:00:00+00:00",
+            "customer_id": 100,
+            "end": "2220-01-02T00:00:00+00:00",
+            "summary": "string",
+            "id": 3268638
+          }
+        ],
+        "code": 200,
+        "_metadata": {},
+        "_meta": {},
+        "gw_api_response": [],
+        "warnings": null
+      },
+      "config": {
+        "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268638",
+        "method": "get",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+          "User-Agent": "axios-vcr"
+        }
+      }
+    }
+  },
+  "0a63305dcfb68a657365ea9629788a05": {
+    "meta": {
+      "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268638",
+      "method": "put",
+      "data": "{\"summary\":\"string 2\",\"start\":\"2220-1-1\",\"end\":\"2220-1-2\",\"time_zone\":\"UTC\",\"event_type\":\"TICKET_SCHEDULE\"}",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json;charset=utf-8",
+        "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+        "User-Agent": "axios-vcr",
+        "Content-Length": 107
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "connection": "close",
+        "server": "gunicorn/19.1.1",
+        "date": "Thu, 01 Sep 2016 17:41:24 GMT",
+        "content-type": "application/json",
+        "content-length": "354",
+        "access-control-allow-methods": "GET, POST, PUT, DELETE",
+        "access-control-allow-origin": "*",
+        "access-control-allow-headers": "authorization, Content-Type",
+        "via": "1.1 vegur"
+      },
+      "data": {
+        "errors": null,
+        "data": [
+          {
+            "description": null,
+            "recurrence": null,
+            "event_type": "TICKET_SCHEDULE",
+            "generated": false,
+            "ticket": null,
+            "start": "2220-01-01T00:00:00+00:00",
+            "customer_id": 100,
+            "end": "2220-01-02T00:00:00+00:00",
+            "summary": "string 2",
+            "id": 3268638
+          }
+        ],
+        "code": 200,
+        "_metadata": {},
+        "_meta": {},
+        "gw_api_response": [],
+        "warnings": null
+      },
+      "config": {
+        "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268638",
+        "method": "put",
+        "data": "{\"summary\":\"string 2\",\"start\":\"2220-1-1\",\"end\":\"2220-1-2\",\"time_zone\":\"UTC\",\"event_type\":\"TICKET_SCHEDULE\"}",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Content-Type": "application/json;charset=utf-8",
+          "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+          "User-Agent": "axios-vcr",
+          "Content-Length": 107
+        }
+      }
+    }
+  },
+  "3b5407012f1f9c5803f37f8469b38e71": {
+    "meta": {
+      "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268638",
+      "method": "delete",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+        "User-Agent": "axios-vcr"
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "connection": "close",
+        "server": "gunicorn/19.1.1",
+        "date": "Thu, 01 Sep 2016 17:41:25 GMT",
+        "content-type": "application/json",
+        "content-length": "115",
+        "via": "1.1 vegur"
+      },
+      "data": {
+        "errors": null,
+        "data": [
+          200
+        ],
+        "code": 200,
+        "_metadata": {},
+        "_meta": {},
+        "gw_api_response": [],
+        "warnings": null
+      },
+      "config": {
+        "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268638",
+        "method": "delete",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+          "User-Agent": "axios-vcr"
+        }
+      }
+    }
+  },
+  "5200cfec6a77324386824cd56ee80834": {
+    "meta": {
+      "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268639",
+      "method": "get",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+        "User-Agent": "axios-vcr"
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "connection": "close",
+        "server": "gunicorn/19.1.1",
+        "date": "Thu, 01 Sep 2016 17:42:12 GMT",
+        "content-type": "application/json",
+        "content-length": "352",
+        "access-control-allow-methods": "GET, POST, PUT, DELETE",
+        "access-control-allow-origin": "*",
+        "access-control-allow-headers": "authorization, Content-Type",
+        "via": "1.1 vegur"
+      },
+      "data": {
+        "warnings": null,
+        "_metadata": {},
+        "gw_api_response": [],
+        "code": 200,
+        "_meta": {},
+        "data": [
+          {
+            "id": 3268639,
+            "event_type": "TICKET_SCHEDULE",
+            "recurrence": null,
+            "description": null,
+            "end": "2220-01-02T00:00:00+00:00",
+            "customer_id": 100,
+            "ticket": null,
+            "start": "2220-01-01T00:00:00+00:00",
+            "summary": "string",
+            "generated": false
+          }
+        ],
+        "errors": null
+      },
+      "config": {
+        "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268639",
+        "method": "get",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+          "User-Agent": "axios-vcr"
+        }
+      }
+    }
+  },
+  "1fbf871aed812d78dad58bcafeb27861": {
+    "meta": {
+      "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268639",
+      "method": "put",
+      "data": "{\"summary\":\"string 2\",\"start\":\"2220-1-1\",\"end\":\"2220-1-2\",\"time_zone\":\"UTC\",\"event_type\":\"TICKET_SCHEDULE\"}",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json;charset=utf-8",
+        "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+        "User-Agent": "axios-vcr",
+        "Content-Length": 107
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "connection": "close",
+        "server": "gunicorn/19.1.1",
+        "date": "Thu, 01 Sep 2016 17:42:13 GMT",
+        "content-type": "application/json",
+        "content-length": "354",
+        "access-control-allow-origin": "*",
+        "access-control-allow-methods": "GET, POST, PUT, DELETE",
+        "access-control-allow-headers": "authorization, Content-Type",
+        "via": "1.1 vegur"
+      },
+      "data": {
+        "data": [
+          {
+            "customer_id": 100,
+            "ticket": null,
+            "start": "2220-01-01T00:00:00+00:00",
+            "generated": false,
+            "id": 3268639,
+            "end": "2220-01-02T00:00:00+00:00",
+            "recurrence": null,
+            "event_type": "TICKET_SCHEDULE",
+            "description": null,
+            "summary": "string 2"
+          }
+        ],
+        "errors": null,
+        "code": 200,
+        "_meta": {},
+        "gw_api_response": [],
+        "warnings": null,
+        "_metadata": {}
+      },
+      "config": {
+        "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268639",
+        "method": "put",
+        "data": "{\"summary\":\"string 2\",\"start\":\"2220-1-1\",\"end\":\"2220-1-2\",\"time_zone\":\"UTC\",\"event_type\":\"TICKET_SCHEDULE\"}",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Content-Type": "application/json;charset=utf-8",
+          "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+          "User-Agent": "axios-vcr",
+          "Content-Length": 107
+        }
+      }
+    }
+  },
+  "9ccfe21d04ff264d86bdec87a67e6b2d": {
+    "meta": {
+      "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268639",
+      "method": "delete",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+        "User-Agent": "axios-vcr"
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "connection": "close",
+        "server": "gunicorn/19.1.1",
+        "date": "Thu, 01 Sep 2016 17:42:13 GMT",
+        "content-type": "application/json",
+        "content-length": "115",
+        "via": "1.1 vegur"
+      },
+      "data": {
+        "data": [
+          200
+        ],
+        "errors": null,
+        "code": 200,
+        "_meta": {},
+        "gw_api_response": [],
+        "warnings": null,
+        "_metadata": {}
+      },
+      "config": {
+        "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268639",
+        "method": "delete",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+          "User-Agent": "axios-vcr"
+        }
+      }
+    }
+  },
+  "1811a3f2f850f685df91f09d2863e4b0": {
+    "meta": {
+      "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268640",
+      "method": "get",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+        "User-Agent": "axios-vcr"
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "connection": "close",
+        "server": "gunicorn/19.1.1",
+        "date": "Thu, 01 Sep 2016 17:43:04 GMT",
+        "content-type": "application/json",
+        "content-length": "352",
+        "access-control-allow-origin": "*",
+        "access-control-allow-methods": "GET, POST, PUT, DELETE",
+        "access-control-allow-headers": "authorization, Content-Type",
+        "via": "1.1 vegur"
+      },
+      "data": {
+        "data": [
+          {
+            "customer_id": 100,
+            "ticket": null,
+            "start": "2220-01-01T00:00:00+00:00",
+            "generated": false,
+            "id": 3268640,
+            "end": "2220-01-02T00:00:00+00:00",
+            "recurrence": null,
+            "event_type": "TICKET_SCHEDULE",
+            "description": null,
+            "summary": "string"
+          }
+        ],
+        "errors": null,
+        "code": 200,
+        "_meta": {},
+        "gw_api_response": [],
+        "warnings": null,
+        "_metadata": {}
+      },
+      "config": {
+        "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268640",
+        "method": "get",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+          "User-Agent": "axios-vcr"
+        }
+      }
+    }
+  },
+  "d8c218d57b05d95aebf2727f25d71a71": {
+    "meta": {
+      "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268640",
+      "method": "put",
+      "data": "{\"summary\":\"string 2\",\"start\":\"2220-1-1\",\"end\":\"2220-1-2\",\"time_zone\":\"UTC\",\"event_type\":\"TICKET_SCHEDULE\"}",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json;charset=utf-8",
+        "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+        "User-Agent": "axios-vcr",
+        "Content-Length": 107
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "connection": "close",
+        "server": "gunicorn/19.1.1",
+        "date": "Thu, 01 Sep 2016 17:43:10 GMT",
+        "content-type": "application/json",
+        "content-length": "354",
+        "access-control-allow-methods": "GET, POST, PUT, DELETE",
+        "access-control-allow-origin": "*",
+        "access-control-allow-headers": "authorization, Content-Type",
+        "via": "1.1 vegur"
+      },
+      "data": {
+        "errors": null,
+        "data": [
+          {
+            "description": null,
+            "recurrence": null,
+            "event_type": "TICKET_SCHEDULE",
+            "generated": false,
+            "ticket": null,
+            "start": "2220-01-01T00:00:00+00:00",
+            "customer_id": 100,
+            "end": "2220-01-02T00:00:00+00:00",
+            "summary": "string 2",
+            "id": 3268640
+          }
+        ],
+        "code": 200,
+        "_metadata": {},
+        "_meta": {},
+        "gw_api_response": [],
+        "warnings": null
+      },
+      "config": {
+        "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268640",
+        "method": "put",
+        "data": "{\"summary\":\"string 2\",\"start\":\"2220-1-1\",\"end\":\"2220-1-2\",\"time_zone\":\"UTC\",\"event_type\":\"TICKET_SCHEDULE\"}",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Content-Type": "application/json;charset=utf-8",
+          "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+          "User-Agent": "axios-vcr",
+          "Content-Length": 107
+        }
+      }
+    }
+  },
+  "6fa0667aca5ab462a7a2fb80d325d2e5": {
+    "meta": {
+      "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268640",
+      "method": "delete",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+        "User-Agent": "axios-vcr"
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "connection": "close",
+        "server": "gunicorn/19.1.1",
+        "date": "Thu, 01 Sep 2016 17:43:11 GMT",
+        "content-type": "application/json",
+        "content-length": "115",
+        "via": "1.1 vegur"
+      },
+      "data": {
+        "warnings": null,
+        "_metadata": {},
+        "gw_api_response": [],
+        "code": 200,
+        "_meta": {},
+        "data": [
+          200
+        ],
+        "errors": null
+      },
+      "config": {
+        "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268640",
+        "method": "delete",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+          "User-Agent": "axios-vcr"
+        }
+      }
+    }
+  },
+  "dba4ffe01bf0767cf4fbdb0ac73af414": {
+    "meta": {
+      "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268642",
+      "method": "get",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+        "User-Agent": "axios-vcr"
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "connection": "close",
+        "server": "gunicorn/19.1.1",
+        "date": "Thu, 01 Sep 2016 17:46:46 GMT",
+        "content-type": "application/json",
+        "content-length": "352",
+        "access-control-allow-origin": "*",
+        "access-control-allow-methods": "GET, POST, PUT, DELETE",
+        "access-control-allow-headers": "authorization, Content-Type",
+        "via": "1.1 vegur"
+      },
+      "data": {
+        "data": [
+          {
+            "customer_id": 100,
+            "ticket": null,
+            "start": "2220-01-01T00:00:00+00:00",
+            "generated": false,
+            "id": 3268642,
+            "end": "2220-01-02T00:00:00+00:00",
+            "recurrence": null,
+            "event_type": "TICKET_SCHEDULE",
+            "description": null,
+            "summary": "string"
+          }
+        ],
+        "errors": null,
+        "code": 200,
+        "_meta": {},
+        "gw_api_response": [],
+        "warnings": null,
+        "_metadata": {}
+      },
+      "config": {
+        "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268642",
+        "method": "get",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+          "User-Agent": "axios-vcr"
+        }
+      }
+    }
+  },
+  "333caadb35f687293503fd2a31510177": {
+    "meta": {
+      "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268642",
+      "method": "put",
+      "data": "{\"summary\":\"string 2\",\"start\":\"2220-1-1\",\"end\":\"2220-1-2\",\"time_zone\":\"UTC\",\"event_type\":\"TICKET_SCHEDULE\"}",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json;charset=utf-8",
+        "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+        "User-Agent": "axios-vcr",
+        "Content-Length": 107
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "connection": "close",
+        "server": "gunicorn/19.1.1",
+        "date": "Thu, 01 Sep 2016 17:46:47 GMT",
+        "content-type": "application/json",
+        "content-length": "354",
+        "access-control-allow-methods": "GET, POST, PUT, DELETE",
+        "access-control-allow-origin": "*",
+        "access-control-allow-headers": "authorization, Content-Type",
+        "via": "1.1 vegur"
+      },
+      "data": {
+        "warnings": null,
+        "_metadata": {},
+        "gw_api_response": [],
+        "code": 200,
+        "_meta": {},
+        "data": [
+          {
+            "id": 3268642,
+            "event_type": "TICKET_SCHEDULE",
+            "recurrence": null,
+            "description": null,
+            "end": "2220-01-02T00:00:00+00:00",
+            "customer_id": 100,
+            "ticket": null,
+            "start": "2220-01-01T00:00:00+00:00",
+            "summary": "string 2",
+            "generated": false
+          }
+        ],
+        "errors": null
+      },
+      "config": {
+        "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268642",
+        "method": "put",
+        "data": "{\"summary\":\"string 2\",\"start\":\"2220-1-1\",\"end\":\"2220-1-2\",\"time_zone\":\"UTC\",\"event_type\":\"TICKET_SCHEDULE\"}",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Content-Type": "application/json;charset=utf-8",
+          "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+          "User-Agent": "axios-vcr",
+          "Content-Length": 107
+        }
+      }
+    }
+  },
+  "19a98c2adabf5d048a6f42674ebda5e5": {
+    "meta": {
+      "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268642",
+      "method": "delete",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+        "User-Agent": "axios-vcr"
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "connection": "close",
+        "server": "gunicorn/19.1.1",
+        "date": "Thu, 01 Sep 2016 17:46:47 GMT",
+        "content-type": "application/json",
+        "content-length": "115",
+        "via": "1.1 vegur"
+      },
+      "data": {
+        "data": [
+          200
+        ],
+        "errors": null,
+        "code": 200,
+        "_meta": {},
+        "gw_api_response": [],
+        "warnings": null,
+        "_metadata": {}
+      },
+      "config": {
+        "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268642",
+        "method": "delete",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+          "User-Agent": "axios-vcr"
+        }
+      }
+    }
+  },
+  "2618f46528c066e172c088f3c02c1a42": {
+    "meta": {
+      "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268643",
+      "method": "get",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+        "User-Agent": "axios-vcr"
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "connection": "close",
+        "server": "gunicorn/19.1.1",
+        "date": "Thu, 01 Sep 2016 17:48:48 GMT",
+        "content-type": "application/json",
+        "content-length": "352",
+        "access-control-allow-methods": "GET, POST, PUT, DELETE",
+        "access-control-allow-origin": "*",
+        "access-control-allow-headers": "authorization, Content-Type",
+        "via": "1.1 vegur"
+      },
+      "data": {
+        "errors": null,
+        "data": [
+          {
+            "description": null,
+            "recurrence": null,
+            "event_type": "TICKET_SCHEDULE",
+            "generated": false,
+            "ticket": null,
+            "start": "2220-01-01T00:00:00+00:00",
+            "customer_id": 100,
+            "end": "2220-01-02T00:00:00+00:00",
+            "summary": "string",
+            "id": 3268643
+          }
+        ],
+        "code": 200,
+        "_metadata": {},
+        "_meta": {},
+        "gw_api_response": [],
+        "warnings": null
+      },
+      "config": {
+        "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268643",
+        "method": "get",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+          "User-Agent": "axios-vcr"
+        }
+      }
+    }
+  },
+  "50a0bdea499c9002da1e49b635faa43c": {
+    "meta": {
+      "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268643",
+      "method": "put",
+      "data": "{\"summary\":\"string 2\",\"start\":\"2220-1-1\",\"end\":\"2220-1-2\",\"time_zone\":\"UTC\",\"event_type\":\"TICKET_SCHEDULE\"}",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json;charset=utf-8",
+        "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+        "User-Agent": "axios-vcr",
+        "Content-Length": 107
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "connection": "close",
+        "server": "gunicorn/19.1.1",
+        "date": "Thu, 01 Sep 2016 17:48:49 GMT",
+        "content-type": "application/json",
+        "content-length": "354",
+        "access-control-allow-methods": "GET, POST, PUT, DELETE",
+        "access-control-allow-origin": "*",
+        "access-control-allow-headers": "authorization, Content-Type",
+        "via": "1.1 vegur"
+      },
+      "data": {
+        "warnings": null,
+        "_metadata": {},
+        "gw_api_response": [],
+        "code": 200,
+        "_meta": {},
+        "data": [
+          {
+            "id": 3268643,
+            "event_type": "TICKET_SCHEDULE",
+            "recurrence": null,
+            "description": null,
+            "end": "2220-01-02T00:00:00+00:00",
+            "customer_id": 100,
+            "ticket": null,
+            "start": "2220-01-01T00:00:00+00:00",
+            "summary": "string 2",
+            "generated": false
+          }
+        ],
+        "errors": null
+      },
+      "config": {
+        "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268643",
+        "method": "put",
+        "data": "{\"summary\":\"string 2\",\"start\":\"2220-1-1\",\"end\":\"2220-1-2\",\"time_zone\":\"UTC\",\"event_type\":\"TICKET_SCHEDULE\"}",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Content-Type": "application/json;charset=utf-8",
+          "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+          "User-Agent": "axios-vcr",
+          "Content-Length": 107
+        }
+      }
+    }
+  },
+  "940901f2ec243b293effe34b38e0d71b": {
+    "meta": {
+      "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268643",
+      "method": "delete",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+        "User-Agent": "axios-vcr"
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "connection": "close",
+        "server": "gunicorn/19.1.1",
+        "date": "Thu, 01 Sep 2016 17:48:50 GMT",
+        "content-type": "application/json",
+        "content-length": "115",
+        "via": "1.1 vegur"
+      },
+      "data": {
+        "errors": null,
+        "data": [
+          200
+        ],
+        "code": 200,
+        "_metadata": {},
+        "_meta": {},
+        "gw_api_response": [],
+        "warnings": null
+      },
+      "config": {
+        "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268643",
+        "method": "delete",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+          "User-Agent": "axios-vcr"
+        }
+      }
+    }
+  },
+  "d4500d6b9a17ca2cd9d344fcc6fff2cb": {
+    "meta": {
+      "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268644",
+      "method": "get",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+        "User-Agent": "axios-vcr"
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "connection": "close",
+        "server": "gunicorn/19.1.1",
+        "date": "Thu, 01 Sep 2016 17:50:29 GMT",
+        "content-type": "application/json",
+        "content-length": "352",
+        "access-control-allow-origin": "*",
+        "access-control-allow-methods": "GET, POST, PUT, DELETE",
+        "access-control-allow-headers": "authorization, Content-Type",
+        "via": "1.1 vegur"
+      },
+      "data": {
+        "data": [
+          {
+            "customer_id": 100,
+            "ticket": null,
+            "start": "2220-01-01T00:00:00+00:00",
+            "generated": false,
+            "id": 3268644,
+            "end": "2220-01-02T00:00:00+00:00",
+            "recurrence": null,
+            "event_type": "TICKET_SCHEDULE",
+            "description": null,
+            "summary": "string"
+          }
+        ],
+        "errors": null,
+        "code": 200,
+        "_meta": {},
+        "gw_api_response": [],
+        "warnings": null,
+        "_metadata": {}
+      },
+      "config": {
+        "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268644",
+        "method": "get",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+          "User-Agent": "axios-vcr"
+        }
+      }
+    }
+  },
+  "481fdb2518eb16c47f8308fecc1e920b": {
+    "meta": {
+      "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268644",
+      "method": "put",
+      "data": "{\"summary\":\"string 2\",\"start\":\"2220-1-1\",\"end\":\"2220-1-2\",\"time_zone\":\"UTC\",\"event_type\":\"TICKET_SCHEDULE\"}",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json;charset=utf-8",
+        "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+        "User-Agent": "axios-vcr",
+        "Content-Length": 107
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "connection": "close",
+        "server": "gunicorn/19.1.1",
+        "date": "Thu, 01 Sep 2016 17:50:29 GMT",
+        "content-type": "application/json",
+        "content-length": "354",
+        "access-control-allow-methods": "GET, POST, PUT, DELETE",
+        "access-control-allow-origin": "*",
+        "access-control-allow-headers": "authorization, Content-Type",
+        "via": "1.1 vegur"
+      },
+      "data": {
+        "warnings": null,
+        "_metadata": {},
+        "gw_api_response": [],
+        "code": 200,
+        "_meta": {},
+        "data": [
+          {
+            "id": 3268644,
+            "event_type": "TICKET_SCHEDULE",
+            "recurrence": null,
+            "description": null,
+            "end": "2220-01-02T00:00:00+00:00",
+            "customer_id": 100,
+            "ticket": null,
+            "start": "2220-01-01T00:00:00+00:00",
+            "summary": "string 2",
+            "generated": false
+          }
+        ],
+        "errors": null
+      },
+      "config": {
+        "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268644",
+        "method": "put",
+        "data": "{\"summary\":\"string 2\",\"start\":\"2220-1-1\",\"end\":\"2220-1-2\",\"time_zone\":\"UTC\",\"event_type\":\"TICKET_SCHEDULE\"}",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Content-Type": "application/json;charset=utf-8",
+          "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+          "User-Agent": "axios-vcr",
+          "Content-Length": 107
+        }
+      }
+    }
+  },
+  "a22869f2b42612eed2c2d805a37ddc61": {
+    "meta": {
+      "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268644",
+      "method": "delete",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+        "User-Agent": "axios-vcr"
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "connection": "close",
+        "server": "gunicorn/19.1.1",
+        "date": "Thu, 01 Sep 2016 17:50:30 GMT",
+        "content-type": "application/json",
+        "content-length": "115",
+        "via": "1.1 vegur"
+      },
+      "data": {
+        "errors": null,
+        "data": [
+          200
+        ],
+        "code": 200,
+        "_metadata": {},
+        "_meta": {},
+        "gw_api_response": [],
+        "warnings": null
+      },
+      "config": {
+        "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268644",
+        "method": "delete",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+          "User-Agent": "axios-vcr"
+        }
+      }
+    }
+  },
+  "d560f9ca62aa06b78267a42423719224": {
+    "meta": {
+      "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268645",
+      "method": "get",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+        "User-Agent": "axios-vcr"
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "connection": "close",
+        "server": "gunicorn/19.1.1",
+        "date": "Thu, 01 Sep 2016 17:56:00 GMT",
+        "content-type": "application/json",
+        "content-length": "352",
+        "access-control-allow-methods": "GET, POST, PUT, DELETE",
+        "access-control-allow-origin": "*",
+        "access-control-allow-headers": "authorization, Content-Type",
+        "via": "1.1 vegur"
+      },
+      "data": {
+        "errors": null,
+        "data": [
+          {
+            "description": null,
+            "recurrence": null,
+            "event_type": "TICKET_SCHEDULE",
+            "generated": false,
+            "ticket": null,
+            "start": "2220-01-01T00:00:00+00:00",
+            "customer_id": 100,
+            "end": "2220-01-02T00:00:00+00:00",
+            "summary": "string",
+            "id": 3268645
+          }
+        ],
+        "code": 200,
+        "_metadata": {},
+        "_meta": {},
+        "gw_api_response": [],
+        "warnings": null
+      },
+      "config": {
+        "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268645",
+        "method": "get",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+          "User-Agent": "axios-vcr"
+        }
+      }
+    }
+  },
+  "a9e873216295657c4adb1577d07a2827": {
+    "meta": {
+      "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268645",
+      "method": "put",
+      "data": "{\"summary\":\"string 2\",\"start\":\"2220-1-1\",\"end\":\"2220-1-2\",\"time_zone\":\"UTC\",\"event_type\":\"TICKET_SCHEDULE\"}",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json;charset=utf-8",
+        "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+        "User-Agent": "axios-vcr",
+        "Content-Length": 107
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "connection": "close",
+        "server": "gunicorn/19.1.1",
+        "date": "Thu, 01 Sep 2016 17:56:01 GMT",
+        "content-type": "application/json",
+        "content-length": "354",
+        "access-control-allow-methods": "GET, POST, PUT, DELETE",
+        "access-control-allow-origin": "*",
+        "access-control-allow-headers": "authorization, Content-Type",
+        "via": "1.1 vegur"
+      },
+      "data": {
+        "warnings": null,
+        "_metadata": {},
+        "gw_api_response": [],
+        "code": 200,
+        "_meta": {},
+        "data": [
+          {
+            "id": 3268645,
+            "event_type": "TICKET_SCHEDULE",
+            "recurrence": null,
+            "description": null,
+            "end": "2220-01-02T00:00:00+00:00",
+            "customer_id": 100,
+            "ticket": null,
+            "start": "2220-01-01T00:00:00+00:00",
+            "summary": "string 2",
+            "generated": false
+          }
+        ],
+        "errors": null
+      },
+      "config": {
+        "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268645",
+        "method": "put",
+        "data": "{\"summary\":\"string 2\",\"start\":\"2220-1-1\",\"end\":\"2220-1-2\",\"time_zone\":\"UTC\",\"event_type\":\"TICKET_SCHEDULE\"}",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Content-Type": "application/json;charset=utf-8",
+          "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+          "User-Agent": "axios-vcr",
+          "Content-Length": 107
+        }
+      }
+    }
+  },
+  "0cdf1b15b88203a4cffb88cce1b5e1e9": {
+    "meta": {
+      "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268646",
+      "method": "get",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+        "User-Agent": "axios-vcr"
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "connection": "close",
+        "server": "gunicorn/19.1.1",
+        "date": "Thu, 01 Sep 2016 18:01:28 GMT",
+        "content-type": "application/json",
+        "content-length": "352",
+        "access-control-allow-methods": "GET, POST, PUT, DELETE",
+        "access-control-allow-origin": "*",
+        "access-control-allow-headers": "authorization, Content-Type",
+        "via": "1.1 vegur"
+      },
+      "data": {
+        "warnings": null,
+        "_metadata": {},
+        "gw_api_response": [],
+        "code": 200,
+        "_meta": {},
+        "data": [
+          {
+            "id": 3268646,
+            "event_type": "TICKET_SCHEDULE",
+            "recurrence": null,
+            "description": null,
+            "end": "2220-01-02T00:00:00+00:00",
+            "customer_id": 100,
+            "ticket": null,
+            "start": "2220-01-01T00:00:00+00:00",
+            "summary": "string",
+            "generated": false
+          }
+        ],
+        "errors": null
+      },
+      "config": {
+        "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268646",
+        "method": "get",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+          "User-Agent": "axios-vcr"
+        }
+      }
+    }
+  },
+  "f50b09296b711e8ae23fb04217def626": {
+    "meta": {
+      "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268646",
+      "method": "put",
+      "data": "{\"summary\":\"string 2\",\"start\":\"2220-1-1\",\"end\":\"2220-1-2\",\"time_zone\":\"UTC\",\"event_type\":\"TICKET_SCHEDULE\"}",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json;charset=utf-8",
+        "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+        "User-Agent": "axios-vcr",
+        "Content-Length": 107
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "connection": "close",
+        "server": "gunicorn/19.1.1",
+        "date": "Thu, 01 Sep 2016 18:01:29 GMT",
+        "content-type": "application/json",
+        "content-length": "354",
+        "access-control-allow-origin": "*",
+        "access-control-allow-methods": "GET, POST, PUT, DELETE",
+        "access-control-allow-headers": "authorization, Content-Type",
+        "via": "1.1 vegur"
+      },
+      "data": {
+        "data": [
+          {
+            "customer_id": 100,
+            "ticket": null,
+            "start": "2220-01-01T00:00:00+00:00",
+            "generated": false,
+            "id": 3268646,
+            "end": "2220-01-02T00:00:00+00:00",
+            "recurrence": null,
+            "event_type": "TICKET_SCHEDULE",
+            "description": null,
+            "summary": "string 2"
+          }
+        ],
+        "errors": null,
+        "code": 200,
+        "_meta": {},
+        "gw_api_response": [],
+        "warnings": null,
+        "_metadata": {}
+      },
+      "config": {
+        "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268646",
+        "method": "put",
+        "data": "{\"summary\":\"string 2\",\"start\":\"2220-1-1\",\"end\":\"2220-1-2\",\"time_zone\":\"UTC\",\"event_type\":\"TICKET_SCHEDULE\"}",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Content-Type": "application/json;charset=utf-8",
+          "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+          "User-Agent": "axios-vcr",
+          "Content-Length": 107
+        }
+      }
+    }
+  },
+  "d82e6d6af9090ef518715048bfdf6589": {
+    "meta": {
+      "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268646",
+      "method": "delete",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+        "User-Agent": "axios-vcr"
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "connection": "close",
+        "server": "gunicorn/19.1.1",
+        "date": "Thu, 01 Sep 2016 18:01:31 GMT",
+        "content-type": "application/json",
+        "content-length": "115",
+        "via": "1.1 vegur"
+      },
+      "data": {
+        "warnings": null,
+        "_metadata": {},
+        "gw_api_response": [],
+        "code": 200,
+        "_meta": {},
+        "data": [
+          200
+        ],
+        "errors": null
+      },
+      "config": {
+        "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268646",
+        "method": "delete",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+          "User-Agent": "axios-vcr"
+        }
+      }
+    }
+  },
+  "237bc729a5bcb4b81c9bc258883b95d1": {
+    "meta": {
+      "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268647",
+      "method": "get",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+        "User-Agent": "axios-vcr"
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "connection": "close",
+        "server": "gunicorn/19.1.1",
+        "date": "Thu, 01 Sep 2016 18:07:50 GMT",
+        "content-type": "application/json",
+        "content-length": "352",
+        "access-control-allow-origin": "*",
+        "access-control-allow-methods": "GET, POST, PUT, DELETE",
+        "access-control-allow-headers": "authorization, Content-Type",
+        "via": "1.1 vegur"
+      },
+      "data": {
+        "data": [
+          {
+            "customer_id": 100,
+            "ticket": null,
+            "start": "2220-01-01T00:00:00+00:00",
+            "generated": false,
+            "id": 3268647,
+            "end": "2220-01-02T00:00:00+00:00",
+            "recurrence": null,
+            "event_type": "TICKET_SCHEDULE",
+            "description": null,
+            "summary": "string"
+          }
+        ],
+        "errors": null,
+        "code": 200,
+        "_meta": {},
+        "gw_api_response": [],
+        "warnings": null,
+        "_metadata": {}
+      },
+      "config": {
+        "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268647",
+        "method": "get",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+          "User-Agent": "axios-vcr"
+        }
+      }
+    }
+  },
+  "875a72e5367cdc24e2bbac94b395f90b": {
+    "meta": {
+      "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268647",
+      "method": "put",
+      "data": "{\"summary\":\"string 2\",\"start\":\"2220-1-1\",\"end\":\"2220-1-2\",\"time_zone\":\"UTC\",\"event_type\":\"TICKET_SCHEDULE\"}",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json;charset=utf-8",
+        "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+        "User-Agent": "axios-vcr",
+        "Content-Length": 107
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "connection": "close",
+        "server": "gunicorn/19.1.1",
+        "date": "Thu, 01 Sep 2016 18:07:51 GMT",
+        "content-type": "application/json",
+        "content-length": "354",
+        "access-control-allow-origin": "*",
+        "access-control-allow-methods": "GET, POST, PUT, DELETE",
+        "access-control-allow-headers": "authorization, Content-Type",
+        "via": "1.1 vegur"
+      },
+      "data": {
+        "data": [
+          {
+            "customer_id": 100,
+            "ticket": null,
+            "start": "2220-01-01T00:00:00+00:00",
+            "generated": false,
+            "id": 3268647,
+            "end": "2220-01-02T00:00:00+00:00",
+            "recurrence": null,
+            "event_type": "TICKET_SCHEDULE",
+            "description": null,
+            "summary": "string 2"
+          }
+        ],
+        "errors": null,
+        "code": 200,
+        "_meta": {},
+        "gw_api_response": [],
+        "warnings": null,
+        "_metadata": {}
+      },
+      "config": {
+        "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268647",
+        "method": "put",
+        "data": "{\"summary\":\"string 2\",\"start\":\"2220-1-1\",\"end\":\"2220-1-2\",\"time_zone\":\"UTC\",\"event_type\":\"TICKET_SCHEDULE\"}",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Content-Type": "application/json;charset=utf-8",
+          "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+          "User-Agent": "axios-vcr",
+          "Content-Length": 107
+        }
+      }
+    }
+  },
+  "7c4a0a5faf2aa6535240629cd6073b66": {
+    "meta": {
+      "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268647",
+      "method": "delete",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+        "User-Agent": "axios-vcr"
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "connection": "close",
+        "server": "gunicorn/19.1.1",
+        "date": "Thu, 01 Sep 2016 18:07:51 GMT",
+        "content-type": "application/json",
+        "content-length": "115",
+        "via": "1.1 vegur"
+      },
+      "data": {
+        "warnings": null,
+        "_metadata": {},
+        "gw_api_response": [],
+        "code": 200,
+        "_meta": {},
+        "data": [
+          200
+        ],
+        "errors": null
+      },
+      "config": {
+        "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268647",
+        "method": "delete",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+          "User-Agent": "axios-vcr"
+        }
+      }
+    }
+  },
+  "8bb039e0829d66f91ab6b7ae2edbb392": {
+    "meta": {
+      "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268648",
+      "method": "put",
+      "data": "{\"summary\":\"string 2\",\"start\":\"2220-1-1\",\"end\":\"2220-1-2\",\"time_zone\":\"UTC\",\"event_type\":\"TICKET_SCHEDULE\"}",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json;charset=utf-8",
+        "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+        "User-Agent": "axios-vcr",
+        "Content-Length": 107
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "connection": "close",
+        "server": "gunicorn/19.1.1",
+        "date": "Thu, 01 Sep 2016 18:12:20 GMT",
+        "content-type": "application/json",
+        "content-length": "354",
+        "access-control-allow-methods": "GET, POST, PUT, DELETE",
+        "access-control-allow-origin": "*",
+        "access-control-allow-headers": "authorization, Content-Type",
+        "via": "1.1 vegur"
+      },
+      "data": {
+        "warnings": null,
+        "_metadata": {},
+        "gw_api_response": [],
+        "code": 200,
+        "_meta": {},
+        "data": [
+          {
+            "id": 3268648,
+            "event_type": "TICKET_SCHEDULE",
+            "recurrence": null,
+            "description": null,
+            "end": "2220-01-02T00:00:00+00:00",
+            "customer_id": 100,
+            "ticket": null,
+            "start": "2220-01-01T00:00:00+00:00",
+            "summary": "string 2",
+            "generated": false
+          }
+        ],
+        "errors": null
+      },
+      "config": {
+        "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268648",
+        "method": "put",
+        "data": "{\"summary\":\"string 2\",\"start\":\"2220-1-1\",\"end\":\"2220-1-2\",\"time_zone\":\"UTC\",\"event_type\":\"TICKET_SCHEDULE\"}",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Content-Type": "application/json;charset=utf-8",
+          "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+          "User-Agent": "axios-vcr",
+          "Content-Length": 107
+        }
+      }
+    }
+  },
+  "0045ead048d4abee4a3a5b503ba63eb3": {
+    "meta": {
+      "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268648",
+      "method": "delete",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+        "User-Agent": "axios-vcr"
+      }
+    },
+    "fixture": true,
+    "originalResponseData": {
+      "status": 200,
+      "statusText": "OK",
+      "headers": {
+        "connection": "close",
+        "server": "gunicorn/19.1.1",
+        "date": "Thu, 01 Sep 2016 18:12:27 GMT",
+        "content-type": "application/json",
+        "content-length": "115",
+        "via": "1.1 vegur"
+      },
+      "data": {
+        "warnings": null,
+        "_metadata": {},
+        "gw_api_response": [],
+        "code": 200,
+        "_meta": {},
+        "data": [
+          200
+        ],
+        "errors": null
+      },
+      "config": {
+        "url": "https://stage-api.apps.gigwalk.com/v1/calendar_events/3268648",
+        "method": "delete",
+        "headers": {
+          "Accept": "application/json, text/plain, */*",
+          "Authorization": "Token 4ccad270d29b4884a36cbc0f56180f97",
+          "User-Agent": "axios-vcr"
+        }
+      }
+    }
+  }
+}

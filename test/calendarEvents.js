@@ -1,22 +1,22 @@
 import CalendarEvents from '../src/api/calendarEvents/index';
-import axios from 'axios';
+import create from './support/client';
 import schema from '../src/api/groups/groups-schema.json';
 import schemaDelete from '../src/api/delete-schema.json';
 
-describe('Calendar Event', () => {
-    const client = axios.create({
+describe.only('Calendar Event', () => {
+    const client = create({
         baseURL,
         headers: {
             Authorization: token
         }
-    });
+    }, 'calendarEvent');
     const calendarEvents = new CalendarEvents(client);
 
     const customerID: number = 100;
     let calendarEventID: number;
 
-    it('should be able to create a calendar event', (done) => {
-        calendarEvents.create({
+    it('should be able to create a calendar event', () => {
+        return calendarEvents.create({
             calendar_event: {
                 summary: 'string',
                 start: '2220-1-1',
@@ -29,10 +29,9 @@ describe('Calendar Event', () => {
                 expect(res.status).to.equal(200);
                 expect(res.data).to.have.jsonSchema(schema);
                 calendarEventID = res.data.data[0].id;
-                done();
             })
-            .catch(done);
-    }).timeout(10000);
+    });
+
     it('should be able to get all calendar events for a customer', (done) => {
         calendarEvents.getForCustomer({
             customer_id: customerID,

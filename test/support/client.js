@@ -8,8 +8,8 @@ import { RequestMiddleware, ResponseMiddleware } from 'axios-vcr';
 export default function createClient<T>(config: AxiosXHRConfigBase<T>, name: string): Axios {
     const client = axios.create(config);
     const fixturesPath = path.join(__dirname, '../fixtures', `./${camelCase(name)}.json`);
-    if (!process.argv.includes('--skip-fixtures')) {
-        client.interceptors.request.use(
+    if (process.env.SKIP_FIXTURES) {
+        axios.interceptors.request.use(
             RequestMiddleware.success(fixturesPath),
             RequestMiddleware.failure
         );
