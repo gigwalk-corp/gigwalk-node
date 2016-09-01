@@ -124,7 +124,7 @@ describe('Loction Lists', () => {
         })
             .then((res) => {
                 expect(res.status).to.equal(200);
-                expect(res.data).to.have.all.keys('data', 'errors');
+                expect(res.data).to.have.all.keys('data', 'errors', '_metadata', '_meta', 'code', 'gw_api_response', 'warnings');
                 expect(res.data.data).to.be.an('array');
                 done();
             })
