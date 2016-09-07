@@ -28,5 +28,5 @@ describe('Request Project Review', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    });
 });
