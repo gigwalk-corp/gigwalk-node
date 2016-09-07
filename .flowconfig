@@ -1,6 +1,7 @@
 [ignore]
 .*/node_modules/.*/test/.*
 .*node_modules/flow-typed
+ <PROJECT_ROOT>/lib/.*
 
 [include]
 
