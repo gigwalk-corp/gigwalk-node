@@ -14,7 +14,10 @@ describe('Request Project Review', () => {
     const organizationID: number = 4;
     const projectID: number = 8139140;
 
-    it('should be able to request project review', (done) => {
+    /**
+     * Blocked by https://gigwalk.myjetbrains.com/youtrack/issue/GWP-6074
+     */
+    it.skip('should be able to request project review', (done) => {
         requestProjectReview.request({
             organization_id: organizationID,
             project_id: projectID
