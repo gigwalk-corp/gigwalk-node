@@ -3,15 +3,8 @@
     "id": "http://gigwalk.com/src/api/requestProjectReview/requestProjectReview-schema.json#",
     "type": "object",
     "properties": {
-        "message": {
-            "type": "string"
-        },
-        "status": {
-            "type": "integer"
-        }
-    },
-    "required": [
-        "message",
-        "status"
-    ]
+        "allOf": [
+            { "$ref": "http://gigwalk.com/src/api/base-schema.json#" }
+        ]
+    }
 }
