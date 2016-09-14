@@ -2,7 +2,7 @@
   "name": "gigwalk",
   "version": "0.0.0-semantic-release",
   "description": "Gigwalk API Client - universal.",
-  "main": "lib/index.js",
+  "main": "./lib",
   "scripts": {
     "prebuild": "rm -rf lib",
     "build": "NODE_ENV=production babel src -d lib -s",
