@@ -3,7 +3,7 @@ import Resource from '../resource';
 import type { APIPromise } from '../resource';
 import type {
     VersionList
-} from './types.js';
+} from './types';
 
 export default class Versions extends Resource {
     /**

@@ -44,12 +44,16 @@ export default class Resource {
     }
 
     stringForQueryObject(queryObject: any): string {
-        if (!queryObject) return '';
-        let qString: string = '';
-        for (let i = 0; i < Object.keys(queryObject).length; i++) {
-            const key: string = Object.keys(queryObject)[i];
-            qString += (qString.length === 0) ? `?${key}=${queryObject[key]}` : `&${key}=${queryObject[key]}`;
+        if (!queryObject) {
+            return '';
         }
-        return qString;
+
+        return Object.entries(queryObject)
+            .reduce((str: string, [key, value]: [string, mixed], i: number): string => {
+                if (typeof value === 'number' || typeof value === 'string') {
+                    return `${str}${i === 0 ? '?' : '&'}${key}=${value}`;
+                }
+                return str;
+            }, '');
     }
 }
