@@ -194,14 +194,19 @@ export default class LocationLists extends Resource {
      * @apiDescription Remove location ids specified in JSON payload from location list.
      * @apiParam {Number} organization_location_list_id
      * @apiParam {Number[]} locations
+     * @apiParam {Number[]} relations
      * @apiExample {js} Example:
      *             gigwalk.locationLists.removeLocations({...})
      */
     removeLocations(params: RemoveLocationsFromListParams): APIPromise<Array<number>> {
-        const data = {
-            action: 'remove',
-            locations: params.locations
-        };
+        const data = {};
+        data.action = 'remove';
+
+        if (params.locations) {
+            data.locations = params.locations;
+        } else {
+            data.relations = params.relations;
+        }
 
         return this.client.put(`/v1/location_lists/${params.organization_location_list_id}/locations`, data);
     }

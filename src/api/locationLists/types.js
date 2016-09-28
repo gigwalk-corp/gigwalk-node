@@ -20,6 +20,7 @@ export type Location = {
     title: string,
     locality: string,
     id: number,
+    relation_id: number,
     country: string,
     formatted_address: string,
     postal_code: number,
@@ -152,6 +153,9 @@ export type AddLocationsToListParams = {
 export type RemoveLocationsFromListParams = {
     organization_location_list_id: number,
     locations: Array<number>
+} | {
+    organization_location_list_id: number,
+    relations: Array<number>
 }
 
 type SearchLocationListQuery = {
