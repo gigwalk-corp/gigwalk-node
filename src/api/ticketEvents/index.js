@@ -5,7 +5,7 @@ import type {
     TicketEvent,
     CreateTicketEventParams,
     DeleteTicketEventParams
-} from './types.js';
+} from './types';
 
 export default class TicketEvents extends Resource {
     /**
