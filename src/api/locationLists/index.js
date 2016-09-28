@@ -175,15 +175,7 @@ export default class LocationLists extends Resource {
      *             gigwalk.locationLists.addLocations({...})
      */
     addLocations(params: AddLocationsToListParams): APIPromise<Array<Location>> {
-        const locations = [];
-        for (let i: number = 0; i < params.locations.length; i++) {
-            const id: number = params.locations[i];
-            locations.push({
-                id
-            });
-        }
-        const data = locations;
-
+        const data = params.locations.map((id: number): { id: number } => ({ id }));
         return this.client.post(`/v1/location_lists/${params.organization_location_list_id}/locations`, data);
     }
 

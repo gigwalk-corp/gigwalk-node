@@ -1,11 +1,12 @@
-/* eslint prefer-template:0 */
+const path = require('path');
+
 module.exports = {
     entry: {
         main: './index.js'
     },
     output: {
         filename: '[name].js',
-        path: __dirname + '/public'
+        path: path.join(__dirname, './public')
     },
     module: {
         loaders: [{
