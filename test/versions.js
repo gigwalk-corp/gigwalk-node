@@ -19,7 +19,7 @@ describe('versions', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
 
     it('should fail if there is no auth token set', (done) => {
         // create a new Versions instance with a new client that doesn't have the headers set.
@@ -34,5 +34,5 @@ describe('versions', () => {
                 expect(err.response.status).to.equal(401);
                 done();
             });
-    }).timeout(10000);
+    }).timeout(30000);
 });

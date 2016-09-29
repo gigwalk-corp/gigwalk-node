@@ -34,7 +34,7 @@ describe('Target Lists', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
     it('should be able to get all target lists', (done) => {
         targetLists.getAll()
             .then((res) => {
@@ -43,7 +43,7 @@ describe('Target Lists', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
     it('should be able to get all organization target lists', (done) => {
         targetLists.getAllForOrganization({
             organization_id: organizationID
@@ -54,7 +54,7 @@ describe('Target Lists', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
     it('should be able to get a specific organization target list', (done) => {
         targetLists.get({
             organization_id: organizationID,
@@ -66,7 +66,7 @@ describe('Target Lists', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
     it('should be able to get targets in a list', (done) => {
         targetLists.getTargets({
             target_list_id: targetListID
@@ -78,7 +78,7 @@ describe('Target Lists', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
     it('should be able to remove targets to a list', (done) => {
         targetLists.updateTargets({
             target_list_id: targetListID,
@@ -93,7 +93,7 @@ describe('Target Lists', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
     it('should be able to add targets from a list', (done) => {
         targetLists.updateTargets({
             target_list_id: targetListID,
@@ -108,7 +108,7 @@ describe('Target Lists', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
     it('should be able to update a specific target list', (done) => {
         targetLists.update({
             observation_target_list_id: targetListID,
@@ -122,7 +122,7 @@ describe('Target Lists', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
     it.skip('should be able to search data items', (done) => {
         targetLists.searchDataItems({
             observation_target_id: targetID,
@@ -147,7 +147,7 @@ describe('Target Lists', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
     it('should be able to search observation targets in a list', (done) => {
         targetLists.searchObservationList({
             target_list_id: targetListID,
@@ -159,7 +159,7 @@ describe('Target Lists', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
     it('should be able to get a specific target list', (done) => {
         targetLists.get({
             observation_target_list_id: targetListID
@@ -170,7 +170,7 @@ describe('Target Lists', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
     it.skip('should be able to delete a specific target list', (done) => {
         targetLists.delete({
             observation_target_list_id: targetListID

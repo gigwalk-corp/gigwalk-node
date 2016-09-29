@@ -28,7 +28,7 @@ describe('Templates', () => {
             done();
         })
         .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
     it('should be able to get all templates', (done) => {
         templates.getAll({
             query: {
@@ -41,7 +41,7 @@ describe('Templates', () => {
             done();
         })
         .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
     it('should be able to update a template', (done) => {
         templates.update({
             template_id: templateID,
@@ -55,7 +55,7 @@ describe('Templates', () => {
             done();
         })
         .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
     it('should be able to get a specific template', (done) => {
         templates.get({
             template_id: templateID
@@ -66,7 +66,7 @@ describe('Templates', () => {
             done();
         })
         .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
     it('should be able to delete a template', (done) => {
         templates.delete({
             template_id: templateID
@@ -77,5 +77,5 @@ describe('Templates', () => {
             done();
         })
         .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
 });

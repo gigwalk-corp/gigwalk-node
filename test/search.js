@@ -23,7 +23,7 @@ describe('Search', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
     it('should be able to create a search', (done) => {
         search.create()
             .then((res) => {
@@ -32,7 +32,7 @@ describe('Search', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
     it('should be able to search an organization', (done) => {
         search.searchOrganization({
             organization_id: organizationID,
@@ -45,5 +45,5 @@ describe('Search', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
 });

@@ -29,7 +29,7 @@ describe('Customer List File Upload', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
     it('should be able to get a customer list file', (done) => {
         customerListFileUpload.get({
             customer_file_id: customerListFile
@@ -40,7 +40,7 @@ describe('Customer List File Upload', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
     it('should be able to get an organization customer list file', (done) => {
         customerListFileUpload.getForOrganization({
             organization_id: organizationID,
@@ -52,5 +52,5 @@ describe('Customer List File Upload', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
 });

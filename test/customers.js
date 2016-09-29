@@ -31,7 +31,7 @@ describe('Customers', () => {
                 done();
             })
             .catch(done);
-    }).timeout(5000);
+    }).timeout(30000);
     it('should be able to get a customer by ID', (done) => {
         customers.getById({
             organization_id: organizationID,
@@ -58,7 +58,7 @@ describe('Customers', () => {
                 done();
             })
             .catch(done);
-    }).timeout(5000);
+    }).timeout(30000);
     it('should be able to update a customer by ID', (done) => {
         customers.updateById({
             organization_id: organizationID,
@@ -73,7 +73,7 @@ describe('Customers', () => {
                 done();
             })
             .catch(done);
-    }).timeout(5000);
+    }).timeout(30000);
     it('should be able to get the current customer', (done) => {
         customers.get()
             .then((res) => {
@@ -82,7 +82,7 @@ describe('Customers', () => {
                 done();
             })
             .catch(done);
-    }).timeout(5000);
+    }).timeout(30000);
     it('should be able to update the current customer', (done) => {
         customers.update({
             customer: {
@@ -109,7 +109,7 @@ describe('Customers', () => {
                 done();
             })
             .catch(done);
-    }).timeout(5000);
+    }).timeout(30000);
     it('should be able to update customers in an organization', (done) => {
         customers.updateForOrganization({
             organization_id: 4,
@@ -138,7 +138,7 @@ describe('Customers', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
     it('should be able to delete a customer by email', (done) => {
         customers.deleteByEmail({
             organization_id: organizationID,
@@ -150,7 +150,7 @@ describe('Customers', () => {
                 done();
             })
             .catch(done);
-    }).timeout(5000);
+    }).timeout(30000);
     it('should be able to delete a customer by ID', (done) => {
         customers.deleteById({
             organization_id: organizationID,
@@ -162,5 +162,5 @@ describe('Customers', () => {
                 done();
             })
             .catch(done);
-    }).timeout(5000);
+    }).timeout(30000);
 });

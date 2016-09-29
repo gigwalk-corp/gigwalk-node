@@ -27,7 +27,7 @@ describe('Organizations', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
     it('should be able create an organization', (done) => {
         organizations.create({
             organization: {
@@ -43,7 +43,7 @@ describe('Organizations', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
     it('should be able update a specific organization', (done) => {
         organizations.update({
             organization_id: organizationID,
@@ -57,7 +57,7 @@ describe('Organizations', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
     it('should be able get a specific organization', (done) => {
         organizations.get({
             organization_id: organizationID
@@ -68,7 +68,7 @@ describe('Organizations', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
     it('should be able delete a specific organization', (done) => {
         organizations.delete({
             organization_id: organizationID
@@ -79,5 +79,5 @@ describe('Organizations', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
 });

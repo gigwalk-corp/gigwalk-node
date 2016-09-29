@@ -28,7 +28,7 @@ describe('Ticket Metadata', () => {
             done();
         })
         .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
     it('should be able to get metadata for a ticket', (done) => {
         ticketMetadata.get({
             ticket_id: ticketId,
@@ -42,7 +42,7 @@ describe('Ticket Metadata', () => {
             done();
         })
         .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
     it('should be able to update metadata for a ticket', (done) => {
         ticketMetadata.update({
             ticket_id: ticketId,
@@ -59,7 +59,7 @@ describe('Ticket Metadata', () => {
             done();
         })
         .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
     it('should be able to update metadata for an orgaization ticket', (done) => {
         ticketMetadata.updateForOrganization({
             organization_id: organizationID,
@@ -77,5 +77,5 @@ describe('Ticket Metadata', () => {
             done();
         })
         .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
 });

@@ -26,7 +26,7 @@ describe('Organization Metadata', () => {
             done();
         })
         .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
     it('should be able to get metadata for an organization', (done) => {
         organizationMetadata.get({
             organization_id: organizationID,
@@ -40,7 +40,7 @@ describe('Organization Metadata', () => {
             done();
         })
         .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
     it('should be able to update metadata for an organization', (done) => {
         organizationMetadata.update({
             organization_id: organizationID,
@@ -56,7 +56,7 @@ describe('Organization Metadata', () => {
             done();
         })
         .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
     it('should be able to get a metadata field for an organization', (done) => {
         organizationMetadata.getField({
             organization_id: organizationID,
@@ -71,7 +71,7 @@ describe('Organization Metadata', () => {
             done();
         })
         .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
     it('should be able to update a metadata field for an organization', (done) => {
         organizationMetadata.updateField({
             organization_id: organizationID,
@@ -86,5 +86,5 @@ describe('Organization Metadata', () => {
             done();
         })
         .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
 });

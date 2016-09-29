@@ -26,7 +26,7 @@ describe('Tickets', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
     it('should be able to get all tickets for a specific customer', (done) => {
         tickets.getAllForCustomer({
             customer_id: customerID
@@ -37,7 +37,7 @@ describe('Tickets', () => {
                 done();
             })
             .catch(done);
-    }).timeout(20000);
+    }).timeout(30000);
     it('should be able to get all tickets available to customer', (done) => {
         tickets.getAll({
             query: {
@@ -51,7 +51,7 @@ describe('Tickets', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
     it('should be able to get a specific ticket', (done) => {
         tickets.get({
             ticket_id: ticketID
@@ -62,7 +62,7 @@ describe('Tickets', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
     it('should be able to get a specific tickets events', (done) => {
         tickets.getEvents({
             ticket_id: ticketID
@@ -73,7 +73,7 @@ describe('Tickets', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
     it('should be able to get all tickets in an organizaiton', (done) => {
         tickets.getAllForOrganization({
             organization_id: organizationID
@@ -84,7 +84,7 @@ describe('Tickets', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
     it('should be able to get all tickets in a subscription', (done) => {
         tickets.getAllForSubscription({
             subscription_id: subscriptionID
@@ -95,7 +95,7 @@ describe('Tickets', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
     it.skip('should be able to get all tickets in an area', (done) => { // CANT DO WITH PLATFORM ADMIN
         tickets.getAllInArea({
             map_lat: 0,
@@ -120,7 +120,7 @@ describe('Tickets', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
     it('should be able to get edit a specific ticket', (done) => {
         tickets.update({
             ticket_id: ticketID,
@@ -133,7 +133,7 @@ describe('Tickets', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
     it('should be able to get assign a specific ticket', (done) => {
         tickets.update({
             ticket_id: ticketID,
@@ -149,7 +149,7 @@ describe('Tickets', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
     it.skip('should be able to create a new ticket data item', (done) => { // CANT DO WITH PLATFORM ADMIN
         tickets.createDataItem({
             ticket_id: ticketID,
@@ -194,7 +194,7 @@ describe('Tickets', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
     it.skip('should be able to submit a ticket', (done) => { // CANT DO WITH PLATFORM ADMIN
         tickets.submit({
             ticket_id: ticketID
@@ -216,7 +216,7 @@ describe('Tickets', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
     it('should be able to search organization tickets', (done) => {
         tickets.searchForOrganization({
             organization_id: organizationID,
@@ -229,7 +229,7 @@ describe('Tickets', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
     it('should be able to search organiation tickets with field', (done) => {
         tickets.searchWithFieldForOrganization({
             organization_id: organizationID,
@@ -242,7 +242,7 @@ describe('Tickets', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
     it('should be able to search tickets with ID', (done) => {
         tickets.searchWithID({
             ticket_id: ticketID,
@@ -257,7 +257,7 @@ describe('Tickets', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
     it('should be able to search tickets', (done) => {
         tickets.search({
             search: {
@@ -271,7 +271,7 @@ describe('Tickets', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
     it('should be able to search tickets matching criteria', (done) => {
         tickets.searchWithCriteriaForOrganization({
             organization_id: organizationID,
@@ -286,7 +286,7 @@ describe('Tickets', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
     it('should be able to search tickets in subscription', (done) => {
         tickets.searchForSubscription({
             subscription_id: subscriptionID,
@@ -301,5 +301,5 @@ describe('Tickets', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
 });

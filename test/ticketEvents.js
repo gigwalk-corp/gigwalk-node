@@ -33,7 +33,7 @@ describe('Ticket Events', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
     it('should be able to delete a ticket event', (done) => {
         ticketEvents.delete({
             ticket_event_id: ticketEventID
@@ -44,5 +44,5 @@ describe('Ticket Events', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
 });

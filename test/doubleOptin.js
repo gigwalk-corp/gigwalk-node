@@ -22,7 +22,7 @@ describe('Double Optin Tickets', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
     it('should be able to get all applications for a customer', (done) => {
         doubleOptin.getForCustomer({
             customer_id: customerId
@@ -33,7 +33,7 @@ describe('Double Optin Tickets', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
     it('should be able to get a customer applying to an optin ticket', (done) => {
         doubleOptin.get({
             customer_id: customerId,
@@ -45,7 +45,7 @@ describe('Double Optin Tickets', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
     it('should be able to get all customers applying to an optin ticket', (done) => {
         doubleOptin.getAll({
             ticket_id: ticketId
@@ -56,7 +56,7 @@ describe('Double Optin Tickets', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
     it.skip('should be able to apply to a customer from an optin ticket', (done) => {
         doubleOptin.apply({
             ticket_id: ticketId
@@ -79,7 +79,7 @@ describe('Double Optin Tickets', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
     it('should be able to bulk remove customers from an optin ticket', (done) => {
         doubleOptin.bulkRemove({
             ticket_id: ticketId,
@@ -93,5 +93,5 @@ describe('Double Optin Tickets', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
 });

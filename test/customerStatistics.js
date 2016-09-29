@@ -23,7 +23,7 @@ describe('Customer Statistics', () => {
             done();
         })
         .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
     it('should be able to get customer statistics by email', (done) => {
         customerStatistics.getByEmail({
             email: customerEmail
@@ -33,7 +33,7 @@ describe('Customer Statistics', () => {
             done();
         })
         .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
     it('should be able to get customer statistics', (done) => {
         customerStatistics.get()
         .then((res) => {
@@ -41,7 +41,7 @@ describe('Customer Statistics', () => {
             done();
         })
         .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
     it.skip('should be able to get customer statistics by ticket', (done) => {
         customerStatistics.getByTicket({
             ticket_id: ticketID

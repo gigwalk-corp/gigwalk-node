@@ -23,5 +23,5 @@ describe('Cloud9 URLs', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
 });

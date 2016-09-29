@@ -26,7 +26,7 @@ describe('Data Types', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
     it('should be able to create a new data type', (done) => {
         dataTypes.create({
             dataType: {
@@ -44,7 +44,7 @@ describe('Data Types', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
     it('should be able to get a specific data type', (done) => {
         dataTypes.get({
             data_type_id: dataTypeID
@@ -55,7 +55,7 @@ describe('Data Types', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
     it('should be able to update a data type', (done) => {
         dataTypes.update({
             data_type_id: dataTypeID,
@@ -73,7 +73,7 @@ describe('Data Types', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
     it('should be able to search all data types', (done) => {
         dataTypes.search({
             organization_id: organizationID,
@@ -88,7 +88,7 @@ describe('Data Types', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
     it('should be able to search data types with a search field', (done) => {
         dataTypes.searchWithField({
             organization_id: organizationID,
@@ -104,5 +104,5 @@ describe('Data Types', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
 });

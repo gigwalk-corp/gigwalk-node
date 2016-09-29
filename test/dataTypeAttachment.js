@@ -28,7 +28,7 @@ describe('Data Type Attachment', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
     it.skip('should be able to delete a data type attachment', (done) => { // only works sometimes??
         dataTypeAttachment.delete({
             data_type_id: dataTypeID,
