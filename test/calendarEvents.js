@@ -32,7 +32,7 @@ describe('Calendar Event', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
     it('should be able to get all calendar events for a customer', (done) => {
         calendarEvents.getForCustomer({
             customer_id: customerID,
@@ -47,7 +47,7 @@ describe('Calendar Event', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
     it('should be able to get a specific calendar event ', (done) => {
         calendarEvents.get({
             calendar_event_id: calendarEventID
@@ -58,7 +58,7 @@ describe('Calendar Event', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
     it('should be able to update calendar event', (done) => {
         calendarEvents.update({
             calendar_event_id: calendarEventID,
@@ -76,7 +76,7 @@ describe('Calendar Event', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
     it('should be able to delete calendar event', (done) => {
         calendarEvents.delete({
             calendar_event_id: calendarEventID
@@ -87,5 +87,5 @@ describe('Calendar Event', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
 });

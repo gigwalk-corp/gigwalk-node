@@ -29,7 +29,7 @@ describe('Signup', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
     it('should be able to bulk create users', (done) => {
         signup.bulkCreate({
             users: [{
@@ -45,7 +45,7 @@ describe('Signup', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
     it.skip('should be able to accept invitation', (done) => {
         signup.accept({
             first_name: 'string',

@@ -33,7 +33,7 @@ describe('Groups', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
     it('should be able to create a new group', (done) => {
         groups.create({
             organization_id: organizationID,
@@ -50,7 +50,7 @@ describe('Groups', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
     it('should be able to get the heirchy of a group', (done) => {
         groups.getHierchy()
             .then((res) => {
@@ -59,7 +59,7 @@ describe('Groups', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
     it('should be able to get the subgroups of a group', (done) => {
         groups.getSubgroups({
             group_id: groupID
@@ -70,7 +70,7 @@ describe('Groups', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
     it('should be able to add a member to a group', (done) => {
         groups.addMember({
             group_id: groupID2,
@@ -85,7 +85,7 @@ describe('Groups', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
     it('should be able to get all members in a group', (done) => {
         groups.getMembers({
             group_id: groupID2
@@ -96,7 +96,7 @@ describe('Groups', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
     it('should be able to update members in a group', (done) => {
         groups.updateMembers({
             group_id: groupID2,
@@ -112,7 +112,7 @@ describe('Groups', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
     it('should be able to remove a member from a group', (done) => {
         groups.removeMember({
             group_id: groupID2,
@@ -124,7 +124,7 @@ describe('Groups', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
     it('should be able to clone a group', (done) => {
         groups.clone({
             group_id: groupID2,
@@ -137,7 +137,7 @@ describe('Groups', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
     it('should be able to update a group', (done) => {
         groups.update({
             organization_id: organizationID,
@@ -152,7 +152,7 @@ describe('Groups', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
     it('should be able to get a specific group', (done) => {
         groups.get({
             organization_id: organizationID,
@@ -164,7 +164,7 @@ describe('Groups', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
     it('should be able to delete a group', (done) => {
         groups.delete({
             organization_id: organizationID,
@@ -176,5 +176,5 @@ describe('Groups', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
 });

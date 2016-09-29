@@ -30,7 +30,7 @@ describe('Targets', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
     it.skip('should be able to get a specific target', (done) => {
         targets.get({
             organization_id: organizationID,
@@ -57,7 +57,7 @@ describe('Targets', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
     it('should be able to search targets in an organization', (done) => {
         targets.search({
             organization_id: organizationID,
@@ -69,7 +69,7 @@ describe('Targets', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
     it('should be able to delete a specific target', (done) => {
         targets.update({
             organization_id: organizationID,
@@ -84,5 +84,5 @@ describe('Targets', () => {
                 done();
             })
             .catch(done);
-    }).timeout(10000);
+    }).timeout(30000);
 });
