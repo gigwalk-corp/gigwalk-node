@@ -1,6 +1,7 @@
 import TicketMetadata from '../src/api/ticketMetadata/index';
 import axios from 'axios';
 import schema from '../src/api/ticketMetadata/ticketMetadata-schema.json';
+import helpers from '../src/helpers';
 
 describe('Ticket Metadata', () => {
     const client = axios.create({
@@ -11,7 +12,7 @@ describe('Ticket Metadata', () => {
     });
     const ticketMetadata = new TicketMetadata(client);
 
-    const randString: string = Math.random().toString(36).substring(10);
+    const randString: string = helpers.randString();
     const organizationID: number = 4;
     const ticketId: number = 11696865;
 

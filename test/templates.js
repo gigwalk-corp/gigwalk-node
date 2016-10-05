@@ -2,6 +2,7 @@ import Templates from '../src/api/templates/index';
 import axios from 'axios';
 import schema from '../src/api/templates/templates-schema.json';
 import schemaDelete from '../src/api/delete-schema.json';
+import helpers from '../src/helpers';
 
 describe('Templates', () => {
     const client = axios.create({
@@ -12,7 +13,7 @@ describe('Templates', () => {
     });
     const templates = new Templates(client);
 
-    const randString: string = Math.random().toString(36).substring(10);
+    const randString: string = helpers.randString();
     let templateID: number;
 
     it('should be able to create new templates', (done) => {

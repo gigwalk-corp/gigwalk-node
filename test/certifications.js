@@ -1,6 +1,8 @@
 import Certifications from '../src/api/certifications/index';
 import axios from 'axios';
 import schema from '../src/api/certifications/certifications-schema.json';
+import helpers from '../src/helpers';
+
 
 describe('Certifications', () => {
     const client = axios.create({
@@ -11,7 +13,7 @@ describe('Certifications', () => {
     });
     const certifications = new Certifications(client);
 
-    const randString: string = Math.random().toString(36).substring(10);
+    const randString: string = helpers.randString();
     let certificationID: number;
     let certificationID2: number;
     const organizationID: number = 4;

@@ -1,6 +1,7 @@
 import DataTypeAttachment from '../src/api/dataTypeAttachment/index';
 import axios from 'axios';
 // import schema from '../src/api/organizationSearch/organizationSearch-schema.json';
+import helpers from '../src/helpers';
 
 describe('Data Type Attachment', () => {
     const client = axios.create({
@@ -11,7 +12,7 @@ describe('Data Type Attachment', () => {
     });
     const dataTypeAttachment = new DataTypeAttachment(client);
 
-    const randString: string = Math.random().toString(36).substring(10);
+    const randString: string = helpers.randString();
     const dataTypeID: number = 50;
 
     it('should be able to create a data type attachment', (done) => {
