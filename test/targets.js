@@ -1,6 +1,7 @@
 import Targets from '../src/api/targets/index';
 import axios from 'axios';
 import schema from '../src/api/targets/targets-schema.json';
+import helpers from '../src/helpers';
 
 describe('Targets', () => {
     const client = axios.create({
@@ -11,7 +12,7 @@ describe('Targets', () => {
     });
     const targets = new Targets(client);
 
-    const randString: string = Math.random().toString(36).substring(10);
+    const randString: string = helpers.randString();
     const organizationID: number = 4;
     let targetID: number;
 

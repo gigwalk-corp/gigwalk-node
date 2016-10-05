@@ -1,6 +1,7 @@
 import OrganizationMetadata from '../src/api/organizationMetadata/index';
 import axios from 'axios';
 import schema from '../src/api/organizationMetadata/organizationMetadata-schema.json';
+import helpers from '../src/helpers';
 
 describe('Organization Metadata', () => {
     const client = axios.create({
@@ -11,7 +12,7 @@ describe('Organization Metadata', () => {
     });
     const organizationMetadata = new OrganizationMetadata(client);
 
-    const randString: string = Math.random().toString(36).substring(10);
+    const randString: string = helpers.randString();
     const organizationID: number = 7;
     const metadataFieldID: number = 1;
 

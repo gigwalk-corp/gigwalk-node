@@ -2,6 +2,7 @@ import TicketEvents from '../src/api/ticketEvents/index';
 import axios from 'axios';
 import schema from '../src/api/ticketEvents/ticketEvents-schema.json';
 import schemaDelete from '../src/api/delete-schema.json';
+import helpers from '../src/helpers';
 
 describe('Ticket Events', () => {
     const client = axios.create({
@@ -12,7 +13,7 @@ describe('Ticket Events', () => {
     });
     const ticketEvents = new TicketEvents(client);
 
-    const randString: string = Math.random().toString(36).substring(10);
+    const randString: string = helpers.randString();
     const ticketID: number = 10825921;
     let ticketEventID: number;
 

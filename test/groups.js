@@ -3,6 +3,7 @@ import axios from 'axios';
 import schema from '../src/api/groups/groups-schema.json';
 import schemaEmpty from '../src/api/empty-schema.json';
 import schemaDelete from '../src/api/delete-schema.json';
+import helpers from '../src/helpers';
 
 describe('Groups', () => {
     const client = axios.create({
@@ -13,7 +14,7 @@ describe('Groups', () => {
     });
     const groups = new Groups(client);
 
-    const randString: string = Math.random().toString(36).substring(10);
+    const randString: string = helpers.randString();
     const organizationID: number = 4;
     const customerID: number = 1;
     let groupID: number;

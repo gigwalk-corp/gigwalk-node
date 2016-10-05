@@ -2,6 +2,7 @@ import Organizations from '../src/api/organizations/index';
 import axios from 'axios';
 import schema from '../src/api/organizations/organizations-schema.json';
 import schemaEmpty from '../src/api/empty-schema.json';
+import helpers from '../src/helpers';
 
 describe('Organizations', () => {
     const client = axios.create({
@@ -12,7 +13,7 @@ describe('Organizations', () => {
     });
     const organizations = new Organizations(client);
 
-    const randString: string = Math.random().toString(36).substring(10);
+    const randString: string = helpers.randString();
     let organizationID: number;
 
     it('should be able to get all organizations', (done) => {
