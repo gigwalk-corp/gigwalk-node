@@ -16,5 +16,3 @@ chai.use(chaiAsPromised);
 chai.use(sinonChai);
 
 global.expect = expect;
-global.baseURL = 'https://stage-api.apps.gigwalk.com';
-global.token = 'Token 4ccad270d29b4884a36cbc0f56180f97';
