@@ -1,7 +1,6 @@
 // import schema from '../src/api/dashboardModule/dashboardModule-schema.json';
 
 describe('Dashboard Module', () => {
-
     const organizationID = 4;
 
     it.skip('should be able to get an organization dashboard module', (done) => {

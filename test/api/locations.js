@@ -125,13 +125,13 @@ describe('Locations', () => {
             organization_id: organizationID,
             title: randString,
             address: '600 Bryant'
-        })
-            .then((res) => {
-                expect(res.status).to.equal(200);
-                expect(res.data).to.have.jsonSchema(schema);
-                done();
-            })
-            .catch(done);
+        });
+
+        apiPromise.then((res) => {
+            expect(res.status).to.equal(200);
+            expect(res.data).to.have.jsonSchema(schema);
+            done();
+        }).catch(done);
     });
 
     it('should be able to update organization location', (done) => {

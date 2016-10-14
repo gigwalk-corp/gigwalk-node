@@ -1,4 +1,3 @@
-// @flow
 import schema from '../../src/api/certifications/certifications-schema.json';
 
 describe('Certifications', () => {
@@ -62,7 +61,7 @@ describe('Certifications', () => {
             done();
         }).catch(done);
     });
-    
+
     it('should be able to edit a specific certification', (done) => {
         const apiPromise = gigwalk.certifications.update({
             certification_id: certificationID,

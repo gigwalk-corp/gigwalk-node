@@ -1,7 +1,7 @@
 import schema from '../../src/api/dataTypes/dataTypes-schema.json';
 
 describe('Data Types', () => {
-    const organizationID  = 4;
+    const organizationID = 4;
     let dataTypeID;
 
     it('should be able to get all data types', (done) => {

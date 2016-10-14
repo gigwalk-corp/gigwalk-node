@@ -13,7 +13,7 @@ const configVars = [
 
 configVars.forEach((key: string) => {
     if (!(key in process.env)) {
-        throw TypeError(`${key} not set`);
+        throw new TypeError(`${key} not set`);
     }
 });
 

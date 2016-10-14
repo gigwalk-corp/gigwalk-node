@@ -15,8 +15,7 @@ describe('Subscriptions', () => {
                 description: 'string',
                 start_date: '2200-1-1',
                 end_date: '2201-1-1'
-            },
-            {
+            }, {
                 title: 'string',
                 description: 'string',
                 start_date: '2200-1-1',
@@ -34,7 +33,7 @@ describe('Subscriptions', () => {
     });
 
     it.skip('should be able to clone a specific subscription', (done) => {
-        const apiPromise = subscriptions.clone({
+        const apiPromise = gigwalk.subscriptions.clone({
             organization_subscription_id: subscriptionID,
             action: 'CLONE'
         });
@@ -47,7 +46,7 @@ describe('Subscriptions', () => {
     });
 
     it.skip('should be able to update a specific subscription', (done) => {
-        const apiPromise = subscriptions.update({
+        const apiPromise = gigwalk.subscriptions.update({
             organization_subscription_id: subscriptionID,
             version_id: 2,
             subscription: {

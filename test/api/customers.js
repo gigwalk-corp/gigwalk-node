@@ -3,7 +3,6 @@ import schemaSearch from '../../src/api/search/search-schema.json';
 import schemaDelete from '../../src/api/delete-schema.json';
 
 describe('Customers', () => {
-
     const organizationID = 4;
     const customerEmail = 'platform_admin@gigwalk.com';
     const deleteCustomerEmail = 'gselfservice_01@mailinator.com';

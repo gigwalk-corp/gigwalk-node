@@ -1,8 +1,7 @@
 {
     "extends": "../.eslintrc",
     "globals": {
-        "baseURL": true,
-        "token": true,
+        "gigwalk": true,
         "expect": true
     }
 }
