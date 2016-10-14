@@ -10,7 +10,7 @@
     "eslint": "eslint .",
     "flow": "flow",
     "prepublish": "npm run build",
-    "test": "NODE_ENV=test mocha ./test/lib/",
+    "test": "NODE_ENV=test mocha ./test/unit/",
     "test-api": "NODE_ENV=test mocha --require ./test/apiSetup.js --timeout 30000 ./test/api/",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
