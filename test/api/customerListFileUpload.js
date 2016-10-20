@@ -1,4 +1,5 @@
 import schema from '../../src/api/customerListFileUpload/customerListFileUpload-schema.json';
+import createMoniker from '../utils/createMoniker';
 
 describe('Customer List File Upload', () => {
     const organizationID = 4;
@@ -8,8 +9,8 @@ describe('Customer List File Upload', () => {
         const apiPromise = gigwalk.customerListFileUpload.upload({
             organization_id: organizationID,
             customer_list_file: {
-                name: 'string',
-                key: 'string'
+                name: createMoniker(),
+                key: 'gnt-s3-key'
             }
         });
 

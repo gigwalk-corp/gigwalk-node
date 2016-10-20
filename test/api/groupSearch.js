@@ -8,7 +8,7 @@ describe('Group Search', () => {
             group_id: groupId,
             index_type: 'members',
             query: {
-                q: 'string'
+                q: 'gnt'
             }
         });
 
@@ -23,7 +23,7 @@ describe('Group Search', () => {
         const apiPromise = gigwalk.groupSearch.searchWithType({
             group_id: groupId,
             query: {
-                q: 'string'
+                q: 'gnt'
             }
         });
 
@@ -38,13 +38,13 @@ describe('Group Search', () => {
         const apiPromise = gigwalk.groupSearch.searchTickets({
             group_id: groupId,
             query: {
-                query_string: 'string',
+                query_string: 'gnt',
                 from: 0,
-                size: 0,
-                sort_field: 'string',
-                sort_order: 'string',
+                size: 10,
+                sort_field: 'title',
+                sort_order: 'asc',
                 filter_key: 'assigned_customer_name',
-                filter_value: 'string'
+                filter_value: 'gnt'
             }
         });
 

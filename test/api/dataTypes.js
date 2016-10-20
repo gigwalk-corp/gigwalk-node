@@ -1,4 +1,5 @@
 import schema from '../../src/api/dataTypes/dataTypes-schema.json';
+import createMoniker from '../utils/createMoniker';
 
 describe('Data Types', () => {
     const organizationID = 4;
@@ -21,10 +22,10 @@ describe('Data Types', () => {
     it('should be able to create a new data type', (done) => {
         const apiPromise = gigwalk.dataTypes.create({
             dataType: {
-                description: 'string',
+                description: createMoniker(),
                 value_type: 'CURRENCY',
                 questions: {
-                    question_text: 'string'
+                    question_text: createMoniker()
                 }
             }
         });
@@ -53,10 +54,10 @@ describe('Data Types', () => {
         const apiPromise = gigwalk.dataTypes.update({
             data_type_id: dataTypeID,
             dataType: {
-                description: 'string 2',
+                description: createMoniker(),
                 value_type: 'CURRENCY',
                 questions: {
-                    question_text: 'string'
+                    question_text: createMoniker()
                 }
             }
         });
@@ -71,7 +72,7 @@ describe('Data Types', () => {
     it('should be able to search all data types', (done) => {
         const apiPromise = gigwalk.dataTypes.search({
             organization_id: organizationID,
-            query_string: 'string',
+            query_string: 'gnt',
             query: {
                 limit: 2
             }
@@ -88,7 +89,7 @@ describe('Data Types', () => {
         const apiPromise = gigwalk.dataTypes.searchWithField({
             organization_id: organizationID,
             search_field: 'description',
-            query_string: 'string',
+            query_string: 'gnt',
             query: {
                 limit: 2
             }

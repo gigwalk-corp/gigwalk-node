@@ -1,9 +1,9 @@
 import schema from '../../src/api/groups/groups-schema.json';
 import schemaEmpty from '../../src/api/empty-schema.json';
 import schemaDelete from '../../src/api/delete-schema.json';
+import createMoniker from '../utils/createMoniker';
 
 describe('Groups', () => {
-    const randString = Math.random().toString(36).substring(10);
     const organizationID = 4;
     const customerID = 1;
     let groupID;
@@ -30,7 +30,7 @@ describe('Groups', () => {
             organization_id: organizationID,
             group: {
                 parent_id: groupID,
-                name: randString,
+                name: createMoniker(),
                 organization_data: {}
             }
         });
@@ -127,7 +127,7 @@ describe('Groups', () => {
         const apiPromise = gigwalk.groups.clone({
             group_id: groupID2,
             parent_id: groupID2,
-            suffix: randString
+            suffix: 'clone'
         });
 
         apiPromise.then((res) => {
@@ -142,7 +142,7 @@ describe('Groups', () => {
             organization_id: organizationID,
             group_id: groupID2,
             group: {
-                name: randString.substring(0, 8)
+                name: createMoniker()
             }
         });
 

@@ -5,7 +5,7 @@ describe('Search', () => {
 
     it('should be able to search documents', (done) => {
         const apiPromise = gigwalk.search.searchDocuments({
-            query_string: 'string'
+            query_string: 'gnt'
         });
 
         apiPromise.then((res) => {

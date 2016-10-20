@@ -1,7 +1,7 @@
 import schema from '../../src/api/targets/targets-schema.json';
+import createMoniker from '../utils/createMoniker';
 
 describe('Targets', () => {
-    const randString = Math.random().toString(36).substring(10);
     const organizationID = 4;
     let targetID;
 
@@ -10,7 +10,7 @@ describe('Targets', () => {
             organization_id: organizationID,
             observation_target: {
                 observation_target_type_id: 1,
-                title: 'string'
+                title: createMoniker()
             }
         });
 
@@ -40,7 +40,7 @@ describe('Targets', () => {
             organization_id: organizationID,
             observation_target_id: targetID,
             observation_target: {
-                title: randString
+                title: createMoniker()
             }
         });
 
@@ -54,7 +54,7 @@ describe('Targets', () => {
     it('should be able to search targets in an organization', (done) => {
         const apiPromise = gigwalk.targets.search({
             organization_id: organizationID,
-            query_string: randString
+            query_string: 'gnt'
         });
 
         apiPromise.then((res) => {

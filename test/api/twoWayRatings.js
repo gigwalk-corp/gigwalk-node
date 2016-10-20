@@ -1,4 +1,5 @@
 // import schema from '../src/api/twoWayRatings/twoWayRatings-schema.json';
+import createMoniker from '../utils/createMoniker';
 
 describe('Two Way Ratings', () => {
     const organizationSubscriptionID = 8000;
@@ -9,7 +10,7 @@ describe('Two Way Ratings', () => {
             organization_subscription_id: organizationSubscriptionID,
             rating: {
                 rating: 5,
-                comments: 'string'
+                comments: createMoniker()
             }
         });
 
@@ -26,7 +27,7 @@ describe('Two Way Ratings', () => {
             worker_id: workerID,
             rating: {
                 rating: 5,
-                comments: 'string'
+                comments: createMoniker()
             }
         });
 

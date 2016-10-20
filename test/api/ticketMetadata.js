@@ -1,7 +1,7 @@
 import schema from '../../src/api/ticketMetadata/ticketMetadata-schema.json';
+import createMoniker from '../utils/createMoniker';
 
 describe('Ticket Metadata', () => {
-    const randString = Math.random().toString(36).substring(10);
     const organizationID = 4;
     const ticketId = 11696865;
 
@@ -9,7 +9,7 @@ describe('Ticket Metadata', () => {
         const apiPromise = gigwalk.ticketMetadata.create({
             ticket_id: ticketId,
             metadata: {
-                randString
+                moniker: createMoniker()
             }
         });
 
@@ -39,7 +39,7 @@ describe('Ticket Metadata', () => {
         const apiPromise = gigwalk.ticketMetadata.update({
             ticket_id: ticketId,
             metadata: {
-                randString: randString.substring(0, 9)
+                moniker: createMoniker()
             },
             query: {
                 limit: 2
@@ -53,12 +53,12 @@ describe('Ticket Metadata', () => {
         }).catch(done);
     });
 
-    it('should be able to update metadata for an orgaization ticket', (done) => {
+    it('should be able to update metadata for an organization ticket', (done) => {
         const apiPromise = gigwalk.ticketMetadata.updateForOrganization({
             organization_id: organizationID,
             ticket_id: ticketId,
             metadata: {
-                randString: randString.substring(0, 8)
+                moniker: createMoniker()
             },
             query: {
                 limit: 2

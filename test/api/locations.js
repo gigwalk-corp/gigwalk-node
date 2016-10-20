@@ -1,8 +1,8 @@
 import schema from '../../src/api/locations/locations-schema.json';
 import schemaDelete from '../../src/api/delete-schema.json';
+import createMoniker from '../utils/createMoniker';
 
 describe('Locations', () => {
-    const randString = Math.random().toString(36).substring(10);
     const organizationID = 4;
     let locationID;
 
@@ -38,7 +38,7 @@ describe('Locations', () => {
     it('should be able to create a new location', (done) => {
         const apiPromise = gigwalk.locations.bulkCreate({
             locations: [{
-                title: 'string',
+                title: createMoniker(),
                 locality: null,
                 administrative_area_level_1: null,
                 country: null,
@@ -86,7 +86,7 @@ describe('Locations', () => {
         const apiPromise = gigwalk.locations.bulkCreateForOrganization({
             organization_id: organizationID,
             locations: [{
-                title: 'string',
+                title: createMoniker(),
                 locality: null,
                 administrative_area_level_1: null,
                 country: null,
@@ -123,7 +123,7 @@ describe('Locations', () => {
     it('should be able to create organization location', (done) => {
         const apiPromise = gigwalk.locations.createForOrganization({
             organization_id: organizationID,
-            title: randString,
+            title: createMoniker(),
             address: '600 Bryant'
         });
 
@@ -139,7 +139,7 @@ describe('Locations', () => {
             organization_id: organizationID,
             location_id: locationID,
             address: '600 Bryant',
-            title: randString.substring(8)
+            title: createMoniker()
         });
 
         apiPromise.then((res) => {

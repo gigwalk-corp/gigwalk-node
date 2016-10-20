@@ -1,14 +1,14 @@
 import schema from '../../src/api/organizationMetadata/organizationMetadata-schema.json';
+import createMoniker from '../utils/createMoniker';
 
 describe('Organization Metadata', () => {
-    const randString = Math.random().toString(36).substring(10);
     const organizationID = 7;
     const metadataFieldID = 1;
 
     it('should be able to create metadata for an organization', (done) => {
         const apiPromise = gigwalk.organizationMetadata.create({
             organization_id: organizationID,
-            name: randString
+            name: createMoniker()
         });
 
         apiPromise.then((res) => {
@@ -37,7 +37,7 @@ describe('Organization Metadata', () => {
         const apiPromise = gigwalk.organizationMetadata.update({
             organization_id: organizationID,
             organization_metadata_field_id: metadataFieldID,
-            name: randString.substring(0, 8),
+            name: createMoniker(),
             query: {
                 limit: 2
             }
@@ -71,7 +71,7 @@ describe('Organization Metadata', () => {
             organization_id: organizationID,
             organization_metadata_field_id: metadataFieldID,
             metadata: {
-                randString
+                moniker: createMoniker()
             }
         });
 

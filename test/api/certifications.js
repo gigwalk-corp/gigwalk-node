@@ -1,8 +1,7 @@
 import schema from '../../src/api/certifications/certifications-schema.json';
+import createMoniker from '../utils/createMoniker';
 
 describe('Certifications', () => {
-    const randString: string = Math.random().toString(36).substring(10);
-
     let certificationID;
     let certificationID2;
 
@@ -13,14 +12,14 @@ describe('Certifications', () => {
         const apiPromise = gigwalk.certifications.create({
             certifications: [
                 {
-                    description: randString,
-                    title: randString,
+                    description: createMoniker(),
+                    title: createMoniker(),
                     type: 'ASSIGNED_CERT',
                     state: 'ACTIVE'
                 },
                 {
-                    description: randString.substr(0, 9),
-                    title: randString.substr(0, 9),
+                    description: createMoniker(),
+                    title: createMoniker(),
                     type: 'ASSIGNED_CERT',
                     state: 'ACTIVE'
                 }
@@ -50,7 +49,7 @@ describe('Certifications', () => {
         }).catch(done);
     });
 
-    it('should be able to get a specific certifiation', (done) => {
+    it('should be able to get a specific certification', (done) => {
         const apiPromise = gigwalk.certifications.get({
             certification_id: certificationID
         });
@@ -66,8 +65,8 @@ describe('Certifications', () => {
         const apiPromise = gigwalk.certifications.update({
             certification_id: certificationID,
             certification: {
-                description: randString.substr(0, 8),
-                title: randString.substr(0, 8),
+                description: createMoniker(),
+                title: createMoniker(),
                 type: 'ASSIGNED_CERT',
                 state: 'ACTIVE'
             }

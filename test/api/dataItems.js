@@ -6,7 +6,7 @@ describe('Data Items', () => {
 
     it.skip('should be able to get data items using an aggregate', (done) => {
         const apiPromise = gigwalk.dataItems.get({
-            aggregate: 'string'
+            aggregate: 'gnt'
         });
 
         apiPromise.then((res) => {

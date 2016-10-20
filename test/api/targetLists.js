@@ -1,5 +1,6 @@
 import schema from '../../src/api/targetLists/targetLists-schema.json';
 import schemaDelete from '../../src/api/delete-schema.json';
+import createMoniker from '../utils/createMoniker';
 
 describe('Target Lists', () => {
     const organizationID = 4;
@@ -10,10 +11,10 @@ describe('Target Lists', () => {
         const apiPromise = gigwalk.targetLists.createForOrganization({
             organization_id: organizationID,
             target_list: {
-                name: 'string',
+                name: createMoniker(),
                 observation_target_type: 1,
                 observation_targets: [{
-                    title: 'string'
+                    title: createMoniker()
                 }]
             }
         });
@@ -138,7 +139,7 @@ describe('Target Lists', () => {
     it('should be able to search targets in a list', (done) => {
         const apiPromise = gigwalk.targetLists.searchList({
             target_list_id: targetListID,
-            query_string: 'string'
+            query_string: 'gnt'
         });
 
         apiPromise.then((res) => {
@@ -151,7 +152,7 @@ describe('Target Lists', () => {
     it('should be able to search observation targets in a list', (done) => {
         const apiPromise = gigwalk.targetLists.searchObservationList({
             target_list_id: targetListID,
-            query_string: 'string'
+            query_string: 'gnt'
         });
 
         apiPromise.then((res) => {

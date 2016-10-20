@@ -1,5 +1,6 @@
 import schema from '../../src/api/groups/groups-schema.json';
 import schemaDelete from '../../src/api/delete-schema.json';
+import createMoniker from '../utils/createMoniker';
 
 describe('Calendar Events', () => {
     const customerID = 100;
@@ -8,7 +9,7 @@ describe('Calendar Events', () => {
     it('should be able to create a calendar event', (done) => {
         const apiPromise = gigwalk.calendarEvents.create({
             calendar_event: {
-                summary: 'string',
+                summary: createMoniker(),
                 start: '2220-1-1',
                 end: '2220-1-2',
                 time_zone: 'UTC',

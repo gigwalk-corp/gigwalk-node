@@ -1,6 +1,7 @@
 import schema from '../../src/api/subscriptions/subscriptions-schema.json';
 import schemaSearch from '../../src/api/subscriptions/subscriptions_search-schema.json';
 import schemaDelete from '../../src/api/delete-schema.json';
+import createMoniker from '../utils/createMoniker';
 
 describe('Subscriptions', () => {
     const organizationID = 4;
@@ -11,13 +12,13 @@ describe('Subscriptions', () => {
         const apiPromise = gigwalk.subscriptions.bulkCreate({
             organization_id: organizationID,
             subscriptions: [{
-                title: 'string',
-                description: 'string',
+                title: createMoniker(),
+                description: createMoniker(),
                 start_date: '2200-1-1',
                 end_date: '2201-1-1'
             }, {
-                title: 'string',
-                description: 'string',
+                title: createMoniker(),
+                description: createMoniker(),
                 start_date: '2200-1-1',
                 end_date: '2201-1-1'
             }]
@@ -93,7 +94,7 @@ describe('Subscriptions', () => {
     it.skip('should be able to search subscriptions with params', (done) => {
         const apiPromise = gigwalk.subscriptions.searchWithParams({
             organization_id: organizationID,
-            query_string: 'string'
+            query_string: 'gnt'
         });
 
         apiPromise.then((res) => {
@@ -107,7 +108,7 @@ describe('Subscriptions', () => {
         const apiPromise = gigwalk.subscriptions.searchWithField({
             organization_id: organizationID,
             search_field: 'title',
-            query_string: 'string',
+            query_string: 'gnt'
         });
 
         apiPromise.then((res) => {
@@ -120,7 +121,7 @@ describe('Subscriptions', () => {
     it('should be able to search subscriptions', (done) => {
         const apiPromise = gigwalk.subscriptions.search({
             organization_id: organizationID,
-            query_string: 'string',
+            query_string: 'gnt'
         });
 
         apiPromise.then((res) => {

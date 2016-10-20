@@ -164,7 +164,7 @@ describe('Tickets', () => {
                 template_id: 0,
                 device_id: 0,
                 app_version: 0,
-                user_agent: 'string'
+                user_agent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36'
             }
         });
 
@@ -224,7 +224,7 @@ describe('Tickets', () => {
     it('should be able to search organization tickets', (done) => {
         const apiPromise = gigwalk.tickets.searchForOrganization({
             organization_id: organizationID,
-            query_string: 'string'
+            query_string: 'gnt'
         });
 
         apiPromise.then((res) => {
@@ -235,11 +235,11 @@ describe('Tickets', () => {
         }).catch(done);
     });
 
-    it('should be able to search organiation tickets with field', (done) => {
+    it('should be able to search organization tickets with field', (done) => {
         const apiPromise = gigwalk.tickets.searchWithFieldForOrganization({
             organization_id: organizationID,
             search_field: 'title',
-            query_string: 'string'
+            query_string: 'gnt'
         });
 
         apiPromise.then((res) => {

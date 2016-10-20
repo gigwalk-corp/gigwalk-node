@@ -1,4 +1,5 @@
 // import schema from '../src/api/pushNotifications/pushNotifications-schema.json';
+import createMoniker from '../utils/createMoniker';
 
 describe('Push Notifications', () => {
     const userID = 100;
@@ -8,7 +9,7 @@ describe('Push Notifications', () => {
             push_notification: {
                 users: [userID],
                 group_ids: [],
-                message: 'string'
+                message: createMoniker()
             }
         });
 

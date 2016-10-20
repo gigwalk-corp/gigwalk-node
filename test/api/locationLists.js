@@ -1,4 +1,5 @@
 import schema from '../../src/api/locationLists/locationLists-schema.json';
+import createMoniker from '../utils/createMoniker';
 
 describe('Location Lists', () => {
     const organizationID = 4;
@@ -26,7 +27,7 @@ describe('Location Lists', () => {
         const apiPromise = gigwalk.locationLists.createForOrganization({
             organization_id: organizationID,
             location_list: {
-                name: 'string',
+                name: createMoniker(),
                 status: 'ACTIVE',
                 locations: []
             }
@@ -157,9 +158,9 @@ describe('Location Lists', () => {
     it('should be able to upload a location list from a file', (done) => {
         const apiPromise = gigwalk.locationLists.createForOrganizationWithFile({
             organization_id: organizationID,
-            location_list_name: 'string',
+            location_list_name: createMoniker(),
             s3_keys: [
-                'test'
+                'gnt-s3-key'
             ]
         });
 
@@ -218,7 +219,7 @@ describe('Location Lists', () => {
             location_list_id: locationListID,
             location_id: locationIDs[0],
             csv: 1,
-            key: 'string'
+            key: 'gnt-s3-key'
         });
 
         apiPromise.then((res) => {

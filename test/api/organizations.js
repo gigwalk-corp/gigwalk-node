@@ -1,8 +1,8 @@
 import schema from '../../src/api/organizations/organizations-schema.json';
 import schemaEmpty from '../../src/api/empty-schema.json';
+import createMoniker from '../utils/createMoniker';
 
 describe('Organizations', () => {
-    const randString = Math.random().toString(36).substring(10);
     let organizationID;
 
     it('should be able to get all organizations', (done) => {
@@ -22,9 +22,9 @@ describe('Organizations', () => {
     it('should be able create an organization', (done) => {
         const apiPromise = gigwalk.organizations.create({
             organization: {
-                organization_name: 'string',
+                organization_name: createMoniker(),
                 type: 'CLIENT',
-                email: `${randString}@gmail.com`
+                email: `${createMoniker()}@gigwalk.com`
             }
         });
 
@@ -40,7 +40,7 @@ describe('Organizations', () => {
         const apiPromise = gigwalk.organizations.update({
             organization_id: organizationID,
             organization: {
-                organization_name: 'string 2'
+                organization_name: createMoniker()
             }
         });
 

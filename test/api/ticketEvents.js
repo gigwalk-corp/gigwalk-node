@@ -1,8 +1,8 @@
 import schema from '../../src/api/ticketEvents/ticketEvents-schema.json';
 import schemaDelete from '../../src/api/delete-schema.json';
+import createMoniker from '../utils/createMoniker';
 
 describe('Ticket Events', () => {
-    const randString = Math.random().toString(36).substring(10);
     const ticketID = 10825921;
     let ticketEventID;
 
@@ -12,7 +12,7 @@ describe('Ticket Events', () => {
             ticket_event: {
                 ticket_event_type: 'COMMENT',
                 ticket_event_data: {
-                    comment: randString
+                    comment: createMoniker()
                 }
             }
         });

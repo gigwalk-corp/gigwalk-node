@@ -1,14 +1,14 @@
 import schema from '../../src/api/templates/templates-schema.json';
 import schemaDelete from '../../src/api/delete-schema.json';
+import createMoniker from '../utils/createMoniker';
 
 describe('Templates', () => {
-    const randString = Math.random().toString(36).substring(10);
     let templateID;
 
     it('should be able to create new templates', (done) => {
         const apiPromise = gigwalk.templates.bulkCreate({
             templates: [{
-                title: randString
+                title: createMoniker()
             }]
         });
 
@@ -38,7 +38,7 @@ describe('Templates', () => {
         const apiPromise = gigwalk.templates.update({
             template_id: templateID,
             template: {
-                title: randString.substring(0, 8)
+                title: createMoniker()
             }
         });
 

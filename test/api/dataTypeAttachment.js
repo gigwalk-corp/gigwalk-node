@@ -1,14 +1,15 @@
 // import schema from '../src/api/organizationSearch/organizationSearch-schema.json';
+import createMoniker from '../utils/createMoniker';
 
 describe('Data Type Attachment', () => {
-    const randString = Math.random().toString(36).substring(10);
+    const url = createMoniker();
     const dataTypeID = 50;
 
     it('should be able to create a data type attachment', (done) => {
         const apiPromise = gigwalk.dataTypeAttachment.create({
             data_type_id: dataTypeID,
             attachment: {
-                url: randString,
+                url,
                 file_type: 'image/gif'
             }
         });
@@ -23,7 +24,7 @@ describe('Data Type Attachment', () => {
     it.skip('should be able to delete a data type attachment', (done) => {
         const apiPromise = gigwalk.dataTypeAttachment.delete({
             data_type_id: dataTypeID,
-            url: randString
+            url
         });
 
         apiPromise.then((res) => {
