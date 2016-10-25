@@ -1,5 +1,8 @@
 // @flow
 
+export type ValueTypes = 'MULTIPLE_CHOICE' | 'MULTI_SELECT' | 'NUMBER' | 'CURRENCY' | 'PHONE_NUMBER' | 'PHOTO' | 'FREE_TEXT' |
+    'ITEM_GRID' | 'DATE' | 'DATE_TIME' | 'TIME' | 'TASK' | 'STEP_TASK' | 'BARCODE' | 'HINT' | 'CHECK' | 'CHECKBOXES' | 'SIGNATURE';
+
 export type DataType = {
     value_type: string,
     id: number,
@@ -22,10 +25,10 @@ export type DataType = {
 
 type DataTypeFields = {
     description: string,
-    value_type: 'SIGNATURE' | 'MULTIPLE_CHOICE' | 'MULTI_SELECT' | 'CHECKBOXES' | 'CURRENCY',
+    value_type: ValueTypes,
     questions: {
         question_text?: string,
-        question_type?: 'SIGNATURE' | 'MULTIPLE_CHOICE' | 'MULTI_SELECT' | 'CHECKBOXES' | 'CURRENCY',
+        question_type?: ValueTypes,
         propositions?: Array<string>
     },
     parent_id?: number,
