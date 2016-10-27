@@ -161,7 +161,8 @@ export default class Locations extends Resource {
         const data = {
             address: params.address,
             title: params.title,
-            organization_data: params.organization_data
+            organization_data: params.organization_data,
+            override_existing: params.override_existing
         };
 
         return this.client.post(`/v1/organizations/${params.organization_id}/locations/geocode`, data);

@@ -91,7 +91,8 @@ export type CreateOrganizationLocationParams = {
     organization_id: number,
     title: string,
     address: string,
-    organization_data?: Object
+    organization_data?: Object,
+    override_existing?: boolean
 }
 
 export type UpdateOrganizationLocationParams = {
