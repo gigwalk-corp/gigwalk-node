@@ -7,7 +7,8 @@ import type {
     GetCalendarEventParams,
     UpdateCalendarEventParams,
     CreateCalendarEventParams,
-    GetCalendarEventsForCustomerParams
+    GetCalendarEventsForCustomerParams,
+    CalendarEventField
 } from './types';
 
 export default class CalendarEvents extends Resource {
@@ -80,7 +81,7 @@ export default class CalendarEvents extends Resource {
      * @apiExample {js} Example:
      *             gigwalk.calendarEvents.getForCustomer({...})
      */
-    getForCustomer(params: GetCalendarEventsForCustomerParams): APIPromise<Array<CalendarEvent>> {
+    getForCustomer(params: GetCalendarEventsForCustomerParams): APIPromise<Array<CalendarEventField>> {
         const query = this.stringForQueryObject(params.query);
 
         return this.client.get(`/v1/customers/${params.customer_id}/calendar_events${query}`);
