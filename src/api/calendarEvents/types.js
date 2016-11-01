@@ -12,7 +12,7 @@ export type CalendarEvent = {
     organization_data: Array<Object>;
 }
 
-type CalendarEventField = {
+export type CalendarEventField = {
     summary?: string,
     description?: string,
     start?: string,
@@ -43,9 +43,9 @@ type GetCalendarEventsForCustomerQuery = {
     time_min: string,
     time_max: string,
     time_zone: string,
-    event_type: 'TICKET_SCHEDULE' | 'BLOCK',
-    offset: number,
-    limit: number
+    event_type?: 'TICKET_SCHEDULE' | 'BLOCK',
+    offset?: number,
+    limit?: number
 }
 
 export type GetCalendarEventsForCustomerParams = {
