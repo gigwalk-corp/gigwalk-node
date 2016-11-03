@@ -1,18 +1,23 @@
 // @flow
 
 export type CalendarEvent = {
-    name: string,
     id: number,
-    parent_id: number,
-    parent: Object,
-    organization_id: number,
-    member_count: number,
-    owners: Array<Object>,
-    sub_groups: Array<Object>,
-    organization_data: Array<Object>;
+    customer_id: number,
+    ticket?: {
+        id: number,
+        start_date: string,
+        due_date: string
+    },
+    summary: ?string,
+    description: ?string,
+    start: string,
+    end: string,
+    recurrence: ?string,
+    event_type: string,
+    generated: boolean
 }
 
-export type CalendarEventField = {
+type CalendarEventField = {
     summary?: string,
     description?: string,
     start?: string,
