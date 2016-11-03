@@ -1,15 +1,20 @@
 // @flow
 
 export type CalendarEvent = {
-    name: string,
     id: number,
-    parent_id: number,
-    parent: Object,
-    organization_id: number,
-    member_count: number,
-    owners: Array<Object>,
-    sub_groups: Array<Object>,
-    organization_data: Array<Object>;
+    customer_id: number,
+    ticket?: {
+        id: number,
+        start_date: string,
+        due_date: string
+    },
+    summary: ?string,
+    description: ?string,
+    start: string,
+    end: string,
+    recurrence: ?string,
+    event_type: string,
+    generated: boolean
 }
 
 type CalendarEventField = {
@@ -43,9 +48,9 @@ type GetCalendarEventsForCustomerQuery = {
     time_min: string,
     time_max: string,
     time_zone: string,
-    event_type: 'TICKET_SCHEDULE' | 'BLOCK',
-    offset: number,
-    limit: number
+    event_type?: 'TICKET_SCHEDULE' | 'BLOCK',
+    offset?: number,
+    limit?: number
 }
 
 export type GetCalendarEventsForCustomerParams = {

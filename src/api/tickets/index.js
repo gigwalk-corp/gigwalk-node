@@ -44,14 +44,14 @@ export default class Tickets extends Resource {
      *             gigwalk.tickets.searchForGroup({...})
      */
     searchForGroup(params: SearchGroupTicketsParams): APIPromise<Array<ESTicket>> {
-        const query = this.stringForQueryObject(params.query);
+        const queryParams = this.stringForQueryObject(params.query_params);
         const data = {
-            query_params: params.query_params,
+            query: params.query,
             bounding_box: params.bounding_box,
             timezone: params.timezone
         };
 
-        return this.client.post(`/v1/groups/${params.group_id}/tickets/search${query}`, data);
+        return this.client.post(`/v1/groups/${params.group_id}/tickets/search${queryParams}`, data);
     }
 
     /**
