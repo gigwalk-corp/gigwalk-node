@@ -143,6 +143,16 @@ export default class GigwalkAPI {
             header = `Token ${auth.token}`;
         }
 
-        this.client.defaults.headers.common.Authorization = header;
+        Object.assign(this.client.defaults, {
+            headers: {
+                common: {
+                    ...(
+                        this.client.defaults.hasOwnProperty('headers') && this.client.defaults.headers.hasOwnProperty('common') ?
+                        this.client.defaults.headers.common : {}
+                    ),
+                    Authorization: header,
+                },
+            },
+        });
     }
 }
