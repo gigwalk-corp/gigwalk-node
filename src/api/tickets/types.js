@@ -136,10 +136,10 @@ type ESTicketSearchFields = {
   timezone?: string
 }
 
-type QueryParamFields = {
+type SearchGroupTicketsQuery = {
     field: string,
     operator: string,
-    value: string
+    value: string | boolean
 }
 
 type BoundingBoxFields = {
@@ -153,17 +153,17 @@ type BoundingBoxFields = {
     }
 }
 
-type SearchGroupTicketsQuery = {
+type QueryParamFields = {
     limit?: number,
     offset?: number
 }
 
 export type SearchGroupTicketsParams = {
     group_id: number,
-    query_params?: Array<QueryParamFields>,
+    query_params?: QueryParamFields,
     bounding_box?: BoundingBoxFields,
     timezone?: string,
-    query?: SearchGroupTicketsQuery
+    query?: Array<SearchGroupTicketsQuery>
 }
 
 type GetCurrentCustomerTicketsQuery = {
