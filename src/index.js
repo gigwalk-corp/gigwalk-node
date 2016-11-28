@@ -1,4 +1,5 @@
 // @flow
+import cloneDeep from 'lodash.clonedeep';
 import GigwalkAxios from './client';
 import Authorization from './api/authorization';
 import CalendarEvents from './api/calendarEvents';
@@ -34,7 +35,6 @@ import TicketMetadata from './api/ticketMetadata';
 import Tickets from './api/tickets';
 import Versions from './api/versions';
 import Waves from './api/waves';
-import cloneDeep from 'lodash.clonedeep';
 
 export type GigwalkAPIConfig = {
     hostname?: string,
