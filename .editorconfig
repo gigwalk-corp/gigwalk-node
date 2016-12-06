@@ -6,6 +6,7 @@ charset = utf-8
 # Indent size is set to 4 spaces
 indent_style = space
 indent_size = 4
+trim_trailing_whitespace = true
 
 # Matches the exact files either package.json, bower.json or .travis.yml
 [{package.json}]
