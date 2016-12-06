@@ -249,7 +249,8 @@ export type UpdateTicketParams = {
     ticket_id: number,
     action: 'assign' | 'extend' | 'schedule' | 'edit' | 'optin',
     ticket_ids: Array<number>,
-    customer_id: string
+    customer_id: string,
+    force?: boolean,
 }
 
 type SearchTicketsQuery = {
