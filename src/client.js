@@ -1,7 +1,7 @@
 // @flow
 import { Axios } from 'axios';
-import RequestQueue from './requestQueue';
 import type { $AxiosXHRConfig, $AxiosXHRConfigBase, $AxiosXHR } from 'axios';
+import RequestQueue from './requestQueue';
 
 export default class GigwalkAxios extends Axios {
 

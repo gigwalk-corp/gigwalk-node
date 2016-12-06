@@ -1,3 +1,4 @@
+import sinon from 'sinon';
 import GigwalkAPI from '../../src/index';
 import GigwalkAxios from '../../src/client';
 import Authorization from '../../src/api/authorization';
@@ -12,7 +13,6 @@ import TargetLists from '../../src/api/targetLists';
 import Targets from '../../src/api/targets';
 import TicketEvents from '../../src/api/ticketEvents';
 import Tickets from '../../src/api/tickets';
-import sinon from 'sinon';
 
 describe('GigwalkAPI', () => {
     const sandbox = sinon.sandbox.create();
