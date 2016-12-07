@@ -33,6 +33,26 @@ describe('Subscriptions', () => {
         }).catch(done);
     });
 
+    it('should be able to get subscriptions', (done) => {
+        const apiPromise = gigwalk.subscriptions.getAll({
+            organization_id: organizationID,
+            query: {
+                state: 'ACTIVE',
+                offset: 0,
+                limit: 10,
+                sort_order: 'asc',
+                sort_field: 'title',
+                dashboard_visible: 1
+            }
+        });
+
+        apiPromise.then((res) => {
+            expect(res.status).to.equal(200);
+            expect(res.data).to.have.jsonSchema(schema);
+            done();
+        }).catch(done);
+    });
+
     it.skip('should be able to clone a specific subscription', (done) => {
         const apiPromise = gigwalk.subscriptions.clone({
             organization_subscription_id: subscriptionID,
