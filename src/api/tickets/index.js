@@ -231,6 +231,8 @@ export default class Tickets extends Resource {
             action: (params.action) ? params.action : 'schedule',
             force: params.force || false,
             customer_id: params.customer_id,
+            date_scheduled: params.date_scheduled,
+            time_zone: params.time_zone,
         };
 
         return this.client.put(`/v1/tickets/${params.ticket_id}`, data);
@@ -252,7 +254,9 @@ export default class Tickets extends Resource {
             action: (params.action) ? params.action : 'schedule',
             force: params.force || false,
             ticket_ids: params.ticket_ids,
-            customer_id: params.customer_id
+            customer_id: params.customer_id,
+            date_scheduled: params.date_scheduled,
+            time_zone: params.time_zone,
         };
 
         return this.client.put('/v1/tickets', data);

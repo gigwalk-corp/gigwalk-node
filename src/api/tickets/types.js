@@ -252,6 +252,8 @@ export type UpdateTicketParams = {
     action: UpdateAction,
     customer_id: string,
     force?: boolean,
+    date_scheduled?: string,
+    time_zone?: string,
 }
 
 export type BulkUpdateTicketParams = {
@@ -259,6 +261,8 @@ export type BulkUpdateTicketParams = {
     action: UpdateAction,
     customer_id: string,
     force?: boolean,
+    date_scheduled?: string,
+    time_zone?: string,
 }
 
 type SearchTicketsQuery = {
