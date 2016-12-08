@@ -245,10 +245,18 @@ export type SearchTicketsWithIDParams = {
     query?: SearchTicketsWithIDQuery
 }
 
+type UpdateAction = 'assign' | 'extend' | 'schedule' | 'edit' | 'optin';
+
 export type UpdateTicketParams = {
     ticket_id: number,
-    action: 'assign' | 'extend' | 'schedule' | 'edit' | 'optin',
+    action: UpdateAction,
+    customer_id: string,
+    force?: boolean,
+}
+
+export type BulkUpdateTicketParams = {
     ticket_ids: Array<number>,
+    action: UpdateAction,
     customer_id: string,
     force?: boolean,
 }
