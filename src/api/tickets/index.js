@@ -229,7 +229,8 @@ export default class Tickets extends Resource {
     update(params: UpdateTicketParams): APIPromise<Array<Ticket>> {
         const data = {
             action: (params.action) ? params.action : 'schedule',
-            force: params.force || false
+            force: params.force || false,
+            customer_id: params.customer_id,
         };
 
         return this.client.put(`/v1/tickets/${params.ticket_id}`, data);
