@@ -18,6 +18,7 @@ import type {
     GetTicketParams,
     SearchTicketsWithIDParams,
     UpdateTicketParams,
+    BulkUpdateTicketParams,
     SearchTicketsParams,
     UpdateTicketWithStateParams,
     GetOrganizationTicketsParams,
@@ -218,10 +219,9 @@ export default class Tickets extends Resource {
      * @api {put} /v1/tickets/:ticket_id update
      * @apiGroup Tickets
      * @apiName update
-     * @apiDescription Edit ticket(s). If ticket_id is present, assign the corresponding ticket. Otherwise, perform action to multiple tickets.
+     * @apiDescription Perform action on the corresponding ticket.
      * @apiParam {Number} ticket_id
      * @apiParam {String} [action='schedule']
-     * @apiParam {Number[]} ticket_ids
      * @apiParam {String} customer_id
      * @apiExample {js} Example:
      *             gigwalk.tickets.update({...})
@@ -230,11 +230,32 @@ export default class Tickets extends Resource {
         const data = {
             action: (params.action) ? params.action : 'schedule',
             force: params.force || false,
+            customer_id: params.customer_id,
+        };
+
+        return this.client.put(`/v1/tickets/${params.ticket_id}`, data);
+    }
+
+    /**
+     * @api {put} /v1/tickets update
+     * @apiGroup Tickets
+     * @apiName bulkUpdate
+     * @apiDescription Edit tickets. Perform action on tickets with ticket_ids.
+     * @apiParam {String} [action='schedule']
+     * @apiParam {Number[]} ticket_ids
+     * @apiParam {String} customer_id
+     * @apiExample {js} Example:
+     *             gigwalk.tickets.bulkUpdate({...})
+     */
+    bulkUpdate(params: BulkUpdateTicketParams): APIPromise<Array<Ticket>> {
+        const data = {
+            action: (params.action) ? params.action : 'schedule',
+            force: params.force || false,
             ticket_ids: params.ticket_ids,
             customer_id: params.customer_id
         };
 
-        return this.client.put(`/v1/tickets/${params.ticket_id}`, data);
+        return this.client.put('/v1/tickets', data);
     }
 
     /**
