@@ -29,6 +29,7 @@ export type Subscription = {
     date_updated: string,
     needs_core: boolean,
     groups: Array<number>,
+    certifications: Array<number>,
     wave: Object,
     created_customer_id: number,
     created_customer: Object,
