@@ -1,6 +1,6 @@
 // @flow
 import Resource from '../resource';
-import type { APIResponse } from '../resource';
+import type { APIPromise } from '../resource';
 
 type GetCurrentBalanceParams = {
     organization_id: number
@@ -22,7 +22,7 @@ export default class Payments extends Resource {
      * @apiExample {js} Example:
      *             gigwalk.payments.getCurrentBalance({...})
      */
-    getCurrentBalance(params: GetCurrentBalanceParams): APIResponse<[{ current_balance: number }]> {
+    getCurrentBalance(params: GetCurrentBalanceParams): APIPromise<[{ current_balance: number }]> {
         return this.client.get(`/v1/organizations/${params.organization_id}/payments`);
     }
 
@@ -37,8 +37,8 @@ export default class Payments extends Resource {
      * @apiExample {js} Example:
      *             gigwalk.payments.addFunds({...})
      */
-    addFunds(params: AddFundsParams): APIResponse<void> {
-        const { organization_id, ...data } = params;
-        return this.client.post(`/v1/organizations/${organization_id}/payments`, data);
+    addFunds(params: AddFundsParams): APIPromise<void> {
+        const { organization_id: organizationId, ...data } = params;
+        return this.client.post(`/v1/organizations/${organizationId}/payments`, data);
     }
 }
