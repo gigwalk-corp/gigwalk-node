@@ -20,7 +20,8 @@ export type DataType = {
     observation_target_type_id: number,
     is_shared: boolean,
     time_estimate: number,
-    dashboard_visible: boolean
+    dashboard_visible: boolean,
+    global_data_type_id: ?number
 }
 
 type DataTypeFields = {

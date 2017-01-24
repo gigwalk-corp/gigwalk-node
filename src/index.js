@@ -21,6 +21,7 @@ import Locations from './api/locations';
 import OrganizationMetadata from './api/organizationMetadata';
 import Organizations from './api/organizations';
 import OrganizationSearch from './api/organizationSearch';
+import Payments from './api/payments';
 import PushNotifications from './api/pushNotifications';
 import Reports from './api/reports';
 import RequestProjectReview from './api/requestProjectReview';
@@ -75,7 +76,8 @@ export default class GigwalkAPI {
     organizationMetadata: OrganizationMetadata;
     organizations: Organizations;
     organizationSearch: OrganizationSearch;
-    pushNotifications: PushNotifications
+    payments: Payments;
+    pushNotifications: PushNotifications;
     reports: Reports
     requestProjectReview: RequestProjectReview;
     search: Search;
@@ -119,6 +121,7 @@ export default class GigwalkAPI {
         this.organizationMetadata = new OrganizationMetadata(client);
         this.organizations = new Organizations(client);
         this.organizationSearch = new OrganizationSearch(client);
+        this.payments = new Payments(client);
         this.pushNotifications = new PushNotifications(client);
         this.reports = new Reports(client);
         this.requestProjectReview = new RequestProjectReview(client);
