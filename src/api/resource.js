@@ -54,6 +54,6 @@ export default class Resource {
                     return `${str}${i === 0 ? '?' : '&'}${key}=${value}`;
                 }
                 return str;
-            }, '');
+            }, '?');
     }
 }
