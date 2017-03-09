@@ -66,5 +66,24 @@ export default class GigwalkAxios extends Axios {
         if (defaultConfig.httpsAgent) config.httpsAgent = defaultConfig.httpsAgent;
 
         super(config);
+
+        this.baseURL = config.baseURL;
+    }
+
+    get(url) {
+        // TODO: add curl
+        return super.get(url);
+    }
+
+    post(url, data) {
+        const headers = '-H "Autorization: Token abc123" -H "Content-Type: application/json"';
+        const data_str = JSON.stringify(JSON.stringify(data));
+        console.log(`curl ${this.baseURL}${url} ${headers} -d ${data_str}`);
+        return super.post(url, data);
+    }
+
+    put(url, data) {
+        // TODO: Add curl
+        return super.put(url, data);
     }
 }
