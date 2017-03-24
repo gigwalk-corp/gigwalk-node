@@ -1,5 +1,6 @@
 // @flow
 import cloneDeep from 'lodash.clonedeep';
+import btoa from 'btoa';
 import GigwalkAxios from './client';
 import Authorization from './api/authorization';
 import CalendarEvents from './api/calendarEvents';
@@ -140,8 +141,8 @@ export default class GigwalkAPI {
 
     authenticate(auth: AuthToken | BasicAuth) {
         let header: string = '';
-        if (typeof auth.email === 'string' && typeof auth.password === 'string') {
-            header = `Basic ${auth.email}:${auth.password}`;
+        if (typeof auth.username === 'string' && typeof auth.password === 'string') {
+            header = `Basic ${btoa(`${auth.username}:${auth.password}`)}`;
         } else if (typeof auth.token === 'string') {
             header = `Token ${auth.token}`;
         }

@@ -1,4 +1,5 @@
 import sinon from 'sinon';
+import btoa from 'btoa';
 import GigwalkAPI from '../../src/index';
 import GigwalkAxios from '../../src/client';
 import Authorization from '../../src/api/authorization';
@@ -42,8 +43,8 @@ describe('GigwalkAPI', () => {
     it('should allow users to authenticate', () => {
         const gigwalk = new GigwalkAPI();
 
-        gigwalk.authenticate({ email: 'marc@gigwalk.com', password: 'password' });
-        expect(gigwalk.client).to.have.deep.property('defaults.headers.common.Authorization', 'Basic marc@gigwalk.com:password');
+        gigwalk.authenticate({ username: 'marc@gigwalk.com', password: 'password' });
+        expect(gigwalk.client).to.have.deep.property('defaults.headers.common.Authorization', `Basic ${btoa('marc@gigwalk.com:password')}`);
 
         gigwalk.authenticate({ token: 'qwerty' });
         expect(gigwalk.client).to.have.deep.property('defaults.headers.common.Authorization', 'Token qwerty');
