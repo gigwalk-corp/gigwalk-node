@@ -1,6 +1,6 @@
 {
   "name": "gigwalk",
-  "version": "0.0.0-semantic-release",
+  "version": "0.0.0-development",
   "description": "Gigwalk API Client - universal.",
   "main": "./lib",
   "scripts": {
@@ -9,7 +9,7 @@
     "postbuild": "gulp",
     "eslint": "eslint .",
     "flow": "flow",
-    "prepublish": "npm run build",
+    "prepublish": "yarn run build",
     "test": "NODE_ENV=test mocha ./test/unit/",
     "test-api": "NODE_ENV=test mocha --require ./test/apiSetup.js --timeout 30000 ./test/api/",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
@@ -32,6 +32,7 @@
   "homepage": "https://github.com/gigwalk-corp/gigwalk-node#readme",
   "dependencies": {
     "babel-runtime": "^6.11.6",
+    "btoa": "^1.1.2",
     "json-stable-stringify": "^1.0.1",
     "lodash.clonedeep": "^4.4.1"
   },
@@ -65,7 +66,7 @@
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-mocha": "^4.7.0",
     "eslint-plugin-react": "^6.7.1",
-    "flow-bin": "^0.40.0",
+    "flow-bin": "^0.44.2",
     "flow-typed": "^2.0.0",
     "gulp": "^3.9.1",
     "gulp-rename": "^1.2.2",

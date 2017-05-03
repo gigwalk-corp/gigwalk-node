@@ -30,7 +30,8 @@ describe('Tickets', () => {
         }).catch(done);
     });
 
-    it('should be able to get all tickets available to customer', (done) => {
+    // Skipping this test as retrieving all tickets for an organization is causing performance issues on the BE
+    it.skip('should be able to get all tickets available to customer', (done) => {
         const apiPromise = gigwalk.tickets.getAll({
             query: {
                 limit: 2
@@ -69,7 +70,8 @@ describe('Tickets', () => {
         }).catch(done);
     });
 
-    it('should be able to get all tickets in an organizaiton', (done) => {
+    // Skipping this test as retrieving all tickets for an organization is causing performance issues on the BE
+    it.skip('should be able to get all tickets in an organizaiton', (done) => {
         const apiPromise = gigwalk.tickets.getAllForOrganization({
             organization_id: organizationID
         });
