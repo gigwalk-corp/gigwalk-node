@@ -1,6 +1,6 @@
 {
   "name": "gigwalk",
-  "version": "0.0.0-semantic-release",
+  "version": "0.0.0-development",
   "description": "Gigwalk API Client - universal.",
   "main": "./lib",
   "scripts": {
@@ -9,7 +9,7 @@
     "postbuild": "gulp",
     "eslint": "eslint .",
     "flow": "flow",
-    "prepublish": "npm run build",
+    "prepublish": "yarn run build",
     "test": "NODE_ENV=test mocha ./test/unit/",
     "test-api": "NODE_ENV=test mocha --require ./test/apiSetup.js --timeout 30000 ./test/api/",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
