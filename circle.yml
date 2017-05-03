@@ -1,15 +1,25 @@
 machine:
   node:
     version: 6.3.1
+  environment:
+    PATH: "${PATH}:${HOME}/${CIRCLE_PROJECT_REPONAME}/node_modules/.bin"
+
+dependencies:
+  override:
+    - yarn
+  cache_directories:
+    - ~/.cache/yarn
 
 test:
+  override:
+    - yarn test
   post:
-    - npm run flow
-    - npm run eslint
+    - yarn run flow
+    - yarn run eslint
 
 deployment:
   npm:
     branch: master
     owner: gigwalk-corp
     commands:
-        - npm run semantic-release || true
+        - yarn run semantic-release || true
