@@ -37,7 +37,7 @@
     "lodash.clonedeep": "^4.4.1"
   },
   "peerDependencies": {
-    "axios": "0.15.x"
+    "axios": ">=0.15 <0.17"
   },
   "devDependencies": {
     "axios": "^0.16.1",
