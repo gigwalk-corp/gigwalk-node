@@ -1,6 +1,6 @@
 {
   "name": "gigwalk",
-  "version": "0.0.0-semantic-release",
+  "version": "0.0.0-development",
   "description": "Gigwalk API Client - universal.",
   "main": "./lib",
   "scripts": {
@@ -9,7 +9,7 @@
     "postbuild": "gulp",
     "eslint": "eslint .",
     "flow": "flow",
-    "prepublish": "npm run build",
+    "prepublish": "yarn run build",
     "test": "NODE_ENV=test mocha ./test/unit/",
     "test-api": "NODE_ENV=test mocha --require ./test/apiSetup.js --timeout 30000 ./test/api/",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
@@ -37,7 +37,7 @@
     "lodash.clonedeep": "^4.4.1"
   },
   "peerDependencies": {
-    "axios": "0.15.x"
+    "axios": ">=0.15 <0.17"
   },
   "devDependencies": {
     "axios": "^0.16.1",
@@ -75,7 +75,7 @@
     "moniker": "^0.1.2",
     "semantic-release": "^6.3.2",
     "sinon": "^2.2.0",
-    "sinon-chai": "^2.8.0"
+    "sinon-chai": "^2.10.0"
   },
   "config": {
     "commitizen": {
