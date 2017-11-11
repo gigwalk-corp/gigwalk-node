@@ -6,6 +6,7 @@ import type {
     ESSubcriptionSearch,
     DeleteSubscriptionParams,
     GetSubscriptionParams,
+    GetAllSubscriptionsParams,
     CreateClonedSubscriptionParams,
     UpdateSubscriptionParams,
     CreateSubscriptionsParams,
@@ -42,6 +43,21 @@ export default class Subscriptions extends Resource {
      */
     get(params: GetSubscriptionParams): APIPromise<[Subscription]> {
         return this.client.get(`/v1/organization_subscriptions/${params.organization_subscription_id}`);
+    }
+
+    /**
+     * @api {get} /v1/organizations/:organization_id/subscriptions getAll
+     * @apiGroup Subscriptions
+     * @apiName getAll
+     * @apiDescription Get list of subscriptions based on paginaion, sort parameters and project state
+     * @apiParam {Number} organization_id
+     * @apiParam {Object} [query]
+     * @apiExample {js} Example:
+     *             gigwalk.subscriptions.getAll({...})
+     */
+    getAll(params: GetAllSubscriptionsParams): APIPromise<Array<Subscription>> {
+        const query = (params) ? this.stringForQueryObject(params.query) : '';
+        return this.client.get(`/v1/organizations/${params.organization_id}/subscriptions?${query}`);
     }
 
     /**

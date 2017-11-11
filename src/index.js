@@ -1,4 +1,6 @@
 // @flow
+import cloneDeep from 'lodash.clonedeep';
+import btoa from 'btoa';
 import GigwalkAxios from './client';
 import Authorization from './api/authorization';
 import CalendarEvents from './api/calendarEvents';
@@ -20,6 +22,7 @@ import Locations from './api/locations';
 import OrganizationMetadata from './api/organizationMetadata';
 import Organizations from './api/organizations';
 import OrganizationSearch from './api/organizationSearch';
+import Payments from './api/payments';
 import PushNotifications from './api/pushNotifications';
 import Reports from './api/reports';
 import RequestProjectReview from './api/requestProjectReview';
@@ -34,7 +37,6 @@ import TicketMetadata from './api/ticketMetadata';
 import Tickets from './api/tickets';
 import Versions from './api/versions';
 import Waves from './api/waves';
-import cloneDeep from 'lodash.clonedeep';
 
 export type GigwalkAPIConfig = {
     hostname?: string,
@@ -75,7 +77,8 @@ export default class GigwalkAPI {
     organizationMetadata: OrganizationMetadata;
     organizations: Organizations;
     organizationSearch: OrganizationSearch;
-    pushNotifications: PushNotifications
+    payments: Payments;
+    pushNotifications: PushNotifications;
     reports: Reports
     requestProjectReview: RequestProjectReview;
     search: Search;
@@ -119,6 +122,7 @@ export default class GigwalkAPI {
         this.organizationMetadata = new OrganizationMetadata(client);
         this.organizations = new Organizations(client);
         this.organizationSearch = new OrganizationSearch(client);
+        this.payments = new Payments(client);
         this.pushNotifications = new PushNotifications(client);
         this.reports = new Reports(client);
         this.requestProjectReview = new RequestProjectReview(client);
@@ -137,12 +141,22 @@ export default class GigwalkAPI {
 
     authenticate(auth: AuthToken | BasicAuth) {
         let header: string = '';
-        if (typeof auth.email === 'string' && typeof auth.password === 'string') {
-            header = `Basic ${auth.email}:${auth.password}`;
+        if (typeof auth.username === 'string' && typeof auth.password === 'string') {
+            header = `Basic ${btoa(`${auth.username}:${auth.password}`)}`;
         } else if (typeof auth.token === 'string') {
             header = `Token ${auth.token}`;
         }
 
-        this.client.defaults.headers.common.Authorization = header;
+        Object.assign(this.client.defaults, {
+            headers: {
+                common: {
+                    ...(
+                        this.client.defaults.hasOwnProperty('headers') && this.client.defaults.headers.hasOwnProperty('common') ?
+                        this.client.defaults.headers.common : {}
+                    ),
+                    Authorization: header,
+                },
+            },
+        });
     }
 }

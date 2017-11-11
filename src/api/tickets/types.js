@@ -136,10 +136,10 @@ type ESTicketSearchFields = {
   timezone?: string
 }
 
-type QueryParamFields = {
+type SearchGroupTicketsQuery = {
     field: string,
     operator: string,
-    value: string
+    value: string | boolean
 }
 
 type BoundingBoxFields = {
@@ -153,17 +153,17 @@ type BoundingBoxFields = {
     }
 }
 
-type SearchGroupTicketsQuery = {
+type QueryParamFields = {
     limit?: number,
     offset?: number
 }
 
 export type SearchGroupTicketsParams = {
     group_id: number,
-    query_params?: Array<QueryParamFields>,
+    query_params?: QueryParamFields,
     bounding_box?: BoundingBoxFields,
     timezone?: string,
-    query?: SearchGroupTicketsQuery
+    query?: Array<SearchGroupTicketsQuery>
 }
 
 type GetCurrentCustomerTicketsQuery = {
@@ -245,11 +245,24 @@ export type SearchTicketsWithIDParams = {
     query?: SearchTicketsWithIDQuery
 }
 
+type UpdateAction = 'assign' | 'extend' | 'schedule' | 'edit' | 'optin';
+
 export type UpdateTicketParams = {
     ticket_id: number,
-    action: 'assign' | 'extend' | 'schedule' | 'edit' | 'optin',
+    action: UpdateAction,
+    customer_id: string,
+    force?: boolean,
+    date_scheduled?: string,
+    time_zone?: string,
+}
+
+export type BulkUpdateTicketParams = {
     ticket_ids: Array<number>,
-    customer_id: string
+    action: UpdateAction,
+    customer_id: string,
+    force?: boolean,
+    date_scheduled?: string,
+    time_zone?: string,
 }
 
 type SearchTicketsQuery = {

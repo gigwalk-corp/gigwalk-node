@@ -29,6 +29,7 @@ export type Subscription = {
     date_updated: string,
     needs_core: boolean,
     groups: Array<number>,
+    certifications: Array<number>,
     wave: Object,
     created_customer_id: number,
     created_customer: Object,
@@ -90,6 +91,20 @@ export type DeleteSubscriptionParams = {
 
 export type GetSubscriptionParams = {
     organization_subscription_id: number
+}
+
+type GetAllSubscriptionsQuery = {
+    state?: string,
+    dashboard_visible?: 0 | 1,
+    limit: number,
+    offset: number,
+    sort_order: 'asc' | 'desc',
+    sort_field: string
+}
+
+export type GetAllSubscriptionsParams = {
+    organization_id: number,
+    query: GetAllSubscriptionsQuery
 }
 
 export type CreateClonedSubscriptionParams = {

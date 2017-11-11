@@ -1,27 +1,54 @@
+// flow-typed signature: 09272b82e4d7a497eb3ffd12dd130407
+// flow-typed version: d28912a036/axios_v0.15.x/flow_>=v0.28.x
+
 declare module 'axios' {
+  declare interface ProxyConfig {
+    host: string;
+    port: number;
+  }
+  declare interface Cancel {
+    constructor(message?: string): Cancel;
+    message: string;
+  }
+  declare interface Canceler {
+    (message?: string): void;
+  }
+  declare interface CancelTokenSource {
+    token: CancelToken;
+    cancel: Canceler;
+  }
+  declare interface CancelToken {
+    constructor(executor: (cancel: Canceler) => void): CancelToken;
+    static source(): CancelTokenSource;
+    promise: Promise<Cancel>;
+    reason?: Cancel;
+    throwIfRequested(): void;
+  }
   declare interface AxiosXHRConfigBase<T> {
     adapter?: <T>(config: AxiosXHRConfig<T>) => Promise<AxiosXHR<T>>;
     auth?: {
-        username: string,
-        password: string
+      username: string,
+      password: string
     };
     baseURL?: string,
-    progress?: (progressEvent: Event) => void | mixed;
+    cancelToken?: CancelToken;
+    headers?: Object;
+    httpAgent?: mixed; // Missing the type in the core flow node libdef
+    httpsAgent?: mixed; // Missing the type in the core flow node libdef
     maxContentLength?: number;
     maxRedirects?: 5,
-    headers?: Object;
     params?: Object;
     paramsSerializer?: (params: Object) => string;
+    progress?: (progressEvent: Event) => void | mixed;
+    proxy?: ProxyConfig;
     responseType?: 'arraybuffer' | 'blob' | 'document' | 'json' | 'text' | 'stream';
-    transformResponse?: Array<<U>(data: T) => U>;
-    transformRequest?: Array<<U>(data: T) => U|Array<<U>(data: T) => U>>;
     timeout?: number;
+    transformRequest?: Array<<U>(data: T) => U|Array<<U>(data: T) => U>>;
+    transformResponse?: Array<<U>(data: T) => U>;
     validateStatus?: (status: number) => boolean,
     withCredentials?: boolean;
     xsrfCookieName?: string;
     xsrfHeaderName?: string;
-    httpAgent?: mixed; // Missing the type in the core flow node libdef
-    httpsAgent?: mixed; // Missing the type in the core flow node libdef
   }
   declare type $AxiosXHRConfigBase<T> = AxiosXHRConfigBase<T>;
   declare interface AxiosXHRConfig<T> extends AxiosXHRConfigBase<T> {
@@ -57,8 +84,7 @@ declare module 'axios' {
   declare type AxiosPromise<T> = Promise<AxiosXHR<T>>;
   declare class Axios {
     constructor<T>(config?: AxiosXHRConfigBase<T>): void;
-    <T>(config: AxiosXHRConfig<T>): AxiosPromise<T>;
-    <T>(url: string, config?: AxiosXHRConfig<T>): AxiosPromise<T>;
+    $call: <T>(config: AxiosXHRConfig<T> | string, config?: AxiosXHRConfig<T>) => AxiosPromise<T>;
     request<T>(config: AxiosXHRConfig<T>): AxiosPromise<T>;
     delete<T>(url: string, config?: AxiosXHRConfigBase<T>): AxiosPromise<T>;
     get<T>(url: string, config?: AxiosXHRConfigBase<T>): AxiosPromise<T>;
@@ -81,10 +107,13 @@ declare module 'axios' {
   declare type $AxiosError<T> = AxiosError<T>;
 
   declare interface AxiosExport extends Axios {
-      Axios: typeof Axios;
-      create(config?: AxiosXHRConfigBase<any>): Axios;
-      all: typeof Promise.all;
-      spread(callback: Function): (arr: Array<any>) => Function
+    Axios: typeof Axios;
+    Cancel: Class<Cancel>;
+    CancelToken: Class<CancelToken>;
+    isCancel(value: any): boolean;
+    create(config?: AxiosXHRConfigBase<any>): Axios;
+    all: typeof Promise.all;
+    spread(callback: Function): (arr: Array<any>) => Function
   }
   declare module.exports: AxiosExport;
 }
