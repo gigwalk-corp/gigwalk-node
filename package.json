@@ -74,7 +74,7 @@
     "mockery": "^2.0.0",
     "moniker": "^0.1.2",
     "semantic-release": "^6.3.2",
-    "sinon": "^2.2.0",
+    "sinon": "^4.3.0",
     "sinon-chai": "^2.10.0"
   },
   "config": {
