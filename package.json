@@ -68,7 +68,7 @@
     "eslint-plugin-react": "^6.7.1",
     "flow-bin": "^0.45.0",
     "flow-typed": "^2.0.0",
-    "gulp": "^3.9.1",
+    "gulp": "^4.0.1",
     "gulp-rename": "^1.2.2",
     "mocha": "^3.2.0",
     "mockery": "^2.0.0",
